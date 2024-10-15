@@ -1,0 +1,50 @@
+{
+  "scripts": {
+    "prod": "npm run production",
+    "production": "pm2 kill ; cross-env NODE_ENV=production pm2 start server.js ; npm run test-prod; pm2 log ",
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development nodemon server.js",
+    "test": "npm run test-prod",
+    "test-prod": "cross-env NODE_ENV=production mocha --timeout 10000 --exit",
+    "test-dev": "cross-env NODE_ENV=development mocha --timeout 10000 --exit",
+    "migrate-prod": "cross-env NODE_ENV=production MIGRATE=true node server.js",
+    "migrate-dev": "cross-env NODE_ENV=development MIGRATE=true nodemon server.js"
+  },
+  "name": "Storybridge-backend",
+  "version": "1.0.0",
+  "description": "Bringing education to everyone.",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "author": "Storybridge company limited",
+  "license": "copyright",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "currency-converter-lt": "^2.0.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "ffmpeg": "^0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "formidable": "^3.5.1",
+    "mocha": "^10.2.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.3",
+    "node-fetch": "^2.7.0",
+    "nodemailer": "^6.9.5",
+    "openai": "^3.3.0",
+    "openweather-api-node": "^3.1.4",
+    "progress-bar-cli": "^1.0.4",
+    "sha256": "^0.2.0",
+    "sql": "^0.78.0",
+    "stripe": "^13.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

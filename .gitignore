@@ -1,0 +1,22 @@
+# Vscode config
+.vscode
+
+# Mac config
+.DS_Store
+
+# Emacs backups
+*~
+.#*
+
+# Environment variables
+*.env
+*.env.*
+
+# Npm
+node_modules/
+
+# log files
+*.log
+
+# root shell files
+*.sh

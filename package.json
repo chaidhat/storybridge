@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "prod": "npm run production",
+    "production": "cd mooc && flutter run -d chrome --release",
+    "dev": "npm run development",
+    "development": "concurrently \"cd mooc && flutter run -d chrome\" \"cd backend/server && npm run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "dependencies": {}
+}
