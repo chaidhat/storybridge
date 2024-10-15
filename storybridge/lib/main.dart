@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 //import 'package:video_player/video_player.dart';
 //import 'package:mooc/style/widgets/video_player/video_progress_indicator.dart';
 import 'package:mooc/route.dart';
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 
 import 'package:mooc/services/error_service.dart' as error_service;
 import 'package:mooc/services/translation_service.dart' as translation_service;
@@ -25,7 +25,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Storybridge', // name decided on 23/05/2022
+      title: 'Scholarity', // name decided on 23/05/2022
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle(
@@ -39,9 +39,9 @@ Future<void> main() async {
           ),
         ),
         fontFamily: "Inter",
-        primarySwatch: Storybridge_color.createMaterialColor(
-            Storybridge_color.StorybridgeAccent),
-        scaffoldBackgroundColor: Storybridge_color.backgroundDim,
+        primarySwatch: scholarity_color
+            .createMaterialColor(scholarity_color.scholarityAccent),
+        scaffoldBackgroundColor: scholarity_color.backgroundDim,
         visualDensity: VisualDensity
             .adaptivePlatformDensity, /*scaffoldBackgroundColor: const Color(0xFF161b22)*/
       ),
