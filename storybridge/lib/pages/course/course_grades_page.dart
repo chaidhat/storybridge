@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
 import 'package:mooc/services/error_service.dart' as error_service;
 import 'package:mooc/services/certificate_service.dart' as certificate_service;
 import 'package:mooc/services/auth_service.dart' as auth_service;
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 
 // helper function
 int _getWeightingTotal(List<dynamic> data) {
@@ -53,17 +53,17 @@ class _State extends State<CourseGradesForAdminsPage> {
     super.dispose();
   }
 
-  final ScholarityTabPageController _tabPageController =
-      ScholarityTabPageController();
+  final StorybridgeTabPageController _tabPageController =
+      StorybridgeTabPageController();
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTabPage(
+    return StorybridgeTabPage(
         hasVeryReducedPadding: true,
         tabPageController: _tabPageController,
         sideBar: [
           const SizedBox(height: 80),
-          ScholaritySideBarButton(
+          StorybridgeSideBarButton(
               label: "Assessments",
               icon: Icons.quiz_rounded,
               onPressed: () {
@@ -76,7 +76,7 @@ class _State extends State<CourseGradesForAdminsPage> {
                 });
               },
               selected: _selectedPage == 0),
-          ScholaritySideBarButton(
+          StorybridgeSideBarButton(
               label: "Students",
               icon: Icons.people_rounded,
               onPressed: () {
@@ -138,7 +138,7 @@ class _CourseGradesForFrontPageState extends State<CourseGradesForFrontPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTabPage(body: [
+    return StorybridgeTabPage(body: [
       Padding(
         padding: const EdgeInsets.only(top: 80.0),
         child: Builder(builder: (context) {
@@ -181,7 +181,7 @@ class _CourseGradesForStudentsPageState
     _CourseGradesStudentsController controller =
         _CourseGradesStudentsController();
     controller.isAdminMode = false;
-    return ScholarityTabPage(sideBar: null, body: [
+    return StorybridgeTabPage(sideBar: null, body: [
       Padding(
         padding: const EdgeInsets.only(top: 80.0),
         child: Builder(builder: (context) {
@@ -229,11 +229,11 @@ class _CourseGradesAssessmentsPageState
   Widget build(BuildContext context) {
     error_service.checkAlerts(context);
 
-    return ScholarityHolder(
+    return StorybridgeHolder(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const ScholarityTextH2("Assessments"),
+        const StorybridgeTextH2("Assessments"),
         const SizedBox(height: 25),
-        const ScholarityTextP(
+        const StorybridgeTextP(
             "These are all assessments which have to be completed in this course."),
         const SizedBox(height: 60),
         FutureBuilder(
@@ -243,10 +243,10 @@ class _CourseGradesAssessmentsPageState
               if (!snapshot.hasData) {
                 return const Column(
                   children: [
-                    ScholarityBoxLoading(height: 50, width: 500),
-                    ScholarityBoxLoading(height: 50, width: 500),
-                    ScholarityBoxLoading(height: 50, width: 500),
-                    ScholarityBoxLoading(height: 50, width: 500),
+                    StorybridgeBoxLoading(height: 50, width: 500),
+                    StorybridgeBoxLoading(height: 50, width: 500),
+                    StorybridgeBoxLoading(height: 50, width: 500),
+                    StorybridgeBoxLoading(height: 50, width: 500),
                   ],
                 );
               }
@@ -301,9 +301,9 @@ class _CourseGradesFrontAssessmentsPageState
     error_service.checkAlerts(context);
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const ScholarityTextH2("Assessments"),
+      const StorybridgeTextH2("Assessments"),
       const SizedBox(height: 25),
-      const ScholarityTextP(
+      const StorybridgeTextP(
           "These are all assessments which have to be completed in this course."),
       const SizedBox(height: 60),
       FutureBuilder(
@@ -313,10 +313,10 @@ class _CourseGradesFrontAssessmentsPageState
             if (!snapshot.hasData) {
               return const Column(
                 children: [
-                  ScholarityBoxLoading(height: 50, width: 500),
-                  ScholarityBoxLoading(height: 50, width: 500),
-                  ScholarityBoxLoading(height: 50, width: 500),
-                  ScholarityBoxLoading(height: 50, width: 500),
+                  StorybridgeBoxLoading(height: 50, width: 500),
+                  StorybridgeBoxLoading(height: 50, width: 500),
+                  StorybridgeBoxLoading(height: 50, width: 500),
+                  StorybridgeBoxLoading(height: 50, width: 500),
                 ],
               );
             }
@@ -375,7 +375,7 @@ class _AssessmentListState extends State<_AssessmentList> {
             initiallyExpanded: true,
             title: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ScholarityTextH2B(courseSectionName),
+              child: StorybridgeTextH2B(courseSectionName),
             ),
             childrenPadding: const EdgeInsets.all(8.0),
             children: List.generate(courseElements.length, (int j) {
@@ -446,7 +446,7 @@ class _AssessmentWidget extends StatelessWidget {
           onTap: () {},
           child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: scholarity_color.borderColor),
+                border: Border.all(color: storybridge_color.borderColor),
                 borderRadius: BorderRadius.circular(12),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
@@ -456,14 +456,14 @@ class _AssessmentWidget extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.quiz_outlined,
-                            size: 30, color: scholarity_color.darkGrey),
+                            size: 30, color: storybridge_color.darkGrey),
                         const SizedBox(width: 10),
-                        ScholarityTextH2B(courseElementName),
+                        StorybridgeTextH2B(courseElementName),
                       ],
                     ),
                   ),
                   Expanded(
-                    child: ScholarityTextH5(
+                    child: StorybridgeTextH5(
                         "${percentageOfCorrectAnswers != null ? "average grade: ${_niceRound(percentageOfCorrectAnswers! * 100).toString()}%\n" : "\n"}weighting: ${weighting.toString()}%"),
                   ),
                 ],
@@ -715,7 +715,7 @@ class _CourseGradesStudentsStatisticsPageState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ScholarityTextH2(widget.controller.isAdminMode
+        StorybridgeTextH2(widget.controller.isAdminMode
             ? widget.controller.studentName
             : "Grades"),
         const SizedBox(height: 60),
@@ -726,10 +726,10 @@ class _CourseGradesStudentsStatisticsPageState
               if (!snapshot.hasData) {
                 return const Column(
                   children: [
-                    ScholarityBoxLoading(height: 50, width: 500),
-                    ScholarityBoxLoading(height: 50, width: 500),
-                    ScholarityBoxLoading(height: 50, width: 500),
-                    ScholarityBoxLoading(height: 50, width: 500),
+                    StorybridgeBoxLoading(height: 50, width: 500),
+                    StorybridgeBoxLoading(height: 50, width: 500),
+                    StorybridgeBoxLoading(height: 50, width: 500),
+                    StorybridgeBoxLoading(height: 50, width: 500),
                   ],
                 );
               }
@@ -751,7 +751,7 @@ class _CourseGradesStudentsStatisticsPageState
                                   ? _PassIconState.passed
                                   : _PassIconState.notPassed),
                           const SizedBox(width: 10),
-                          ScholarityTextH4(_isPassed(assessmentCourseHierarchy)
+                          StorybridgeTextH4(_isPassed(assessmentCourseHierarchy)
                               ? "Course Passed"
                               : "Not Passed"),
                         ],
@@ -764,17 +764,17 @@ class _CourseGradesStudentsStatisticsPageState
                           children: [
                             Row(
                               children: [
-                                const ScholarityTextH2B("Total Grade:"),
+                                const StorybridgeTextH2B("Total Grade:"),
                                 const SizedBox(width: 10),
-                                ScholarityTextH2B(
+                                StorybridgeTextH2B(
                                     "${_calculateTotalGrade(assessmentCourseHierarchy, weightingTotal)}%"),
                               ],
                             ),
                             Row(
                               children: [
-                                const ScholarityTextH2B("Assessments Passed:"),
+                                const StorybridgeTextH2B("Assessments Passed:"),
                                 const SizedBox(width: 10),
-                                ScholarityTextH2B(
+                                StorybridgeTextH2B(
                                     "${_calculateAssessmentsPassed(assessmentCourseHierarchy)}/${_calculateAssessmentsTotal(assessmentCourseHierarchy)}"),
                               ],
                             ),
@@ -783,13 +783,13 @@ class _CourseGradesStudentsStatisticsPageState
                                     padding: const EdgeInsets.only(top: 10),
                                     child: Row(
                                       children: [
-                                        ScholarityButton(
+                                        StorybridgeButton(
                                             text: "Print Certificate",
                                             loading: _isLoadingCert,
                                             onPressed: () async {
                                               await _printCertificate();
                                             }),
-                                        ScholarityButton(
+                                        StorybridgeButton(
                                             text: "Print Passport",
                                             loading: _isLoadingPass,
                                             onPressed: () async {
@@ -857,7 +857,7 @@ class _CourseGradesStudentsStatisticsPageState
                                     ))
                                 : (!widget.controller.isAdminMode
                                     ? Container()
-                                    : ScholarityButton(
+                                    : StorybridgeButton(
                                         text: "Force print certificate",
                                         loading: _isLoadingCert,
                                         onPressed: () async {
@@ -893,7 +893,7 @@ class _CourseGradesStudentsStatisticsPageState
                           initiallyExpanded: true,
                           title: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ScholarityTextH2B(courseSectionName),
+                            child: StorybridgeTextH2B(courseSectionName),
                           ),
                           childrenPadding: const EdgeInsets.all(8.0),
                           children:
@@ -1007,7 +1007,7 @@ class _AssessmentStatisticsWidget extends StatelessWidget {
           onTap: () {},
           child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: scholarity_color.borderColor),
+                border: Border.all(color: storybridge_color.borderColor),
                 borderRadius: BorderRadius.circular(12),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
@@ -1020,7 +1020,7 @@ class _AssessmentStatisticsWidget extends StatelessWidget {
                           children: [
                             _PassIcon(state: _isPassed()),
                             const SizedBox(width: 10),
-                            ScholarityTextH2B(courseElementName),
+                            StorybridgeTextH2B(courseElementName),
                           ],
                         ),
                       ),
@@ -1030,13 +1030,13 @@ class _AssessmentStatisticsWidget extends StatelessWidget {
                             const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ScholarityTextH5("score:"),
-                                ScholarityTextH5("weighting:"),
-                                ScholarityTextH5("weighted score:"),
+                                StorybridgeTextH5("score:"),
+                                StorybridgeTextH5("weighting:"),
+                                StorybridgeTextH5("weighted score:"),
                               ],
                             ),
                             const SizedBox(width: 10),
-                            ScholarityTextH5(
+                            StorybridgeTextH5(
                                 "${_niceRound(percentOfCorrectAnswers * 100).toString()}%\n"
                                 /*"${_isPassed() == _PassIconState.passed ? "" : "(passing score is $passingPercentage%)\n"}"*/
                                 "${weighting.toString()}%\n"
@@ -1178,8 +1178,8 @@ class _CourseGradesStudentsAllPage extends StatefulWidget {
 // myPage state
 class _CourseGradesStudentsAllPageState
     extends State<_CourseGradesStudentsAllPage> {
-  ScholarityTextFieldController _textFieldController =
-      ScholarityTextFieldController();
+  StorybridgeTextFieldController _textFieldController =
+      StorybridgeTextFieldController();
   bool _isLoadingForcePrintAllCertificates = false;
   @override
   void initState() {
@@ -1228,7 +1228,7 @@ class _CourseGradesStudentsAllPageState
   Widget build(BuildContext context) {
     error_service.checkAlerts(context);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const ScholarityTextH2("Students"),
+      const StorybridgeTextH2("Students"),
       const SizedBox(height: 60),
       FutureBuilder(
           future: _load(),
@@ -1237,10 +1237,10 @@ class _CourseGradesStudentsAllPageState
             if (!snapshot.hasData) {
               return const Column(
                 children: [
-                  ScholarityBoxLoading(height: 50, width: 500),
-                  ScholarityBoxLoading(height: 50, width: 500),
-                  ScholarityBoxLoading(height: 50, width: 500),
-                  ScholarityBoxLoading(height: 50, width: 500),
+                  StorybridgeBoxLoading(height: 50, width: 500),
+                  StorybridgeBoxLoading(height: 50, width: 500),
+                  StorybridgeBoxLoading(height: 50, width: 500),
+                  StorybridgeBoxLoading(height: 50, width: 500),
                 ],
               );
             }
@@ -1249,7 +1249,7 @@ class _CourseGradesStudentsAllPageState
                 Row(
                   children: [
                     Expanded(child: Container()),
-                    ScholarityButton(
+                    StorybridgeButton(
                       text: "Force print all certificates",
                       loading: _isLoadingForcePrintAllCertificates,
                       onPressed: () {
@@ -1258,16 +1258,16 @@ class _CourseGradesStudentsAllPageState
                     )
                   ],
                 ),
-                ScholarityTable(
+                StorybridgeTable(
                     advancedHeaders: [
-                      ScholarityTableHeader(key: "email", label: "Email"),
-                      ScholarityTableHeader(
+                      StorybridgeTableHeader(key: "email", label: "Email"),
+                      StorybridgeTableHeader(
                           key: "firstName", label: "First name"),
-                      ScholarityTableHeader(
+                      StorybridgeTableHeader(
                           key: "lastName", label: "Last name"),
-                      ScholarityTableHeader(
+                      StorybridgeTableHeader(
                           key: "totalAssessmentGrades", label: "Grade"),
-                      ScholarityTableHeader(
+                      StorybridgeTableHeader(
                           key: "assessmentsPassed",
                           label: "Assessments passed"),
                     ],
@@ -1312,24 +1312,24 @@ class _StudentWidget extends StatelessWidget {
           },
           child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: scholarity_color.borderColor),
+                border: Border.all(color: storybridge_color.borderColor),
                 borderRadius: BorderRadius.circular(12),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Row(
                 children: [
                   Icon(Icons.person_rounded,
-                      size: 30, color: scholarity_color.darkGrey),
+                      size: 30, color: storybridge_color.darkGrey),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: ScholarityTextH2B(studentName),
+                    child: StorybridgeTextH2B(studentName),
                   ),
                   const SizedBox(width: 10),
-                  Expanded(child: ScholarityTextP(studentEmail)),
+                  Expanded(child: StorybridgeTextP(studentEmail)),
                   const SizedBox(width: 10),
                   Expanded(
                       child:
-                          ScholarityTextP(parseSqlDate(studentDateLastLogin))),
+                          StorybridgeTextP(parseSqlDate(studentDateLastLogin))),
                 ],
               ))),
     );

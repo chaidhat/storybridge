@@ -1,15 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 import 'package:mooc/services/translation_service.dart' as translation_service;
 
 import 'package:excel/excel.dart' as excl;
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
-enum ScholarityTableHeaderType {
+enum StorybridgeTableHeaderType {
   text,
   dropdown,
   datetime,
@@ -18,39 +18,40 @@ enum ScholarityTableHeaderType {
   color
 }
 
-class ScholarityTableHeader {
+class StorybridgeTableHeader {
   String key, label;
   double width;
-  ScholarityTableHeaderType type;
+  StorybridgeTableHeaderType type;
   List<String>? dropdownList;
   Map<String, dynamic>? labelData;
-  ScholarityTableHeader(
+  StorybridgeTableHeader(
       {required this.key,
       required this.label,
       this.labelData,
       this.width = 190,
-      this.type = ScholarityTableHeaderType.text,
+      this.type = StorybridgeTableHeaderType.text,
       this.dropdownList}) {
-    if (type == ScholarityTableHeaderType) {
-      print("warning: dropdownList must be defined for ScholarityTableHeaders");
+    if (type == StorybridgeTableHeaderType) {
+      print(
+          "warning: dropdownList must be defined for StorybridgeTableHeaders");
     }
   }
 }
 
-class ScholarityTable extends StatefulWidget {
+class StorybridgeTable extends StatefulWidget {
   final List<dynamic> data;
   final List<String>? displayHeaders;
-  final List<ScholarityTableHeader>? advancedHeaders;
+  final List<StorybridgeTableHeader>? advancedHeaders;
   final String? pkName; // private key for table
   final void Function(dynamic pk, dynamic data, int index)? onEdit;
   final void Function(dynamic pk, dynamic data, int index)? onDelete;
   final void Function(dynamic pk, dynamic data, int index)? onView;
   final bool initiallyOpenSearch;
   final bool canSearch;
-  final List<ScholarityTableButton>? extraButtons;
+  final List<StorybridgeTableButton>? extraButtons;
   final int maxItemsPerPage;
   final bool useAltStyle;
-  const ScholarityTable({
+  const StorybridgeTable({
     Key? key,
     required this.data,
     this.displayHeaders,
@@ -67,20 +68,20 @@ class ScholarityTable extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ScholarityTable> createState() => _ScholarityTableState();
+  State<StorybridgeTable> createState() => _StorybridgeTableState();
 }
 
-class _ScholarityTableState extends State<ScholarityTable> {
-  final List<ScholarityTableHeader> _headers = [];
+class _StorybridgeTableState extends State<StorybridgeTable> {
+  final List<StorybridgeTableHeader> _headers = [];
   final List<String> _strHeaders = [];
   final Map<String, String> _labelsToKeys = {};
   bool _showSearchPage = false;
   int _page = 0;
   List<dynamic> _data = [];
-  final ScholarityTextFieldController _searchController =
-      ScholarityTextFieldController();
-  final ScholarityTextFieldController _searchCategoryController =
-      ScholarityTextFieldController();
+  final StorybridgeTextFieldController _searchController =
+      StorybridgeTextFieldController();
+  final StorybridgeTextFieldController _searchCategoryController =
+      StorybridgeTextFieldController();
 
   @override
   void initState() {
@@ -135,7 +136,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
   void _getHeaders() {
     _headers.clear();
     if (widget.advancedHeaders != null) {
-      for (ScholarityTableHeader header in widget.advancedHeaders!) {
+      for (StorybridgeTableHeader header in widget.advancedHeaders!) {
         _headers.add(header);
       }
       _getStringHeaders();
@@ -143,8 +144,8 @@ class _ScholarityTableState extends State<ScholarityTable> {
     }
     if (widget.displayHeaders != null) {
       for (String header in widget.displayHeaders!) {
-        _headers.add(ScholarityTableHeader(
-            key: header, label: header, type: ScholarityTableHeaderType.text));
+        _headers.add(StorybridgeTableHeader(
+            key: header, label: header, type: StorybridgeTableHeaderType.text));
       }
       _getStringHeaders();
       return;
@@ -153,14 +154,14 @@ class _ScholarityTableState extends State<ScholarityTable> {
     for (Map<String, dynamic> obj in widget.data) {
       for (String key in obj.keys) {
         bool doesHeaderContainKey = false;
-        for (ScholarityTableHeader h in _headers) {
+        for (StorybridgeTableHeader h in _headers) {
           if (h.key == key) {
             doesHeaderContainKey = true;
           }
         }
         if (!doesHeaderContainKey) {
-          _headers.add(ScholarityTableHeader(
-              key: key, label: key, type: ScholarityTableHeaderType.text));
+          _headers.add(StorybridgeTableHeader(
+              key: key, label: key, type: StorybridgeTableHeaderType.text));
         }
       }
     }
@@ -192,7 +193,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
         cell.value = excl.TextCellValue(dataStr);
       }
     }
-    excel.save(fileName: 'ScholarityDataDownload.xlsx');
+    excel.save(fileName: 'StorybridgeDataDownload.xlsx');
   }
 
   void _getStringHeaders() {
@@ -233,17 +234,17 @@ class _ScholarityTableState extends State<ScholarityTable> {
     });
   }
 
-  Widget _getCellWidget(dynamic cellData, ScholarityTableHeader header) {
+  Widget _getCellWidget(dynamic cellData, StorybridgeTableHeader header) {
     if (cellData != null) {
       switch (header.type) {
-        case ScholarityTableHeaderType.boolean:
+        case StorybridgeTableHeaderType.boolean:
           String? cellString = cellData?.toString();
           if (cellString == "{type: Buffer, data: [1]}") {
             return Align(
               alignment: Alignment.center,
               child: Icon(
                 Icons.check_rounded,
-                color: scholarity_color.black,
+                color: storybridge_color.black,
               ),
             );
           } else if (cellString == "{type: Buffer, data: [0]}") {
@@ -251,47 +252,48 @@ class _ScholarityTableState extends State<ScholarityTable> {
               alignment: Alignment.center,
               child: Icon(
                 Icons.close_rounded,
-                color: scholarity_color.black,
+                color: storybridge_color.black,
               ),
             );
           } else {
             print("wrong data type for table.");
           }
           break;
-        case ScholarityTableHeaderType.text:
-        case ScholarityTableHeaderType.dropdown:
+        case StorybridgeTableHeaderType.text:
+        case StorybridgeTableHeaderType.dropdown:
           String cellString;
           try {
             cellString = Uri.decodeComponent(cellData!.toString());
           } catch (_) {
             cellString = cellData;
           }
-          return _ScholarityCell(
+          return _StorybridgeCell(
               useAltStyle: widget.useAltStyle,
               width: header.width,
               child: IntrinsicWidth(
-                child: ScholarityTextP(cellString),
+                child: StorybridgeTextP(cellString),
               ));
 
-        case ScholarityTableHeaderType.datetime:
+        case StorybridgeTableHeaderType.datetime:
           DateTime? datetime = parseSqlDatetime(cellData?.toString());
           if (datetime != null) {
-            return _ScholarityCell(
+            return _StorybridgeCell(
                 useAltStyle: widget.useAltStyle,
                 width: header.width,
                 child: IntrinsicWidth(
-                  child: ScholarityTextP(translation_service.getDate(datetime)),
+                  child:
+                      StorybridgeTextP(translation_service.getDate(datetime)),
                 ));
           }
           break;
-        case ScholarityTableHeaderType.label:
-          return ScholarityLabels(
+        case StorybridgeTableHeaderType.label:
+          return StorybridgeLabels(
             selectedLabels: cellData,
             canEdit: true,
           );
-        case ScholarityTableHeaderType.color:
+        case StorybridgeTableHeaderType.color:
           try {
-            return _ScholarityCell(
+            return _StorybridgeCell(
                 useAltStyle: widget.useAltStyle,
                 width: header.width,
                 child: IntrinsicWidth(
@@ -299,8 +301,8 @@ class _ScholarityTableState extends State<ScholarityTable> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            border:
-                                Border.all(color: scholarity_color.borderColor),
+                            border: Border.all(
+                                color: storybridge_color.borderColor),
                             borderRadius: BorderRadius.circular(4),
                             color: HexColor(cellData!.toString())),
                         height: 20,
@@ -317,7 +319,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
       alignment: Alignment.centerLeft,
       child: SizedBox(
         width: 30,
-        child: Divider(color: scholarity_color.borderColor),
+        child: Divider(color: storybridge_color.borderColor),
       ),
     );
   }
@@ -339,7 +341,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
             widget.onView!(id, _data[index], index);
           });
         },
-        child: const ScholarityTextBasic('View'),
+        child: const StorybridgeTextBasic('View'),
       ));
     }
     if (widget.onEdit != null) {
@@ -348,9 +350,10 @@ class _ScholarityTableState extends State<ScholarityTable> {
           setState(() {
             showDialog<String>(
                 context: context,
-                builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-                      child: ScholarityAlertDialog(
-                        content: _ScholarityCellEditForm(
+                builder: (BuildContext context) =>
+                    StorybridgeAlertDialogWrapper(
+                      child: StorybridgeAlertDialog(
+                        content: _StorybridgeCellEditForm(
                             data: _data[index],
                             headers: _headers,
                             onSave: () {
@@ -368,19 +371,19 @@ class _ScholarityTableState extends State<ScholarityTable> {
                     ));
           });
         },
-        child: const ScholarityTextBasic('Edit'),
+        child: const StorybridgeTextBasic('Edit'),
       ));
     }
     if (widget.extraButtons != null) {
       for (int j = 0; j < widget.extraButtons!.length; j++) {
-        ScholarityTableButton button = widget.extraButtons![j];
+        StorybridgeTableButton button = widget.extraButtons![j];
         output.add(PopupMenuItem(
           onTap: () {
             String key = widget.pkName ?? _data[0].keys.toList().first;
             var id = _data[index][key];
             button.onPressed(id, _data[index]);
           },
-          child: ScholarityTextBasic(button.buttonText),
+          child: StorybridgeTextBasic(button.buttonText),
         ));
       }
     }
@@ -393,7 +396,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
             widget.onDelete!(id, _data[index], index);
           });
         },
-        child: const ScholarityTextBasic('Delete',
+        child: const StorybridgeTextBasic('Delete',
             style: TextStyle(color: Colors.red)),
       ));
     }
@@ -413,7 +416,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
     return Column(
       children: [
         _showSearchPage
-            ? _ScholarityTableSearchWidget(
+            ? _StorybridgeTableSearchWidget(
                 searchController: _searchController,
                 searchCategoryController: _searchCategoryController,
                 strHeaders: _strHeaders,
@@ -426,7 +429,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
             widget.canSearch
                 ? Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: ScholarityIconButton(
+                    child: StorybridgeIconButton(
                       icon: Icons.search_rounded,
                       onPressed: () {
                         setState(() {
@@ -438,7 +441,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
                 : Container(),
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: ScholarityIconButton(
+              child: StorybridgeIconButton(
                 icon: Icons.download_rounded,
                 onPressed: () {
                   _downloadTable();
@@ -452,7 +455,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
-                          child: ScholarityIconButton(
+                          child: StorybridgeIconButton(
                             icon: Icons.first_page,
                             onPressed: (_page > 0)
                                 ? () {
@@ -463,7 +466,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
-                          child: ScholarityIconButton(
+                          child: StorybridgeIconButton(
                             icon: Icons.arrow_back_rounded,
                             onPressed: (_page > 0)
                                 ? () {
@@ -472,11 +475,11 @@ class _ScholarityTableState extends State<ScholarityTable> {
                                 : null,
                           ),
                         ),
-                        ScholarityTextP(
+                        StorybridgeTextP(
                             "Page ${_page + 1} of ${(_data.length / widget.maxItemsPerPage).ceil()}"),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
-                          child: ScholarityIconButton(
+                          child: StorybridgeIconButton(
                             icon: Icons.arrow_forward_rounded,
                             onPressed: ((_page + 1) * widget.maxItemsPerPage <
                                     _data.length)
@@ -488,7 +491,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: ScholarityIconButton(
+                          child: StorybridgeIconButton(
                             icon: Icons.last_page,
                             onPressed: ((_page + 1) * widget.maxItemsPerPage <
                                     _data.length)
@@ -525,8 +528,8 @@ class _ScholarityTableState extends State<ScholarityTable> {
                                         List.generate(_headers.length, (int i) {
                                   return SizedBox(
                                       width: _headers[i].width,
-                                      child:
-                                          ScholarityTextH2B(_headers[i].label));
+                                      child: StorybridgeTextH2B(
+                                          _headers[i].label));
                                 })),
                               ),
                               Column(
@@ -550,7 +553,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
                                             });
                                           }
                                         : null,
-                                    child: _ScholarityRow(
+                                    child: _StorybridgeRow(
                                       useAltStyle: widget.useAltStyle,
                                       child: Row(
                                         children: [
@@ -566,7 +569,7 @@ class _ScholarityTableState extends State<ScholarityTable> {
                                                           const EdgeInsets.only(
                                                               right: 18),
                                                       child:
-                                                          ScholarityIconButton(
+                                                          StorybridgeIconButton(
                                                         icon: Icons
                                                             .more_horiz_rounded,
                                                         isEnabled: true,
@@ -603,8 +606,8 @@ class _ScholarityTableState extends State<ScholarityTable> {
                           begin: Alignment.centerRight,
                           end: Alignment.centerLeft,
                           colors: <Color>[
-                            scholarity_color.backgroundTransparent,
-                            scholarity_color.background,
+                            storybridge_color.backgroundTransparent,
+                            storybridge_color.background,
                           ], // Gradient from https://learnui.design/tools/gradient-generator.html
                         ),
                       ),
@@ -618,8 +621,8 @@ class _ScholarityTableState extends State<ScholarityTable> {
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: <Color>[
-                              scholarity_color.backgroundTransparent,
-                              scholarity_color.background,
+                              storybridge_color.backgroundTransparent,
+                              storybridge_color.background,
                             ], // Gradient from https://learnui.design/tools/gradient-generator.html
                           ),
                         ),
@@ -628,20 +631,20 @@ class _ScholarityTableState extends State<ScholarityTable> {
                   ],
                 ),
               )
-            : const _ScholarityTableEmptyWidget(),
+            : const _StorybridgeTableEmptyWidget(),
       ],
     );
   }
 }
 
-class _ScholarityTableEmptyWidget extends StatelessWidget {
+class _StorybridgeTableEmptyWidget extends StatelessWidget {
   // constructor
-  const _ScholarityTableEmptyWidget({Key? key}) : super(key: key);
+  const _StorybridgeTableEmptyWidget({Key? key}) : super(key: key);
 
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTile(
+    return StorybridgeTile(
       child: SizedBox(
         height: 300,
         child: Row(
@@ -649,11 +652,11 @@ class _ScholarityTableEmptyWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(Icons.sentiment_dissatisfied_rounded,
-                size: 40, color: scholarity_color.lightGrey),
+                size: 40, color: storybridge_color.lightGrey),
             const SizedBox(
               width: 10,
             ),
-            const ScholarityTextP("This table is empty!"),
+            const StorybridgeTextP("This table is empty!"),
           ],
         ),
       ),
@@ -661,21 +664,21 @@ class _ScholarityTableEmptyWidget extends StatelessWidget {
   }
 }
 
-class ScholarityTableButton {
+class StorybridgeTableButton {
   // members of MyWidget
   final String buttonText;
   final Function(dynamic pk, dynamic data) onPressed;
-  ScholarityTableButton({required this.buttonText, required this.onPressed});
+  StorybridgeTableButton({required this.buttonText, required this.onPressed});
 }
 
-class _ScholarityCell extends StatelessWidget {
+class _StorybridgeCell extends StatelessWidget {
   // members of MyWidget
   final Widget child;
   final double width;
   final bool useAltStyle;
 
   // constructor
-  const _ScholarityCell(
+  const _StorybridgeCell(
       {Key? key,
       required this.child,
       this.width = 150,
@@ -691,7 +694,7 @@ class _ScholarityCell extends StatelessWidget {
         padding: EdgeInsets.only(right: !useAltStyle ? 8 : 16),
         child: Builder(builder: (context) {
           if (!useAltStyle) {
-            return ScholarityTile(
+            return StorybridgeTile(
                 child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Padding(
@@ -707,14 +710,14 @@ class _ScholarityCell extends StatelessWidget {
   }
 }
 
-class _ScholarityCellEditForm extends StatelessWidget {
-  final List<ScholarityTextFieldController> _controllers = [];
+class _StorybridgeCellEditForm extends StatelessWidget {
+  final List<StorybridgeTextFieldController> _controllers = [];
 
   final void Function() onSave;
   final Map<String, dynamic> data;
-  final List<ScholarityTableHeader> headers;
+  final List<StorybridgeTableHeader> headers;
   // constructor
-  _ScholarityCellEditForm(
+  _StorybridgeCellEditForm(
       {Key? key,
       required this.data,
       required this.headers,
@@ -726,7 +729,7 @@ class _ScholarityCellEditForm extends StatelessWidget {
   Widget build(BuildContext context) {
     _controllers.clear();
     for (int i = 0; i < headers.length; i++) {
-      _controllers.add(ScholarityTextFieldController());
+      _controllers.add(StorybridgeTextFieldController());
       _controllers[i].text =
           Uri.decodeComponent(data[headers[i].key].toString());
     }
@@ -738,38 +741,38 @@ class _ScholarityCellEditForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
-            const ScholarityTextH2B("Edit Object"),
+            const StorybridgeTextH2B("Edit Object"),
             const SizedBox(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: List.generate(headers.length, (int i) {
                 switch (headers[i].type) {
-                  case ScholarityTableHeaderType.text:
-                    return ScholarityTextField(
+                  case StorybridgeTableHeaderType.text:
+                    return StorybridgeTextField(
                       label: headers[i].label,
                       controller: _controllers[i],
                     );
-                  case ScholarityTableHeaderType.dropdown:
-                    return ScholarityDropdown(
+                  case StorybridgeTableHeaderType.dropdown:
+                    return StorybridgeDropdown(
                       label: headers[i].label,
                       controller: _controllers[i],
                       dropdownTypes: headers[i].dropdownList ?? [],
                     );
-                  case ScholarityTableHeaderType.datetime:
+                  case StorybridgeTableHeaderType.datetime:
                     // TODO: make this editable
-                    return ScholarityTextP(
+                    return StorybridgeTextP(
                       _controllers[i].text,
                     );
-                  case ScholarityTableHeaderType.label:
+                  case StorybridgeTableHeaderType.label:
                     return Container(); // TODO
-                  case ScholarityTableHeaderType.boolean:
+                  case StorybridgeTableHeaderType.boolean:
                     return Container(); // TODO
-                  case ScholarityTableHeaderType.color:
+                  case StorybridgeTableHeaderType.color:
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ScholarityTextH2B(headers[i].label),
-                        ScholarityColorPicker(controller: _controllers[i]),
+                        StorybridgeTextH2B(headers[i].label),
+                        StorybridgeColorPicker(controller: _controllers[i]),
                         const SizedBox(height: 30),
                       ],
                     ); // TODO
@@ -779,7 +782,7 @@ class _ScholarityCellEditForm extends StatelessWidget {
             const SizedBox(height: 20),
             Row(
               children: [
-                ScholarityButton(
+                StorybridgeButton(
                   padding: false,
                   text: "Save",
                   invertedColor: true,
@@ -797,7 +800,7 @@ class _ScholarityCellEditForm extends StatelessWidget {
                   },
                 ),
                 const SizedBox(width: 10),
-                ScholarityButton(
+                StorybridgeButton(
                     padding: false,
                     text: "Cancel",
                     onPressed: () {
@@ -812,14 +815,14 @@ class _ScholarityCellEditForm extends StatelessWidget {
   }
 }
 
-class _ScholarityTableSearchWidget extends StatelessWidget {
+class _StorybridgeTableSearchWidget extends StatelessWidget {
   // members of MyWidget
-  final ScholarityTextFieldController searchController;
-  final ScholarityTextFieldController searchCategoryController;
+  final StorybridgeTextFieldController searchController;
+  final StorybridgeTextFieldController searchCategoryController;
   final List<String> strHeaders;
 
   // constructor
-  const _ScholarityTableSearchWidget(
+  const _StorybridgeTableSearchWidget(
       {Key? key,
       required this.searchController,
       required this.searchCategoryController,
@@ -835,7 +838,7 @@ class _ScholarityTableSearchWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 15.0),
-            child: ScholarityTextField(
+            child: StorybridgeTextField(
               label: "Search",
               isConstricted: true,
               controller: searchController,
@@ -843,7 +846,7 @@ class _ScholarityTableSearchWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
-            child: ScholarityDropdown(
+            child: StorybridgeDropdown(
                 controller: searchCategoryController,
                 label: "Category",
                 dropdownTypes: strHeaders),
@@ -863,14 +866,14 @@ DateTime? parseSqlDatetime(String? sqlDatetime) {
   return output;
 }
 
-class ScholarityTableDropdown extends StatefulWidget {
+class StorybridgeTableDropdown extends StatefulWidget {
   final List<dynamic> data;
-  final List<ScholarityTableHeader>? advancedHeaders;
+  final List<StorybridgeTableHeader>? advancedHeaders;
   final bool isEnabled;
   final double width;
-  final ScholarityTextFieldController controller;
+  final StorybridgeTextFieldController controller;
   final void Function(dynamic pk) onSubmit;
-  const ScholarityTableDropdown(
+  const StorybridgeTableDropdown(
       {Key? key,
       required this.data,
       required this.advancedHeaders,
@@ -881,12 +884,12 @@ class ScholarityTableDropdown extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ScholarityTableDropdownState createState() =>
-      _ScholarityTableDropdownState();
+  _StorybridgeTableDropdownState createState() =>
+      _StorybridgeTableDropdownState();
 }
 
 // myPage state
-class _ScholarityTableDropdownState extends State<ScholarityTableDropdown> {
+class _StorybridgeTableDropdownState extends State<StorybridgeTableDropdown> {
   String selectedIcon = "";
   @override
   void initState() {
@@ -902,8 +905,8 @@ class _ScholarityTableDropdownState extends State<ScholarityTableDropdown> {
     setState(() {
       showDialog<String>(
         context: context,
-        builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-          child: ScholarityAlertDialog(
+        builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
+          child: StorybridgeAlertDialog(
             content: SizedBox(
               width: 700,
               height: 500,
@@ -912,7 +915,7 @@ class _ScholarityTableDropdownState extends State<ScholarityTableDropdown> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ScholarityTable(
+                    StorybridgeTable(
                       maxItemsPerPage: 5,
                       advancedHeaders: widget.advancedHeaders,
                       initiallyOpenSearch: true,
@@ -948,7 +951,7 @@ class _ScholarityTableDropdownState extends State<ScholarityTableDropdown> {
     return SizedBox(
       width: widget.width,
       height: 48,
-      child: ScholarityTile(
+      child: StorybridgeTile(
         child: InkWell(
           hoverColor: Colors.transparent,
           onTap: widget.isEnabled
@@ -961,9 +964,9 @@ class _ScholarityTableDropdownState extends State<ScholarityTableDropdown> {
             child: Row(
               children: [
                 const SizedBox(width: 10),
-                ScholarityTextP(widget.controller.text),
+                StorybridgeTextP(widget.controller.text),
                 Expanded(child: Container()),
-                ScholarityIconButton(
+                StorybridgeIconButton(
                   icon: Icons.arrow_drop_down,
                   onPressed: widget.isEnabled
                       ? () {
@@ -980,13 +983,13 @@ class _ScholarityTableDropdownState extends State<ScholarityTableDropdown> {
   }
 }
 
-class _ScholarityRow extends StatelessWidget {
+class _StorybridgeRow extends StatelessWidget {
   // members of MyWidget
   final Widget child;
   final bool useAltStyle;
 
   // constructor
-  const _ScholarityRow(
+  const _StorybridgeRow(
       {Key? key, required this.child, required this.useAltStyle})
       : super(key: key);
 
@@ -998,7 +1001,7 @@ class _ScholarityRow extends StatelessWidget {
           ? null
           : BoxDecoration(
               border: Border(
-                top: BorderSide(width: 1, color: scholarity_color.borderColor),
+                top: BorderSide(width: 1, color: storybridge_color.borderColor),
               ),
             ),
       child: SizedBox(

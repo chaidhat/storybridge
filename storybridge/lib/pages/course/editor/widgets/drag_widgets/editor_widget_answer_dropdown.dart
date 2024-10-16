@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/auditing_service.dart' as auditing_service;
 
@@ -69,8 +69,8 @@ class EditorWidgetAnswerDropdown extends StatefulWidget
 
 class _EditorWidgetAnswerDropdownState
     extends State<EditorWidgetAnswerDropdown> {
-  ScholarityTextFieldController answerController =
-      ScholarityTextFieldController();
+  StorybridgeTextFieldController answerController =
+      StorybridgeTextFieldController();
   void updateQuestion() {
     widget.editorWidgetData.onUpdate();
     setState(() {});
@@ -141,13 +141,14 @@ class _EditorWidgetAnswerDropdownState
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData) {
-            return const ScholarityBoxLoading(height: 60, width: 270);
+            return const StorybridgeBoxLoading(height: 60, width: 270);
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               widget.controller.questionController.text.isNotEmpty
-                  ? ScholarityTextH2B(widget.controller.questionController.text)
+                  ? StorybridgeTextH2B(
+                      widget.controller.questionController.text)
                   : Container(),
               SizedBox(
                 height: 50,
@@ -156,7 +157,7 @@ class _EditorWidgetAnswerDropdownState
                   maxHeight: double.infinity,
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: ScholarityDropdown(
+                    child: StorybridgeDropdown(
                       controller: answerController,
                       label: "",
                       mappedDropdownTypes: _dropdownTypes,
@@ -176,10 +177,10 @@ class _EditorWidgetAnswerDropdownState
 
 class AnswerDropdownController {
   String quid = "";
-  ScholarityTextFieldController questionController =
-      ScholarityTextFieldController();
-  ScholarityTextFieldController dropdownController =
-      ScholarityTextFieldController();
+  StorybridgeTextFieldController questionController =
+      StorybridgeTextFieldController();
+  StorybridgeTextFieldController dropdownController =
+      StorybridgeTextFieldController();
   final DataSource dataSource = DataSource();
   Function onUpdate = () {};
 
@@ -220,7 +221,7 @@ class _AnswerDropdownSettingsState extends State<_AnswerDropdownSettings> {
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
-            return const ScholarityBoxLoading(height: 300, width: 500);
+            return const StorybridgeBoxLoading(height: 300, width: 500);
           }
           return SizedBox(
             width: 500,
@@ -228,17 +229,17 @@ class _AnswerDropdownSettingsState extends State<_AnswerDropdownSettings> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ScholarityIconButton(
+                StorybridgeIconButton(
                     icon: Icons.close,
                     onPressed: () {
                       Navigator.pop(context);
                     }),
                 const SizedBox(height: 10),
-                const ScholarityTextH2B("Question Settings"),
+                const StorybridgeTextH2B("Question Settings"),
                 const SizedBox(height: 10),
                 SizedBox(
                   height: 110,
-                  child: ScholarityTextField(
+                  child: StorybridgeTextField(
                     isLarge: true,
                     label: "Question",
                     controller: widget.controller.questionController,
@@ -249,7 +250,7 @@ class _AnswerDropdownSettingsState extends State<_AnswerDropdownSettings> {
                   organizationId: widget.organizationId,
                 ),
                 const SizedBox(height: 30),
-                ScholarityTextP("quid: ${widget.controller.quid}"),
+                StorybridgeTextP("quid: ${widget.controller.quid}"),
               ],
             ),
           );
@@ -270,15 +271,15 @@ class _Toolbar extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityButton(
+    return StorybridgeButton(
       text: "Edit question",
       invertedColor: true,
       padding: false,
       onPressed: () {
-        scholarityShowDialog(
+        storybridgeShowDialog(
           context: context,
-          builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-            child: ScholarityAlertDialog(
+          builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
+            child: StorybridgeAlertDialog(
               content: _AnswerDropdownSettings(
                 controller: controller,
                 organizationId: organizationId,

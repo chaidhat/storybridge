@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:mooc/pages/course/editor/widgets/drag_widgets/editor_widget_column.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:flutter/scheduler.dart';
 
@@ -74,7 +74,7 @@ class _AuditPageStudent extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityScaffold(
+    return StorybridgeScaffold(
       hasAppbar: false,
       body: const [],
       startingTab: startingTab,
@@ -95,7 +95,7 @@ class _AuditPageStudent extends StatelessWidget {
           Expanded(
             child: Container(),
           ),
-          ScholarityButton(
+          StorybridgeButton(
             icon: Icons.share_rounded,
             text: "Share",
             invertedColor: true,
@@ -104,9 +104,9 @@ class _AuditPageStudent extends StatelessWidget {
       ),
       */
       tabNames: [
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Audit", tabIcon: Icons.collections_bookmark_rounded),
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Permissions",
             tabIcon: Icons.collections_bookmark_rounded),
       ],
@@ -133,7 +133,7 @@ class _AuditPageAdmin extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityScaffold(
+    return StorybridgeScaffold(
       hasAppbar: false,
       startingTab: startingTab,
       body: const [],
@@ -149,22 +149,22 @@ class _AuditPageAdmin extends StatelessWidget {
       tabSuffix: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          ScholaritySavingIndicator(),
-          //ScholarityAccountIndicator(organizationId: organizationId),
+          StorybridgeSavingIndicator(),
+          //StorybridgeAccountIndicator(organizationId: organizationId),
         ],
       ),
       isTabRightAligned: true,
       tabNames: [
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Audit", tabIcon: Icons.collections_bookmark_rounded),
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Workflow", tabIcon: Icons.collections_bookmark_rounded),
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Settings", tabIcon: Icons.collections_bookmark_rounded),
         /*
-        ScholarityTabHeaders(
+        StorybridgeTabHeaders(
             tabName: "Discussion", tabIcon: Icons.school_rounded),
-        ScholarityTabHeaders(tabName: "Notes", tabIcon: Icons.article_rounded),
+        StorybridgeTabHeaders(tabName: "Notes", tabIcon: Icons.article_rounded),
         */
       ],
       tabs: [
@@ -198,10 +198,10 @@ class _AuditTemplatePage extends StatelessWidget {
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData) {
-            return ScholarityTabPage(sideBar: [], body: [
+            return StorybridgeTabPage(sideBar: [], body: [
               const Padding(
                 padding: EdgeInsets.only(top: 60),
-                child: ScholarityPageLoading(),
+                child: StorybridgePageLoading(),
               )
             ]);
           }
@@ -232,7 +232,7 @@ class _AuditTaskPageState extends State<_AuditTaskPage> {
     }
     try {
       await auditing_service.setAuditTaskId(widget.auditTaskId);
-    } on error_service.ScholarityException catch (e) {
+    } on error_service.StorybridgeException catch (e) {
       _errored = true;
       setState(() {
         error_service.alert(error_service.Alert(
@@ -258,10 +258,10 @@ class _AuditTaskPageState extends State<_AuditTaskPage> {
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData || snapshot.data == null) {
-            return ScholarityTabPage(sideBar: [], body: [
+            return StorybridgeTabPage(sideBar: [], body: [
               const Padding(
                 padding: EdgeInsets.only(top: 60),
-                child: ScholarityPageLoading(),
+                child: StorybridgePageLoading(),
               )
             ]);
           }
@@ -312,12 +312,12 @@ class _AuditEditorPageState extends State<AuditEditorPage>
     super.dispose();
   }
 
-  final ScholarityTabPageController _tabPageController =
-      ScholarityTabPageController();
+  final StorybridgeTabPageController _tabPageController =
+      StorybridgeTabPageController();
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTabPage(
+    return StorybridgeTabPage(
         scrollController: _scrollController,
         tabPageController: _tabPageController,
         hasReducedPadding: true,
@@ -426,7 +426,7 @@ class _AuditViewerState extends State<_AuditViewer>
       } else {
         return const Padding(
           padding: EdgeInsets.only(top: 80.0),
-          child: ScholarityPageLoading(),
+          child: StorybridgePageLoading(),
         );
       }
     } else {
@@ -457,7 +457,7 @@ class AuditorEditorViewerPage extends StatefulWidget {
 }
 
 class _AuditorEditorViewerPageState extends State<AuditorEditorViewerPage> {
-  final _courseElementNameController = ScholarityTextFieldController();
+  final _courseElementNameController = StorybridgeTextFieldController();
   int _updatesQueued = 0;
   int _statusLabelGroupId = 0;
   dynamic _status;
@@ -496,7 +496,7 @@ class _AuditorEditorViewerPageState extends State<AuditorEditorViewerPage> {
       try {
         auditing_service.setAuditTemplatePageData(
             widget.auditTemplateId, _stemEditorWidget.saveToJson());
-      } on error_service.ScholarityException catch (e) {
+      } on error_service.StorybridgeException catch (e) {
         if (e.message == "assigner has insufficient permission") {
           setState(() {
             error_service.alert(error_service.Alert(
@@ -604,15 +604,15 @@ class _AuditorEditorViewerPageState extends State<AuditorEditorViewerPage> {
                             child: Row(
                               children: [
                                 Expanded(
-                                  child: ScholarityEditableText(
+                                  child: StorybridgeEditableText(
                                     enabled: widget.isAdminMode,
-                                    style: scholarityTextH2Style,
+                                    style: storybridgeTextH2Style,
                                     controller: _courseElementNameController,
                                     onSubmit: _changeCourseElementName,
                                   ),
                                 ),
                                 widget.auditTaskId != null
-                                    ? ScholarityLabels(
+                                    ? StorybridgeLabels(
                                         labelGroupId: _statusLabelGroupId,
                                         selectedLabels: _status,
                                         canEdit: true,
@@ -639,7 +639,7 @@ class _AuditorEditorViewerPageState extends State<AuditorEditorViewerPage> {
                               */
                           _stemEditorWidget,
                           _nextPageId != null
-                              ? ScholarityButton(
+                              ? StorybridgeButton(
                                   text: "Next page",
                                   invertedColor: true,
                                   onPressed: () async {
@@ -659,7 +659,7 @@ class _AuditorEditorViewerPageState extends State<AuditorEditorViewerPage> {
                                   : Container()),
                         ],
                       )
-                    : const ScholarityPageLoading(),
+                    : const StorybridgePageLoading(),
               ],
             ),
           );
@@ -715,11 +715,11 @@ class _AuditSettingsPageState extends State<AuditSettingsPage> {
   @override
   Widget build(BuildContext context) {
     error_service.checkAlerts(context);
-    return ScholarityTabPage(body: [
+    return StorybridgeTabPage(body: [
       const SizedBox(height: 40),
-      const ScholarityTextH2("General Settings"),
+      const StorybridgeTextH2("General Settings"),
       const SizedBox(height: 60),
-      ScholaritySettingButton(
+      StorybridgeSettingButton(
           loadValue: () async {
             Map<String, dynamic> response = await networking_api_service
                 .getAuditTemplate(auditTemplateId: widget.auditTemplateId);
@@ -740,11 +740,11 @@ class _AuditSettingsPageState extends State<AuditSettingsPage> {
             );
           },
           name: "Audit Template Name"),
-      const ScholarityDescriptor(
+      const StorybridgeDescriptor(
         name: "Course Files",
       ),
       _AuditTemplateFilesViewer(auditTemplateId: widget.auditTemplateId),
-      ScholarityButton(
+      StorybridgeButton(
         text: "Delete Audit Template",
         lightenBackground: true,
         onPressed: _deleteAuditTemplate,
@@ -813,15 +813,15 @@ class _AuditNameState extends State<_AuditName> {
 
             // custom styling
             if (_auditTemplateName.length > 35) {
-              courseNameTextFontSize = scholarityTextH2BStyle.fontSize! - 2;
+              courseNameTextFontSize = storybridgeTextH2BStyle.fontSize! - 2;
             } else if (_auditTemplateName.length < 20) {
-              courseNameTextFontSize = scholarityTextH2BStyle.fontSize! + 4;
+              courseNameTextFontSize = storybridgeTextH2BStyle.fontSize! + 4;
             } else {
-              courseNameTextFontSize = scholarityTextH2BStyle.fontSize!;
+              courseNameTextFontSize = storybridgeTextH2BStyle.fontSize!;
             }
             TextStyle courseNameStyle = TextStyle(
-                color: scholarityTextH2BStyle.color,
-                fontWeight: scholarityTextH2BStyle.fontWeight,
+                color: storybridgeTextH2BStyle.color,
+                fontWeight: storybridgeTextH2BStyle.fontWeight,
                 fontSize: courseNameTextFontSize);
 
             return IntrinsicWidth(
@@ -849,16 +849,17 @@ class _AuditNameState extends State<_AuditName> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          ScholarityTextBasic(_organizationName,
-                                              style: scholarityTextH5Style),
-                                          ScholarityTextBasic(
+                                          StorybridgeTextBasic(
+                                              _organizationName,
+                                              style: storybridgeTextH5Style),
+                                          StorybridgeTextBasic(
                                               _auditTemplateName,
                                               style: courseNameStyle),
                                         ],
                                       ),
                                     );
                                   } else {
-                                    return ScholarityTextBasic(
+                                    return StorybridgeTextBasic(
                                         _auditTemplateName,
                                         style: courseNameStyle);
                                   }
@@ -870,7 +871,7 @@ class _AuditNameState extends State<_AuditName> {
               ),
             );
           } else {
-            return const ScholarityBoxLoading(height: 25, width: 200);
+            return const StorybridgeBoxLoading(height: 25, width: 200);
           }
         });
   }
@@ -930,7 +931,7 @@ class _AuditSidebarState extends State<_AuditSidebar>
               const SizedBox(height: 80),
               Column(
                 children: List.generate(_data.length, (int i) {
-                  return ScholarityHoverButton(
+                  return StorybridgeHoverButton(
                     enabled: widget.isAdminMode,
                     button: PopupEditElementButton(
                       onPressed: (EditElementTypes item) {
@@ -972,7 +973,7 @@ class _AuditSidebarState extends State<_AuditSidebar>
                         }
                       },
                     ),
-                    child: ScholaritySideBarButton(
+                    child: StorybridgeSideBarButton(
                         icon: Icons.article_rounded,
                         label: _data[i]["pageName"],
                         selected:
@@ -989,7 +990,7 @@ class _AuditSidebarState extends State<_AuditSidebar>
                 }),
               ),
               widget.isAdminMode
-                  ? ScholarityButton(
+                  ? StorybridgeButton(
                       text: "Add Page",
                       onPressed: () {
                         _addPage();
@@ -1046,7 +1047,7 @@ class _AuditWorkflowPageState extends State<_AuditWorkflowPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTabPage(
+    return StorybridgeTabPage(
         disableScroll: true,
         hasVeryReducedPadding: true,
         body: [
@@ -1058,7 +1059,7 @@ class _AuditWorkflowPageState extends State<_AuditWorkflowPage> {
                     auditTemplateId: widget.auditTemplateId,
                   );
                 } else {
-                  return const ScholarityPageLoading();
+                  return const StorybridgePageLoading();
                 }
               })
         ]);
@@ -1113,14 +1114,14 @@ class _AuditTemplateFilesViewerState extends State<_AuditTemplateFilesViewer> {
         future: _load(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData) {
-            return const ScholarityBoxLoading(height: 200, width: 300);
+            return const StorybridgeBoxLoading(height: 200, width: 300);
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ScholarityTextP(
+              StorybridgeTextP(
                   "Total Size: ${_totalSize?.round() ?? "unknown"} MB"),
-              ScholarityTable(
+              StorybridgeTable(
                   maxItemsPerPage: 5,
                   pkName: "contentDataId",
                   onDelete: null,
@@ -1159,7 +1160,7 @@ class _AuditTaskPermissionsPageState extends State<_AuditTaskPermissionsPage> {
   }
 
   void _assignUser() {
-    scholarityShowDialog(
+    storybridgeShowDialog(
         context: context,
         builder: (BuildContext context) => _AuditTaskPermissionAssignPopup(
               auditTaskId: widget.auditTaskId,
@@ -1173,7 +1174,7 @@ class _AuditTaskPermissionsPageState extends State<_AuditTaskPermissionsPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTabPage(hasVeryReducedPadding: true, body: [
+    return StorybridgeTabPage(hasVeryReducedPadding: true, body: [
       const SizedBox(height: 50),
       FutureBuilder(
           future: _load(),
@@ -1182,13 +1183,13 @@ class _AuditTaskPermissionsPageState extends State<_AuditTaskPermissionsPage> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ScholarityTextH2("Permissions"),
+                  const StorybridgeTextH2("Permissions"),
                   Row(
                     children: [
                       Expanded(
                         child: Container(),
                       ),
-                      ScholarityButton(
+                      StorybridgeButton(
                         invertedColor: true,
                         icon: Icons.sync_alt_rounded,
                         text: "Assign user",
@@ -1199,39 +1200,39 @@ class _AuditTaskPermissionsPageState extends State<_AuditTaskPermissionsPage> {
                     ],
                   ),
                   Center(
-                    child: ScholarityTable(
+                    child: StorybridgeTable(
                       advancedHeaders: [
-                        ScholarityTableHeader(key: "name", label: "Name"),
-                        ScholarityTableHeader(key: "email", label: "Email"),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(key: "name", label: "Name"),
+                        StorybridgeTableHeader(key: "email", label: "Email"),
+                        StorybridgeTableHeader(
                           key: "canEdit",
                           label: "Can\nedit?",
-                          type: ScholarityTableHeaderType.boolean,
+                          type: StorybridgeTableHeaderType.boolean,
                           width: 90,
                         ),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                           key: "canComment",
                           label: "Can comment?",
-                          type: ScholarityTableHeaderType.boolean,
+                          type: StorybridgeTableHeaderType.boolean,
                           width: 90,
                         ),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                           key: "isOwner",
                           label: "Is\nowner?",
-                          type: ScholarityTableHeaderType.boolean,
+                          type: StorybridgeTableHeaderType.boolean,
                           width: 90,
                         ),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                           key: "dateCreated",
                           label: "Date assigned",
-                          type: ScholarityTableHeaderType.datetime,
+                          type: StorybridgeTableHeaderType.datetime,
                         ),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                           key: "dateSubmitted",
                           label: "Date submitted",
-                          type: ScholarityTableHeaderType.datetime,
+                          type: StorybridgeTableHeaderType.datetime,
                         ),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                           key: "submitVerb",
                           label: "Verdict",
                         ),
@@ -1247,7 +1248,7 @@ class _AuditTaskPermissionsPageState extends State<_AuditTaskPermissionsPage> {
                 ],
               );
             } else {
-              return const ScholarityPageLoading();
+              return const StorybridgePageLoading();
             }
           })
     ]);
@@ -1272,10 +1273,10 @@ class _AuditTaskPermissionAssignPopupState
     extends State<_AuditTaskPermissionAssignPopup> {
   final List<String> _users = [];
   final Map<String, int> _userToId = {};
-  ScholarityTextFieldController userController =
-      ScholarityTextFieldController();
-  ScholarityTextFieldController _submitModeController =
-      ScholarityTextFieldController();
+  StorybridgeTextFieldController userController =
+      StorybridgeTextFieldController();
+  StorybridgeTextFieldController _submitModeController =
+      StorybridgeTextFieldController();
   int userId = 0;
 
   bool canEdit = false;
@@ -1320,8 +1321,8 @@ class _AuditTaskPermissionAssignPopupState
     ];
     _submitModeController.text = submitModeDescriptors[0];
     // ignore: unused_local_variable
-    return ScholarityAlertDialogWrapper(
-        child: ScholarityAlertDialog(
+    return StorybridgeAlertDialogWrapper(
+        child: StorybridgeAlertDialog(
       content: SingleChildScrollView(
         child: SizedBox(
           width: 500,
@@ -1329,25 +1330,25 @@ class _AuditTaskPermissionAssignPopupState
               future: _load(),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (!snapshot.hasData) {
-                  return const ScholarityBoxLoading(height: 100, width: 300);
+                  return const StorybridgeBoxLoading(height: 100, width: 300);
                 }
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    const ScholarityTextH2B("Assign user to audit"),
+                    const StorybridgeTextH2B("Assign user to audit"),
                     const SizedBox(height: 20),
                     SizedBox(
                       width: 300,
-                      child: ScholarityDropdown(
+                      child: StorybridgeDropdown(
                           label: "User",
                           controller: userController,
                           dropdownTypes: _users),
                     ),
-                    const ScholarityTextP(
+                    const StorybridgeTextP(
                         "Note: Once assigned, this user will be able to view this audit."),
-                    ScholarityCheckbox(
+                    StorybridgeCheckbox(
                         label: "User can edit",
                         value: canEdit,
                         onChanged: (bool newValue) {
@@ -1355,7 +1356,7 @@ class _AuditTaskPermissionAssignPopupState
                             canEdit = newValue;
                           });
                         }),
-                    ScholarityCheckbox(
+                    StorybridgeCheckbox(
                         label: "User can comment",
                         value: canComment,
                         onChanged: (bool newValue) {
@@ -1363,14 +1364,14 @@ class _AuditTaskPermissionAssignPopupState
                             canComment = newValue;
                           });
                         }),
-                    ScholarityDropdown(
+                    StorybridgeDropdown(
                         label: "Submit Mode",
                         controller: _submitModeController,
                         dropdownTypes: submitModeDescriptors),
                     const SizedBox(height: 20),
                     Row(
                       children: [
-                        ScholarityButton(
+                        StorybridgeButton(
                           padding: false,
                           text: "Assign",
                           invertedColor: true,
@@ -1404,7 +1405,7 @@ class _AuditTaskPermissionAssignPopupState
                           },
                         ),
                         const SizedBox(width: 10),
-                        ScholarityButton(
+                        StorybridgeButton(
                             padding: false,
                             text: "Cancel",
                             onPressed: () {
@@ -1440,10 +1441,10 @@ class _SubmitButtonState extends State<_SubmitButton> {
   }
 
   void _submit(String submitVerb) {
-    scholarityShowDialog(
+    storybridgeShowDialog(
       context: context,
-      builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-        child: ScholarityAlertDialog(
+      builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
+        child: StorybridgeAlertDialog(
           content: _SubmitButtonPopup(
             auditTaskId: widget.auditTaskId,
             submitVerb: submitVerb,
@@ -1456,18 +1457,18 @@ class _SubmitButtonState extends State<_SubmitButton> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTile(
+    return StorybridgeTile(
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: FutureBuilder(
             future: _load(),
             builder: (context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData) {
-                return ScholarityBoxLoading(height: 50, width: 150);
+                return StorybridgeBoxLoading(height: 50, width: 150);
               }
               switch (snapshot.data["submitMode"]) {
                 case 0:
-                  return ScholarityButton(
+                  return StorybridgeButton(
                     text: "Submit",
                     icon: Icons.done_all_rounded,
                     invertedColor: true,
@@ -1480,7 +1481,7 @@ class _SubmitButtonState extends State<_SubmitButton> {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ScholarityButton(
+                      StorybridgeButton(
                         text: "Approve",
                         invertedColor: true,
                         icon: Icons.check_rounded,
@@ -1488,7 +1489,7 @@ class _SubmitButtonState extends State<_SubmitButton> {
                           _submit("Approve");
                         },
                       ),
-                      ScholarityButton(
+                      StorybridgeButton(
                         text: "Reject",
                         invertedColor: true,
                         icon: Icons.close_rounded,
@@ -1568,17 +1569,17 @@ class _SubmitButtonPopupState extends State<_SubmitButtonPopup> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ScholarityIconButton(
+          StorybridgeIconButton(
               icon: Icons.close,
               onPressed: () {
                 Navigator.pop(context);
               }),
           const SizedBox(height: 10),
-          ScholarityTextH2B("${widget.submitVerb} - Signature Required"),
-          const ScholarityTextP(
+          StorybridgeTextH2B("${widget.submitVerb} - Signature Required"),
+          const StorybridgeTextP(
               "Please sign in the grey area below using your trackpad/screen."),
           const SizedBox(height: 30),
-          ScholarityTextP(
+          StorybridgeTextP(
               "I hereby ${widget.submitVerb.toLowerCase()} this form.\nSigned,"),
           const SizedBox(height: 10),
           //SIGNATURE CANVAS
@@ -1599,7 +1600,7 @@ class _SubmitButtonPopupState extends State<_SubmitButtonPopup> {
           _startedDrawingSignature
               ? Row(
                   children: [
-                    ScholarityButton(
+                    StorybridgeButton(
                       padding: false,
                       loading: _loadingSubmitting,
                       text: widget.submitVerb,
@@ -1609,7 +1610,7 @@ class _SubmitButtonPopupState extends State<_SubmitButtonPopup> {
                       }),
                     ),
                     const SizedBox(width: 10),
-                    ScholarityButton(
+                    StorybridgeButton(
                       padding: false,
                       loading: _loadingSubmitting,
                       text: "Clear",
@@ -1624,7 +1625,7 @@ class _SubmitButtonPopupState extends State<_SubmitButtonPopup> {
                 )
               : const SizedBox(
                   height: 50,
-                  child: ScholarityTextP("Please sign in grey area"))
+                  child: StorybridgeTextP("Please sign in grey area"))
         ],
       ),
     );
@@ -1666,34 +1667,34 @@ class _AuditTaskSummaryPageState extends State<_AuditTaskSummaryPage> {
   @override
   Widget build(BuildContext context) {
     int data = 2;
-    return ScholarityTabPage(hasVeryReducedPadding: true, body: [
+    return StorybridgeTabPage(hasVeryReducedPadding: true, body: [
       const SizedBox(height: 50),
       FutureBuilder(
           future: _load(),
           builder: (context, AsyncSnapshot<dynamic> snapshot) {
             if (!snapshot.hasData) {
-              return const ScholarityPageLoading();
+              return const StorybridgePageLoading();
             }
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ScholarityTextH2("Summary"),
+                const StorybridgeTextH2("Summary"),
                 const SizedBox(height: 20),
-                ScholarityLineChart(x: data),
-                const ScholarityBox(
+                StorybridgeLineChart(x: data),
+                const StorybridgeBox(
                   useAltStyle: true,
-                  child: ScholarityPadding(
+                  child: StorybridgePadding(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ScholarityTextP("# of Non compliancies"),
-                        ScholarityTextH2("20"),
+                        StorybridgeTextP("# of Non compliancies"),
+                        StorybridgeTextH2("20"),
                         SizedBox(height: 30),
-                        ScholarityTextP("# of NC Priority A"),
-                        ScholarityTextH2("5"),
+                        StorybridgeTextP("# of NC Priority A"),
+                        StorybridgeTextH2("5"),
                         SizedBox(height: 30),
-                        ScholarityTextP("# of forms per department"),
-                        ScholarityTextH2("50"),
+                        StorybridgeTextP("# of forms per department"),
+                        StorybridgeTextH2("50"),
                       ],
                     ),
                   ),

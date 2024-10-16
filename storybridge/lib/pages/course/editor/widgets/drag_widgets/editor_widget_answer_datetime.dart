@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/auditing_service.dart' as auditing_service;
 
@@ -111,13 +111,13 @@ class _EditorWidgetAnswerDatetimeState
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData) {
-            return const ScholarityBoxLoading(height: 60, width: 270);
+            return const StorybridgeBoxLoading(height: 60, width: 270);
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               !widget._controller.questionController.text.isEmpty
-                  ? ScholarityTextH2B(
+                  ? StorybridgeTextH2B(
                       widget._controller.questionController.text)
                   : Container(),
               SizedBox(
@@ -130,7 +130,7 @@ class _EditorWidgetAnswerDatetimeState
                                 "show date only")
                         ? Padding(
                             padding: const EdgeInsets.only(right: 20),
-                            child: ScholarityDatePicker(
+                            child: StorybridgeDatePicker(
                               label: "",
                               date: dateController,
                               onChanged: (DateTime newDate) {
@@ -144,7 +144,7 @@ class _EditorWidgetAnswerDatetimeState
                                 "show date and time" ||
                             widget._controller.datetimeMode.text ==
                                 "show time only")
-                        ? ScholarityTimePicker(
+                        ? StorybridgeTimePicker(
                             label: "",
                             tod: timeController,
                             onChanged: (TimeOfDay newTod) {
@@ -164,10 +164,12 @@ class _EditorWidgetAnswerDatetimeState
 
 class _AnswerDatetimeController {
   String quid = "";
-  ScholarityTextFieldController questionController =
-      ScholarityTextFieldController();
-  ScholarityTextFieldController datetimeMode = ScholarityTextFieldController();
-  ScholarityTextFieldController autofillMode = ScholarityTextFieldController();
+  StorybridgeTextFieldController questionController =
+      StorybridgeTextFieldController();
+  StorybridgeTextFieldController datetimeMode =
+      StorybridgeTextFieldController();
+  StorybridgeTextFieldController autofillMode =
+      StorybridgeTextFieldController();
   Function onUpdate = () {};
 
   _AnswerDatetimeController() {
@@ -201,23 +203,23 @@ class _AnswerDatetimeSettings extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ScholarityIconButton(
+          StorybridgeIconButton(
               icon: Icons.close,
               onPressed: () {
                 Navigator.pop(context);
               }),
           const SizedBox(height: 10),
-          const ScholarityTextH2B("Question Settings"),
+          const StorybridgeTextH2B("Question Settings"),
           const SizedBox(height: 10),
           SizedBox(
             height: 110,
-            child: ScholarityTextField(
+            child: StorybridgeTextField(
               isLarge: true,
               label: "Question",
               controller: controller.questionController,
             ),
           ),
-          ScholarityDropdown(
+          StorybridgeDropdown(
             label: "Pick",
             dropdownTypes: const [
               "show date and time",
@@ -227,7 +229,7 @@ class _AnswerDatetimeSettings extends StatelessWidget {
             controller: controller.datetimeMode,
           ),
           const SizedBox(height: 30),
-          ScholarityDropdown(
+          StorybridgeDropdown(
             label: "Autofill",
             dropdownTypes: const [
               "none",
@@ -237,7 +239,7 @@ class _AnswerDatetimeSettings extends StatelessWidget {
             controller: controller.autofillMode,
           ),
           const SizedBox(height: 30),
-          ScholarityTextP("quid: ${controller.quid}"),
+          StorybridgeTextP("quid: ${controller.quid}"),
         ],
       ),
     );
@@ -254,15 +256,15 @@ class _Toolbar extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityButton(
+    return StorybridgeButton(
       text: "Edit question",
       invertedColor: true,
       padding: false,
       onPressed: () {
-        scholarityShowDialog(
+        storybridgeShowDialog(
           context: context,
-          builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-            child: ScholarityAlertDialog(
+          builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
+            child: StorybridgeAlertDialog(
               content: _AnswerDatetimeSettings(
                 controller: controller,
               ),

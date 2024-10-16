@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/auditing_service.dart' as auditing_service;
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 
 const widgetTypeAnswerText = "answerText";
 
@@ -70,8 +70,8 @@ class EditorWidgetAnswerText extends StatefulWidget implements EditorWidget {
 }
 
 class _EditorWidgetAnswerTextState extends State<EditorWidgetAnswerText> {
-  ScholarityTextFieldController answerController =
-      ScholarityTextFieldController();
+  StorybridgeTextFieldController answerController =
+      StorybridgeTextFieldController();
   void updateQuestion() {
     widget.editorWidgetData.onUpdate();
     setState(() {});
@@ -112,13 +112,14 @@ class _EditorWidgetAnswerTextState extends State<EditorWidgetAnswerText> {
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData) {
-            return ScholarityBoxLoading(height: 60, width: 270);
+            return StorybridgeBoxLoading(height: 60, width: 270);
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               !widget.controller.questionController.text.isEmpty
-                  ? ScholarityTextH2B(widget.controller.questionController.text)
+                  ? StorybridgeTextH2B(
+                      widget.controller.questionController.text)
                   : Container(),
               Row(
                 children: [
@@ -135,7 +136,7 @@ class _EditorWidgetAnswerTextState extends State<EditorWidgetAnswerText> {
                           maxHeight: double.infinity,
                           child: widget.controller.autofillFormulaController
                                   .text.isEmpty
-                              ? ScholarityTextField(
+                              ? StorybridgeTextField(
                                   controller: answerController,
                                   label: widget
                                       .controller.answerHintController.text,
@@ -143,10 +144,10 @@ class _EditorWidgetAnswerTextState extends State<EditorWidgetAnswerText> {
                                   isEnabled:
                                       !widget.editorWidgetData.isAdminMode,
                                 )
-                              : const ScholarityTile(
+                              : const StorybridgeTile(
                                   useAltStyle: true,
                                   child: Center(
-                                      child: ScholarityTextP(
+                                      child: StorybridgeTextP(
                                           "This will be autofilled."))),
                         ),
                       ),
@@ -158,7 +159,7 @@ class _EditorWidgetAnswerTextState extends State<EditorWidgetAnswerText> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 20),
                             child: Icon(Icons.numbers_rounded,
-                                color: scholarity_color.lightGrey),
+                                color: storybridge_color.lightGrey),
                           ),
                         )
                       : Container()
@@ -172,14 +173,14 @@ class _EditorWidgetAnswerTextState extends State<EditorWidgetAnswerText> {
 
 class _AnswerTextController {
   String quid = "";
-  ScholarityTextFieldController questionController =
-      ScholarityTextFieldController();
-  ScholarityTextFieldController answerHintController =
-      ScholarityTextFieldController();
-  ScholarityTextFieldController autofillFormulaController =
-      ScholarityTextFieldController();
-  ScholarityTextFieldController validationRegexController =
-      ScholarityTextFieldController();
+  StorybridgeTextFieldController questionController =
+      StorybridgeTextFieldController();
+  StorybridgeTextFieldController answerHintController =
+      StorybridgeTextFieldController();
+  StorybridgeTextFieldController autofillFormulaController =
+      StorybridgeTextFieldController();
+  StorybridgeTextFieldController validationRegexController =
+      StorybridgeTextFieldController();
   bool isLargeField = false;
   bool isNumericalField = false;
   Function onUpdate = () {};
@@ -223,27 +224,27 @@ class _AnswerTextSettingsState extends State<_AnswerTextSettings> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ScholarityIconButton(
+          StorybridgeIconButton(
               icon: Icons.close,
               onPressed: () {
                 Navigator.pop(context);
               }),
           const SizedBox(height: 10),
-          const ScholarityTextH2B("Question Settings"),
+          const StorybridgeTextH2B("Question Settings"),
           const SizedBox(height: 10),
           SizedBox(
             height: 110,
-            child: ScholarityTextField(
+            child: StorybridgeTextField(
               isLarge: true,
               label: "Question",
               controller: widget.controller.questionController,
             ),
           ),
-          ScholarityTextField(
+          StorybridgeTextField(
             label: "Answer Label",
             controller: widget.controller.answerHintController,
           ),
-          ScholarityCheckbox(
+          StorybridgeCheckbox(
               label: "Large text field",
               value: widget.controller.isLargeField,
               onChanged: (bool? val) {
@@ -252,7 +253,7 @@ class _AnswerTextSettingsState extends State<_AnswerTextSettings> {
                   widget.controller.onUpdate();
                 });
               }),
-          ScholarityCheckbox(
+          StorybridgeCheckbox(
               label: "Is numerical?",
               value: widget.controller.isNumericalField,
               onChanged: (bool? val) {
@@ -263,18 +264,18 @@ class _AnswerTextSettingsState extends State<_AnswerTextSettings> {
               }),
           const SizedBox(height: 10),
           /*
-          const ScholarityTextH2B("Autofill"),
+          const StorybridgeTextH2B("Autofill"),
           const SizedBox(height: 10),
-          ScholarityFormulaField(
+          StorybridgeFormulaField(
               controller: widget.controller.autofillFormulaController),
-          const ScholarityTextH2B("Advanced Settings"),
+          const StorybridgeTextH2B("Advanced Settings"),
           const SizedBox(height: 10),
-          ScholarityTextField(
+          StorybridgeTextField(
             label: "Validation Regex",
           ),
               */
           const SizedBox(height: 30),
-          ScholarityTextP("quid: ${widget.controller.quid}"),
+          StorybridgeTextP("quid: ${widget.controller.quid}"),
         ],
       ),
     );
@@ -291,15 +292,15 @@ class _Toolbar extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityButton(
+    return StorybridgeButton(
       text: "Edit question",
       invertedColor: true,
       padding: false,
       onPressed: () {
-        scholarityShowDialog(
+        storybridgeShowDialog(
           context: context,
-          builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-            child: ScholarityAlertDialog(
+          builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
+            child: StorybridgeAlertDialog(
               content: _AnswerTextSettings(
                 controller: controller,
               ),

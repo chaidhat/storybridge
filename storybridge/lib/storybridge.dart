@@ -1,21 +1,21 @@
-// barrell import for all Scholarity elements
+// barrell import for all Storybridge elements
 
 // style widgets
-export 'package:mooc/style/scholarity_appbar.dart';
-export 'package:mooc/style/scholarity_colors.dart';
-export 'package:mooc/style/scholarity_login_headers.dart';
-export 'package:mooc/style/scholarity_account_indicator.dart';
-export 'package:mooc/style/scholarity_alert_dialog.dart';
-export 'package:mooc/style/scholarity_button.dart';
-export 'package:mooc/style/scholarity_divider.dart';
-export 'package:mooc/style/scholarity_elements.dart';
-export 'package:mooc/style/scholarity_saving_indicator.dart';
-export 'package:mooc/style/scholarity_table.dart';
-export 'package:mooc/style/scholarity_text_field.dart';
-export 'package:mooc/style/scholarity_text.dart';
+export 'package:mooc/style/storybridge_appbar.dart';
+export 'package:mooc/style/storybridge_colors.dart';
+export 'package:mooc/style/storybridge_login_headers.dart';
+export 'package:mooc/style/storybridge_account_indicator.dart';
+export 'package:mooc/style/storybridge_alert_dialog.dart';
+export 'package:mooc/style/storybridge_button.dart';
+export 'package:mooc/style/storybridge_divider.dart';
+export 'package:mooc/style/storybridge_elements.dart';
+export 'package:mooc/style/storybridge_saving_indicator.dart';
+export 'package:mooc/style/storybridge_table.dart';
+export 'package:mooc/style/storybridge_text_field.dart';
+export 'package:mooc/style/storybridge_text.dart';
 export 'package:mooc/style/video_progress_indicator.dart';
-export 'package:mooc/style/scholarity_labels.dart';
-export 'package:mooc/style/scholarity_charts.dart';
+export 'package:mooc/style/storybridge_labels.dart';
+export 'package:mooc/style/storybridge_charts.dart';
 
 // course widgets
 export 'package:mooc/pages/course/widgets/profile_picture_widget.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 
 import 'package:mooc/services/snackbar_service.dart' as snackbar_service;
 
@@ -32,7 +32,7 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
     Navigator.pushNamed(context, "/course?id=${widget.courseId}");
     /*
     launchUrl(
-        Uri.parse("https://scholarity.io/app/#/course?id=${widget.courseId}"));
+        Uri.parse("https://storybridge.io/app/#/course?id=${widget.courseId}"));
     course_navigation_service.goToFrontPage();
         */
     /*
@@ -44,7 +44,7 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityButton(
+    return StorybridgeButton(
       text: "Share",
       icon: Icons.rocket_launch_rounded,
       invertedColor: true,
@@ -52,45 +52,45 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
         setState(() {
           showDialog<String>(
             context: context,
-            builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-              child: ScholarityAlertDialog(
+            builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
+              child: StorybridgeAlertDialog(
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 8),
                     Icon(Icons.rocket_launch_rounded,
-                        color: scholarity_color.darkGrey, size: 40),
+                        color: storybridge_color.darkGrey, size: 40),
                     const SizedBox(height: 20),
-                    const ScholarityTextH2B("Link to your story page"),
+                    const StorybridgeTextH2B("Link to your story page"),
                     const SizedBox(height: 10),
                     Row(
                       children: [
-                        ScholarityButton(
+                        StorybridgeButton(
                             padding: false,
                             onPressed: _goToCourse,
                             child: Padding(
                               padding: const EdgeInsets.all(12),
                               child: Row(children: [
-                                ScholarityTextBasic(
-                                    "https://scholarity.io/app/#/course?id=${widget.courseId}",
+                                StorybridgeTextBasic(
+                                    "https://storybridge.io/app/#/course?id=${widget.courseId}",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color:
-                                            scholarity_color.scholarityAccent)),
+                                        color: storybridge_color
+                                            .storybridgeAccent)),
                                 const SizedBox(width: 30),
                                 Icon(Icons.arrow_forward_rounded,
-                                    color: scholarity_color.scholarityAccent)
+                                    color: storybridge_color.storybridgeAccent)
                               ]),
                             )),
                         const SizedBox(width: 20),
-                        ScholarityButton(
+                        StorybridgeButton(
                             padding: false,
                             onPressed: () async {
                               await Clipboard.setData(ClipboardData(
                                   text:
-                                      "https://scholarity.io/app/#/course?id=${widget.courseId}"));
+                                      "https://storybridge.io/app/#/course?id=${widget.courseId}"));
 
                               snackbar_service.showSnackbar(
                                   context, "Link copied to clipboard.");
@@ -98,17 +98,17 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               child: Icon(Icons.copy_rounded,
-                                  color: scholarity_color.scholarityAccent),
+                                  color: storybridge_color.storybridgeAccent),
                             )),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    const ScholarityTextP(
+                    const StorybridgeTextP(
                         "Congratulations!\nPlease click the link above to go to your story.\n\nYou can share this link with your students for\nthem to view the course."),
                     const SizedBox(height: 50),
                     Row(
                       children: [
-                        ScholarityButton(
+                        StorybridgeButton(
                           padding: false,
                           text: "Go to your story!",
                           invertedColor: true,
@@ -117,7 +117,7 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                           },
                         ),
                         const SizedBox(width: 15),
-                        ScholarityButton(
+                        StorybridgeButton(
                           padding: false,
                           text: "Dismiss",
                           onPressed: () {
@@ -127,11 +127,11 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                       ],
                     ),
                     /*
-                    const ScholarityTextH2B("Relevant settings:"),
+                    const StorybridgeTextH2B("Relevant settings:"),
                     const SizedBox(height: 10),
-                    const ScholarityTextH2B("Who can modify/teach course"),
+                    const StorybridgeTextH2B("Who can modify/teach course"),
                     const SizedBox(height: 10),
-                    ScholarityButton(
+                    StorybridgeButton(
                       padding: false,
                       text: "Manage",
                       lightenBackground: true,
@@ -140,9 +140,9 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                       },
                     ),
                     const SizedBox(height: 20),
-                    const ScholarityTextH2B("Who can view your course"),
+                    const StorybridgeTextH2B("Who can view your course"),
                     const SizedBox(height: 10),
-                    ScholarityButton(
+                    StorybridgeButton(
                       padding: false,
                       text: "Manage",
                       lightenBackground: true,
@@ -151,7 +151,7 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                       },
                     ),
                     const SizedBox(height: 50),
-                    ScholarityButton(
+                    StorybridgeButton(
                       padding: false,
                       text: "Change your domain",
                       lightenBackground: true,
@@ -160,7 +160,7 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                       },
                     ),
                     const SizedBox(height: 10),
-                    ScholarityButton(
+                    StorybridgeButton(
                       padding: false,
                       text: "Dismiss",
                       onPressed: () {
@@ -210,7 +210,7 @@ class _OrganizationAuthShareWidgetState
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityButton(
+    return StorybridgeButton(
       icon: Icons.link_rounded,
       text: "Get login/register link",
       invertedColor: true,
@@ -218,46 +218,46 @@ class _OrganizationAuthShareWidgetState
         setState(() {
           showDialog<String>(
             context: context,
-            builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-              child: ScholarityAlertDialog(
+            builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
+              child: StorybridgeAlertDialog(
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 8),
                     Icon(Icons.rocket_launch_rounded,
-                        color: scholarity_color.darkGrey, size: 40),
+                        color: storybridge_color.darkGrey, size: 40),
                     const SizedBox(height: 20),
-                    const ScholarityTextH2B(
+                    const StorybridgeTextH2B(
                         "Link to your organization login page"),
                     const SizedBox(height: 10),
                     Row(
                       children: [
-                        ScholarityButton(
+                        StorybridgeButton(
                             padding: false,
                             onPressed: _goToCourse,
                             child: Padding(
                               padding: const EdgeInsets.all(12),
                               child: Row(children: [
-                                ScholarityTextBasic(
-                                    "https://scholarity.io/app/#/login?id=${widget.organizationId}",
+                                StorybridgeTextBasic(
+                                    "https://storybridge.io/app/#/login?id=${widget.organizationId}",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color:
-                                            scholarity_color.scholarityAccent)),
+                                        color: storybridge_color
+                                            .storybridgeAccent)),
                                 const SizedBox(width: 30),
                                 Icon(Icons.arrow_forward_rounded,
-                                    color: scholarity_color.scholarityAccent)
+                                    color: storybridge_color.storybridgeAccent)
                               ]),
                             )),
                         const SizedBox(width: 20),
-                        ScholarityButton(
+                        StorybridgeButton(
                             padding: false,
                             onPressed: () async {
                               await Clipboard.setData(ClipboardData(
                                   text:
-                                      "https://scholarity.io/app/#/login?id=${widget.organizationId}"));
+                                      "https://storybridge.io/app/#/login?id=${widget.organizationId}"));
 
                               snackbar_service.showSnackbar(
                                   context, "Link copied to clipboard.");
@@ -265,17 +265,17 @@ class _OrganizationAuthShareWidgetState
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               child: Icon(Icons.copy_rounded,
-                                  color: scholarity_color.scholarityAccent),
+                                  color: storybridge_color.storybridgeAccent),
                             )),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    const ScholarityTextP(
+                    const StorybridgeTextP(
                         "Link for users to register or log into your organization."),
                     const SizedBox(height: 50),
                     Row(
                       children: [
-                        ScholarityButton(
+                        StorybridgeButton(
                           padding: false,
                           text: "Copy link",
                           invertedColor: true,
@@ -284,7 +284,7 @@ class _OrganizationAuthShareWidgetState
                           },
                         ),
                         const SizedBox(width: 15),
-                        ScholarityButton(
+                        StorybridgeButton(
                           padding: false,
                           text: "Dismiss",
                           onPressed: () {

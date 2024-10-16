@@ -2,9 +2,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
 
@@ -137,7 +137,7 @@ class AuditWorkflowCanvasController {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ScholarityTextSmall(
+              StorybridgeTextSmall(
                 workflowNodeTypeToObject[workflowNodeType]["text"],
                 textAlign: TextAlign.center,
               ),
@@ -197,7 +197,7 @@ class AuditWorkflowCanvasController {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ScholarityTextSmall(
+            StorybridgeTextSmall(
               workflowNodeTypeToObject[workflowNodeType]["text"],
               textAlign: TextAlign.center,
             ),
@@ -480,7 +480,7 @@ class _AuditWorkflowCanvasState extends State<AuditWorkflowCanvas> {
                     height: 2000,
                     width: 2000,
                     child: Scaffold(
-                      backgroundColor: scholarity_color.backgroundDim,
+                      backgroundColor: storybridge_color.backgroundDim,
                       body: Stack(
                         children: [
                           SizedBox(
@@ -548,7 +548,7 @@ class _AuditWorkflowCanvasState extends State<AuditWorkflowCanvas> {
                             ["workflowNodeTagType"],
                       ),
                       const SizedBox(width: 20),
-                      ScholarityTextBasic(
+                      StorybridgeTextBasic(
                           workflowNodeTypeToObject[key]["text"]),
                     ],
                   ),
@@ -560,7 +560,7 @@ class _AuditWorkflowCanvasState extends State<AuditWorkflowCanvas> {
 
           child: const SizedBox(
             width: 150,
-            child: ScholarityButton(
+            child: StorybridgeButton(
               text: "Create Node",
               invertedColor: true,
             ),

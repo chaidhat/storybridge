@@ -1,9 +1,9 @@
 import 'dart:html';
 import 'package:intl/intl.dart';
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 enum Language { english, thai, deutsch }
 
@@ -51,8 +51,8 @@ const Map<String, String> ENGLISH_TO_THAI = {
   "sign in": "เข้าสู่ระบบ",
   "login": "เข้าสู่ระบบ",
   "register": "ลงทะเบียน",
-  "i accept scholarity's terms of use and privacy notice.\nby creating an account, you agree to those terms.":
-      "ฉันยอมรับข้อกำหนดการใช้งานและประกาศความเป็นส่วนตัวของ Scholarity โดยการสร้างบัญชี คุณตกลงตามข้อกำหนดเหล่านั้น",
+  "i accept storybridge's terms of use and privacy notice.\nby creating an account, you agree to those terms.":
+      "ฉันยอมรับข้อกำหนดการใช้งานและประกาศความเป็นส่วนตัวของ Storybridge โดยการสร้างบัญชี คุณตกลงตามข้อกำหนดเหล่านั้น",
 
   // Organization Page
   "courses": "หลักสูตร",
@@ -227,8 +227,8 @@ const Map<String, String> ENGLISH_TO_GERMAN = {
   "sign in": "Anmelden",
   "login": "Anmelden",
   "register": "Registrieren",
-  "i accept scholarity's terms of use and privacy notice.\nby creating an account, you agree to those terms.":
-      "Ich akzeptiere die Nutzungsbedingungen und die Datenschutzerklärung von Scholarity.\nDurch die Erstellung eines Kontos stimmen Sie diesen Bedingungen zu.",
+  "i accept storybridge's terms of use and privacy notice.\nby creating an account, you agree to those terms.":
+      "Ich akzeptiere die Nutzungsbedingungen und die Datenschutzerklärung von Storybridge.\nDurch die Erstellung eines Kontos stimmen Sie diesen Bedingungen zu.",
 
   // Organization Page
   "courses": "Kurse",
@@ -345,7 +345,7 @@ const Map<String, String> ENGLISH_TO_GERMAN = {
 
 Language globalLanguage = Language.thai;
 final Storage _localStorage = window.localStorage;
-const Language DEFAULT_LANGUAGE = Language.thai;
+const Language DEFAULT_LANGUAGE = Language.english;
 
 void getStorageLanguage() {
   // attempt to get admin token from local storage
@@ -418,14 +418,14 @@ class LanguageFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: scholarity_color.background,
+      backgroundColor: storybridge_color.background,
       tooltip: "Language",
       onPressed: () {
         showDialog<String>(
             context: context,
             builder: (BuildContext context) => _LanguageDialog());
       },
-      child: Icon(Icons.language_rounded, color: scholarity_color.black),
+      child: Icon(Icons.language_rounded, color: storybridge_color.black),
     );
   }
 }
@@ -437,15 +437,15 @@ class _LanguageDialog extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityAlertDialogWrapper(
-      child: ScholarityAlertDialog(
+    return StorybridgeAlertDialogWrapper(
+      child: StorybridgeAlertDialog(
         content: SizedBox(
           width: 300,
           child: Column(
             children: [
               const SizedBox(height: 20),
-              const ScholarityTile(
-                child: ScholarityPadding(
+              const StorybridgeTile(
+                child: StorybridgePadding(
                   child: IntrinsicHeight(
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -454,17 +454,17 @@ class _LanguageDialog extends StatelessWidget {
                             language: Language.english,
                             languageName: "English",
                           ),
-                          ScholarityDivider(),
+                          StorybridgeDivider(),
                           _LanguageDialogButton(
                             language: Language.thai,
                             languageName: "ภาษาไทย",
                           ),
-                          ScholarityDivider(),
+                          StorybridgeDivider(),
                           _LanguageDialogButton(
                             language: Language.deutsch,
                             languageName: "ဗမာဘာသာစကား",
                           ),
-                          ScholarityDivider(),
+                          StorybridgeDivider(),
                           _LanguageDialogButton(
                             language: Language.deutsch,
                             languageName: "ភាសាខ្មែរ",
@@ -476,7 +476,7 @@ class _LanguageDialog extends StatelessWidget {
               const SizedBox(height: 20),
               Row(
                 children: [
-                  ScholarityButton(
+                  StorybridgeButton(
                       padding: false,
                       text: "Dismiss",
                       onPressed: () {
@@ -518,6 +518,6 @@ class _LanguageDialogButton extends StatelessWidget {
             height: 50,
             child: Align(
                 alignment: Alignment.centerLeft,
-                child: ScholarityTextH2B(languageName))));
+                child: StorybridgeTextH2B(languageName))));
   }
 }

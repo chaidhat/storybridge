@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 
 class EditorWidgetTemplate {
   final Map<String, dynamic> Function() getWidgetJson;
@@ -69,11 +69,11 @@ class EditorWidgetIcon extends StatelessWidget {
             width: 127,
             height: 80,
             decoration: BoxDecoration(
-                boxShadow: isGrabbed ? [scholarity_color.highShadow] : null,
+                boxShadow: isGrabbed ? [storybridge_color.highShadow] : null,
                 color: !isWhiteButton
-                    ? scholarity_color.backgroundDim
-                    : scholarity_color.background,
-                border: Border.all(color: scholarity_color.borderColor),
+                    ? storybridge_color.backgroundDim
+                    : storybridge_color.background,
+                border: Border.all(color: storybridge_color.borderColor),
                 borderRadius: BorderRadius.circular(8)),
             child: Padding(
               padding: const EdgeInsets.all(12),
@@ -84,11 +84,11 @@ class EditorWidgetIcon extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 12),
                         child:
-                            Icon(icon, size: 27, color: scholarity_color.grey),
+                            Icon(icon, size: 27, color: storybridge_color.grey),
                       )),
                   Align(
                       alignment: Alignment.bottomCenter,
-                      child: ScholarityTextH5(name)),
+                      child: StorybridgeTextH5(name)),
                 ],
               ),
             ),

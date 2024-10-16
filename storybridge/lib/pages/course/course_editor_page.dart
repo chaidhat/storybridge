@@ -5,7 +5,7 @@ import 'package:mooc/pages/course/editor/course_editor_viewer_page.dart';
 import 'package:mooc/services/course_navigation_service.dart'
     as course_navigation_service;
 
-import 'package:mooc/style/scholarity_appbar.dart';
+import 'package:mooc/style/storybridge_appbar.dart';
 
 import 'package:mooc/pages/course/editor/course_editor_sidebar_page.dart';
 import 'package:mooc/pages/course/editor/course_editor_drag_page.dart';
@@ -55,12 +55,12 @@ class _State extends State<CourseEditorPage>
     super.dispose();
   }
 
-  final ScholarityTabPageController _tabPageController =
-      ScholarityTabPageController();
+  final StorybridgeTabPageController _tabPageController =
+      StorybridgeTabPageController();
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTabPage(
+    return StorybridgeTabPage(
         scrollController: _scrollController,
         tabPageController: _tabPageController,
         hasReducedPadding: true,
@@ -164,7 +164,7 @@ class _CourseViewerState extends State<_CourseViewer>
       } else {
         return const Padding(
           padding: EdgeInsets.only(top: 80.0),
-          child: ScholarityPageLoading(),
+          child: StorybridgePageLoading(),
         );
       }
     } else {

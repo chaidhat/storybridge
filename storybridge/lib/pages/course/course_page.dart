@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/pages/course/course_editor_page.dart';
 import 'package:mooc/pages/course/course_design_page.dart';
@@ -79,7 +79,7 @@ class _CoursePageAdminState extends State<_CoursePageAdmin> {
   @override
   Widget build(BuildContext context) {
     error_service.checkAlerts(context);
-    return ScholarityScaffold(
+    return StorybridgeScaffold(
       forceDesktop: true,
       isTabRightAligned: true,
       hasAppbar: false,
@@ -96,7 +96,7 @@ class _CoursePageAdminState extends State<_CoursePageAdmin> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const ScholaritySavingIndicator(),
+            const StorybridgeSavingIndicator(),
             const SizedBox(width: 20),
             CourseShareWidget(
               courseId: widget.courseId,
@@ -105,17 +105,17 @@ class _CoursePageAdminState extends State<_CoursePageAdmin> {
         ),
       ),
       tabNames: [
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Editor", tabIcon: Icons.construction_rounded),
         /*
-        ScholarityTabHeaders(
+        StorybridgeTabHeaders(
             tabName: "Analytics", tabIcon: Icons.school_rounded),
             */
-        ScholarityTabHeader(tabName: "Sales", tabIcon: Icons.payment_rounded),
-        ScholarityTabHeader(
+        StorybridgeTabHeader(tabName: "Sales", tabIcon: Icons.payment_rounded),
+        StorybridgeTabHeader(
             tabName: "Settings", tabIcon: Icons.settings_rounded),
         /*
-        ScholarityTabHeaders(
+        StorybridgeTabHeaders(
             tabName: "Discussion", tabIcon: Icons.show_chart_rounded),
             */
       ],
@@ -147,7 +147,7 @@ class _CoursePageStudent extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityScaffold(
+    return StorybridgeScaffold(
       hasAppbar: false,
       body: const [],
       tabPrefix: IntrinsicWidth(
@@ -168,17 +168,17 @@ class _CoursePageStudent extends StatelessWidget {
       tabSuffix: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          ScholarityAccountIndicator(organizationId: organizationId),
+          StorybridgeAccountIndicator(organizationId: organizationId),
         ],
       ),
       isTabRightAligned: true,
       tabNames: [
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Story", tabIcon: Icons.collections_bookmark_rounded),
         /*
-        ScholarityTabHeaders(
+        StorybridgeTabHeaders(
             tabName: "Discussion", tabIcon: Icons.school_rounded),
-        ScholarityTabHeaders(tabName: "Notes", tabIcon: Icons.article_rounded),
+        StorybridgeTabHeaders(tabName: "Notes", tabIcon: Icons.article_rounded),
         */
       ],
       tabs: [
@@ -237,15 +237,15 @@ class _CourseNameState extends State<_CourseName> {
 
             // custom styling
             if (_courseName.length > 35) {
-              courseNameTextFontSize = scholarityTextH2BStyle.fontSize! - 2;
+              courseNameTextFontSize = storybridgeTextH2BStyle.fontSize! - 2;
             } else if (_courseName.length < 20) {
-              courseNameTextFontSize = scholarityTextH2BStyle.fontSize! + 4;
+              courseNameTextFontSize = storybridgeTextH2BStyle.fontSize! + 4;
             } else {
-              courseNameTextFontSize = scholarityTextH2BStyle.fontSize!;
+              courseNameTextFontSize = storybridgeTextH2BStyle.fontSize!;
             }
             TextStyle courseNameStyle = TextStyle(
-                color: scholarityTextH2BStyle.color,
-                fontWeight: scholarityTextH2BStyle.fontWeight,
+                color: storybridgeTextH2BStyle.color,
+                fontWeight: storybridgeTextH2BStyle.fontWeight,
                 fontSize: courseNameTextFontSize);
 
             return IntrinsicWidth(
@@ -273,15 +273,16 @@ class _CourseNameState extends State<_CourseName> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          ScholarityTextBasic(_organizationName,
-                                              style: scholarityTextH5Style),
-                                          ScholarityTextBasic(_courseName,
+                                          StorybridgeTextBasic(
+                                              _organizationName,
+                                              style: storybridgeTextH5Style),
+                                          StorybridgeTextBasic(_courseName,
                                               style: courseNameStyle),
                                         ],
                                       ),
                                     );
                                   } else {
-                                    return ScholarityTextBasic(_courseName,
+                                    return StorybridgeTextBasic(_courseName,
                                         style: courseNameStyle);
                                   }
                                 }))),
@@ -292,7 +293,7 @@ class _CourseNameState extends State<_CourseName> {
               ),
             );
           } else {
-            return const ScholarityBoxLoading(height: 25, width: 200);
+            return const StorybridgeBoxLoading(height: 25, width: 200);
           }
         });
   }

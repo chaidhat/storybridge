@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/auditing_service.dart' as auditing_service;
 
@@ -73,8 +73,8 @@ class EditorWidgetAnswerButtons extends StatefulWidget implements EditorWidget {
 
 class _EditorWidgetAnswerButtonsState extends State<EditorWidgetAnswerButtons> {
   List<bool> _answers = [];
-  ScholarityTextFieldController _otherFieldController =
-      ScholarityTextFieldController();
+  StorybridgeTextFieldController _otherFieldController =
+      StorybridgeTextFieldController();
   bool _selectedOtherField = false;
   void updateQuestion() {
     widget.editorWidgetData.onUpdate();
@@ -128,20 +128,21 @@ class _EditorWidgetAnswerButtonsState extends State<EditorWidgetAnswerButtons> {
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData) {
-            return const ScholarityBoxLoading(height: 60, width: 270);
+            return const StorybridgeBoxLoading(height: 60, width: 270);
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               widget.controller.questionController.text.isNotEmpty
-                  ? ScholarityTextH2B(widget.controller.questionController.text)
+                  ? StorybridgeTextH2B(
+                      widget.controller.questionController.text)
                   : Container(),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Wrap(
                     crossAxisAlignment: WrapCrossAlignment.start,
                     children: List.generate(snapshot.data.length, (int i) {
                       return IntrinsicWidth(
-                        child: ScholarityButton(
+                        child: StorybridgeButton(
                             text: snapshot.data[i],
                             invertedColor:
                                 i < _answers.length ? _answers[i] : false,
@@ -174,7 +175,7 @@ class _EditorWidgetAnswerButtonsState extends State<EditorWidgetAnswerButtons> {
                     })),
                 !widget.controller.hasOtherField
                     ? Container()
-                    : ScholarityCheckbox(
+                    : StorybridgeCheckbox(
                         label: "Add additional information",
                         value: _selectedOtherField,
                         onChanged: (bool val) {
@@ -184,7 +185,7 @@ class _EditorWidgetAnswerButtonsState extends State<EditorWidgetAnswerButtons> {
                         }),
                 !_selectedOtherField
                     ? Container()
-                    : ScholarityTextField(
+                    : StorybridgeTextField(
                         label: "Please specify",
                         controller: _otherFieldController,
                         isEnabled: !widget.editorWidgetData.isAdminMode,
@@ -198,10 +199,10 @@ class _EditorWidgetAnswerButtonsState extends State<EditorWidgetAnswerButtons> {
 
 class AnswerButtonsController {
   String quid = "";
-  ScholarityTextFieldController questionController =
-      ScholarityTextFieldController();
-  ScholarityTextFieldController buttonsController =
-      ScholarityTextFieldController();
+  StorybridgeTextFieldController questionController =
+      StorybridgeTextFieldController();
+  StorybridgeTextFieldController buttonsController =
+      StorybridgeTextFieldController();
   final DataSource dataSource = DataSource();
   bool hasOtherField = false;
   bool canMultiselect = false;
@@ -245,17 +246,17 @@ class _AnswerButtonsSettingsState extends State<_AnswerButtonsSettings> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ScholarityIconButton(
+          StorybridgeIconButton(
               icon: Icons.close,
               onPressed: () {
                 Navigator.pop(context);
               }),
           const SizedBox(height: 10),
-          const ScholarityTextH2B("Question Settings"),
+          const StorybridgeTextH2B("Question Settings"),
           const SizedBox(height: 10),
           SizedBox(
             height: 110,
-            child: ScholarityTextField(
+            child: StorybridgeTextField(
               isLarge: true,
               label: "Question",
               controller: widget.controller.questionController,
@@ -265,7 +266,7 @@ class _AnswerButtonsSettingsState extends State<_AnswerButtonsSettings> {
             dataSource: widget.controller.dataSource,
             organizationId: widget.organizationId,
           ),
-          ScholarityCheckbox(
+          StorybridgeCheckbox(
               label: "Allow 'other' field",
               value: widget.controller.hasOtherField,
               onChanged: (bool val) {
@@ -274,7 +275,7 @@ class _AnswerButtonsSettingsState extends State<_AnswerButtonsSettings> {
                   widget.controller.onUpdate();
                 });
               }),
-          ScholarityCheckbox(
+          StorybridgeCheckbox(
               label: "Allow multiple selections",
               value: widget.controller.canMultiselect,
               onChanged: (bool val) {
@@ -284,8 +285,8 @@ class _AnswerButtonsSettingsState extends State<_AnswerButtonsSettings> {
                 });
               }),
           const SizedBox(height: 30),
-          ScholarityTextP("quid: ${widget.controller.quid}"),
-          ScholarityButton(
+          StorybridgeTextP("quid: ${widget.controller.quid}"),
+          StorybridgeButton(
             text: "Save",
             onPressed: () {
               Navigator.pop(context);
@@ -310,15 +311,15 @@ class _Toolbar extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityButton(
+    return StorybridgeButton(
       text: "Edit question",
       invertedColor: true,
       padding: false,
       onPressed: () {
-        scholarityShowDialog(
+        storybridgeShowDialog(
           context: context,
-          builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-            child: ScholarityAlertDialog(
+          builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
+            child: StorybridgeAlertDialog(
               content: _AnswerButtonsSettings(
                 controller: controller,
                 organizationId: organizationId,

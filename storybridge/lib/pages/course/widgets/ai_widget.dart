@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -41,7 +41,7 @@ class _AiWidgetState extends State<AiWidget> {
             Wrap(
               children: [
                 IntrinsicWidth(
-                  child: ScholarityButton(
+                  child: StorybridgeButton(
                     invertedColor: _hasOpenedQuestion,
                     text: !_hasOpenedQuestion
                         ? "Ask the AI a question"
@@ -55,7 +55,7 @@ class _AiWidgetState extends State<AiWidget> {
                   ),
                 ),
                 IntrinsicWidth(
-                  child: ScholarityButton(
+                  child: StorybridgeButton(
                     invertedColor: _hasOpenedSummary,
                     text: !_hasOpenedSummary
                         ? "See AI Summary"
@@ -119,18 +119,18 @@ class _AISummaryWidgetState extends State<_AISummaryWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ScholarityTile(
-        child: ScholarityPadding(
+      child: StorybridgeTile(
+        child: StorybridgePadding(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ScholarityTextH2B("AI Generated Summary"),
+              const StorybridgeTextH2B("AI Generated Summary"),
               const SizedBox(height: 10),
               FutureBuilder(
                   future: _getAiCourseElementSummary(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (!snapshot.hasData) {
-                      return const ScholarityPageLoading(
+                      return const StorybridgePageLoading(
                         useAltStyle: true,
                       );
                     } else {
@@ -162,8 +162,8 @@ class _AIQuestionWidget extends StatefulWidget {
 
 // myPage state
 class _AIQuestionWidgetState extends State<_AIQuestionWidget> {
-  final ScholarityTextFieldController _controller =
-      ScholarityTextFieldController();
+  final StorybridgeTextFieldController _controller =
+      StorybridgeTextFieldController();
   bool _isLoading = false;
   @override
   void initState() {
@@ -195,12 +195,12 @@ class _AIQuestionWidgetState extends State<_AIQuestionWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ScholarityTile(
-        child: ScholarityPadding(
+      child: StorybridgeTile(
+        child: StorybridgePadding(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ScholarityTextH2B(
+              const StorybridgeTextH2B(
                   "Ask the AI a question about this course"),
               const SizedBox(height: 10),
               Column(
@@ -214,17 +214,17 @@ class _AIQuestionWidgetState extends State<_AIQuestionWidget> {
               const SizedBox(height: 10),
               Builder(builder: (BuildContext context) {
                 if (_isLoading) {
-                  return const ScholarityPageLoading(
+                  return const StorybridgePageLoading(
                     useAltStyle: true,
                   );
                 } else {
                   return Column(
                     children: [
-                      ScholarityTextField(
+                      StorybridgeTextField(
                         label: "Question",
                         controller: _controller,
                       ),
-                      ScholarityButton(
+                      StorybridgeButton(
                         text: "Ask",
                         invertedColor: true,
                         padding: false,
@@ -274,7 +274,7 @@ class _ChatWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ScholarityTextH2B(data.isAi ? "Scholarity AI" : "You"),
+                StorybridgeTextH2B(data.isAi ? "Storybridge AI" : "You"),
                 AnimatedTextKit(
                   totalRepeatCount: 1,
                   animatedTexts: [
@@ -283,7 +283,7 @@ class _ChatWidget extends StatelessWidget {
                       speed: isTextAnimated
                           ? const Duration(milliseconds: 10)
                           : const Duration(milliseconds: 0),
-                      textStyle: scholarityTextPStyle,
+                      textStyle: storybridgeTextPStyle,
                     )
                   ],
                 ),

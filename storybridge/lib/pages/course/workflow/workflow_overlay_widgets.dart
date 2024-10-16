@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 
 abstract class WorkflowOverlay {
   Widget draw(AuditWorkflowCanvasController canvasController);
@@ -317,11 +317,11 @@ class _WorkflowArrowSourceWidgetState extends State<WorkflowArrowSourceWidget> {
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                           color: widget.isSource
-                              ? scholarity_color.borderColor
+                              ? storybridge_color.borderColor
                               : Colors.transparent,
                           width: 1),
                       color: widget.isSource
-                          ? scholarity_color.background
+                          ? storybridge_color.background
                           : Colors.blue[100]),
                 )),
           ),
@@ -329,7 +329,7 @@ class _WorkflowArrowSourceWidgetState extends State<WorkflowArrowSourceWidget> {
               opacity:
                   widget.isSource ? 0 : (_isHovered && !_isDragged ? 0.5 : 0.1),
               child: Icon(Icons.arrow_downward_rounded,
-                  color: scholarity_color.black, size: 40)),
+                  color: storybridge_color.black, size: 40)),
         ],
       ),
     );
@@ -366,16 +366,16 @@ class WorkflowNodeWidgetBody extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          border: Border.all(color: scholarity_color.borderColor, width: 1),
+          border: Border.all(color: storybridge_color.borderColor, width: 1),
           borderRadius: BorderRadius.circular(8),
-          color: scholarity_color.background,
+          color: storybridge_color.background,
           boxShadow:
-              isBeingDragged ? const [scholarity_color.highShadow] : const [],
+              isBeingDragged ? const [storybridge_color.highShadow] : const [],
         ),
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Stack(children: [
-            ScholarityPadding(child: child),
+            StorybridgePadding(child: child),
             Align(
                 alignment: Alignment.topRight,
                 child: Opacity(
@@ -388,12 +388,12 @@ class WorkflowNodeWidgetBody extends StatelessWidget {
                           onTap: () {
                             canvasController.removeNode(workflowNodeId);
                           },
-                          child: const ScholarityTextBasic("Delete"),
+                          child: const StorybridgeTextBasic("Delete"),
                         ),
                       ];
                     },
                     child: Icon(Icons.more_vert_rounded,
-                        color: scholarity_color.black),
+                        color: storybridge_color.black),
                   ),
                 )),
             Align(
@@ -408,7 +408,7 @@ class WorkflowNodeWidgetBody extends StatelessWidget {
                   child: Row(
                       children: List.generate(outputLabels.length, (int i) {
                     return Expanded(
-                        child: ScholarityTextSmall(
+                        child: StorybridgeTextSmall(
                       outputLabels[i],
                       textAlign: TextAlign.center,
                     ));
@@ -471,12 +471,12 @@ class _WorkflowArrowSinkWidgetState extends State<WorkflowArrowSinkWidget> {
                         child: Icon(Icons.close_rounded,
                             color: _isHovered
                                 ? Colors.red
-                                : scholarity_color.black,
+                                : storybridge_color.black,
                             size: 40))
                     : Opacity(
                         opacity: 0.1,
                         child: Icon(Icons.arrow_downward,
-                            color: scholarity_color.black, size: 40)),
+                            color: storybridge_color.black, size: 40)),
                 Container(
                     height: arrowSourceSize,
                     width: arrowSourceSize,
@@ -537,7 +537,7 @@ class WorkflowNodeActionTag extends StatelessWidget {
               SizedBox(
                 width: 3,
               ),
-              ScholarityTextBasic("Action",
+              StorybridgeTextBasic("Action",
                   style: TextStyle(
                       color: Colors.orange,
                       fontSize: 12,
@@ -570,7 +570,7 @@ class WorkflowNodeTriggerTag extends StatelessWidget {
               SizedBox(
                 width: 3,
               ),
-              ScholarityTextBasic("Trigger",
+              StorybridgeTextBasic("Trigger",
                   style: TextStyle(
                       color: Colors.green,
                       fontSize: 12,
@@ -603,7 +603,7 @@ class WorkflowNodeConditionTag extends StatelessWidget {
               SizedBox(
                 width: 3,
               ),
-              ScholarityTextBasic("Wait",
+              StorybridgeTextBasic("Wait",
                   style: TextStyle(
                       color: Colors.purple,
                       fontSize: 12,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/auth_service.dart' as auth_service;
 import 'package:mooc/services/error_service.dart' as error_service;
@@ -10,7 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AuthLoginPage extends StatelessWidget {
   final int?
-      organizationId; // if not provided, this means that Scholarity is the organization (used for appbar)
+      organizationId; // if not provided, this means that Storybridge is the organization (used for appbar)
   final String? redirectToUrl;
 
   const AuthLoginPage({Key? key, this.organizationId, this.redirectToUrl})
@@ -31,7 +31,7 @@ class AuthLoginPage extends StatelessWidget {
 
 class AuthRegisterPage extends StatelessWidget {
   final int?
-      organizationId; // if not provided, this means that Scholarity is the organization (used for appbar)
+      organizationId; // if not provided, this means that Storybridge is the organization (used for appbar)
   final String? redirectToUrl;
 
   const AuthRegisterPage({Key? key, this.organizationId, this.redirectToUrl})
@@ -64,7 +64,7 @@ class AuthPageWrapper extends StatelessWidget {
       floatingActionButton: const translation_service.LanguageFab(),
       body: Center(
         child: IntrinsicWidth(
-          child: ScholarityTile(
+          child: StorybridgeTile(
             width: 470,
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -81,7 +81,7 @@ class AuthWidget extends StatefulWidget {
   // members of MyWidget
   final bool startWithLoginMode;
   final int?
-      organizationId; // if not provided, this means that Scholarity is the organization (used for appbar)
+      organizationId; // if not provided, this means that Storybridge is the organization (used for appbar)
   final bool isPopup;
   final String? redirectToUrl;
 
@@ -117,7 +117,7 @@ class _AuthWidgetState extends State<AuthWidget> {
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
-      child: ScholarityPadding(
+      child: StorybridgePadding(
         thick: true,
         child: SizedBox(
           width: 370,
@@ -128,7 +128,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                 const SizedBox(height: 10),
                 widget.organizationId != null
                     ? CustomLoginHeader(organizationId: widget.organizationId!)
-                    : const ScholarityLoginHeader(),
+                    : const StorybridgeLoginHeader(),
                 const SizedBox(height: 50),
                 _loginMode
                     ? _AuthLoginWidget(
@@ -154,7 +154,7 @@ class _AuthWidgetState extends State<AuthWidget> {
 // myPage class which creates a state on call
 class _AuthLoginWidget extends StatefulWidget {
   final int?
-      organizationId; // if not provided, this means that Scholarity is the organization (used for appbar)
+      organizationId; // if not provided, this means that Storybridge is the organization (used for appbar)
   final void Function() changePage;
   final bool isPopup;
   final String? redirectToUrl;
@@ -172,8 +172,8 @@ class _AuthLoginWidget extends StatefulWidget {
 
 // myPage state
 class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
-  final _emailController = ScholarityTextFieldController();
-  final _passwordController = ScholarityTextFieldController();
+  final _emailController = StorybridgeTextFieldController();
+  final _passwordController = StorybridgeTextFieldController();
   bool _isLoggingIn = false;
 
   @override
@@ -202,7 +202,7 @@ class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
         organizationId: widget.organizationId,
       );
       return true;
-    } on error_service.ScholarityException catch (err) {
+    } on error_service.StorybridgeException catch (err) {
       switch (err.errorData?["authErrorType"]) {
         case "email":
         case "general":
@@ -232,14 +232,14 @@ class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
-        const ScholarityTextH3("Log into existing account"),
+        const StorybridgeTextH3("Log into existing account"),
         const SizedBox(height: 5),
-        ScholarityTextField(
+        StorybridgeTextField(
           label: "Email",
           controller: _emailController,
           isPragmaticField: true,
         ),
-        ScholarityTextField(
+        StorybridgeTextField(
           label: "Password",
           controller: _passwordController,
           isPragmaticField: true,
@@ -252,7 +252,7 @@ class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
             Padding(
               padding: const EdgeInsets.only(right: 20),
               child: IntrinsicWidth(
-                child: ScholarityButton(
+                child: StorybridgeButton(
                     text: "Login",
                     verticalOnlyPadding: true,
                     onPressed: () async {
@@ -280,7 +280,7 @@ class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
                             course_service.sendToOrgPage(context);
                           }
                         }
-                      } on error_service.ScholarityException catch (error) {
+                      } on error_service.StorybridgeException catch (error) {
                         setState(() {
                           _isLoggingIn = false;
                         });
@@ -289,27 +289,6 @@ class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
                     },
                     invertedColor: true,
                     loading: _isLoggingIn),
-              ),
-            ),
-            IntrinsicWidth(
-              child: ScholarityButton(
-                verticalOnlyPadding: true,
-                text: "Create a new account",
-                onPressed: () {
-                  if (widget.organizationId == null) {
-                    launchUrl(Uri.parse("https://scholarity.io/pricing"));
-                    return;
-                  }
-                  widget.changePage();
-                  /*
-                  Navigator.pushNamed(
-                      context,
-                      '/register' +
-                          (widget.organizationId != null
-                              ? "?id=${widget.organizationId}"
-                              : ""));
-                              */
-                },
               ),
             ),
           ],
@@ -322,7 +301,7 @@ class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
 // myPage class which creates a state on call
 class _AuthRegisterWidget extends StatefulWidget {
   final int?
-      organizationId; // if not provided, this means that Scholarity is the organization (used for appbar)
+      organizationId; // if not provided, this means that Storybridge is the organization (used for appbar)
   final void Function() changePage;
   final bool isPopup;
   const _AuthRegisterWidget({
@@ -338,12 +317,12 @@ class _AuthRegisterWidget extends StatefulWidget {
 
 // myPage state
 class _AuthRegisterWidgetState extends State<_AuthRegisterWidget> {
-  final ScholarityTextFieldController _emailController =
-      ScholarityTextFieldController();
-  final ScholarityTextFieldController _passwordController =
-      ScholarityTextFieldController();
-  final ScholarityTextFieldController _fullNameController =
-      ScholarityTextFieldController();
+  final StorybridgeTextFieldController _emailController =
+      StorybridgeTextFieldController();
+  final StorybridgeTextFieldController _passwordController =
+      StorybridgeTextFieldController();
+  final StorybridgeTextFieldController _fullNameController =
+      StorybridgeTextFieldController();
   bool _isRegistering = false;
 
   @override
@@ -389,7 +368,7 @@ class _AuthRegisterWidgetState extends State<_AuthRegisterWidget> {
         organizationId: widget.organizationId,
       );
       return true;
-    } on error_service.ScholarityException catch (err) {
+    } on error_service.StorybridgeException catch (err) {
       switch (err.errorData?["authErrorType"]) {
         case "name":
         case "general":
@@ -424,19 +403,19 @@ class _AuthRegisterWidgetState extends State<_AuthRegisterWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ScholarityTextH3("Create a free account"),
+        const StorybridgeTextH3("Create a free account"),
         const SizedBox(height: 10),
-        ScholarityTextField(
+        StorybridgeTextField(
           label: "Full name",
           controller: _fullNameController,
           isPragmaticField: true,
         ),
-        ScholarityTextField(
+        StorybridgeTextField(
           label: "Email",
           controller: _emailController,
           isPragmaticField: true,
         ),
-        ScholarityTextField(
+        StorybridgeTextField(
           label: "Password",
           controller: _passwordController,
           isPragmaticField: true,
@@ -447,7 +426,7 @@ class _AuthRegisterWidgetState extends State<_AuthRegisterWidget> {
             Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: IntrinsicWidth(
-                  child: ScholarityButton(
+                  child: StorybridgeButton(
                     text: "Register",
                     verticalOnlyPadding: true,
                     onPressed: () async {
@@ -472,7 +451,7 @@ class _AuthRegisterWidgetState extends State<_AuthRegisterWidget> {
                             course_service.sendToOrgPage(context);
                           }
                         }
-                      } on error_service.ScholarityException catch (error) {
+                      } on error_service.StorybridgeException catch (error) {
                         error_service.reportError(error, context);
                       }
                     },
@@ -481,7 +460,7 @@ class _AuthRegisterWidgetState extends State<_AuthRegisterWidget> {
                   ),
                 )),
             IntrinsicWidth(
-              child: ScholarityButton(
+              child: StorybridgeButton(
                 verticalOnlyPadding: true,
                 text: "Log into existing account",
                 onPressed: () async {
@@ -502,11 +481,9 @@ class _AuthRegisterWidgetState extends State<_AuthRegisterWidget> {
         ),
         const SizedBox(height: 20),
         InkWell(
-          onTap: () {
-            launchUrl(Uri.parse("https://scholarity.io/privacy"));
-          },
-          child: const ScholarityTextP(
-            "I accept Scholarity's Terms of Use and Privacy Notice.\nBy creating an account, you agree to those terms.",
+          onTap: () {},
+          child: const StorybridgeTextP(
+            "I accept Storybridge's Terms of Use and Privacy Notice.\nBy creating an account, you agree to those terms.",
             isDim: true,
           ),
         ),

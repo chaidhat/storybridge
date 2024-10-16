@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart'; // Flutter
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 //const COLOR_MAIN = const Color(0xFF006EB4);
-const Color _lightmodeScholarityAccent = Color(0xFF000000);
-const Color _lightmodeScholarityAccentLight = Color(0x18000000);
-const Color _lightmodeScholarityAccentBackground = Color(0x10000000);
+const Color _lightmodeStorybridgeAccent = Color(0xFF000000);
+const Color _lightmodeStorybridgeAccentLight = Color(0x18000000);
+const Color _lightmodeStorybridgeAccentBackground = Color(0x10000000);
 const Color _lightmodeBackground = Color(0xFFFFFFFF);
 const Color _lightmodeBackgroundTransparent = Color(0x00FFFFFF);
 const Color _lightmodeBackgroundDim = Color(0xFFF8F8F8);
@@ -16,9 +16,9 @@ const Color _lightmodeBorderColor = Color(0xFFD0D0D0);
 const Color _lightmodeBlack = Color(0xFF000000);
 const Color _lightmodeBackgroundLoading = Color(0xFFF0F0F0);
 
-const Color _darkmodeScholarityAccent = Color.fromARGB(255, 217, 217, 217);
-const Color _darkmodeScholarityAccentLight = Color.fromARGB(255, 85, 85, 85);
-const Color _darkmodeScholarityAccentBackground =
+const Color _darkmodeStorybridgeAccent = Color.fromARGB(255, 217, 217, 217);
+const Color _darkmodeStorybridgeAccentLight = Color.fromARGB(255, 85, 85, 85);
+const Color _darkmodeStorybridgeAccentBackground =
     Color.fromARGB(255, 32, 32, 32);
 const Color _darkmodeBackground = Color.fromARGB(255, 0, 0, 0);
 const Color _darkmodeBackgroundTransparent = Color.fromARGB(0, 0, 0, 0);
@@ -30,9 +30,9 @@ const Color _darkmodeBorderColor = Color.fromARGB(255, 79, 79, 79);
 const Color _darkmodeBlack = Color.fromARGB(255, 255, 255, 255);
 const Color _darkmodeBackgroundLoading = Color.fromARGB(255, 23, 23, 23);
 
-Color scholarityAccent = _lightmodeScholarityAccent;
-Color scholarityAccentLight = _lightmodeScholarityAccentLight;
-Color scholarityAccentBackground = _lightmodeScholarityAccentBackground;
+Color storybridgeAccent = _lightmodeStorybridgeAccent;
+Color storybridgeAccentLight = _lightmodeStorybridgeAccentLight;
+Color storybridgeAccentBackground = _lightmodeStorybridgeAccentBackground;
 Color background = _lightmodeBackground;
 Color backgroundDim = _lightmodeBackgroundDim;
 Color backgroundTransparent = _lightmodeBackgroundTransparent;
@@ -52,9 +52,9 @@ bool getIsDarkMode() {
 void toggleDarkMode() {
   _isDarkMode = !_isDarkMode;
   if (_isDarkMode) {
-    scholarityAccent = _darkmodeScholarityAccent;
-    scholarityAccentLight = _darkmodeScholarityAccentLight;
-    scholarityAccentBackground = _darkmodeScholarityAccentBackground;
+    storybridgeAccent = _darkmodeStorybridgeAccent;
+    storybridgeAccentLight = _darkmodeStorybridgeAccentLight;
+    storybridgeAccentBackground = _darkmodeStorybridgeAccentBackground;
     background = _darkmodeBackground;
     backgroundDim = _darkmodeBackgroundDim;
     backgroundTransparent = _darkmodeBackgroundTransparent;
@@ -65,9 +65,9 @@ void toggleDarkMode() {
     black = _darkmodeBlack;
     backgroundLoading = _darkmodeBackgroundLoading;
   } else {
-    scholarityAccent = _lightmodeScholarityAccent;
-    scholarityAccentLight = _lightmodeScholarityAccentLight;
-    scholarityAccentBackground = _lightmodeScholarityAccentBackground;
+    storybridgeAccent = _lightmodeStorybridgeAccent;
+    storybridgeAccentLight = _lightmodeStorybridgeAccentLight;
+    storybridgeAccentBackground = _lightmodeStorybridgeAccentBackground;
     background = _lightmodeBackground;
     backgroundDim = _lightmodeBackgroundDim;
     backgroundTransparent = _lightmodeBackgroundTransparent;
@@ -81,9 +81,9 @@ void toggleDarkMode() {
 }
 /*
 OLD colour scheme
-const scholarityRed = Color(0xFFD41C3A);
-const scholarityRedLight = Color(0xFFfbdfe4);
-const scholarityRedBackground = Color(0xFFFDF2F4);
+const storybridgeRed = Color(0xFFD41C3A);
+const storybridgeRedLight = Color(0xFFfbdfe4);
+const storybridgeRedBackground = Color(0xFFFDF2F4);
 const background = Color(0xFFFFFFFF);
 const backgroundDim = Color(0xFFF8F8F8);
 const grey = Color(0xFF606060);
@@ -98,16 +98,16 @@ const green = Color(0xFF7CEA9C);
 const blueblue = Color.fromARGB(255, 105, 97, 128);
 const auditBlue = Color.fromARGB(255, 26, 189, 235);
 
-const double scholarityHolderMaxWidth = 740;
-const double scholarityHolderMaxWidthNotPadded = 787;
-const double scholaritySideBarWidth = 300;
+const double storybridgeHolderMaxWidth = 740;
+const double storybridgeHolderMaxWidthNotPadded = 787;
+const double storybridgeSideBarWidth = 300;
 
 //DARKMODE
 
 /*
-const scholarityRed = Color(0xFFD41C3A);
-const scholarityRedLight = Color(0xFF612728);
-const scholarityRedBackground = Color(0xFF391d1F);
+const storybridgeRed = Color(0xFFD41C3A);
+const storybridgeRedLight = Color(0xFF612728);
+const storybridgeRedBackground = Color(0xFF391d1F);
 const backgroundDim = Color(0xFF161C21);
 const grey = Color(0xFFFFFFFF);
 const darkGrey = Color(0xFFFFFFFF);
@@ -163,17 +163,17 @@ class HexColor extends Color {
 // usage Color color2 = HexColor("#b74093");
 
 // myPage class which creates a state on call
-class ScholarityColorPicker extends StatefulWidget {
-  final ScholarityTextFieldController controller;
-  const ScholarityColorPicker({Key? key, required this.controller})
+class StorybridgeColorPicker extends StatefulWidget {
+  final StorybridgeTextFieldController controller;
+  const StorybridgeColorPicker({Key? key, required this.controller})
       : super(key: key);
 
   @override
-  _ScholarityColorPickerState createState() => _ScholarityColorPickerState();
+  _StorybridgeColorPickerState createState() => _StorybridgeColorPickerState();
 }
 
 // myPage state
-class _ScholarityColorPickerState extends State<ScholarityColorPicker> {
+class _StorybridgeColorPickerState extends State<StorybridgeColorPicker> {
   Color? pickerColor;
   @override
   void initState() {
@@ -229,7 +229,7 @@ class _ScholarityColorPickerState extends State<ScholarityColorPicker> {
                 // ),
               ),
               actions: <Widget>[
-                ScholarityButton(
+                StorybridgeButton(
                   text: "Confirm",
                   invertedColor: true,
                   onPressed: () {
@@ -264,11 +264,11 @@ class _ScholarityColorPickerState extends State<ScholarityColorPicker> {
                     height: 40,
                     width: 100,
                   )
-                : ScholarityTextP(
+                : StorybridgeTextP(
                     "Invalid colour: '#${widget.controller.text}'"),
           ),
           const SizedBox(width: 10),
-          ScholarityIconButton(
+          StorybridgeIconButton(
             onPressed: () {
               pickColor();
             },
@@ -281,18 +281,19 @@ class _ScholarityColorPickerState extends State<ScholarityColorPicker> {
 }
 
 // myPage class which creates a state on call
-class ScholarityColorPickerIcon extends StatefulWidget {
-  final ScholarityTextFieldController controller;
-  const ScholarityColorPickerIcon({Key? key, required this.controller})
+class StorybridgeColorPickerIcon extends StatefulWidget {
+  final StorybridgeTextFieldController controller;
+  const StorybridgeColorPickerIcon({Key? key, required this.controller})
       : super(key: key);
 
   @override
-  ScholarityColorPickerIconState createState() =>
-      ScholarityColorPickerIconState();
+  StorybridgeColorPickerIconState createState() =>
+      StorybridgeColorPickerIconState();
 }
 
 // myPage state
-class ScholarityColorPickerIconState extends State<ScholarityColorPickerIcon> {
+class StorybridgeColorPickerIconState
+    extends State<StorybridgeColorPickerIcon> {
   Color? pickerColor;
   @override
   void initState() {
@@ -329,7 +330,7 @@ class ScholarityColorPickerIconState extends State<ScholarityColorPickerIcon> {
                 ),
               ),
               actions: <Widget>[
-                ScholarityButton(
+                StorybridgeButton(
                   text: "Confirm",
                   invertedColor: true,
                   onPressed: () {
@@ -346,7 +347,7 @@ class ScholarityColorPickerIconState extends State<ScholarityColorPickerIcon> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityIconButton(
+    return StorybridgeIconButton(
       icon: Icons.format_color_fill_rounded,
       onPressed: () {
         pickColor();

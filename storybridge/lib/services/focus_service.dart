@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-List<ScholarityFocusController> focusControllers = [];
+List<StorybridgeFocusController> focusControllers = [];
 
-void _registerFocusNode(ScholarityFocusController focusController) {
+void _registerFocusNode(StorybridgeFocusController focusController) {
   focusControllers.add(focusController);
 }
 
-void _deregisterFocusNode(ScholarityFocusController focusController) {
+void _deregisterFocusNode(StorybridgeFocusController focusController) {
   focusControllers.remove(focusController);
 }
 
 int _highestZ = 0;
 void _globalUpdateFocus(
-    bool hasFocus, ScholarityFocusController focusController) async {
+    bool hasFocus, StorybridgeFocusController focusController) async {
   int z = focusController.z ?? 0;
   if (z > _highestZ) {
     _highestZ = z;
@@ -54,101 +54,101 @@ void _globalUnfocusAll() {
   }
 }
 
-class ScholarityFocusController {
+class StorybridgeFocusController {
   late void Function() update;
   bool hasFocus = false;
   int? z;
 
-  ScholarityFocusController();
+  StorybridgeFocusController();
 }
 
-class ScholarityFocusNode {
+class StorybridgeFocusNode {
   late void Function() requestFocus;
   late void Function() unfocus;
   bool hasFocus = false;
-  ScholarityFocusNode();
+  StorybridgeFocusNode();
 }
 
 // myPage class which creates a state on call
-class ScholarityFocus extends StatefulWidget {
-  final ScholarityFocusBuilder builder;
+class StorybridgeFocus extends StatefulWidget {
+  final StorybridgeFocusBuilder builder;
   final void Function(bool hasFocus) onFocusChange;
-  final ScholarityFocusNode scholarityFocusNode;
-  final ScholarityFocusController scholarityFocusController =
-      ScholarityFocusController();
+  final StorybridgeFocusNode storybridgeFocusNode;
+  final StorybridgeFocusController storybridgeFocusController =
+      StorybridgeFocusController();
   final int z;
-  ScholarityFocus({
+  StorybridgeFocus({
     Key? key,
     required this.builder,
     required this.onFocusChange,
-    required this.scholarityFocusNode,
+    required this.storybridgeFocusNode,
     required this.z,
   }) : super(key: key) {
-    scholarityFocusController.z = z;
-    _registerFocusNode(scholarityFocusController);
+    storybridgeFocusController.z = z;
+    _registerFocusNode(storybridgeFocusController);
   }
 
   @override
-  _ScholarityFocusState createState() => _ScholarityFocusState();
+  _StorybridgeFocusState createState() => _StorybridgeFocusState();
 }
 
 // myPage state
-class _ScholarityFocusState extends State<ScholarityFocus> {
+class _StorybridgeFocusState extends State<StorybridgeFocus> {
   @override
   void dispose() {
-    _deregisterFocusNode(widget.scholarityFocusController);
+    _deregisterFocusNode(widget.storybridgeFocusController);
     super.dispose();
   }
 
   void _requestFocus() {
-    _globalUpdateFocus(true, widget.scholarityFocusController);
+    _globalUpdateFocus(true, widget.storybridgeFocusController);
   }
 
   void _unfocus() {
-    _globalUpdateFocus(false, widget.scholarityFocusController);
+    _globalUpdateFocus(false, widget.storybridgeFocusController);
   }
 
   void _onControllerUpdate() {
     setState(() {
-      bool hasFocus = widget.scholarityFocusController.hasFocus;
+      bool hasFocus = widget.storybridgeFocusController.hasFocus;
       widget.onFocusChange(hasFocus);
-      widget.scholarityFocusNode.hasFocus = hasFocus;
+      widget.storybridgeFocusNode.hasFocus = hasFocus;
     });
   }
 
   // main build function
   @override
   Widget build(BuildContext context) {
-    widget.scholarityFocusNode.requestFocus = _requestFocus;
-    widget.scholarityFocusNode.unfocus = _unfocus;
+    widget.storybridgeFocusNode.requestFocus = _requestFocus;
+    widget.storybridgeFocusNode.unfocus = _unfocus;
 
-    widget.scholarityFocusController.update = _onControllerUpdate;
+    widget.storybridgeFocusController.update = _onControllerUpdate;
     return Focus(
       onFocusChange: (bool hasFocus) {
-        _globalUpdateFocus(hasFocus, widget.scholarityFocusController);
+        _globalUpdateFocus(hasFocus, widget.storybridgeFocusController);
       },
       child: GestureDetector(
         onTap: () {
-          _globalUpdateFocus(true, widget.scholarityFocusController);
+          _globalUpdateFocus(true, widget.storybridgeFocusController);
         },
         child: widget.builder
-            .builder(context, widget.scholarityFocusController.hasFocus),
+            .builder(context, widget.storybridgeFocusController.hasFocus),
       ),
     );
   }
 }
 
-class ScholarityFocusBuilder {
+class StorybridgeFocusBuilder {
   late Widget Function(BuildContext context, bool isFocused) builder;
-  ScholarityFocusBuilder({required this.builder});
+  StorybridgeFocusBuilder({required this.builder});
 }
 
-class ScholarityFocusDismisser extends StatelessWidget {
+class StorybridgeFocusDismisser extends StatelessWidget {
   // members of MyWidget
   final Widget child;
 
   // constructor
-  const ScholarityFocusDismisser({Key? key, required this.child})
+  const StorybridgeFocusDismisser({Key? key, required this.child})
       : super(key: key);
 
   // main build function

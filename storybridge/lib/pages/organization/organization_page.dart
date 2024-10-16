@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/pages/organization/organization_people_page.dart';
 import 'package:mooc/pages/organization/organization_course_page.dart';
@@ -78,7 +78,7 @@ class _OrganizationStudentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    return ScholarityScaffold(
+    return StorybridgeScaffold(
       hasAppbar: false,
       body: [
         const SizedBox(height: 20),
@@ -90,17 +90,17 @@ class _OrganizationStudentPage extends StatelessWidget {
                   children: [
                     ProfilePictureWidget(organizationId: organizationId),
                     const SizedBox(width: 20),
-                    ScholarityTextH2B(snapshot.data ?? ""),
+                    StorybridgeTextH2B(snapshot.data ?? ""),
                   ],
                 );
               } else {
-                return const ScholarityBoxLoading(height: 70, width: 300);
+                return const StorybridgeBoxLoading(height: 70, width: 300);
               }
             }),
         const SizedBox(height: 10),
       ],
       tabNames: [
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Stories", tabIcon: Icons.collections_bookmark_rounded),
       ],
       tabs: [
@@ -132,7 +132,7 @@ class _OrganizationAdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    return ScholarityScaffold(
+    return StorybridgeScaffold(
       startingTab: startingTab,
       hasAppbar: false,
       tabSuffix: Row(
@@ -140,7 +140,7 @@ class _OrganizationAdminPage extends StatelessWidget {
           Expanded(child: Container()),
           const Padding(
             padding: EdgeInsets.only(right: 20),
-            child: ScholarityAccountIndicator(organizationId: 0),
+            child: StorybridgeAccountIndicator(organizationId: 0),
           ),
         ],
       ),
@@ -154,27 +154,27 @@ class _OrganizationAdminPage extends StatelessWidget {
                   children: [
                     ProfilePictureWidget(organizationId: organizationId),
                     const SizedBox(width: 20),
-                    ScholarityTextH2B(snapshot.data ?? ""),
+                    StorybridgeTextH2B(snapshot.data ?? ""),
                   ],
                 );
               } else {
-                return const ScholarityBoxLoading(height: 70, width: 300);
+                return const StorybridgeBoxLoading(height: 70, width: 300);
               }
             }),
         const SizedBox(height: 10),
       ],
       tabNames: [
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Stories", tabIcon: Icons.collections_bookmark_rounded),
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Sales", tabIcon: Icons.stacked_line_chart_rounded),
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Settings", tabIcon: Icons.stacked_line_chart_rounded),
         /*
-        ScholarityTabHeaders(
+        StorybridgeTabHeaders(
             tabName: "Design", tabIcon: Icons.stacked_line_chart_rounded),
-        ScholarityTabHeaders(tabName: "Analytics", tabIcon: Icons.groups),
-        ScholarityTabHeaders(
+        StorybridgeTabHeaders(tabName: "Analytics", tabIcon: Icons.groups),
+        StorybridgeTabHeaders(
             tabName: "Settings", tabIcon: Icons.stacked_line_chart_rounded),
             */
       ],

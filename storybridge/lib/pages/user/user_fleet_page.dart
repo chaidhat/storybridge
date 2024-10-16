@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
-import 'package:mooc/style/scholarity_colors.dart'
-    as scholarity_color; // Scholarity
+import 'package:mooc/style/storybridge_colors.dart'
+    as storybridge_color; // Storybridge
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
 import 'package:mooc/services/geo_service.dart' as geo_service;
@@ -93,7 +93,7 @@ class _UserFleetPageState extends State<UserFleetPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTabPage(body: [
+    return StorybridgeTabPage(body: [
       FutureBuilder(
           future: _load(),
           builder: (context, AsyncSnapshot<dynamic> snapshot) {
@@ -109,7 +109,7 @@ class _UserFleetPageState extends State<UserFleetPage> {
                   },
                 ),
                 _isLocked
-                    ? ScholarityButton(
+                    ? StorybridgeButton(
                         text: "Edit",
                         invertedColor: true,
                         onPressed: () {
@@ -118,7 +118,7 @@ class _UserFleetPageState extends State<UserFleetPage> {
                           });
                         },
                       )
-                    : ScholarityButton(
+                    : StorybridgeButton(
                         text: "Submit",
                         invertedColor: true,
                         onPressed: () async {
@@ -130,7 +130,7 @@ class _UserFleetPageState extends State<UserFleetPage> {
                       )
               ]);
             } else {
-              return const ScholarityPageLoading();
+              return const StorybridgePageLoading();
             }
           })
     ]);
@@ -196,9 +196,9 @@ class _FleetFlightplanData {
 }
 
 class _FleetWaypointData {
-  ScholarityTextFieldController location = ScholarityTextFieldController();
-  ScholarityTextFieldController car = ScholarityTextFieldController();
-  ScholarityTextFieldController remark = ScholarityTextFieldController();
+  StorybridgeTextFieldController location = StorybridgeTextFieldController();
+  StorybridgeTextFieldController car = StorybridgeTextFieldController();
+  StorybridgeTextFieldController remark = StorybridgeTextFieldController();
   int? selectedFleetLocationId;
   int? selectedFleetCarId;
   int? waypointId;
@@ -270,14 +270,14 @@ class _FleetFlightplanWidgetState extends State<_FleetFlightplanWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(width: 500),
-          const ScholarityTextH2B("Date"),
-          ScholarityDatePicker(
+          const StorybridgeTextH2B("Date"),
+          StorybridgeDatePicker(
             label: "",
             date: DateTime.now(),
             isEnabled: false,
           ),
           const SizedBox(height: 28),
-          const ScholarityTextH2B("Itinerary"),
+          const StorybridgeTextH2B("Itinerary"),
           const SizedBox(height: 10),
           Column(
               children: List.generate(widget.flightplanData.waypointData.length,
@@ -308,12 +308,12 @@ class _FleetFlightplanWidgetState extends State<_FleetFlightplanWidget> {
   }
 }
 
-class ScholarityWeatherWidget extends StatelessWidget {
+class StorybridgeWeatherWidget extends StatelessWidget {
   // members of MyWidget
   final double lat, lon;
 
   // constructor
-  const ScholarityWeatherWidget(
+  const StorybridgeWeatherWidget(
       {Key? key, required this.lat, required this.lon})
       : super(key: key);
 
@@ -330,11 +330,11 @@ class ScholarityWeatherWidget extends StatelessWidget {
         future: _load(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData) {
-            return const ScholarityBoxLoading(width: 500, height: 100);
+            return const StorybridgeBoxLoading(width: 500, height: 100);
           }
-          return ScholarityTile(
+          return StorybridgeTile(
               useAltStyle: true,
-              child: _ScholarityWeatherBodyWidget(weatherData: snapshot.data));
+              child: _StorybridgeWeatherBodyWidget(weatherData: snapshot.data));
         });
   }
 }
@@ -376,7 +376,7 @@ class _FleetLocationWeatherWidgetState
             future: _load(),
             builder: (context, AsyncSnapshot<dynamic> snapshot) {
               if (!snapshot.hasData) {
-                return const ScholarityBoxLoading(width: 50, height: 50);
+                return const StorybridgeBoxLoading(width: 50, height: 50);
               }
               if (snapshot.data == 0) {
                 return Container();
@@ -387,10 +387,10 @@ class _FleetLocationWeatherWidgetState
                     showDialog<String>(
                         context: context,
                         builder: (BuildContext context) =>
-                            ScholarityAlertDialogWrapper(
-                                child: ScholarityAlertDialog(
+                            StorybridgeAlertDialogWrapper(
+                                child: StorybridgeAlertDialog(
                                     content: IntrinsicHeight(
-                              child: _ScholarityWeatherBodyWidget(
+                              child: _StorybridgeWeatherBodyWidget(
                                 weatherData: snapshot.data,
                               ),
                             ))));
@@ -406,7 +406,7 @@ class _FleetLocationWeatherWidgetState
                           "assets/images/weather/${snapshot.data["weatherCurrent"]["weather"]["icon"]["raw"]}.png"),
                     ),
                     const SizedBox(width: 5),
-                    ScholarityTextP(
+                    StorybridgeTextP(
                         "${snapshot.data["weatherCurrent"]["weather"]["temp"]["cur"].round()}˚C")
                   ],
                 ),
@@ -417,18 +417,18 @@ class _FleetLocationWeatherWidgetState
   }
 }
 
-class _ScholarityWeatherBodyWidget extends StatelessWidget {
+class _StorybridgeWeatherBodyWidget extends StatelessWidget {
   // members of MyWidget
   final dynamic weatherData;
 
   // constructor
-  const _ScholarityWeatherBodyWidget({Key? key, required this.weatherData})
+  const _StorybridgeWeatherBodyWidget({Key? key, required this.weatherData})
       : super(key: key);
 
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityPadding(
+    return StorybridgePadding(
         child: SizedBox(
       width: 800,
       child: SingleChildScrollView(
@@ -452,10 +452,10 @@ class _ScholarityWeatherBodyWidget extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ScholarityTextH2B(
+                        StorybridgeTextH2B(
                             "${weatherData["weatherCurrent"]["weather"]["temp"]["cur"]}˚C"),
-                        ScholarityTextP(weatherData["weatherCurrent"]["weather"]
-                            ["description"]),
+                        StorybridgeTextP(weatherData["weatherCurrent"]
+                            ["weather"]["description"]),
                       ],
                     ),
                   ],
@@ -474,11 +474,11 @@ class _ScholarityWeatherBodyWidget extends StatelessWidget {
                             child: Image.asset(
                                 "assets/images/weather/${weatherData["weatherForecast"][i]["weather"]["icon"]["raw"]}.png"),
                           ),
-                          ScholarityTextH2B(
+                          StorybridgeTextH2B(
                               "${weatherData["weatherForecast"][i]["weather"]["temp"]["cur"].round()}˚C"),
-                          ScholarityTextP(
+                          StorybridgeTextP(
                               "${(weatherData["weatherForecast"][i]["weather"]["pop"] * 100).round()}%"),
-                          ScholarityTextP(
+                          StorybridgeTextP(
                               "${DateTime.parse(weatherData["weatherForecast"][i]["dt"]).toLocal().hour}:00"),
                         ],
                       ),
@@ -489,7 +489,7 @@ class _ScholarityWeatherBodyWidget extends StatelessWidget {
             ),
             const Align(
                 alignment: Alignment.bottomLeft,
-                child: ScholarityTextP("Data provided by OpenWeather.",
+                child: StorybridgeTextP("Data provided by OpenWeather.",
                     isDim: true))
           ],
         ),
@@ -530,7 +530,7 @@ class _FleetWaypointWidgetUserState extends State<_FleetWaypointWidgetUser> {
         myLat: location.latitude,
         myLon: location.longitude,
       );
-    } on error_service.ScholarityException catch (e) {
+    } on error_service.StorybridgeException catch (e) {
       setState(() {
         error_service.alert(error_service.Alert(
             title: "Location Error",
@@ -556,9 +556,9 @@ class _FleetWaypointWidgetUserState extends State<_FleetWaypointWidgetUser> {
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                    color: scholarity_color.scholarityAccent, width: 2))
+                    color: storybridge_color.storybridgeAccent, width: 2))
             : null,
-        child: ScholarityTile(
+        child: StorybridgeTile(
           useAltStyle: true,
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -571,12 +571,12 @@ class _FleetWaypointWidgetUserState extends State<_FleetWaypointWidgetUser> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ScholarityTextH2B("Location"),
+                          const StorybridgeTextH2B("Location"),
                           const SizedBox(height: 10),
                           IntrinsicWidth(
                             child: Row(
                               children: [
-                                ScholarityTextP(
+                                StorybridgeTextP(
                                     widget.waypointData.location.text),
                                 FleetLocationWeatherWidget(
                                     fleetLocationId: widget
@@ -591,13 +591,13 @@ class _FleetWaypointWidgetUserState extends State<_FleetWaypointWidgetUser> {
                         child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const ScholarityTextH2B("Vehicle"),
+                        const StorybridgeTextH2B("Vehicle"),
                         const SizedBox(height: 10),
                         SizedBox(
                             height: 48,
                             child: Align(
                                 alignment: Alignment.centerLeft,
-                                child: ScholarityTextP(
+                                child: StorybridgeTextP(
                                     widget.waypointData.car.text))),
                       ],
                     )),
@@ -605,13 +605,13 @@ class _FleetWaypointWidgetUserState extends State<_FleetWaypointWidgetUser> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ScholarityTextH2B("Comment"),
+                          const StorybridgeTextH2B("Comment"),
                           const SizedBox(height: 10),
                           SizedBox(
                             height: 48,
                             child: Align(
                               alignment: Alignment.centerLeft,
-                              child: ScholarityTextP(
+                              child: StorybridgeTextP(
                                   widget.waypointData.remark.text.isNotEmpty
                                       ? widget.waypointData.remark.text
                                       : "---"),
@@ -625,7 +625,7 @@ class _FleetWaypointWidgetUserState extends State<_FleetWaypointWidgetUser> {
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    ScholarityButton(
+                    StorybridgeButton(
                       padding: false,
                       invertedColor: true,
                       icon: Icons.track_changes_rounded,
@@ -636,7 +636,7 @@ class _FleetWaypointWidgetUserState extends State<_FleetWaypointWidgetUser> {
                       },
                     ),
                     const SizedBox(width: 20),
-                    ScholarityTextP("Checked in as of")
+                    StorybridgeTextP("Checked in as of")
                   ],
                 ),
               ],
@@ -675,7 +675,7 @@ class _FleetWaypointWidgetAdminState extends State<_FleetWaypointWidgetAdmin> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ScholarityTile(
+      child: StorybridgeTile(
         useAltStyle: true,
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -690,22 +690,22 @@ class _FleetWaypointWidgetAdminState extends State<_FleetWaypointWidgetAdmin> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const ScholarityTextH2B("Location"),
+                        const StorybridgeTextH2B("Location"),
                         const SizedBox(height: 10),
                         IntrinsicWidth(
                           child: Row(
                             children: [
-                              ScholarityTableDropdown(
+                              StorybridgeTableDropdown(
                                   width: 150,
                                   advancedHeaders: [
-                                    ScholarityTableHeader(
+                                    StorybridgeTableHeader(
                                         key: "locationName", label: "Location"),
-                                    ScholarityTableHeader(
+                                    StorybridgeTableHeader(
                                         key: "subdistrict",
                                         label: "Subdistrict"),
-                                    ScholarityTableHeader(
+                                    StorybridgeTableHeader(
                                         key: "district", label: "District"),
-                                    ScholarityTableHeader(
+                                    StorybridgeTableHeader(
                                         key: "province", label: "Province"),
                                   ],
                                   onSubmit: (dynamic pk) {
@@ -730,14 +730,14 @@ class _FleetWaypointWidgetAdminState extends State<_FleetWaypointWidgetAdmin> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ScholarityTextH2B("Vehicle"),
+                          const StorybridgeTextH2B("Vehicle"),
                           const SizedBox(height: 10),
-                          ScholarityTableDropdown(
+                          StorybridgeTableDropdown(
                               width: 250,
                               advancedHeaders: [
-                                ScholarityTableHeader(
+                                StorybridgeTableHeader(
                                     key: "licensePlate", label: "Location"),
-                                ScholarityTableHeader(
+                                StorybridgeTableHeader(
                                     key: "model", label: "Model"),
                               ],
                               onSubmit: (dynamic pk) {
@@ -756,9 +756,9 @@ class _FleetWaypointWidgetAdminState extends State<_FleetWaypointWidgetAdmin> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ScholarityTextH2B("Comment"),
+                          const StorybridgeTextH2B("Comment"),
                           const SizedBox(height: 10),
-                          ScholarityTextField(
+                          StorybridgeTextField(
                             label: "Comment",
                             controller: widget.waypointData.remark,
                           ),
@@ -770,7 +770,7 @@ class _FleetWaypointWidgetAdminState extends State<_FleetWaypointWidgetAdmin> {
               ),
               Row(
                 children: [
-                  ScholarityIconButton(
+                  StorybridgeIconButton(
                     useAltStyle: true,
                     icon: Icons.close,
                     onPressed: () {
@@ -780,7 +780,7 @@ class _FleetWaypointWidgetAdminState extends State<_FleetWaypointWidgetAdmin> {
                   const SizedBox(
                     width: 20,
                   ),
-                  ScholarityIconButton(
+                  StorybridgeIconButton(
                     useAltStyle: true,
                     icon: Icons.add,
                     onPressed: () {

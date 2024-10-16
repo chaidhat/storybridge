@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 // myPage class which creates a state on call
 class UserSupportPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class _UserSupportPageState extends State<UserSupportPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTabPage(body: [
+    return StorybridgeTabPage(body: [
       const SizedBox(height: 40),
       Row(
         children: [
@@ -34,7 +34,7 @@ class _UserSupportPageState extends State<UserSupportPage> {
             size: 40,
           ),
           const SizedBox(width: 10),
-          const ScholarityTextH2B("081 325 3809"),
+          const StorybridgeTextH2B("081 325 3809"),
         ],
       ),
     ]);

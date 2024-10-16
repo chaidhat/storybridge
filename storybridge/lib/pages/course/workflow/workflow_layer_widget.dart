@@ -5,7 +5,7 @@ import 'package:mooc/pages/course/workflow/workflow_canvas_widget.dart';
 import 'package:mooc/pages/course/workflow/workflow_overlay_widgets.dart';
 import 'dart:math';
 
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 
 enum Direction { up, right, down, left }
 
@@ -100,7 +100,7 @@ class ScholsPainterArc extends ScholsPainterObject {
     if (!isBackground) {
       paint.color = layerController.style.lineColour;
     } else {
-      paint.color = scholarity_color.backgroundDim;
+      paint.color = storybridge_color.backgroundDim;
     }
     paint.strokeWidth = layerController.style.lineStrokeWidth;
     canvas.drawArc(
@@ -172,7 +172,7 @@ class ScholsLayerStyle {
     Color? lineColour,
   }) {
     if (lineColour == null) {
-      this.lineColour = scholarity_color.darkGrey;
+      this.lineColour = storybridge_color.darkGrey;
     } else {
       this.lineColour = lineColour;
     }

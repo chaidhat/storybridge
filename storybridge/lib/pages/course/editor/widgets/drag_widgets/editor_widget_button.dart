@@ -2,8 +2,8 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/storybridge.dart'; // Storybridge
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 
 import 'package:mooc/pages/auth_page.dart';
 
@@ -28,8 +28,8 @@ class EditorWidgetButton extends StatelessWidget implements EditorWidget {
   @override
   final bool reduceDropzoneSize = false;
 
-  final ScholarityTextFieldController _controller =
-      ScholarityTextFieldController();
+  final StorybridgeTextFieldController _controller =
+      StorybridgeTextFieldController();
 
   // serialization
   @override
@@ -86,8 +86,8 @@ class EditorWidgetButton extends StatelessWidget implements EditorWidget {
       if (!isLoggedIn) {
         await showDialog<String>(
           context: context,
-          builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-            child: ScholarityAlertDialog(
+          builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
+            child: StorybridgeAlertDialog(
               content: AuthWidget(
                 startWithLoginMode: false,
                 organizationId: editorWidgetData.courseData.organizationId,
@@ -109,8 +109,8 @@ class EditorWidgetButton extends StatelessWidget implements EditorWidget {
         /*
         await showDialog<String>(
           context: context,
-          builder: (BuildContext context) => ScholarityAlertDialogWrapper(
-            child: ScholarityAlertDialog(
+          builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
+            child: StorybridgeAlertDialog(
               content: _PaymentWelcomeWidget(
                   courseSalesData: _courseSalesData,
                   link: _courseSalesData.checkoutSessionUrl),
@@ -175,13 +175,13 @@ class EditorWidgetButton extends StatelessWidget implements EditorWidget {
                 onEnroll: () => _enrollNow(context),
               );
             } else {
-              return const ScholarityTile(
-                  child: ScholarityPadding(
-                      child: ScholarityBoxLoading(height: 80, width: 200)));
+              return const StorybridgeTile(
+                  child: StorybridgePadding(
+                      child: StorybridgeBoxLoading(height: 80, width: 200)));
             }
           });
     } else {
-      return ScholarityButton(
+      return StorybridgeButton(
         text: "Resume Course",
         onPressed: () {
           // find the first course element after the front page
@@ -199,13 +199,13 @@ class EditorWidgetButton extends StatelessWidget implements EditorWidget {
       );
     }
     /*
-    return ScholarityEditableText(
+    return StorybridgeEditableText(
       enabled: editorWidgetData.isAdminMode,
       controller: _controller,
       onSubmit: () {
         editorWidgetData.onUpdate();
       },
-      style: scholarityTextPStyle,
+      style: storybridgeeeeeeTextPStyle,
     );
     */
   }
@@ -235,8 +235,8 @@ class _NotEnrolledWidget extends StatelessWidget {
     NumberFormat numberFormat = NumberFormat.decimalPattern('hi');
     return Align(
       alignment: Alignment.centerLeft,
-      child: ScholarityTile(
-        child: ScholarityPadding(
+      child: StorybridgeTile(
+        child: StorybridgePadding(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -244,22 +244,22 @@ class _NotEnrolledWidget extends StatelessWidget {
                   ? Text(
                       "${courseSalesData.currencyCode.toUpperCase()} ${numberFormat.format(courseSalesData.price)}",
                       style: TextStyle(
-                          color: scholarity_color.black,
-                          fontFamily: scholarityTextH2BStyle.fontFamily,
-                          fontWeight: scholarityTextPStyle.fontWeight,
+                          color: storybridge_color.black,
+                          fontFamily: storybridgeTextH2BStyle.fontFamily,
+                          fontWeight: storybridgeTextPStyle.fontWeight,
                           fontSize: 25),
                     )
                   : Container(),
               courseSalesData.price != 0
-                  ? const ScholarityDivider()
+                  ? const StorybridgeDivider()
                   : Container(),
               courseSalesData.price != 0
-                  ? ScholarityTextP(courseSalesData.productDescription)
+                  ? StorybridgeTextP(courseSalesData.productDescription)
                   : Container(),
               courseSalesData.price != 0
                   ? const SizedBox(height: 20)
                   : Container(),
-              ScholarityButton(
+              StorybridgeButton(
                 padding: false,
                 onPressed: () async {
                   await onEnroll();
@@ -269,12 +269,12 @@ class _NotEnrolledWidget extends StatelessWidget {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 64),
-                  child: ScholarityTextBasic("Read now",
+                  child: StorybridgeTextBasic("Read now",
                       style: TextStyle(
                           color: Colors.white,
-                          fontFamily: scholarityTextH2BStyle.fontFamily,
-                          fontWeight: scholarityTextPStyle.fontWeight,
-                          fontSize: scholarityTextH2BStyle.fontSize)),
+                          fontFamily: storybridgeTextH2BStyle.fontFamily,
+                          fontWeight: storybridgeTextPStyle.fontWeight,
+                          fontSize: storybridgeTextH2BStyle.fontSize)),
                 ),
               ),
             ],
@@ -306,31 +306,31 @@ class _PaymentWelcomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
-      child: ScholarityPadding(
+      child: StorybridgePadding(
         child: SizedBox(
           width: 370,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              const ScholarityTextH2B("Checkout"),
+              const StorybridgeTextH2B("Checkout"),
               const SizedBox(height: 10),
-              ScholarityTextH4(courseSalesData.productName),
+              StorybridgeTextH4(courseSalesData.productName),
               const SizedBox(height: 20),
-              const ScholarityTextP(
+              const StorybridgeTextP(
                   "Thank you for choosing to enroll in our course! We partner with Stripe to bring you effortless payment of your story."),
               const SizedBox(height: 50),
               Row(
                 children: [
-                  const Expanded(child: ScholarityTextH2B("Total:")),
+                  const Expanded(child: StorybridgeTextH2B("Total:")),
                   Expanded(
-                    child: ScholarityTextH2B(
+                    child: StorybridgeTextH2B(
                         "${courseSalesData.currencyCode.toUpperCase()} ${courseSalesData.price}"),
                   ),
                 ],
               ),
-              const ScholarityDivider(),
-              ScholarityButton(
+              const StorybridgeDivider(),
+              StorybridgeButton(
                   padding: false,
                   onPressed: () => _goToLink(context),
                   child: Padding(
@@ -340,10 +340,10 @@ class _PaymentWelcomeWidget extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: scholarity_color.scholarityAccent)),
+                              color: storybridge_color.storybridgeAccent)),
                       const SizedBox(width: 30),
                       Icon(Icons.arrow_forward_rounded,
-                          color: scholarity_color.scholarityAccent)
+                          color: storybridge_color.storybridgeAccent)
                     ]),
                   )),
             ],

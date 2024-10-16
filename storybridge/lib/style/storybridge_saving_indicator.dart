@@ -1,21 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 import 'package:mooc/services/saving_telemetry_service.dart'
     as saving_telemetry_service;
 
 // myPage class which creates a state on call
-class ScholaritySavingIndicator extends StatefulWidget {
-  const ScholaritySavingIndicator({Key? key}) : super(key: key);
+class StorybridgeSavingIndicator extends StatefulWidget {
+  const StorybridgeSavingIndicator({Key? key}) : super(key: key);
 
   @override
-  _ScholaritySavingIndicatorState createState() =>
-      _ScholaritySavingIndicatorState();
+  _StorybridgeSavingIndicatorState createState() =>
+      _StorybridgeSavingIndicatorState();
 }
 
 // myPage state
-class _ScholaritySavingIndicatorState extends State<ScholaritySavingIndicator> {
+class _StorybridgeSavingIndicatorState
+    extends State<StorybridgeSavingIndicator> {
   saving_telemetry_service.SaveState saveState =
       saving_telemetry_service.SaveState.notSaved;
   Timer? timer;
@@ -56,19 +57,19 @@ class _ScholaritySavingIndicatorState extends State<ScholaritySavingIndicator> {
               return Tooltip(
                 message: "Saving...",
                 child: Icon(Icons.cloud_sync_rounded,
-                    color: scholarity_color.grey),
+                    color: storybridge_color.grey),
               );
             case saving_telemetry_service.SaveState.saved:
               return Tooltip(
                 message: "Saved to cloud",
                 child: Icon(Icons.cloud_done_outlined,
-                    color: scholarity_color.grey),
+                    color: storybridge_color.grey),
               );
             case saving_telemetry_service.SaveState.errored:
               return Tooltip(
                 message: "Error whilst saving",
                 child: Icon(Icons.warning_rounded,
-                    color: scholarity_color.scholarityAccent),
+                    color: storybridge_color.storybridgeAccent),
               );
           }
         }));

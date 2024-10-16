@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/error_service.dart' as error_service;
 
@@ -65,10 +65,10 @@ class PriceSelector extends StatefulWidget {
 
 // myPage state
 class _PriceSelectorState extends State<PriceSelector> {
-  ScholarityTextFieldController pricingController =
-      ScholarityTextFieldController();
-  ScholarityTextFieldController currencyController =
-      ScholarityTextFieldController();
+  StorybridgeTextFieldController pricingController =
+      StorybridgeTextFieldController();
+  StorybridgeTextFieldController currencyController =
+      StorybridgeTextFieldController();
   double price = 0;
 
   @override
@@ -143,7 +143,7 @@ class _PriceSelectorState extends State<PriceSelector> {
                 }
               });
             },
-            child: ScholarityTextField(
+            child: StorybridgeTextField(
               label: "Price",
               controller: pricingController,
             ),
@@ -160,17 +160,17 @@ class _PriceSelectorState extends State<PriceSelector> {
             builder:
                 (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
               if (snapshot.hasData) {
-                return ScholarityDropdown(
+                return StorybridgeDropdown(
                   label: "Currency",
                   controller: currencyController,
                   dropdownTypes: snapshot.data!,
                 );
               } else {
-                return const ScholarityBoxLoading(width: 100, height: 30);
+                return const StorybridgeBoxLoading(width: 100, height: 30);
               }
             }),
         const SizedBox(height: 20),
-        ScholarityButton(
+        StorybridgeButton(
           text: "Save Price",
           onPressed: () async {
             if (_validate()) {
@@ -190,7 +190,7 @@ class _PriceSelectorState extends State<PriceSelector> {
               }
               try {
                 await widget.onSubmit();
-              } on error_service.ScholarityException catch (err) {
+              } on error_service.StorybridgeException catch (err) {
                 switch (err.message) {
                   case "course price too low":
                     setState(() {
@@ -227,8 +227,8 @@ class _FreeCourseWarning extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return const ScholarityTile(
-        child: ScholarityPadding(
+    return const StorybridgeTile(
+        child: StorybridgePadding(
             child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -236,11 +236,11 @@ class _FreeCourseWarning extends StatelessWidget {
           children: [
             Icon(Icons.info_rounded),
             SizedBox(width: 10),
-            ScholarityTextH2B("Price is Zero"),
+            StorybridgeTextH2B("Price is Zero"),
           ],
         ),
         SizedBox(height: 5),
-        ScholarityTextP(
+        StorybridgeTextP(
             "Students can enroll and access the course without paying."),
       ],
     )));

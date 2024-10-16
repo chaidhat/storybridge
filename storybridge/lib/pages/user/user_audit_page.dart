@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mooc/pages/organization/organization_auditing_page.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -69,7 +69,7 @@ class _UserAuditsPageState extends State<UserAuditsPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTabPage(hasVeryReducedPadding: true, body: [
+    return StorybridgeTabPage(hasVeryReducedPadding: true, body: [
       const SizedBox(height: 50),
       FutureBuilder(
           future: _load(),
@@ -78,7 +78,7 @@ class _UserAuditsPageState extends State<UserAuditsPage> {
               return Column(
                 children: [
                   const SizedBox(height: 20),
-                  ScholarityButton(
+                  StorybridgeButton(
                       text: "New",
                       invertedColor: true,
                       verticalOnlyPadding: true,
@@ -86,37 +86,37 @@ class _UserAuditsPageState extends State<UserAuditsPage> {
                         await _createAuditTask();
                       }),
                   Center(
-                    child: ScholarityTable(
+                    child: StorybridgeTable(
                       advancedHeaders: [
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                             key: "auditTaskId", label: "ID", width: 80),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                             key: "auditTemplateName",
                             label: "Template name",
                             width: 300),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                           key: "canEdit",
                           label: "Can edit?",
-                          type: ScholarityTableHeaderType.boolean,
+                          type: StorybridgeTableHeaderType.boolean,
                         ),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                           key: "canComment",
                           label: "Can comment?",
-                          type: ScholarityTableHeaderType.boolean,
+                          type: StorybridgeTableHeaderType.boolean,
                         ),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                           key: "isOwner",
                           label: "Is owner?",
-                          type: ScholarityTableHeaderType.boolean,
+                          type: StorybridgeTableHeaderType.boolean,
                         ),
-                        ScholarityTableHeader(
+                        StorybridgeTableHeader(
                             key: "dateCreated",
                             label: "Date created",
-                            type: ScholarityTableHeaderType.datetime),
-                        ScholarityTableHeader(
+                            type: StorybridgeTableHeaderType.datetime),
+                        StorybridgeTableHeader(
                             key: "dateModified",
                             label: "Date modified",
-                            type: ScholarityTableHeaderType.datetime),
+                            type: StorybridgeTableHeaderType.datetime),
                       ],
                       onView: (_, dynamic data, _2) {
                         Navigator.pushNamed(
@@ -128,7 +128,7 @@ class _UserAuditsPageState extends State<UserAuditsPage> {
                 ],
               );
             } else {
-              return const ScholarityPageLoading();
+              return const StorybridgePageLoading();
             }
           })
     ]);

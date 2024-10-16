@@ -4,13 +4,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart'; // Flutter
 
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 
-class ScholarityVideoProgressIndicator extends StatefulWidget {
+class StorybridgeVideoProgressIndicator extends StatefulWidget {
   final VideoPlayerController controller;
   final bool isSkippable;
   final Function()? onVideoEnd;
-  ScholarityVideoProgressIndicator(
+  StorybridgeVideoProgressIndicator(
       {Key? key,
       required this.controller,
       required this.isSkippable,
@@ -18,12 +18,12 @@ class ScholarityVideoProgressIndicator extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ScholarityVideoProgressIndicatorState createState() =>
-      _ScholarityVideoProgressIndicatorState();
+  _StorybridgeVideoProgressIndicatorState createState() =>
+      _StorybridgeVideoProgressIndicatorState();
 }
 
-class _ScholarityVideoProgressIndicatorState
-    extends State<ScholarityVideoProgressIndicator> {
+class _StorybridgeVideoProgressIndicatorState
+    extends State<StorybridgeVideoProgressIndicator> {
   double _sliderSize = 0;
   double _sliderPositionValue = 0;
   double _sliderBufferedValue = 0;
@@ -128,7 +128,7 @@ class _ScholarityVideoProgressIndicatorState
                     SliderTheme(
                       data: SliderThemeData(
                           inactiveTrackColor: Colors.transparent,
-                          thumbColor: scholarity_color.scholarityAccent,
+                          thumbColor: storybridge_color.storybridgeAccent,
                           trackHeight: animMouseHover * 5 + 5,
                           thumbShape: RoundSliderThumbShape(
                               enabledThumbRadius: animMouseHover * 10)),

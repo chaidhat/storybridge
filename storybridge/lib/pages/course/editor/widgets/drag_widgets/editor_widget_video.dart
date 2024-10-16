@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 import 'package:mooc/pages/course/widgets/video_player.dart';
 
 import 'package:mooc/services/networking_api_service.dart'
@@ -170,7 +170,7 @@ class _EditorWidgetVideoState extends State<EditorWidgetVideo> {
                       (!_isRead!
                           ? ((!widget.editorWidgetData.isAdminMode)
                               ? Container()
-                              : ScholarityButton(
+                              : StorybridgeButton(
                                   text: "mark as read",
                                   padding: false,
                                   invertedColor: true,
@@ -182,14 +182,14 @@ class _EditorWidgetVideoState extends State<EditorWidgetVideo> {
                           : Wrap(
                               children: [
                                 Icon(Icons.check,
-                                    color: scholarity_color.scholarityAccent),
+                                    color: storybridge_color.storybridgeAccent),
                                 const SizedBox(width: 20),
-                                const ScholarityTextP(
+                                const StorybridgeTextP(
                                     "You have finished watching this video."),
                                 const SizedBox(width: 20),
                                 !widget.editorWidgetData.isAdminMode
                                     ? Container()
-                                    : ScholarityButton(
+                                    : StorybridgeButton(
                                         text: "mark as unread",
                                         onPressed: () {
                                           _markAsUnread();
@@ -200,18 +200,18 @@ class _EditorWidgetVideoState extends State<EditorWidgetVideo> {
                     ],
                   );
                 } else {
-                  return ScholarityContentUploadProgess(
+                  return StorybridgeContentUploadProgess(
                     contentDataId: _video!.contentDataId,
                     onVideoUploaded: onVideoUploaded,
                   );
                 }
               } else {
                 return const Center(
-                    child: ScholarityBoxLoading(height: 580, width: 760));
+                    child: StorybridgeBoxLoading(height: 580, width: 760));
               }
             })
-        : ScholarityContentUploader(
-            contentType: ScholarityContentType.video,
+        : StorybridgeContentUploader(
+            contentType: StorybridgeContentType.video,
             onContentUploading: onVideoUploading,
             onContentUploaded: onVideoUploaded,
             courseId: widget.editorWidgetData.courseData.courseId,
@@ -253,7 +253,7 @@ class _WidgetVideoPlayerState extends State<_WidgetVideoPlayer> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityVideoPlayer(
+    return StorybridgeVideoPlayer(
         isSkippable: widget.isSkippable,
         onVideoEnd: widget.onVideoEnd,
         videoUrl: Uri.parse(

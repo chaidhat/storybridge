@@ -1,10 +1,10 @@
 import 'dart:math' as maths;
 
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:flutter_quill/flutter_quill.dart' as quill;
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 import 'package:mooc/services/translation_service.dart' as translation_service;
 
 const List<String> MONTH_HASH = [
@@ -22,32 +22,32 @@ const List<String> MONTH_HASH = [
   "December",
 ];
 
-class ScholarityTextFieldController extends TextEditingController {
+class StorybridgeTextFieldController extends TextEditingController {
   String? errorText;
   void clearError() {
     errorText = null;
   }
 }
 
-class ScholarityTextFieldFocusNode {
+class StorybridgeTextFieldFocusNode {
   FocusNode? focusNode;
 }
 
-class ScholarityTextField extends StatelessWidget {
+class StorybridgeTextField extends StatelessWidget {
   // members of MyWidget
   final String label;
   final bool isPragmaticField;
   final bool isPasswordField;
   final bool isLarge;
   final bool isConstricted;
-  final ScholarityTextFieldController? controller;
-  final ScholarityTextFieldFocusNode focusNodeController =
-      ScholarityTextFieldFocusNode();
+  final StorybridgeTextFieldController? controller;
+  final StorybridgeTextFieldFocusNode focusNodeController =
+      StorybridgeTextFieldFocusNode();
   final bool isEnabled;
   final String? hintText;
 
   // constructor
-  ScholarityTextField({
+  StorybridgeTextField({
     Key? key,
     required this.label,
     this.isPragmaticField = false,
@@ -84,34 +84,34 @@ class ScholarityTextField extends StatelessWidget {
                 enableSuggestions: !isPragmaticField,
                 obscureText: isPasswordField,
                 enabled: isEnabled,
-                style: scholarityTextPStyle,
-                cursorColor: scholarity_color.black,
+                style: storybridgeTextPStyle,
+                cursorColor: storybridge_color.black,
                 decoration: InputDecoration(
                   hintText: hintText,
                   filled: true,
-                  fillColor: scholarity_color.background,
-                  focusColor: scholarity_color.scholarityAccent,
+                  fillColor: storybridge_color.background,
+                  focusColor: storybridge_color.storybridgeAccent,
                   labelText: translation_service.translate(label),
-                  labelStyle: scholarityTextPDimStyle,
+                  labelStyle: storybridgeTextPDimStyle,
                   focusedBorder: OutlineInputBorder(
                     // width: 0.0 produces a thin "hairline" border
                     borderSide: BorderSide(
-                        color: scholarity_color.scholarityAccent, width: 2.0),
+                        color: storybridge_color.storybridgeAccent, width: 2.0),
                   ),
                   enabledBorder: OutlineInputBorder(
                     // width: 0.0 produces a thin "hairline" border
                     borderSide: BorderSide(
-                        color: scholarity_color.borderColor, width: 1.0),
+                        color: storybridge_color.borderColor, width: 1.0),
                   ),
                   disabledBorder: OutlineInputBorder(
                     // width: 0.0 produces a thin "hairline" border
                     borderSide: BorderSide(
-                        color: scholarity_color.borderColor, width: 1.0),
+                        color: storybridge_color.borderColor, width: 1.0),
                   ),
                   prefixIcon: controller?.errorText == null
                       ? null // if errorText is null, then no icon is needed
                       : Icon(Icons.warning_rounded,
-                          color: scholarity_color.scholarityAccent),
+                          color: storybridge_color.storybridgeAccent),
                 ),
               ),
             ),
@@ -129,7 +129,7 @@ class ScholarityTextField extends StatelessWidget {
                         translation_service
                             .translate(controller?.errorText ?? ""),
                         style: TextStyle(
-                          color: scholarity_color.scholarityAccent,
+                          color: storybridge_color.storybridgeAccent,
                           fontSize: 13,
                         )),
                   );
@@ -142,15 +142,15 @@ class ScholarityTextField extends StatelessWidget {
 }
 
 // myPage class which creates a state on call
-class ScholarityEditableText extends StatefulWidget {
+class StorybridgeEditableText extends StatefulWidget {
   // members of MyWidget
   final void Function() onSubmit;
-  final ScholarityTextFieldController? controller;
+  final StorybridgeTextFieldController? controller;
   final quill.QuillController? richController;
   final TextStyle style;
   final bool enabled;
   final bool avoidLineBreaks;
-  const ScholarityEditableText(
+  const StorybridgeEditableText(
       {Key? key,
       required this.onSubmit,
       this.controller,
@@ -162,11 +162,12 @@ class ScholarityEditableText extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ScholarityEditableTextState createState() => _ScholarityEditableTextState();
+  _StorybridgeEditableTextState createState() =>
+      _StorybridgeEditableTextState();
 }
 
 // myPage state
-class _ScholarityEditableTextState extends State<ScholarityEditableText> {
+class _StorybridgeEditableTextState extends State<StorybridgeEditableText> {
   final FocusNode _focus = FocusNode();
   final ScrollController _scrollController = ScrollController();
 
@@ -247,7 +248,7 @@ class _ScholarityEditableTextState extends State<ScholarityEditableText> {
 // myPage class which creates a state on call
 class SwappableTextField extends StatefulWidget {
   final Widget textWidget;
-  final ScholarityTextField textFieldWidget;
+  final StorybridgeTextField textFieldWidget;
   final Function onSubmit;
   const SwappableTextField(
       {Key? key,
@@ -306,15 +307,15 @@ class _State extends State<SwappableTextField> {
 }
 
 // myPage class which creates a state on call
-class ScholarityDropdown extends StatefulWidget {
+class StorybridgeDropdown extends StatefulWidget {
   final List<String>? dropdownTypes;
   final Map<String, dynamic>? mappedDropdownTypes;
   final String label;
   final bool isEnabled;
-  final ScholarityTextFieldController? controller;
+  final StorybridgeTextFieldController? controller;
   final void Function(dynamic value)? onSubmit;
   final double? width;
-  const ScholarityDropdown({
+  const StorybridgeDropdown({
     Key? key,
     required this.label,
     this.dropdownTypes,
@@ -326,11 +327,11 @@ class ScholarityDropdown extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ScholarityDropdownState createState() => _ScholarityDropdownState();
+  _StorybridgeDropdownState createState() => _StorybridgeDropdownState();
 }
 
 // myPage state
-class _ScholarityDropdownState extends State<ScholarityDropdown> {
+class _StorybridgeDropdownState extends State<StorybridgeDropdown> {
   String selectedIcon = "";
   @override
   void initState() {
@@ -362,7 +363,7 @@ class _ScholarityDropdownState extends State<ScholarityDropdown> {
       }
     } else {
       throw Exception(
-          "ScholarityDropdown: either mappedDropdownTypes or dropdownTypes should be null.");
+          "StorybridgeDropdown: either mappedDropdownTypes or dropdownTypes should be null.");
     }
 
     // ignore: unused_local_variable
@@ -371,29 +372,29 @@ class _ScholarityDropdownState extends State<ScholarityDropdown> {
       enableFilter: false,
       requestFocusOnTap: false,
       enabled: widget.isEnabled,
-      textStyle: scholarityTextPStyle,
+      textStyle: storybridgeTextPStyle,
       label: Text(translation_service.translate(widget.label)),
       controller: widget.controller,
       dropdownMenuEntries: typeEntries,
       inputDecorationTheme: InputDecorationTheme(
-        labelStyle: scholarityTextPDimStyle,
+        labelStyle: storybridgeTextPDimStyle,
         filled: true,
-        fillColor: scholarity_color.background,
+        fillColor: storybridge_color.background,
         contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
         focusedBorder: OutlineInputBorder(
           // width: 0.0 produces a thin "hairline" border
-          borderSide:
-              BorderSide(color: scholarity_color.scholarityAccent, width: 2.0),
+          borderSide: BorderSide(
+              color: storybridge_color.storybridgeAccent, width: 2.0),
         ),
         disabledBorder: OutlineInputBorder(
           // width: 0.0 produces a thin "hairline" border
           borderSide:
-              BorderSide(color: scholarity_color.borderColor, width: 1.0),
+              BorderSide(color: storybridge_color.borderColor, width: 1.0),
         ),
         enabledBorder: OutlineInputBorder(
           // width: 0.0 produces a thin "hairline" border
           borderSide:
-              BorderSide(color: scholarity_color.borderColor, width: 1.0),
+              BorderSide(color: storybridge_color.borderColor, width: 1.0),
         ),
       ),
       onSelected: widget.onSubmit,
@@ -401,14 +402,14 @@ class _ScholarityDropdownState extends State<ScholarityDropdown> {
   }
 }
 
-class ScholarityCheckbox extends StatefulWidget {
+class StorybridgeCheckbox extends StatefulWidget {
   // members of MyWidget
   final String label;
   final bool value;
   final Function(bool value) onChanged;
 
   // constructor
-  const ScholarityCheckbox(
+  const StorybridgeCheckbox(
       {Key? key,
       required this.label,
       required this.value,
@@ -416,10 +417,10 @@ class ScholarityCheckbox extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<ScholarityCheckbox> createState() => _ScholarityCheckboxState();
+  State<StorybridgeCheckbox> createState() => _StorybridgeCheckboxState();
 }
 
-class _ScholarityCheckboxState extends State<ScholarityCheckbox> {
+class _StorybridgeCheckboxState extends State<StorybridgeCheckbox> {
   void _switch() {
     bool val = !widget.value;
     widget.onChanged(val);
@@ -433,14 +434,14 @@ class _ScholarityCheckboxState extends State<ScholarityCheckbox> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Checkbox(
-          activeColor: scholarity_color.black,
-          checkColor: scholarity_color.background,
+          activeColor: storybridge_color.black,
+          checkColor: storybridge_color.background,
           value: widget.value,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(2.0),
           ),
           side: MaterialStateBorderSide.resolveWith(
-            (states) => BorderSide(color: scholarity_color.black, width: 2),
+            (states) => BorderSide(color: storybridge_color.black, width: 2),
           ),
           onChanged: (bool? val) {
             _switch();
@@ -454,18 +455,18 @@ class _ScholarityCheckboxState extends State<ScholarityCheckbox> {
               onTap: () {
                 _switch();
               },
-              child: ScholarityTextP(widget.label)),
+              child: StorybridgeTextP(widget.label)),
         ),
       ],
     );
   }
 }
 
-class ScholarityDatePicker extends StatefulWidget {
+class StorybridgeDatePicker extends StatefulWidget {
   final String label;
   final Function(DateTime)? onChanged;
   final bool isEnabled;
-  ScholarityDatePicker(
+  StorybridgeDatePicker(
       {super.key,
       required this.label,
       required this.date,
@@ -474,11 +475,11 @@ class ScholarityDatePicker extends StatefulWidget {
   final DateTime date;
 
   @override
-  State<ScholarityDatePicker> createState() => _ScholarityDatePickerState();
+  State<StorybridgeDatePicker> createState() => _StorybridgeDatePickerState();
 }
 
 /// RestorationProperty objects can be used because of RestorationMixin.
-class _ScholarityDatePickerState extends State<ScholarityDatePicker> {
+class _StorybridgeDatePickerState extends State<StorybridgeDatePicker> {
   // In this example, the restoration ID for the mixin is passed in through
   // the [StatefulWidget]'s constructor.
 
@@ -502,10 +503,10 @@ class _ScholarityDatePickerState extends State<ScholarityDatePicker> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.label.isNotEmpty ? ScholarityTextP(widget.label) : Container(),
+        widget.label.isNotEmpty ? StorybridgeTextP(widget.label) : Container(),
         SizedBox(
           width: 200,
-          child: ScholarityTile(
+          child: StorybridgeTile(
             child: InkWell(
               hoverColor: Colors.transparent,
               onTap: widget.isEnabled
@@ -518,11 +519,11 @@ class _ScholarityDatePickerState extends State<ScholarityDatePicker> {
                 child: Row(
                   children: [
                     const SizedBox(width: 10),
-                    ScholarityTextP(
+                    StorybridgeTextP(
                       "${MONTH_HASH[widget.date.month - 1]} ${widget.date.day}, ${widget.date.year}",
                     ),
                     Expanded(child: Container()),
-                    ScholarityIconButton(
+                    StorybridgeIconButton(
                       icon: Icons.calendar_month_rounded,
                       onPressed: widget.isEnabled
                           ? () {
@@ -541,20 +542,20 @@ class _ScholarityDatePickerState extends State<ScholarityDatePicker> {
   }
 }
 
-class ScholarityTimePicker extends StatefulWidget {
+class StorybridgeTimePicker extends StatefulWidget {
   final String label;
   final Function(TimeOfDay)? onChanged;
-  ScholarityTimePicker(
+  StorybridgeTimePicker(
       {Key? key, required this.label, required this.tod, this.onChanged})
       : super(key: key);
   final TimeOfDay tod;
 
   @override
-  _ScholarityTimePickerState createState() => _ScholarityTimePickerState();
+  _StorybridgeTimePickerState createState() => _StorybridgeTimePickerState();
 }
 
 // myPage state
-class _ScholarityTimePickerState extends State<ScholarityTimePicker> {
+class _StorybridgeTimePickerState extends State<StorybridgeTimePicker> {
   @override
   void initState() {
     super.initState();
@@ -605,11 +606,11 @@ class _ScholarityTimePickerState extends State<ScholarityTimePicker> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.label.isNotEmpty ? ScholarityTextP(widget.label) : Container(),
+        widget.label.isNotEmpty ? StorybridgeTextP(widget.label) : Container(),
         SizedBox(
           width: 120,
           height: 48,
-          child: ScholarityTile(
+          child: StorybridgeTile(
             child: InkWell(
               hoverColor: Colors.transparent,
               onTap: () {
@@ -620,9 +621,9 @@ class _ScholarityTimePickerState extends State<ScholarityTimePicker> {
                 child: Row(
                   children: [
                     const SizedBox(width: 10),
-                    ScholarityTextP(formatTime(widget.tod)),
+                    StorybridgeTextP(formatTime(widget.tod)),
                     Expanded(child: Container()),
-                    ScholarityIconButton(
+                    StorybridgeIconButton(
                       icon: Icons.schedule_rounded,
                       onPressed: () {
                         _showTimePicker();
@@ -639,14 +640,14 @@ class _ScholarityTimePickerState extends State<ScholarityTimePicker> {
   }
 }
 
-class ScholarityAlertDialog extends StatelessWidget {
+class StorybridgeAlertDialog extends StatelessWidget {
   // members of MyWidget
   final Widget content;
   final Widget? title;
   final List<Widget>? actions;
 
   // constructor
-  const ScholarityAlertDialog(
+  const StorybridgeAlertDialog(
       {Key? key, required this.content, this.title, this.actions})
       : super(key: key);
 
@@ -654,13 +655,13 @@ class ScholarityAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        backgroundColor: scholarity_color.background,
+        backgroundColor: storybridge_color.background,
         contentPadding: EdgeInsets.zero,
         content: Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: scholarity_color.borderColor)),
+                border: Border.all(color: storybridge_color.borderColor)),
             child: IntrinsicHeight(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

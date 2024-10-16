@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -18,10 +18,10 @@ class OrganizationRegisterPage extends StatefulWidget {
 
 // myPage state
 class _State extends State<OrganizationRegisterPage> {
-  final ScholarityTextFieldController _organizationNameController =
-      ScholarityTextFieldController();
-  final ScholarityTextFieldController _tierController =
-      ScholarityTextFieldController();
+  final StorybridgeTextFieldController _organizationNameController =
+      StorybridgeTextFieldController();
+  final StorybridgeTextFieldController _tierController =
+      StorybridgeTextFieldController();
   bool _loading = true;
   String _checkoutUrl = "";
   @override
@@ -70,9 +70,9 @@ class _State extends State<OrganizationRegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ScholarityTile(
+                  StorybridgeTile(
                     width: 470,
-                    child: ScholarityPadding(
+                    child: StorybridgePadding(
                       thick: true,
                       child: SizedBox(
                         height: 320,
@@ -81,16 +81,16 @@ class _State extends State<OrganizationRegisterPage> {
                                 Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const ScholarityTextH3("Setup Your Organization"),
-                            const ScholarityTextP(
+                            const StorybridgeTextH3("Setup Your Organization"),
+                            const StorybridgeTextP(
                                 "Organizations are a collection of teachers and courses under one business name. You can change this name later."),
                             const SizedBox(height: 20),
-                            ScholarityTextField(
+                            StorybridgeTextField(
                               label: "Organization Name",
                               controller: _organizationNameController,
                               isPragmaticField: true,
                             ),
-                            ScholarityButton(
+                            StorybridgeButton(
                                 loading: _loading,
                                 text: "Create & Checkout",
                                 invertedColor: true,
@@ -116,9 +116,9 @@ class _State extends State<OrganizationRegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ScholarityTile(
+                  StorybridgeTile(
                     width: 470,
-                    child: ScholarityPadding(
+                    child: StorybridgePadding(
                       thick: true,
                       child: SizedBox(
                         height: 320,
@@ -126,8 +126,8 @@ class _State extends State<OrganizationRegisterPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const ScholarityTextH3("Your Selected Plan"),
-                              ScholarityDropdown(
+                              const StorybridgeTextH3("Your Selected Plan"),
+                              StorybridgeDropdown(
                                 controller: _tierController,
                                 label: "Tier",
                                 dropdownTypes: [
@@ -159,7 +159,7 @@ class _State extends State<OrganizationRegisterPage> {
                                 },
                               ),
                               const SizedBox(height: 10),
-                              ScholarityTile(child: ScholarityPadding(
+                              StorybridgeTile(child: StorybridgePadding(
                                   child: Builder(builder: (context) {
                                 switch (_tierController.text) {
                                   case "Expand Tier":

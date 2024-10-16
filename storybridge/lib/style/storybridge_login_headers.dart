@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
 
-class ScholarityLoginHeader extends StatelessWidget {
+class StorybridgeLoginHeader extends StatelessWidget {
   // constructor
-  const ScholarityLoginHeader({Key? key}) : super(key: key);
+  const StorybridgeLoginHeader({Key? key}) : super(key: key);
 
   // main build function
   @override
@@ -46,11 +46,11 @@ class CustomLoginHeader extends StatelessWidget {
               children: [
                 ProfilePictureWidget(organizationId: organizationId),
                 const SizedBox(height: 10),
-                ScholarityTextH2B(organizationName)
+                StorybridgeTextH2B(organizationName)
               ],
             );
           } else {
-            return const ScholarityBoxLoading(height: 70, width: 100);
+            return const StorybridgeBoxLoading(height: 70, width: 100);
           }
         });
   }

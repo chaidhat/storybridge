@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/auditing_service.dart' as auditing_service;
 import 'package:mooc/services/networking_api_service.dart'
@@ -26,8 +26,8 @@ DataAnswers.getEncodedFromAnswers will be the inverse
 class DataSource {
   DataSourceType dataSourceType;
   int? labelGroupId;
-  final ScholarityTextFieldController unlinkedAnswers =
-      ScholarityTextFieldController();
+  final StorybridgeTextFieldController unlinkedAnswers =
+      StorybridgeTextFieldController();
   DataSource(
       {this.labelGroupId, this.dataSourceType = DataSourceType.unlinked}) {
     if (dataSourceType == DataSourceType.labelGroups && labelGroupId == null) {
@@ -254,8 +254,8 @@ class DatasourceEditor extends StatefulWidget {
 class _DatasourceEditorState extends State<DatasourceEditor> {
   final Map<String, DataSource> _dataSources = {};
   String? _previewDataSource;
-  final ScholarityTextFieldController _dataSourceController =
-      ScholarityTextFieldController();
+  final StorybridgeTextFieldController _dataSourceController =
+      StorybridgeTextFieldController();
 
   @override
   void initState() {
@@ -299,9 +299,9 @@ class _DatasourceEditorState extends State<DatasourceEditor> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ScholarityTextP(
+              const StorybridgeTextP(
                   "User can select answers from the following options:"),
-              ScholarityDropdown(
+              StorybridgeDropdown(
                   width: 400,
                   controller: _dataSourceController,
                   onSubmit: (value) {
@@ -315,13 +315,13 @@ class _DatasourceEditorState extends State<DatasourceEditor> {
                   label: "Data Source",
                   mappedDropdownTypes: _dataSources),
               widget.dataSource.dataSourceType == DataSourceType.unlinked
-                  ? const ScholarityTextP(
+                  ? const StorybridgeTextP(
                       "Please separate selections with a comma")
                   : Container(),
               widget.dataSource.dataSourceType == DataSourceType.unlinked
                   ? SizedBox(
                       height: 110,
-                      child: ScholarityTextField(
+                      child: StorybridgeTextField(
                         isLarge: true,
                         label: "Answers, separated by commas",
                         hintText: "alice, bob, charlie",
@@ -332,7 +332,7 @@ class _DatasourceEditorState extends State<DatasourceEditor> {
               _previewDataSource != null
                   ? Padding(
                       padding: const EdgeInsets.only(top: 10),
-                      child: ScholarityTextP(_previewDataSource!),
+                      child: StorybridgeTextP(_previewDataSource!),
                     )
                   : Container(),
             ],

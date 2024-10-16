@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -29,14 +29,14 @@ class _State extends State<CourseSalesPage> {
     super.dispose();
   }
 
-  final ScholarityTabPageController _tabPageController =
-      ScholarityTabPageController();
+  final StorybridgeTabPageController _tabPageController =
+      StorybridgeTabPageController();
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTabPage(tabPageController: _tabPageController, sideBar: [
+    return StorybridgeTabPage(tabPageController: _tabPageController, sideBar: [
       const SizedBox(height: 80),
-      ScholaritySideBarButton(
+      StorybridgeSideBarButton(
           label: "Sales Page",
           icon: Icons.shopping_cart_rounded,
           onPressed: () {
@@ -49,7 +49,7 @@ class _State extends State<CourseSalesPage> {
             });
           },
           selected: _selectedPage == 0),
-      ScholaritySideBarButton(
+      StorybridgeSideBarButton(
           label: "Sales History",
           icon: Icons.paid_rounded,
           onPressed: () {
@@ -62,7 +62,7 @@ class _State extends State<CourseSalesPage> {
             });
           },
           selected: _selectedPage == 1),
-      ScholaritySideBarButton(
+      StorybridgeSideBarButton(
           label: "Balance",
           icon: Icons.money_rounded,
           onPressed: () {
@@ -139,7 +139,7 @@ class _CourseSalesGeneralPageState extends State<CourseSalesGeneralPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ScholarityTextH2("Sales"),
+        const StorybridgeTextH2("Sales"),
         const SizedBox(height: 40),
         FutureBuilder(
             future: _load(),
@@ -148,7 +148,7 @@ class _CourseSalesGeneralPageState extends State<CourseSalesGeneralPage> {
                 return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ScholarityDescriptor(
+                      const StorybridgeDescriptor(
                           name: "Course Price",
                           description:
                               "The total price your students have to pay to access your story."),
@@ -171,11 +171,11 @@ class _CourseSalesGeneralPageState extends State<CourseSalesGeneralPage> {
                       const SizedBox(height: 20),
                       const _FeeWarning(),
                       const SizedBox(height: 20),
-                      const ScholarityDescriptor(
+                      const StorybridgeDescriptor(
                           name: "Payment Page - Product Name",
                           description:
                               "This is the name of your course your students will see in the payment page."),
-                      ScholaritySettingButton(
+                      StorybridgeSettingButton(
                           loadValue: () async {
                             return _courseProductName;
                           },
@@ -187,11 +187,11 @@ class _CourseSalesGeneralPageState extends State<CourseSalesGeneralPage> {
                             );
                           },
                           name: "Payment Page - Product Name"),
-                      const ScholarityDescriptor(
+                      const StorybridgeDescriptor(
                           name: "Payment Page - Product Description",
                           description:
                               "This is the description your students will see in the payment page."),
-                      ScholaritySettingButton(
+                      StorybridgeSettingButton(
                           isLarge: true,
                           loadValue: () async {
                             return _courseProductDescription;
@@ -206,7 +206,7 @@ class _CourseSalesGeneralPageState extends State<CourseSalesGeneralPage> {
                           name: "Payment Page - Product Description"),
                     ]);
               } else {
-                return const ScholarityPageLoading();
+                return const StorybridgePageLoading();
               }
             }),
       ],
@@ -221,8 +221,8 @@ class _FeeWarning extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityTile(
-        child: ScholarityPadding(
+    return StorybridgeTile(
+        child: StorybridgePadding(
             child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -230,19 +230,19 @@ class _FeeWarning extends StatelessWidget {
           children: [
             Icon(Icons.info_rounded),
             SizedBox(width: 10),
-            ScholarityTextH2B("Taxes & Stripe Processing Fees"),
+            StorybridgeTextH2B("Taxes & Stripe Processing Fees"),
           ],
         ),
         const SizedBox(height: 5),
-        const ScholarityTextP(
-            "As Scholarity partners with Stripe for secure payment processing, just like our competitors, you will be subject to taxes, Stripe's processing fees, and Stripe's currency conversion fees (to Thai Baht). Scholarity takes no transaction fees on top of that."),
+        const StorybridgeTextP(
+            "As Storybridge partners with Stripe for secure payment processing, just like our competitors, you will be subject to taxes, Stripe's processing fees, and Stripe's currency conversion fees (to Thai Baht). Storybridge takes no transaction fees on top of that."),
         const SizedBox(height: 15),
         InkWell(
             onTap: () {
               launchUrl(Uri.parse("https://stripe.com/en-th/pricing"));
             },
-            child: ScholarityTextBasic("Learn More",
-                style: scholarityTextPLinkStyle))
+            child: StorybridgeTextBasic("Learn More",
+                style: storybridgeTextPLinkStyle))
       ],
     )));
   }
@@ -303,7 +303,7 @@ class _CourseSalesHistoryPageState extends State<CourseSalesHistoryPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ScholarityTextH2("Sales History"),
+        const StorybridgeTextH2("Sales History"),
         const SizedBox(height: 40),
         FutureBuilder(
             future: _load(),
@@ -314,29 +314,29 @@ class _CourseSalesHistoryPageState extends State<CourseSalesHistoryPage> {
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 22),
                       child: Row(children: [
-                        Expanded(child: ScholarityTextH2B("Customer")),
-                        Expanded(child: ScholarityTextH2B("Date")),
+                        Expanded(child: StorybridgeTextH2B("Customer")),
+                        Expanded(child: StorybridgeTextH2B("Date")),
                         Row(
                           children: [
                             Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 16),
-                                child: ScholarityTextH2B("Amount")),
+                                child: StorybridgeTextH2B("Amount")),
                             Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 16),
                                 child: Row(
                                   children: [
-                                    ScholarityTextH2B("Fees"),
+                                    StorybridgeTextH2B("Fees"),
                                     SizedBox(width: 2),
                                     Tooltip(
                                         message:
-                                            "Taxes & Stripe processing fees.\nScholarity takes 0% transaction cost on top.\nLearn more at https://stripe.com/en-th/pricing.",
+                                            "Taxes & Stripe processing fees.\nStorybridge takes 0% transaction cost on top.\nLearn more at https://stripe.com/en-th/pricing.",
                                         child: Icon(Icons.info_rounded,
                                             color: Colors.grey))
                                   ],
                                 )),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 16),
-                              child: ScholarityTextH2B("Net"),
+                              child: StorybridgeTextH2B("Net"),
                             ),
                           ],
                         ),
@@ -352,7 +352,7 @@ class _CourseSalesHistoryPageState extends State<CourseSalesHistoryPage> {
                   ],
                 );
               } else {
-                return const ScholarityPageLoading();
+                return const StorybridgePageLoading();
               }
             }),
       ],
@@ -375,27 +375,27 @@ class _CourseSalesHistoryEntryWidget extends StatelessWidget {
     NumberFormat numberFormat = NumberFormat.decimalPattern('hi');
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ScholarityTile(
-          child: ScholarityPadding(
+      child: StorybridgeTile(
+          child: StorybridgePadding(
               child: Row(
         children: [
-          Expanded(child: ScholarityTextP(salesHistoryEntry.email)),
+          Expanded(child: StorybridgeTextP(salesHistoryEntry.email)),
           Expanded(
-              child:
-                  ScholarityTextP(parseSqlDate(salesHistoryEntry.dateCreated))),
+              child: StorybridgeTextP(
+                  parseSqlDate(salesHistoryEntry.dateCreated))),
           Row(
             children: [
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: ScholarityTextP(
+                  child: StorybridgeTextP(
                       "${salesHistoryEntry.paidCurrencyCode.toUpperCase()} ${numberFormat.format(salesHistoryEntry.paidAmount)}")),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: ScholarityTextP(
+                  child: StorybridgeTextP(
                       "${salesHistoryEntry.paidCurrencyCode.toUpperCase()} ${numberFormat.format(salesHistoryEntry.paidAmount - salesHistoryEntry.paidNet)}")),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: ScholarityTextP(
+                  child: StorybridgeTextP(
                       "${salesHistoryEntry.paidCurrencyCode.toUpperCase()} ${salesHistoryEntry.paidNet}")),
             ],
           ),
@@ -434,9 +434,9 @@ class _CourseSalesBalancePageState extends State<CourseSalesBalancePage> {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ScholarityTextH2("Balance"),
+        StorybridgeTextH2("Balance"),
         SizedBox(height: 40),
-        ScholarityTextP("Please see organization page for the balance.")
+        StorybridgeTextP("Please see organization page for the balance.")
       ],
     );
   }

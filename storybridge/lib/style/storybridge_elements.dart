@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 
 const int MOBILE_SCREEN_WIDTH = 1000;
 
@@ -12,7 +12,7 @@ bool isMobileScreen(BuildContext context) {
   }
 }
 
-class ScholarityTile extends StatelessWidget {
+class StorybridgeTile extends StatelessWidget {
   // members of MyWidget
   final double? width;
   final Widget child;
@@ -21,7 +21,7 @@ class ScholarityTile extends StatelessWidget {
   final Color? color;
 
   // constructor
-  const ScholarityTile(
+  const StorybridgeTile(
       {Key? key,
       this.width,
       required this.child,
@@ -33,13 +33,13 @@ class ScholarityTile extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor = scholarity_color.background;
-    Color backgroundDimColor = scholarity_color.backgroundDim;
-    Color borderColor = scholarity_color.borderColor;
+    Color backgroundColor = storybridge_color.background;
+    Color backgroundDimColor = storybridge_color.backgroundDim;
+    Color borderColor = storybridge_color.borderColor;
     if (color != null) {
-      backgroundColor = scholarity_color.getBackgroundColor(color!);
-      backgroundDimColor = scholarity_color.getBackgroundColor(color!);
-      borderColor = scholarity_color.getTextColor(color!);
+      backgroundColor = storybridge_color.getBackgroundColor(color!);
+      backgroundDimColor = storybridge_color.getBackgroundColor(color!);
+      borderColor = storybridge_color.getTextColor(color!);
     }
 
     return SizedBox(
@@ -51,7 +51,7 @@ class ScholarityTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           color: !useAltStyle ? backgroundColor : backgroundDimColor,
           boxShadow:
-              hasShadows ? const [scholarity_color.highShadow] : const [],
+              hasShadows ? const [storybridge_color.highShadow] : const [],
         ),
         child: child,
       ),
@@ -59,7 +59,7 @@ class ScholarityTile extends StatelessWidget {
   }
 }
 
-class ScholarityHolder extends StatelessWidget {
+class StorybridgeHolder extends StatelessWidget {
   // members of MyWidget
   final Widget child;
   final bool hasPadding;
@@ -67,7 +67,7 @@ class ScholarityHolder extends StatelessWidget {
   final bool hasVeryReducedPadding;
 
   // constructor
-  const ScholarityHolder(
+  const StorybridgeHolder(
       {Key? key,
       required this.child,
       this.hasPadding = true,
@@ -86,8 +86,8 @@ class ScholarityHolder extends StatelessWidget {
         constraints: !hasVeryReducedPadding
             ? BoxConstraints(
                 maxWidth: !hasReducedPadding
-                    ? scholarity_color.scholarityHolderMaxWidth
-                    : scholarity_color.scholarityHolderMaxWidthNotPadded)
+                    ? storybridge_color.storybridgeHolderMaxWidth
+                    : storybridge_color.storybridgeHolderMaxWidthNotPadded)
             : null,
         child: Padding(
           padding:
@@ -99,14 +99,14 @@ class ScholarityHolder extends StatelessWidget {
   }
 }
 
-class ScholarityPadding extends StatelessWidget {
+class StorybridgePadding extends StatelessWidget {
   // members of MyWidget
   final Widget child;
   final bool thick;
   final bool verticalOnly;
 
   // constructor
-  const ScholarityPadding(
+  const StorybridgePadding(
       {Key? key,
       required this.child,
       this.thick = false,
@@ -127,10 +127,10 @@ class ScholarityPadding extends StatelessWidget {
 }
 
 // myPage class which creates a state on call
-class ScholarityHoverButton extends StatefulWidget {
+class StorybridgeHoverButton extends StatefulWidget {
   final Widget child, button;
   final bool enabled;
-  const ScholarityHoverButton({
+  const StorybridgeHoverButton({
     Key? key,
     required this.child,
     required this.button,
@@ -138,11 +138,11 @@ class ScholarityHoverButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ScholarityHoverButtonState createState() => _ScholarityHoverButtonState();
+  _StorybridgeHoverButtonState createState() => _StorybridgeHoverButtonState();
 }
 
 // myPage state
-class _ScholarityHoverButtonState extends State<ScholarityHoverButton> {
+class _StorybridgeHoverButtonState extends State<StorybridgeHoverButton> {
   bool _isHovering = false;
 
   // main build function
@@ -174,13 +174,14 @@ class _ScholarityHoverButtonState extends State<ScholarityHoverButton> {
   }
 }
 
-class ScholarityBox extends StatelessWidget {
+class StorybridgeBox extends StatelessWidget {
   // members of MyWidget
   final Widget child;
   final bool useAltStyle;
 
   // constructor
-  const ScholarityBox({Key? key, required this.child, this.useAltStyle = false})
+  const StorybridgeBox(
+      {Key? key, required this.child, this.useAltStyle = false})
       : super(key: key);
 
   // main build function
@@ -191,11 +192,11 @@ class ScholarityBox extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: !useAltStyle
-                ? scholarity_color.scholarityAccentBackground
-                : scholarity_color.backgroundDim,
+                ? storybridge_color.storybridgeAccentBackground
+                : storybridge_color.backgroundDim,
             borderRadius: BorderRadius.circular(8),
             border: !useAltStyle
-                ? Border.all(color: scholarity_color.scholarityAccent)
+                ? Border.all(color: storybridge_color.storybridgeAccent)
                 : null,
           ),
           child: Padding(
@@ -208,12 +209,12 @@ class ScholarityBox extends StatelessWidget {
   }
 }
 
-class ScholarityProgressIndicator extends StatelessWidget {
+class StorybridgeProgressIndicator extends StatelessWidget {
   // members of MyWidget
   final double progress;
 
   // constructor
-  const ScholarityProgressIndicator({Key? key, required this.progress})
+  const StorybridgeProgressIndicator({Key? key, required this.progress})
       : super(key: key);
 
   // main build function
@@ -221,7 +222,7 @@ class ScholarityProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return LinearProgressIndicator(
       borderRadius: BorderRadius.circular(10),
-      backgroundColor: scholarity_color.lightGrey,
+      backgroundColor: storybridge_color.lightGrey,
       value: progress,
       minHeight: 10,
       semanticsLabel: 'Linear progress indicator',

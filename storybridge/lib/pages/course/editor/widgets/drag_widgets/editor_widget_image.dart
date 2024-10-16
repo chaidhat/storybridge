@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -34,8 +34,8 @@ class EditorWidgetImage extends StatefulWidget implements EditorWidget {
   @override
   late final EditorWidgetMetadata metadata;
 
-  final ScholarityTextFieldController _altTextcontroller =
-      ScholarityTextFieldController();
+  final StorybridgeTextFieldController _altTextcontroller =
+      StorybridgeTextFieldController();
 
   final _EditorWidgetImageController controller =
       _EditorWidgetImageController();
@@ -120,18 +120,18 @@ class _EditorWidgetImageState extends State<EditorWidgetImage> {
                   return Image.network(
                       '${networking_service.getApiUrl()}?action=downloadImage&contentDataId=${_image!.contentDataId}');
                 } else {
-                  return ScholarityContentUploadProgess(
+                  return StorybridgeContentUploadProgess(
                     contentDataId: _image!.contentDataId,
                     onVideoUploaded: onImageUploaded,
                   );
                 }
               } else {
                 return const Center(
-                    child: ScholarityBoxLoading(height: 580, width: 760));
+                    child: StorybridgeBoxLoading(height: 580, width: 760));
               }
             })
-        : ScholarityContentUploader(
-            contentType: ScholarityContentType.image,
+        : StorybridgeContentUploader(
+            contentType: StorybridgeContentType.image,
             onContentUploading: onImageUploading,
             onContentUploaded: onImageUploaded,
             courseId: widget.editorWidgetData.courseData.courseId,
@@ -142,13 +142,13 @@ class _EditorWidgetImageState extends State<EditorWidgetImage> {
   }
 }
 
-class _ScholarityLinkSetting extends StatelessWidget {
+class _StorybridgeLinkSetting extends StatelessWidget {
   // members of MyWidget
-  final ScholarityTextFieldController linkController;
+  final StorybridgeTextFieldController linkController;
   final Function() onSave;
 
   // constructor
-  const _ScholarityLinkSetting({
+  const _StorybridgeLinkSetting({
     Key? key,
     required this.linkController,
     required this.onSave,
@@ -161,22 +161,22 @@ class _ScholarityLinkSetting extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ScholarityIconButton(
+        StorybridgeIconButton(
             icon: Icons.close,
             onPressed: () {
               Navigator.pop(context);
             }),
         const SizedBox(height: 30),
-        const ScholarityTextH2B("Send to Link"),
-        const ScholarityTextP(
+        const StorybridgeTextH2B("Send to Link"),
+        const StorybridgeTextP(
             "Please enter the url below of where you want to send the student to"),
         const SizedBox(height: 10),
         Column(
           children: [
             SizedBox(
-                child: ScholarityTextField(
+                child: StorybridgeTextField(
                     controller: linkController, label: "URL")),
-            ScholarityButton(
+            StorybridgeButton(
               padding: false,
               text: "save",
               onPressed: () {

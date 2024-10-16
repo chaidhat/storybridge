@@ -1,127 +1,127 @@
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 import 'package:mooc/services/translation_service.dart' as translation_service;
 
-TextStyle get scholarityTextH2Style => TextStyle(
+TextStyle get storybridgeTextH2Style => TextStyle(
       fontSize: 32,
       fontWeight: FontWeight.w500,
-      color: scholarity_color.darkGrey,
+      color: storybridge_color.darkGrey,
     );
-TextStyle get scholarityTextH2BStyle => TextStyle(
+TextStyle get storybridgeTextH2BStyle => TextStyle(
       fontSize: 17,
       fontWeight: FontWeight.bold,
-      color: scholarity_color.darkGrey,
+      color: storybridge_color.darkGrey,
     );
-TextStyle get scholarityTextH4Style => TextStyle(
+TextStyle get storybridgeTextH4Style => TextStyle(
       fontSize: 25,
       fontWeight: FontWeight.w500,
-      color: scholarity_color.darkGrey,
+      color: storybridge_color.darkGrey,
     );
 
 /*
 *  Text H5
 */
-TextStyle get scholarityTextH5DimStyle => TextStyle(
+TextStyle get storybridgeTextH5DimStyle => TextStyle(
       fontSize: 14,
       fontFamily: "Inter",
       fontWeight: FontWeight.w500,
-      color: scholarity_color.lightGrey,
+      color: storybridge_color.lightGrey,
     );
-TextStyle get scholarityTextH5Style => TextStyle(
+TextStyle get storybridgeTextH5Style => TextStyle(
       fontSize: 14,
       fontFamily: "Inter",
       fontWeight: FontWeight.w500,
-      color: scholarity_color.darkGrey,
+      color: storybridge_color.darkGrey,
     );
-TextStyle get scholarityTextH5RedStyle => TextStyle(
+TextStyle get storybridgeTextH5RedStyle => TextStyle(
       fontSize: 14,
       fontFamily: "Inter",
       fontWeight: FontWeight.w500,
-      color: scholarity_color.scholarityAccent,
+      color: storybridge_color.storybridgeAccent,
     );
-TextStyle get scholarityTextH5BStyle => TextStyle(
+TextStyle get storybridgeTextH5BStyle => TextStyle(
       fontSize: 14,
       fontFamily: "Inter",
       fontStyle: FontStyle.italic,
-      color: scholarity_color.darkGrey,
+      color: storybridge_color.darkGrey,
     );
-TextStyle get scholarityTextH5RedBStyle => TextStyle(
+TextStyle get storybridgeTextH5RedBStyle => TextStyle(
       fontSize: 14,
       fontFamily: "Inter",
       fontStyle: FontStyle.italic,
-      color: scholarity_color.scholarityAccent,
+      color: storybridge_color.storybridgeAccent,
     );
-TextStyle get scholarityTextH5WhiteStyle => TextStyle(
+TextStyle get storybridgeTextH5WhiteStyle => TextStyle(
       fontSize: 14,
       fontFamily: "Inter",
       fontWeight: FontWeight.w500,
-      color: scholarity_color.background,
+      color: storybridge_color.background,
     );
 /*
 *  End of Text H5
 */
 
-TextStyle get scholarityTextPStyle => TextStyle(
+TextStyle get storybridgeTextPStyle => TextStyle(
       height: 1.5,
-      color: scholarity_color.black,
+      color: storybridge_color.black,
       fontSize: 14,
     );
-TextStyle get scholarityTextPRedStyle => TextStyle(
-      color: scholarity_color.scholarityAccent,
+TextStyle get storybridgeTextPRedStyle => TextStyle(
+      color: storybridge_color.storybridgeAccent,
       fontSize: 14,
     );
-TextStyle get scholarityTextPLinkStyle => TextStyle(
-      color: scholarity_color.scholarityAccent,
+TextStyle get storybridgeTextPLinkStyle => TextStyle(
+      color: storybridge_color.storybridgeAccent,
       decoration: TextDecoration.underline,
       fontSize: 14,
     );
-TextStyle get scholarityTextPDimStyle => TextStyle(
-      color: scholarity_color.grey,
+TextStyle get storybridgeTextPDimStyle => TextStyle(
+      color: storybridge_color.grey,
       fontSize: 14,
     );
-TextStyle get scholarityTextSmallStyle => TextStyle(
+TextStyle get storybridgeTextSmallStyle => TextStyle(
       height: 1.5,
-      color: scholarity_color.black,
+      color: storybridge_color.black,
       fontSize: 14,
     );
 
-class ScholarityTextH2 extends StatelessWidget {
+class StorybridgeTextH2 extends StatelessWidget {
   // members of MyWidget
   final String text;
 
   // constructor
-  const ScholarityTextH2(this.text, {Key? key}) : super(key: key);
+  const StorybridgeTextH2(this.text, {Key? key}) : super(key: key);
 
   // main build function
   @override
   Widget build(BuildContext context) {
     return Text(translation_service.translate(text),
-        style: scholarityTextH2Style);
+        style: storybridgeTextH2Style);
   }
 }
 
-class ScholarityTextH2B extends StatelessWidget {
+class StorybridgeTextH2B extends StatelessWidget {
   // members of MyWidget
   final String text;
 
   // constructor
-  const ScholarityTextH2B(this.text, {Key? key}) : super(key: key);
+  const StorybridgeTextH2B(this.text, {Key? key}) : super(key: key);
 
   // main build function
   @override
   Widget build(BuildContext context) {
     return Text(translation_service.translate(text),
-        style: scholarityTextH2BStyle);
+        style: storybridgeTextH2BStyle);
   }
 }
 
-class ScholarityTextH3 extends StatelessWidget {
+class StorybridgeTextH3 extends StatelessWidget {
   // members of MyWidget
   final String text;
   final String? bracketText;
 
   // constructor
-  const ScholarityTextH3(this.text, {Key? key, this.bracketText})
+  const StorybridgeTextH3(this.text, {Key? key, this.bracketText})
       : super(key: key);
 
   // main build function
@@ -133,35 +133,35 @@ class ScholarityTextH3 extends StatelessWidget {
         Text(translation_service.translate(text),
             style: TextStyle(
               fontSize: 20,
-              color: scholarity_color.scholarityAccent,
+              color: storybridge_color.storybridgeAccent,
             )),
         const SizedBox(width: 10),
         Text(translation_service.translate(bracketText ?? ""),
             style: TextStyle(
               fontSize: 14,
-              color: scholarity_color.scholarityAccent,
+              color: storybridge_color.storybridgeAccent,
             )),
       ],
     );
   }
 }
 
-class ScholarityTextH4 extends StatelessWidget {
+class StorybridgeTextH4 extends StatelessWidget {
   // members of MyWidget
   final String text;
 
   // constructor
-  const ScholarityTextH4(this.text, {Key? key}) : super(key: key);
+  const StorybridgeTextH4(this.text, {Key? key}) : super(key: key);
 
   // main build function
   @override
   Widget build(BuildContext context) {
     return Text(translation_service.translate(text),
-        style: scholarityTextH4Style);
+        style: storybridgeTextH4Style);
   }
 }
 
-class ScholarityTextH5 extends StatelessWidget {
+class StorybridgeTextH5 extends StatelessWidget {
   // members of MyWidget
   final String text;
   final bool red;
@@ -169,7 +169,7 @@ class ScholarityTextH5 extends StatelessWidget {
   final bool bold;
 
   // constructor
-  const ScholarityTextH5(this.text,
+  const StorybridgeTextH5(this.text,
       {Key? key, this.red = false, this.bold = false, this.dim = false})
       : super(key: key);
 
@@ -183,7 +183,7 @@ class ScholarityTextH5 extends StatelessWidget {
         selection: const TextSelection.collapsed(offset: 0));
     if (!red) {
       return quill.QuillEditor.basic(controller: _controller, readOnly: true);
-      //style: !bold ? scholarityTextH5Style : scholarityTextH5BStyle);
+      //style: !bold ? storybridgeTextH5Style : storybridgeTextH5BStyle);
     } else {
       return quill.QuillEditor.basic(controller: _controller, readOnly: true);
     }
@@ -191,26 +191,27 @@ class ScholarityTextH5 extends StatelessWidget {
 
     if (dim) {
       return Text(translation_service.translate(text),
-          style: scholarityTextH5DimStyle);
+          style: storybridgeTextH5DimStyle);
     }
     if (!red) {
       return Text(translation_service.translate(text),
-          style: !bold ? scholarityTextH5Style : scholarityTextH5BStyle);
+          style: !bold ? storybridgeTextH5Style : storybridgeTextH5BStyle);
     } else {
       return Text(translation_service.translate(text),
-          style: !bold ? scholarityTextH5RedStyle : scholarityTextH5RedBStyle);
+          style:
+              !bold ? storybridgeTextH5RedStyle : storybridgeTextH5RedBStyle);
     }
   }
 }
 
-class ScholarityTextP extends StatelessWidget {
+class StorybridgeTextP extends StatelessWidget {
   // members of MyWidget
   final String text;
   final TextAlign? textAlign;
   final bool isDim;
 
   // constructor
-  const ScholarityTextP(this.text,
+  const StorybridgeTextP(this.text,
       {Key? key, this.textAlign, this.isDim = false})
       : super(key: key);
 
@@ -219,17 +220,17 @@ class ScholarityTextP extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(translation_service.translate(text),
         textAlign: textAlign,
-        style: !isDim ? scholarityTextPStyle : scholarityTextPDimStyle);
+        style: !isDim ? storybridgeTextPStyle : storybridgeTextPDimStyle);
   }
 }
 
-class ScholarityDescriptor extends StatelessWidget {
+class StorybridgeDescriptor extends StatelessWidget {
   // members of MyWidget
   final String name;
   final String description;
 
   // constructor
-  const ScholarityDescriptor(
+  const StorybridgeDescriptor(
       {Key? key, required this.name, this.description = ""})
       : super(key: key);
 
@@ -240,21 +241,21 @@ class ScholarityDescriptor extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
-        ScholarityTextH2B(name),
-        description == "" ? Container() : ScholarityTextP(description),
+        StorybridgeTextH2B(name),
+        description == "" ? Container() : StorybridgeTextP(description),
         const SizedBox(height: 10),
       ],
     );
   }
 }
 
-class ScholarityTextBasic extends StatelessWidget {
+class StorybridgeTextBasic extends StatelessWidget {
   // members of MyWidget
   final String text;
   final TextStyle? style;
   final TextAlign? textAlign;
 
-  const ScholarityTextBasic(this.text, {Key? key, this.style, this.textAlign})
+  const StorybridgeTextBasic(this.text, {Key? key, this.style, this.textAlign})
       : super(key: key);
   // main build function
   @override
@@ -264,19 +265,19 @@ class ScholarityTextBasic extends StatelessWidget {
   }
 }
 
-class ScholarityTextSmall extends StatelessWidget {
+class StorybridgeTextSmall extends StatelessWidget {
   // members of MyWidget
   final String text;
   final TextAlign? textAlign;
 
   // constructor
-  const ScholarityTextSmall(this.text, {Key? key, this.textAlign})
+  const StorybridgeTextSmall(this.text, {Key? key, this.textAlign})
       : super(key: key);
 
   // main build function
   @override
   Widget build(BuildContext context) {
     return Text(translation_service.translate(text),
-        textAlign: textAlign, style: scholarityTextSmallStyle);
+        textAlign: textAlign, style: storybridgeTextSmallStyle);
   }
 }

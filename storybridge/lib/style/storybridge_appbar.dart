@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/focus_service.dart';
-import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
+import 'package:mooc/style/storybridge_colors.dart' as storybridge_color;
 import 'package:mooc/services/translation_service.dart' as translation_service;
 
-class ScholarityAppbar extends StatelessWidget {
+class StorybridgeAppbar extends StatelessWidget {
   // constructor
-  const ScholarityAppbar({Key? key}) : super(key: key);
+  const StorybridgeAppbar({Key? key}) : super(key: key);
 
   // main build function
   @override
@@ -15,7 +15,7 @@ class ScholarityAppbar extends StatelessWidget {
     return Container(
       height: 65,
       decoration: BoxDecoration(
-        color: scholarity_color.background,
+        color: storybridge_color.background,
       ),
       child: const Stack(
         children: [
@@ -42,7 +42,7 @@ class ScholarityAppbar extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ScholarityAccountIndicator(
+                    StorybridgeAccountIndicator(
                       organizationId: null,
                     ),
                   ],
@@ -56,22 +56,22 @@ class ScholarityAppbar extends StatelessWidget {
   }
 }
 
-class ScholarityTabHeader {
+class StorybridgeTabHeader {
   final String tabName;
   final IconData tabIcon;
 
   Function? onUpdate;
   bool isVisible;
-  ScholarityTabHeader(
+  StorybridgeTabHeader(
       {required this.tabName,
       required this.tabIcon,
       this.isVisible = true,
       this.onUpdate});
 }
 
-class ScholarityScaffold extends StatefulWidget {
+class StorybridgeScaffold extends StatefulWidget {
   final bool hasAppbar;
-  final List<ScholarityTabHeader> tabNames;
+  final List<StorybridgeTabHeader> tabNames;
   final List<Widget> body;
   final List<Widget> tabs;
   final Widget? tabPrefix, tabSuffix;
@@ -79,7 +79,7 @@ class ScholarityScaffold extends StatefulWidget {
   final bool isTabRightAligned;
   final int startingTab;
 
-  ScholarityScaffold({
+  StorybridgeScaffold({
     Key? key,
     required this.hasAppbar,
     required this.body,
@@ -93,10 +93,10 @@ class ScholarityScaffold extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ScholarityScaffold> createState() => _ScholarityScaffoldState();
+  State<StorybridgeScaffold> createState() => _StorybridgeScaffoldState();
 }
 
-class _ScholarityScaffoldState extends State<ScholarityScaffold>
+class _StorybridgeScaffoldState extends State<StorybridgeScaffold>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late int _numberOfTabs;
@@ -115,7 +115,7 @@ class _ScholarityScaffoldState extends State<ScholarityScaffold>
     // this is to make sure it fills the entire column
     //body.add(Container());
     return Scaffold(
-      backgroundColor: scholarity_color.backgroundDim,
+      backgroundColor: storybridge_color.backgroundDim,
       floatingActionButton: Align(
         alignment: Alignment.bottomRight,
         child: Row(
@@ -124,23 +124,23 @@ class _ScholarityScaffoldState extends State<ScholarityScaffold>
             const translation_service.LanguageFab(),
             const SizedBox(width: 10),
             FloatingActionButton(
-              backgroundColor: scholarity_color.background,
+              backgroundColor: storybridge_color.background,
               tooltip: "Dark Mode",
               onPressed: () async {
-                scholarity_color.toggleDarkMode();
+                storybridge_color.toggleDarkMode();
                 Navigator.pushNamed(context, '/reload');
               },
               child:
-                  Icon(Icons.contrast_rounded, color: scholarity_color.black),
+                  Icon(Icons.contrast_rounded, color: storybridge_color.black),
             )
           ],
         ),
       ),
       body: Stack(
         children: [
-          ScholarityFocusDismisser(
+          StorybridgeFocusDismisser(
             child: Column(children: [
-              widget.hasAppbar ? const ScholarityAppbar() : Container(),
+              widget.hasAppbar ? const StorybridgeAppbar() : Container(),
               // padding to move
               Stack(
                 alignment: Alignment.center,
@@ -160,7 +160,7 @@ class _ScholarityScaffoldState extends State<ScholarityScaffold>
                           child: widget.tabSuffix ?? Container())),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: ScholarityHolder(
+                    child: StorybridgeHolder(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -169,7 +169,7 @@ class _ScholarityScaffoldState extends State<ScholarityScaffold>
                             children: widget.body,
                           ),
                           _numberOfTabs > 1 && !isMobileScreen(context)
-                              ? ScholarityTabBar(
+                              ? StorybridgeTabBar(
                                   isRightAligned: widget.isTabRightAligned,
                                   tabNames: widget.tabNames,
                                   controller: _tabController,
@@ -185,7 +185,7 @@ class _ScholarityScaffoldState extends State<ScholarityScaffold>
                   ? Container()
                   : Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ScholarityTabBar(
+                      child: StorybridgeTabBar(
                           tabNames: widget.tabNames,
                           controller: _tabController),
                     ),
@@ -199,21 +199,21 @@ class _ScholarityScaffoldState extends State<ScholarityScaffold>
           ),
           !(isMobileScreen(context) && widget.forceDesktop)
               ? Container()
-              : const _ScholarityDesktopWarning()
+              : const _StorybridgeDesktopWarning()
         ],
       ),
     );
   }
 }
 
-class ScholarityTabBar extends StatefulWidget {
+class StorybridgeTabBar extends StatefulWidget {
   // members of MyWidget
-  final List<ScholarityTabHeader> tabNames;
+  final List<StorybridgeTabHeader> tabNames;
   final bool isRightAligned;
   final TabController controller;
 
   // constructor
-  const ScholarityTabBar({
+  const StorybridgeTabBar({
     Key? key,
     required this.tabNames,
     required this.controller,
@@ -221,10 +221,10 @@ class ScholarityTabBar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ScholarityTabBar> createState() => _ScholarityTabBarState();
+  State<StorybridgeTabBar> createState() => _StorybridgeTabBarState();
 }
 
-class _ScholarityTabBarState extends State<ScholarityTabBar> {
+class _StorybridgeTabBarState extends State<StorybridgeTabBar> {
   // main build function
 
   void update() {
@@ -264,11 +264,11 @@ class _ScholarityTabBarState extends State<ScholarityTabBar> {
                     ? const Color(0x18808080)
                     : Colors.transparent),
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-            child: ScholarityTextBasic(widget.tabNames[i].tabName,
+            child: StorybridgeTextBasic(widget.tabNames[i].tabName,
                 style: TextStyle(
-                  fontSize: scholarityTextH5Style.fontSize,
+                  fontSize: storybridgeTextH5Style.fontSize,
                   fontWeight: FontWeight.w500,
-                  color: scholarity_color.darkGrey,
+                  color: storybridge_color.darkGrey,
                 )),
           ),
         );
@@ -277,25 +277,25 @@ class _ScholarityTabBarState extends State<ScholarityTabBar> {
   }
 }
 
-class ScholarityTabPageController {
+class StorybridgeTabPageController {
   bool mobileShowSidebar = false;
   late Function() update;
-  ScholarityTabPageController();
+  StorybridgeTabPageController();
 }
 
-class ScholarityTabPage extends StatefulWidget {
+class StorybridgeTabPage extends StatefulWidget {
   final List<Widget> body;
   final List<Widget>? sideBar, rightSideBar;
   final bool hasSideBarPadding, hasRightSideBarPadding;
   final bool hasReducedPadding;
   final bool hasVeryReducedPadding;
   final bool disableScroll;
-  final ScholarityTabPageController? tabPageController;
+  final StorybridgeTabPageController? tabPageController;
   final ScrollController? scrollController;
   // constructor
 
   // ignore: prefer_const_constructors_in_immutables
-  ScholarityTabPage({
+  StorybridgeTabPage({
     Key? key,
     required this.body,
     this.sideBar,
@@ -310,10 +310,10 @@ class ScholarityTabPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ScholarityTabPage> createState() => _ScholarityTabPageState();
+  State<StorybridgeTabPage> createState() => _StorybridgeTabPageState();
 }
 
-class _ScholarityTabPageState extends State<ScholarityTabPage> {
+class _StorybridgeTabPageState extends State<StorybridgeTabPage> {
   @override
   void initState() {
     widget.tabPageController?.update = () {
@@ -331,8 +331,8 @@ class _ScholarityTabPageState extends State<ScholarityTabPage> {
     widget.body.add(Container());
     return Container(
       decoration: BoxDecoration(
-        color: scholarity_color.background,
-        //boxShadow: [scholarity_color.shadow],
+        color: storybridge_color.background,
+        //boxShadow: [storybridge_color.shadow],
       ),
       child: Stack(
         children: [
@@ -346,16 +346,16 @@ class _ScholarityTabPageState extends State<ScholarityTabPage> {
               child: Padding(
                 padding: EdgeInsets.only(
                     left: widget.sideBar != null && !isMobileScreen(context)
-                        ? scholarity_color.scholaritySideBarWidth
+                        ? storybridge_color.storybridgeSideBarWidth
                         : 0,
                     right: (widget.hasVeryReducedPadding &&
                                 widget.rightSideBar != null) ||
                             (!widget.hasVeryReducedPadding &&
                                     widget.sideBar != null) &&
                                 !isMobileScreen(context)
-                        ? scholarity_color.scholaritySideBarWidth
+                        ? storybridge_color.storybridgeSideBarWidth
                         : 0),
-                child: ScholarityHolder(
+                child: StorybridgeHolder(
                   hasReducedPadding: widget.hasReducedPadding,
                   hasVeryReducedPadding: widget.hasVeryReducedPadding,
                   child: Column(
@@ -379,11 +379,11 @@ class _ScholarityTabPageState extends State<ScholarityTabPage> {
                   ? Row(
                       children: [
                         Container(
-                            width: scholarity_color.scholaritySideBarWidth,
+                            width: storybridge_color.storybridgeSideBarWidth,
                             constraints: BoxConstraints(
                                 minHeight: MediaQuery.of(context).size.height),
                             child: SingleChildScrollView(
-                              child: ScholarityHolder(
+                              child: StorybridgeHolder(
                                   hasPadding: widget.hasSideBarPadding,
                                   child: Column(
                                     crossAxisAlignment:
@@ -396,7 +396,7 @@ class _ScholarityTabPageState extends State<ScholarityTabPage> {
                             width: 20,
                             thickness: 1,
                             endIndent: 20,
-                            color: scholarity_color.borderColor)
+                            color: storybridge_color.borderColor)
                       ],
                     )
                   : Container(),
@@ -413,14 +413,14 @@ class _ScholarityTabPageState extends State<ScholarityTabPage> {
                               width: 20,
                               thickness: 1,
                               endIndent: 20,
-                              color: scholarity_color.borderColor),
+                              color: storybridge_color.borderColor),
                           Container(
-                              width: scholarity_color.scholaritySideBarWidth,
+                              width: storybridge_color.storybridgeSideBarWidth,
                               constraints: BoxConstraints(
                                   minHeight:
                                       MediaQuery.of(context).size.height),
                               child: SingleChildScrollView(
-                                child: ScholarityHolder(
+                                child: StorybridgeHolder(
                                     hasPadding: widget.hasRightSideBarPadding,
                                     child: Column(
                                       crossAxisAlignment:
@@ -439,14 +439,15 @@ class _ScholarityTabPageState extends State<ScholarityTabPage> {
                   widget.sideBar == null
               ? Container()
               : Container(
-                  decoration: BoxDecoration(color: scholarity_color.background),
-                  child: ScholarityHolder(
+                  decoration:
+                      BoxDecoration(color: storybridge_color.background),
+                  child: StorybridgeHolder(
                       hasPadding: widget.hasSideBarPadding,
                       child: Column(children: widget.sideBar!))),
           widget.sideBar == null || !isMobileScreen(context)
               ? Container()
-              : ScholarityPadding(
-                  child: ScholarityIconButton(
+              : StorybridgePadding(
+                  child: StorybridgeIconButton(
                     icon: Icons.list_rounded,
                     onPressed: () {
                       setState(() {
@@ -464,10 +465,10 @@ class _ScholarityTabPageState extends State<ScholarityTabPage> {
   }
 }
 
-class ScholarityLoading extends StatelessWidget {
+class StorybridgeLoading extends StatelessWidget {
   final bool white;
   // constructor
-  const ScholarityLoading({Key? key, this.white = false}) : super(key: key);
+  const StorybridgeLoading({Key? key, this.white = false}) : super(key: key);
 
   // main build function
   @override
@@ -477,12 +478,13 @@ class ScholarityLoading extends StatelessWidget {
             height: 20,
             width: 20,
             child: CircularProgressIndicator(
-                color:
-                    white ? Colors.white : scholarity_color.scholarityAccent)));
+                color: white
+                    ? Colors.white
+                    : storybridge_color.storybridgeAccent)));
   }
 }
 
-class ScholaritySideBarButton extends StatelessWidget {
+class StorybridgeSideBarButton extends StatelessWidget {
   // members of MyWidget
   final String label;
   final IconData icon;
@@ -492,7 +494,7 @@ class ScholaritySideBarButton extends StatelessWidget {
   final bool isDisabled;
 
   // constructor
-  const ScholaritySideBarButton({
+  const StorybridgeSideBarButton({
     Key? key,
     required this.label,
     required this.icon,
@@ -514,7 +516,7 @@ class ScholaritySideBarButton extends StatelessWidget {
         style: ButtonStyle(
             backgroundColor: selected
                 ? MaterialStateProperty.all<Color>(
-                    scholarity_color.scholarityAccentBackground)
+                    storybridge_color.storybridgeAccentBackground)
                 : null,
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
@@ -526,9 +528,9 @@ class ScholaritySideBarButton extends StatelessWidget {
             Icon(icon,
                 color: !isDisabled
                     ? (selected
-                        ? scholarity_color.scholarityAccent
-                        : scholarity_color.grey)
-                    : scholarity_color.lightGrey,
+                        ? storybridge_color.storybridgeAccent
+                        : storybridge_color.grey)
+                    : storybridge_color.lightGrey,
                 size: 22),
             Flexible(
               child: Padding(
@@ -537,14 +539,14 @@ class ScholaritySideBarButton extends StatelessWidget {
                   children: [
                     Container(
                       constraints: const BoxConstraints(maxWidth: 150),
-                      child: ScholarityTextH5(label,
+                      child: StorybridgeTextH5(label,
                           red: selected, bold: isSpecial, dim: isDisabled),
                     ),
                     const SizedBox(width: 10),
                     !isDisabled
                         ? Container()
                         : Icon(Icons.lock_rounded,
-                            color: scholarity_color.lightGrey, size: 22),
+                            color: storybridge_color.lightGrey, size: 22),
                   ],
                 ),
               ),
@@ -556,17 +558,17 @@ class ScholaritySideBarButton extends StatelessWidget {
 }
 
 // myPage class which creates a state on call
-class ScholarityPageLoading extends StatefulWidget {
+class StorybridgePageLoading extends StatefulWidget {
   final bool useAltStyle;
-  const ScholarityPageLoading({Key? key, this.useAltStyle = false})
+  const StorybridgePageLoading({Key? key, this.useAltStyle = false})
       : super(key: key);
 
   @override
-  _ScholarityPageLoadingState createState() => _ScholarityPageLoadingState();
+  _StorybridgePageLoadingState createState() => _StorybridgePageLoadingState();
 }
 
 // myPage state
-class _ScholarityPageLoadingState extends State<ScholarityPageLoading>
+class _StorybridgePageLoadingState extends State<StorybridgePageLoading>
     with SingleTickerProviderStateMixin {
   AnimationController? _animationController;
   Animation? _animation;
@@ -708,15 +710,15 @@ class _ScholarityPageLoadingState extends State<ScholarityPageLoading>
                 _animation!.value % 1 + 0.5,
                 _animation!.value % 1 + 1,
               ], colors: [
-                scholarity_color.backgroundDim,
+                storybridge_color.backgroundDim,
                 !widget.useAltStyle
-                    ? scholarity_color.backgroundLoading
-                    : scholarity_color.scholarityAccentLight,
-                scholarity_color.backgroundDim,
+                    ? storybridge_color.backgroundLoading
+                    : storybridge_color.storybridgeAccentLight,
+                storybridge_color.backgroundDim,
                 !widget.useAltStyle
-                    ? scholarity_color.backgroundLoading
-                    : scholarity_color.scholarityAccentLight,
-                scholarity_color.backgroundDim,
+                    ? storybridge_color.backgroundLoading
+                    : storybridge_color.storybridgeAccentLight,
+                storybridge_color.backgroundDim,
               ]).createShader(rect);
             },
           ),
@@ -727,18 +729,18 @@ class _ScholarityPageLoadingState extends State<ScholarityPageLoading>
 }
 
 // myPage class which creates a state on call
-class ScholarityBoxLoading extends StatefulWidget {
+class StorybridgeBoxLoading extends StatefulWidget {
   final double height, width;
-  const ScholarityBoxLoading(
+  const StorybridgeBoxLoading(
       {Key? key, required this.height, required this.width})
       : super(key: key);
 
   @override
-  _ScholarityBoxLoadingState createState() => _ScholarityBoxLoadingState();
+  _StorybridgeBoxLoadingState createState() => _StorybridgeBoxLoadingState();
 }
 
 // myPage state
-class _ScholarityBoxLoadingState extends State<ScholarityBoxLoading>
+class _StorybridgeBoxLoadingState extends State<StorybridgeBoxLoading>
     with SingleTickerProviderStateMixin {
   AnimationController? _animationController;
   Animation? _animation;
@@ -798,11 +800,11 @@ class _ScholarityBoxLoadingState extends State<ScholarityBoxLoading>
                 _animation!.value % 1 + 0.5,
                 _animation!.value % 1 + 1,
               ], colors: [
-                scholarity_color.backgroundDim,
-                scholarity_color.backgroundLoading,
-                scholarity_color.backgroundDim,
-                scholarity_color.backgroundLoading,
-                scholarity_color.backgroundDim,
+                storybridge_color.backgroundDim,
+                storybridge_color.backgroundLoading,
+                storybridge_color.backgroundDim,
+                storybridge_color.backgroundLoading,
+                storybridge_color.backgroundDim,
               ]).createShader(rect);
             },
           ),
@@ -812,9 +814,9 @@ class _ScholarityBoxLoadingState extends State<ScholarityBoxLoading>
   }
 }
 
-class _ScholarityDesktopWarning extends StatelessWidget {
+class _StorybridgeDesktopWarning extends StatelessWidget {
   // constructor
-  const _ScholarityDesktopWarning({Key? key}) : super(key: key);
+  const _StorybridgeDesktopWarning({Key? key}) : super(key: key);
 
   // main build function
   @override
@@ -825,12 +827,12 @@ class _ScholarityDesktopWarning extends StatelessWidget {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ScholarityTextBasic("Please use a desktop",
-                style: scholarityTextH2Style, textAlign: TextAlign.center),
+            StorybridgeTextBasic("Please use a desktop",
+                style: storybridgeTextH2Style, textAlign: TextAlign.center),
             const SizedBox(height: 20),
-            ScholarityTextBasic(
-                "Scholarity Teaching console does not work with a mobile phone.",
-                style: scholarityTextH2BStyle,
+            StorybridgeTextBasic(
+                "Storybridge Teaching console does not work with a mobile phone.",
+                style: storybridgeTextH2BStyle,
                 textAlign: TextAlign.center),
           ],
         )));

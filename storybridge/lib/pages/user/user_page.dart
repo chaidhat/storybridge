@@ -5,7 +5,7 @@ import 'package:mooc/pages/user/user_settings_page.dart';
 import 'package:mooc/pages/user/user_support_page.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/scholarity.dart'; // Scholarity
+import 'package:mooc/storybridge.dart'; // Storybridge
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -89,11 +89,11 @@ class _UserViewerPageState extends State<_UserViewerPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityScaffold(
+    return StorybridgeScaffold(
       hasAppbar: false,
       body: [],
       tabNames: [
-        ScholarityTabHeader(
+        StorybridgeTabHeader(
             tabName: "Profile", tabIcon: Icons.stacked_line_chart_rounded),
       ],
       tabs: [
@@ -117,7 +117,7 @@ class _UserOwnerPage extends StatefulWidget {
 
 // myPage state
 class _UserOwnerPageState extends State<_UserOwnerPage> {
-  ScholarityTabHeader myFleetTab = ScholarityTabHeader(
+  StorybridgeTabHeader myFleetTab = StorybridgeTabHeader(
       tabIcon: Icons.abc, tabName: "Flight plan", isVisible: false);
   @override
   void initState() {
@@ -153,7 +153,7 @@ class _UserOwnerPageState extends State<_UserOwnerPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return ScholarityScaffold(
+    return StorybridgeScaffold(
         startingTab: widget.startingTab,
         hasAppbar: false,
         body: [],
@@ -167,7 +167,7 @@ class _UserOwnerPageState extends State<_UserOwnerPage> {
         tabSuffix: Row(
           children: [
             Expanded(child: Container()),
-            ScholarityAccountIndicator(organizationId: getOrganizationId()),
+            StorybridgeAccountIndicator(organizationId: getOrganizationId()),
           ],
         ),
         tabs: [
@@ -183,16 +183,16 @@ class _UserOwnerPageState extends State<_UserOwnerPage> {
           UserSupportPage(userId: widget.userId),
         ],
         tabNames: [
-          ScholarityTabHeader(
+          StorybridgeTabHeader(
               tabName: "Profile", tabIcon: Icons.stacked_line_chart_rounded),
           myFleetTab,
-          ScholarityTabHeader(
+          StorybridgeTabHeader(
               tabName: "My courses", tabIcon: Icons.stacked_line_chart_rounded),
-          ScholarityTabHeader(
+          StorybridgeTabHeader(
               tabName: "My audits", tabIcon: Icons.stacked_line_chart_rounded),
-          ScholarityTabHeader(
+          StorybridgeTabHeader(
               tabName: "My files", tabIcon: Icons.stacked_line_chart_rounded),
-          ScholarityTabHeader(
+          StorybridgeTabHeader(
               tabName: "Support", tabIcon: Icons.stacked_line_chart_rounded),
         ]);
   }
@@ -237,15 +237,15 @@ class _OrganizationNameState extends State<OrganizationName> {
 
             // custom styling
             if (_organizationName.length > 35) {
-              courseNameTextFontSize = scholarityTextH2BStyle.fontSize! - 2;
+              courseNameTextFontSize = storybridgeTextH2BStyle.fontSize! - 2;
             } else if (_organizationName.length < 20) {
-              courseNameTextFontSize = scholarityTextH2BStyle.fontSize! + 4;
+              courseNameTextFontSize = storybridgeTextH2BStyle.fontSize! + 4;
             } else {
-              courseNameTextFontSize = scholarityTextH2BStyle.fontSize!;
+              courseNameTextFontSize = storybridgeTextH2BStyle.fontSize!;
             }
             TextStyle courseNameStyle = TextStyle(
-                color: scholarityTextH2BStyle.color,
-                fontWeight: scholarityTextH2BStyle.fontWeight,
+                color: storybridgeTextH2BStyle.color,
+                fontWeight: storybridgeTextH2BStyle.fontWeight,
                 fontSize: courseNameTextFontSize);
 
             return IntrinsicWidth(
@@ -267,7 +267,7 @@ class _OrganizationNameState extends State<OrganizationName> {
                               organizationId: widget.organizationId,
                               child: Builder(builder: (context) {
                                 if (!profilePictureController.hasPicture) {
-                                  return ScholarityTextBasic(_organizationName,
+                                  return StorybridgeTextBasic(_organizationName,
                                       style: courseNameStyle);
                                 } else {
                                   return Container();
@@ -281,7 +281,7 @@ class _OrganizationNameState extends State<OrganizationName> {
               ),
             );
           } else {
-            return const ScholarityBoxLoading(height: 25, width: 200);
+            return const StorybridgeBoxLoading(height: 25, width: 200);
           }
         });
   }
