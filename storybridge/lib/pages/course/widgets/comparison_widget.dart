@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/error_service.dart' as error_service;
 
@@ -28,8 +28,8 @@ class EditorWidgetMetadataPopup extends StatefulWidget {
 }
 
 class _EditorWidgetMetadataPopupState extends State<EditorWidgetMetadataPopup> {
-  StorybridgeTextFieldController _showIfFormulaController =
-      StorybridgeTextFieldController();
+  ScholarityTextFieldController _showIfFormulaController =
+      ScholarityTextFieldController();
 
   void _save() {
     widget.controller.metadata.showIfs = _showIfFormulaController.text;
@@ -57,33 +57,33 @@ class _EditorWidgetMetadataPopupState extends State<EditorWidgetMetadataPopup> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StorybridgeIconButton(
+          ScholarityIconButton(
               icon: Icons.close,
               onPressed: () {
                 Navigator.pop(context);
               }),
           const SizedBox(height: 10),
-          const StorybridgeTextH2B("Show If"),
-          StorybridgeFormulaField(
+          const ScholarityTextH2B("Show If"),
+          ScholarityFormulaField(
             controller: _showIfFormulaController,
           ),
-          StorybridgeButton(
+          ScholarityButton(
             text: "Save",
             onPressed: () {
               _save();
             },
           ),
-          const StorybridgeDivider(),
-          const StorybridgeTextH2B("Widget metadata"),
-          StorybridgeTextP("wuid: ${widget.controller.metadata.wuid}"),
+          const ScholarityDivider(),
+          const ScholarityTextH2B("Widget metadata"),
+          ScholarityTextP("wuid: ${widget.controller.metadata.wuid}"),
           /*
           FutureBuilder(
               future: _load(),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (!snapshot.hasData) {
-                  return const StorybridgeLoading();
+                  return const ScholarityLoading();
                 }
-                return StorybridgeFormulaField();
+                return ScholarityFormulaField();
               })
               */
         ],
@@ -92,19 +92,18 @@ class _EditorWidgetMetadataPopupState extends State<EditorWidgetMetadataPopup> {
   }
 }
 
-class StorybridgeFormulaField extends StatefulWidget {
+class ScholarityFormulaField extends StatefulWidget {
   // members of MyWidget
-  final StorybridgeTextFieldController controller;
+  final ScholarityTextFieldController controller;
 
-  const StorybridgeFormulaField({Key? key, required this.controller})
+  const ScholarityFormulaField({Key? key, required this.controller})
       : super(key: key);
 
   @override
-  State<StorybridgeFormulaField> createState() =>
-      _StorybridgeFormulaFieldState();
+  State<ScholarityFormulaField> createState() => _ScholarityFormulaFieldState();
 }
 
-class _StorybridgeFormulaFieldState extends State<StorybridgeFormulaField> {
+class _ScholarityFormulaFieldState extends State<ScholarityFormulaField> {
   bool _isLoading = false;
   bool _isGoodSyntax = false;
   String _message = "";
@@ -120,7 +119,7 @@ class _StorybridgeFormulaFieldState extends State<StorybridgeFormulaField> {
         _isGoodSyntax = true;
         _isLoading = false;
       });
-    } on error_service.StorybridgeException catch (err) {
+    } on error_service.ScholarityException catch (err) {
       setState(() {
         _message = err.message;
         _isLoading = false;
@@ -149,7 +148,7 @@ class _StorybridgeFormulaFieldState extends State<StorybridgeFormulaField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _message.isNotEmpty ? StorybridgeTextP(_message) : Container(),
+        _message.isNotEmpty ? ScholarityTextP(_message) : Container(),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -157,16 +156,16 @@ class _StorybridgeFormulaFieldState extends State<StorybridgeFormulaField> {
               child: !_isLoading
                   ? SizedBox(
                       height: 120,
-                      child: StorybridgeTextField(
+                      child: ScholarityTextField(
                         controller: widget.controller,
                         label: "formula",
                         isLarge: true,
                       ),
                     )
-                  : const StorybridgeBoxLoading(height: 100, width: 300),
+                  : const ScholarityBoxLoading(height: 100, width: 300),
             ),
             const SizedBox(width: 10),
-            StorybridgeIconButton(
+            ScholarityIconButton(
               icon: _isGoodSyntax ? Icons.check : Icons.playlist_add_check,
               onPressed: () {
                 _verify();

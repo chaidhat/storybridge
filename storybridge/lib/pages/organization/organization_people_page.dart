@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -18,8 +18,8 @@ class OrganizationPeoplePage extends StatefulWidget {
 
 // myPage state
 class _OrganizationPeoplePageState extends State<OrganizationPeoplePage> {
-  final StorybridgeTabPageController _tabPageController =
-      StorybridgeTabPageController();
+  final ScholarityTabPageController _tabPageController =
+      ScholarityTabPageController();
   int _selectedPage = 0;
 
   @override
@@ -35,12 +35,12 @@ class _OrganizationPeoplePageState extends State<OrganizationPeoplePage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(
+    return ScholarityTabPage(
         tabPageController: _tabPageController,
         hasVeryReducedPadding: true,
         sideBar: [
           const SizedBox(height: 80),
-          StorybridgeSideBarButton(
+          ScholaritySideBarButton(
               label: "Users",
               icon: Icons.people_outlined,
               onPressed: () {
@@ -53,7 +53,7 @@ class _OrganizationPeoplePageState extends State<OrganizationPeoplePage> {
                 });
               },
               selected: _selectedPage == 0),
-          StorybridgeSideBarButton(
+          ScholaritySideBarButton(
               label: "Teachers",
               icon: Icons.school_outlined,
               onPressed: () {
@@ -66,8 +66,8 @@ class _OrganizationPeoplePageState extends State<OrganizationPeoplePage> {
                 });
               },
               selected: _selectedPage == 1),
-          const StorybridgeDivider(),
-          StorybridgeSideBarButton(
+          const ScholarityDivider(),
+          ScholaritySideBarButton(
               label: "Coordinator Groups",
               icon: Icons.workspaces_rounded,
               onPressed: () {
@@ -80,7 +80,7 @@ class _OrganizationPeoplePageState extends State<OrganizationPeoplePage> {
                 });
               },
               selected: _selectedPage == 2),
-          StorybridgeSideBarButton(
+          ScholaritySideBarButton(
               label: "Coordinators",
               icon: Icons.workspaces_outline,
               onPressed: () {
@@ -191,11 +191,11 @@ class _OrganizationPeopleStudentPageState
         future: _load(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
-            List<StorybridgeTableHeader> headers = [
-              StorybridgeTableHeader(key: "email", label: "Email", width: 300),
-              StorybridgeTableHeader(key: "firstName", label: "First name"),
-              StorybridgeTableHeader(key: "lastName", label: "Last name"),
-              StorybridgeTableHeader(
+            List<ScholarityTableHeader> headers = [
+              ScholarityTableHeader(key: "email", label: "Email", width: 300),
+              ScholarityTableHeader(key: "firstName", label: "First name"),
+              ScholarityTableHeader(key: "lastName", label: "Last name"),
+              ScholarityTableHeader(
                   key: "coordinatorGrouoName", label: "Group"),
             ];
             for (String v in _extraUserDataFieldHeaders) {
@@ -205,7 +205,7 @@ class _OrganizationPeopleStudentPageState
               } else if (v == "employeeId") {
                 label = "employee id";
               }
-              headers.add(StorybridgeTableHeader(key: v, label: label));
+              headers.add(ScholarityTableHeader(key: v, label: label));
             }
             return Column(
               children: [
@@ -214,7 +214,7 @@ class _OrganizationPeopleStudentPageState
                     Expanded(
                       child: Container(),
                     ),
-                    StorybridgeButton(
+                    ScholarityButton(
                       icon: Icons.edit_rounded,
                       text: "Edit student fields",
                       onPressed: () {
@@ -225,7 +225,7 @@ class _OrganizationPeopleStudentPageState
                       organizationId: widget.organizationId,
                     ),
                     /*
-                    StorybridgeButton(
+                    ScholarityButton(
                       invertedColor: true,
                       icon: Icons.add,
                       text: "Pre-Register Students",
@@ -234,14 +234,14 @@ class _OrganizationPeopleStudentPageState
                     */
                   ],
                 ),
-                StorybridgeTable(
+                ScholarityTable(
                   data: snapshot.data,
                   advancedHeaders: headers,
                   onView: (dynamic pk, dynamic data, int index) {
                     Navigator.pushNamed(context, '/user?id=${data["userId"]}');
                   },
                   extraButtons: [
-                    StorybridgeTableButton(
+                    ScholarityTableButton(
                         buttonText: "Edit",
                         onPressed: (dynamic pk, dynamic data) {
                           Navigator.pushNamed(context,
@@ -252,7 +252,7 @@ class _OrganizationPeopleStudentPageState
               ],
             );
           } else {
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
         });
   }
@@ -295,43 +295,43 @@ class _OrganizationPeopleTeacherPageState
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             return Center(
-              child: StorybridgeTable(
+              child: ScholarityTable(
                 data: snapshot.data,
                 advancedHeaders: [
-                  StorybridgeTableHeader(
+                  ScholarityTableHeader(
                       key: "email", label: "Email", width: 300),
-                  StorybridgeTableHeader(key: "firstName", label: "First name"),
-                  StorybridgeTableHeader(key: "lastName", label: "Last name"),
-                  StorybridgeTableHeader(
+                  ScholarityTableHeader(key: "firstName", label: "First name"),
+                  ScholarityTableHeader(key: "lastName", label: "Last name"),
+                  ScholarityTableHeader(
                       key: "canAnalyzeAll",
                       label: "Can analyze?",
-                      type: StorybridgeTableHeaderType.boolean,
+                      type: ScholarityTableHeaderType.boolean,
                       width: 80),
-                  StorybridgeTableHeader(
+                  ScholarityTableHeader(
                       key: "canEditAll",
                       label: "Can edit?",
-                      type: StorybridgeTableHeaderType.boolean,
+                      type: ScholarityTableHeaderType.boolean,
                       width: 80),
-                  StorybridgeTableHeader(
+                  ScholarityTableHeader(
                       key: "canTeachAll",
                       label: "Can teach?",
-                      type: StorybridgeTableHeaderType.boolean,
+                      type: ScholarityTableHeaderType.boolean,
                       width: 80),
-                  StorybridgeTableHeader(
+                  ScholarityTableHeader(
                       key: "isAdmin",
                       label: "Is admin?",
-                      type: StorybridgeTableHeaderType.boolean,
+                      type: ScholarityTableHeaderType.boolean,
                       width: 80),
-                  StorybridgeTableHeader(
+                  ScholarityTableHeader(
                       key: "isOwner",
                       label: "Is owner?",
-                      type: StorybridgeTableHeaderType.boolean,
+                      type: ScholarityTableHeaderType.boolean,
                       width: 80),
                 ],
               ),
             );
           } else {
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
         });
   }
@@ -419,7 +419,7 @@ class _OrganizationPeopleCoordinatorGroupPageState
                     Expanded(
                       child: Container(),
                     ),
-                    StorybridgeButton(
+                    ScholarityButton(
                       invertedColor: true,
                       icon: Icons.add,
                       text: "Add Coordinator Group",
@@ -431,12 +431,12 @@ class _OrganizationPeopleCoordinatorGroupPageState
                 ),
                 const SizedBox(height: 20),
                 Center(
-                  child: StorybridgeTable(
+                  child: ScholarityTable(
                     data: snapshot.data,
                     advancedHeaders: [
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                           key: "coordinatorGroupName", label: "Group name"),
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                           key: "notificationEmail", label: "Email"),
                     ],
                     onView: (var pk, dynamic data, int i) {
@@ -453,7 +453,7 @@ class _OrganizationPeopleCoordinatorGroupPageState
               ],
             );
           } else {
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
         });
   }
@@ -504,14 +504,14 @@ class _OrganizationPeopleCoordinatorPageState
   }
 
   Future<dynamic> _assignCoordinator() async {
-    StorybridgeTextFieldController coordinatorGroupController =
-        StorybridgeTextFieldController();
-    StorybridgeTextFieldController userController =
-        StorybridgeTextFieldController();
+    ScholarityTextFieldController coordinatorGroupController =
+        ScholarityTextFieldController();
+    ScholarityTextFieldController userController =
+        ScholarityTextFieldController();
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-                child: StorybridgeAlertDialog(
+        builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+                child: ScholarityAlertDialog(
               content: SingleChildScrollView(
                 child: SizedBox(
                   width: 500,
@@ -520,12 +520,12 @@ class _OrganizationPeopleCoordinatorPageState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 10),
-                      const StorybridgeTextH2B(
+                      const ScholarityTextH2B(
                           "Assign Coordinator to Coordinator Group"),
                       const SizedBox(height: 20),
                       SizedBox(
                         width: 300,
-                        child: StorybridgeDropdown(
+                        child: ScholarityDropdown(
                             label: "Coordinator",
                             controller: userController,
                             dropdownTypes: _users),
@@ -533,7 +533,7 @@ class _OrganizationPeopleCoordinatorPageState
                       const SizedBox(height: 20),
                       SizedBox(
                         width: 300,
-                        child: StorybridgeDropdown(
+                        child: ScholarityDropdown(
                             label: "Coordinator Group",
                             controller: coordinatorGroupController,
                             dropdownTypes: _coordinatorGroups),
@@ -541,7 +541,7 @@ class _OrganizationPeopleCoordinatorPageState
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          StorybridgeButton(
+                          ScholarityButton(
                             padding: false,
                             text: "Assign",
                             invertedColor: true,
@@ -564,7 +564,7 @@ class _OrganizationPeopleCoordinatorPageState
                             },
                           ),
                           const SizedBox(width: 10),
-                          StorybridgeButton(
+                          ScholarityButton(
                               padding: false,
                               text: "Cancel",
                               onPressed: () {
@@ -613,7 +613,7 @@ class _OrganizationPeopleCoordinatorPageState
                     Expanded(
                       child: Container(),
                     ),
-                    StorybridgeButton(
+                    ScholarityButton(
                       invertedColor: true,
                       icon: Icons.sync_alt_rounded,
                       text: "Assign Coordinators",
@@ -625,18 +625,18 @@ class _OrganizationPeopleCoordinatorPageState
                 ),
                 const SizedBox(height: 20),
                 Center(
-                  child: StorybridgeTable(
+                  child: ScholarityTable(
                     data: snapshot.data,
                     onDelete: (var pk, dynamic data, int i) {
                       _deassignCoordinator(pk, data);
                     },
                     advancedHeaders: [
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                           key: "coordinatorGroupName", label: "Group name"),
-                      StorybridgeTableHeader(key: "email", label: "Email"),
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(key: "email", label: "Email"),
+                      ScholarityTableHeader(
                           key: "firstName", label: "First name"),
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                           key: "lastName", label: "Last name"),
                     ],
                   ),
@@ -644,7 +644,7 @@ class _OrganizationPeopleCoordinatorPageState
               ],
             );
           } else {
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
         });
   }
@@ -689,12 +689,12 @@ class _OrganizationPeopleCoordinatorGroupsStudentPopupState
   }
 
   Future<dynamic> _assignUser() async {
-    StorybridgeTextFieldController userController =
-        StorybridgeTextFieldController();
+    ScholarityTextFieldController userController =
+        ScholarityTextFieldController();
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-                child: StorybridgeAlertDialog(
+        builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+                child: ScholarityAlertDialog(
               content: SingleChildScrollView(
                 child: SizedBox(
                   width: 500,
@@ -703,10 +703,10 @@ class _OrganizationPeopleCoordinatorGroupsStudentPopupState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 10),
-                      StorybridgeTextH2B(
+                      ScholarityTextH2B(
                           "Assign student to ${Uri.decodeComponent(widget.coordinatorGroupName)}"),
                       const SizedBox(height: 20),
-                      StorybridgeDropdown(
+                      ScholarityDropdown(
                         label: "Email",
                         dropdownTypes: _users,
                         controller: userController,
@@ -714,7 +714,7 @@ class _OrganizationPeopleCoordinatorGroupsStudentPopupState
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          StorybridgeButton(
+                          ScholarityButton(
                             padding: false,
                             text: "Save",
                             invertedColor: true,
@@ -733,7 +733,7 @@ class _OrganizationPeopleCoordinatorGroupsStudentPopupState
                             },
                           ),
                           const SizedBox(width: 10),
-                          StorybridgeButton(
+                          ScholarityButton(
                               padding: false,
                               text: "Cancel",
                               onPressed: () {
@@ -757,8 +757,8 @@ class _OrganizationPeopleCoordinatorGroupsStudentPopupState
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeAlertDialogWrapper(
-        child: StorybridgeAlertDialog(
+    return ScholarityAlertDialogWrapper(
+        child: ScholarityAlertDialog(
       content: SingleChildScrollView(
         child: SizedBox(
           width: 800,
@@ -766,13 +766,13 @@ class _OrganizationPeopleCoordinatorGroupsStudentPopupState
               future: _load(),
               builder: (context, AsyncSnapshot<dynamic> snapshot) {
                 if (!snapshot.hasData) {
-                  return const StorybridgeBoxLoading(height: 50, width: 200);
+                  return const ScholarityBoxLoading(height: 50, width: 200);
                 }
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StorybridgeIconButton(
+                    ScholarityIconButton(
                         icon: Icons.close,
                         onPressed: () {
                           Navigator.pop(context);
@@ -780,10 +780,10 @@ class _OrganizationPeopleCoordinatorGroupsStudentPopupState
                     const SizedBox(height: 10),
                     Row(
                       children: [
-                        StorybridgeTextH2B(
+                        ScholarityTextH2B(
                             "Students For ${Uri.decodeComponent(widget.coordinatorGroupName)}"),
                         Expanded(child: Container()),
-                        StorybridgeButton(
+                        ScholarityButton(
                           text: "Assign User",
                           icon: Icons.sync_alt_rounded,
                           invertedColor: true,
@@ -795,14 +795,14 @@ class _OrganizationPeopleCoordinatorGroupsStudentPopupState
                     ),
                     const SizedBox(height: 20),
                     Center(
-                      child: StorybridgeTable(
+                      child: ScholarityTable(
                         data: snapshot.data,
                         advancedHeaders: [
-                          StorybridgeTableHeader(key: "email", label: "Email"),
-                          StorybridgeTableHeader(key: "email", label: "Email"),
-                          StorybridgeTableHeader(
+                          ScholarityTableHeader(key: "email", label: "Email"),
+                          ScholarityTableHeader(key: "email", label: "Email"),
+                          ScholarityTableHeader(
                               key: "firstName", label: "First name"),
-                          StorybridgeTableHeader(
+                          ScholarityTableHeader(
                               key: "lastName", label: "Last name"),
                         ],
                         onDelete: (var pk, dynamic va, int i) {
@@ -850,8 +850,8 @@ class _OrganizationPagePeopleStudentFieldsPopupState
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeAlertDialogWrapper(
-        child: StorybridgeAlertDialog(
+    return ScholarityAlertDialogWrapper(
+        child: ScholarityAlertDialog(
       content: SingleChildScrollView(
         child: SizedBox(
           width: 500,
@@ -860,13 +860,13 @@ class _OrganizationPagePeopleStudentFieldsPopupState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              const StorybridgeTextH2B("Edit Student Fields"),
+              const ScholarityTextH2B("Edit Student Fields"),
               Row(
                 children: [
                   Expanded(
                     child: Container(),
                   ),
-                  StorybridgeButton(
+                  ScholarityButton(
                     icon: Icons.add,
                     invertedColor: true,
                     text: "Add Student Fields",
@@ -881,7 +881,7 @@ class _OrganizationPagePeopleStudentFieldsPopupState
                   ),
                 ],
               ),
-              StorybridgeTable(
+              ScholarityTable(
                 onEdit: (var pk, var data, int i) {
                   setState(() {
                     widget.data["data"][i]["fieldName"] = data["fieldName"];
@@ -894,11 +894,11 @@ class _OrganizationPagePeopleStudentFieldsPopupState
                   });
                 },
                 advancedHeaders: [
-                  StorybridgeTableHeader(key: "fieldName", label: "Field name"),
-                  StorybridgeTableHeader(
+                  ScholarityTableHeader(key: "fieldName", label: "Field name"),
+                  ScholarityTableHeader(
                     key: "fieldType",
                     label: "Field type",
-                    type: StorybridgeTableHeaderType.dropdown,
+                    type: ScholarityTableHeaderType.dropdown,
                     dropdownList: ["Text", "External Certificate"],
                   ),
                 ],
@@ -907,7 +907,7 @@ class _OrganizationPagePeopleStudentFieldsPopupState
               const SizedBox(height: 20),
               Row(
                 children: [
-                  StorybridgeButton(
+                  ScholarityButton(
                     padding: false,
                     text: "Save",
                     invertedColor: true,
@@ -921,7 +921,7 @@ class _OrganizationPagePeopleStudentFieldsPopupState
                     },
                   ),
                   const SizedBox(width: 10),
-                  StorybridgeButton(
+                  ScholarityButton(
                       padding: false,
                       text: "Cancel",
                       onPressed: () {

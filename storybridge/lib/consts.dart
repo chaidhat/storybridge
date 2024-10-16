@@ -20,7 +20,7 @@ String getServerUriScheme() {
 
 String getServerUriHost() {
   if (kReleaseMode || OVERRIDE_USE_RELEASE) {
-    return "server-singapore.Storybridge.io";
+    return "server-singapore.scholarity.io";
   } else {
     return "localhost";
   }

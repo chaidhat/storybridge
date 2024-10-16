@@ -1,23 +1,23 @@
 import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 import 'package:mooc/services/networking_service.dart' as networking_service;
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
 import 'package:mooc/services/error_service.dart' as error_service;
 
-enum StorybridgeContentType { video, image }
+enum ScholarityContentType { video, image }
 
 // myPage class which creates a state on call
-class StorybridgeContentUploader extends StatefulWidget {
+class ScholarityContentUploader extends StatefulWidget {
   final Function(int) onContentUploading;
   final Function() onContentUploaded;
   final int courseId, courseElementId, organizationId;
-  final StorybridgeContentType contentType;
-  const StorybridgeContentUploader(
+  final ScholarityContentType contentType;
+  const ScholarityContentUploader(
       {Key? key,
       required this.onContentUploading,
       required this.onContentUploaded,
@@ -28,13 +28,12 @@ class StorybridgeContentUploader extends StatefulWidget {
       : super(key: key);
 
   @override
-  _StorybridgeContentUploaderState createState() =>
-      _StorybridgeContentUploaderState();
+  _ScholarityContentUploaderState createState() =>
+      _ScholarityContentUploaderState();
 }
 
 // myPage state
-class _StorybridgeContentUploaderState
-    extends State<StorybridgeContentUploader> {
+class _ScholarityContentUploaderState extends State<ScholarityContentUploader> {
   FilePickerResult? _result;
   bool _isCreatingContent = false;
   @override
@@ -54,12 +53,12 @@ class _StorybridgeContentUploaderState
     int contentId;
     Map<String, dynamic> response;
     switch (widget.contentType) {
-      case StorybridgeContentType.video:
+      case ScholarityContentType.video:
         contentId = await networking_api_service.createVideo(
             courseId: widget.courseId, courseElementId: widget.courseElementId);
         response = await networking_api_service.getVideo(videoId: contentId);
         break;
-      case StorybridgeContentType.image:
+      case ScholarityContentType.image:
         contentId = await networking_api_service.createImage(
             courseId: widget.courseId,
             courseElementId: widget.courseElementId,
@@ -82,7 +81,7 @@ class _StorybridgeContentUploaderState
 
   void selectFiles() async {
     switch (widget.contentType) {
-      case StorybridgeContentType.video:
+      case ScholarityContentType.video:
         const List<String> supported_video_exts = [
           'mp4',
           'mkv',
@@ -135,7 +134,7 @@ class _StorybridgeContentUploaderState
           _result = null;
         }
         break;
-      case StorybridgeContentType.image:
+      case ScholarityContentType.image:
         const List<String> supported_img_exts = [
           'png',
           'jpg',
@@ -182,8 +181,8 @@ class _StorybridgeContentUploaderState
     error_service.checkAlerts(context);
     return Container(
         decoration: BoxDecoration(
-            color: Storybridge_color.backgroundDim,
-            border: Border.all(color: Storybridge_color.borderColor),
+            color: scholarity_color.backgroundDim,
+            border: Border.all(color: scholarity_color.borderColor),
             borderRadius: BorderRadius.circular(8.0)),
         child: AspectRatio(
           aspectRatio: 4 / 3,
@@ -193,18 +192,18 @@ class _StorybridgeContentUploaderState
                   children: [
                     const SizedBox(height: 40),
                     Icon(Icons.file_upload_outlined,
-                        size: 100, color: Storybridge_color.grey),
+                        size: 100, color: scholarity_color.grey),
                     const SizedBox(height: 10),
                     _result == null
-                        ? StorybridgeTextH2B(
-                            "Upload Your ${widget.contentType == StorybridgeContentType.image ? "Image" : "Video"}")
+                        ? ScholarityTextH2B(
+                            "Upload Your ${widget.contentType == ScholarityContentType.image ? "Image" : "Video"}")
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(Icons.file_copy_rounded,
-                                  color: Storybridge_color.grey),
+                                  color: scholarity_color.grey),
                               const SizedBox(width: 5),
-                              StorybridgeTextH2B(_result!.names.first!),
+                              ScholarityTextH2B(_result!.names.first!),
                             ],
                           ),
                     const SizedBox(height: 30),
@@ -212,13 +211,13 @@ class _StorybridgeContentUploaderState
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         _result != null
-                            ? StorybridgeButton(
+                            ? ScholarityButton(
                                 text: "Upload",
                                 invertedColor: true,
                                 onPressed: uploadVideo,
                               )
                             : Container(),
-                        StorybridgeButton(
+                        ScholarityButton(
                           text:
                               _result == null ? "Select File" : "Reselect File",
                           darkenBackground: true,
@@ -229,28 +228,28 @@ class _StorybridgeContentUploaderState
                     ),
                   ],
                 )
-              : const StorybridgeLoading(),
+              : const ScholarityLoading(),
         ));
   }
 }
 
 // myPage class which creates a state on call
-class StorybridgeContentUploadProgess extends StatefulWidget {
+class ScholarityContentUploadProgess extends StatefulWidget {
   final String contentDataId;
   final Function() onVideoUploaded;
 
-  const StorybridgeContentUploadProgess(
+  const ScholarityContentUploadProgess(
       {Key? key, required this.contentDataId, required this.onVideoUploaded})
       : super(key: key);
 
   @override
-  _StorybridgeContentUploadProgessState createState() =>
-      _StorybridgeContentUploadProgessState();
+  _ScholarityContentUploadProgessState createState() =>
+      _ScholarityContentUploadProgessState();
 }
 
 // myPage state
-class _StorybridgeContentUploadProgessState
-    extends State<StorybridgeContentUploadProgess> {
+class _ScholarityContentUploadProgessState
+    extends State<ScholarityContentUploadProgess> {
   bool _stillGo = true;
   double _videoProgress = 0;
   bool _isCompressing = false;
@@ -288,8 +287,8 @@ class _StorybridgeContentUploadProgessState
     );
     return Container(
         decoration: BoxDecoration(
-            color: Storybridge_color.backgroundDim,
-            border: Border.all(color: Storybridge_color.borderColor),
+            color: scholarity_color.backgroundDim,
+            border: Border.all(color: scholarity_color.borderColor),
             borderRadius: BorderRadius.circular(8.0)),
         child: AspectRatio(
           aspectRatio: 4 / 3,
@@ -298,9 +297,9 @@ class _StorybridgeContentUploadProgessState
             children: [
               const SizedBox(height: 40),
               Icon(Icons.file_upload_outlined,
-                  size: 100, color: Storybridge_color.grey),
+                  size: 100, color: scholarity_color.grey),
               const SizedBox(height: 10),
-              StorybridgeTextH2B(
+              ScholarityTextH2B(
                   "${(_isCompressing) ? 'Compressing' : 'Uploading'} ${_videoProgress.round()}%..."),
               const SizedBox(height: 40),
               Padding(
@@ -308,9 +307,8 @@ class _StorybridgeContentUploadProgessState
                 child: SizedBox(
                     height: 20,
                     child: LinearProgressIndicator(
-                        color: Storybridge_color.StorybridgeAccent,
-                        backgroundColor:
-                            Storybridge_color.StorybridgeAccentLight,
+                        color: scholarity_color.scholarityAccent,
+                        backgroundColor: scholarity_color.scholarityAccentLight,
                         value: _videoProgress / 100)),
               )
             ],

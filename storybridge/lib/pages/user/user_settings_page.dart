@@ -4,12 +4,12 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
 import 'package:mooc/services/auth_service.dart' as auth_service;
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 import 'package:mooc/services/networking_service.dart' as networking_service;
 import 'package:mooc/services/error_service.dart' as error_service;
 
@@ -35,7 +35,7 @@ abstract class FieldWidget {
 
 class _FieldTextWidget extends FieldWidget {
   String fieldName;
-  StorybridgeTextFieldController _controller = StorybridgeTextFieldController();
+  ScholarityTextFieldController _controller = ScholarityTextFieldController();
   _FieldTextWidget({required this.fieldName, required String data})
       : super(fieldName: fieldName, data: data) {
     _controller.text = Uri.decodeComponent(data);
@@ -43,10 +43,10 @@ class _FieldTextWidget extends FieldWidget {
 
   @override
   Widget getEditableWidget() {
-    return _StorybridgeSettingField(
+    return _ScholaritySettingField(
       children: [
-        StorybridgeDescriptor(name: fieldName),
-        StorybridgeTextField(
+        ScholarityDescriptor(name: fieldName),
+        ScholarityTextField(
           label: fieldName,
           controller: _controller,
         ),
@@ -56,10 +56,10 @@ class _FieldTextWidget extends FieldWidget {
 
   @override
   Widget getLockedWidget() {
-    return _StorybridgeSettingField(
+    return _ScholaritySettingField(
       children: [
-        StorybridgeDescriptor(name: fieldName),
-        StorybridgeTextP(
+        ScholarityDescriptor(name: fieldName),
+        ScholarityTextP(
           _controller.text,
         ),
       ],
@@ -74,9 +74,9 @@ class _FieldTextWidget extends FieldWidget {
 
 class _FieldExternalCertificateWidget extends FieldWidget {
   String fieldName;
-  StorybridgeTextFieldController _expiryDate = StorybridgeTextFieldController();
+  ScholarityTextFieldController _expiryDate = ScholarityTextFieldController();
   int userId;
-  final _StorybridgeFileUploadData _fileData = _StorybridgeFileUploadData();
+  final _ScholarityFileUploadData _fileData = _ScholarityFileUploadData();
   _FieldExternalCertificateWidget(
       {required this.fieldName, required String data, required this.userId})
       : super(fieldName: fieldName, data: data) {
@@ -94,15 +94,15 @@ class _FieldExternalCertificateWidget extends FieldWidget {
   Widget getEditableWidget() {
     return Column(
       children: [
-        StorybridgeDescriptor(name: fieldName),
-        StorybridgeTile(
+        ScholarityDescriptor(name: fieldName),
+        ScholarityTile(
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Row(
               children: [
-                _StorybridgeFileUploadWidget(userId: userId, data: _fileData),
+                _ScholarityFileUploadWidget(userId: userId, data: _fileData),
                 const SizedBox(width: 20),
-                StorybridgeDatePicker(
+                ScholarityDatePicker(
                     label: "Expiry Date", date: DateTime.now()),
               ],
             ),
@@ -126,10 +126,10 @@ class _FieldExternalCertificateWidget extends FieldWidget {
 
 // myPage state
 class _UserSettingsPageState extends State<UserSettingsPage> {
-  final StorybridgeTextFieldController _emailController =
-      StorybridgeTextFieldController();
-  final StorybridgeTextFieldController _fullNameController =
-      StorybridgeTextFieldController();
+  final ScholarityTextFieldController _emailController =
+      ScholarityTextFieldController();
+  final ScholarityTextFieldController _fullNameController =
+      ScholarityTextFieldController();
   final List<FieldWidget> _eudControllers = [];
   final _PDPAData _pdpaData = _PDPAData();
   String _userId = "";
@@ -253,18 +253,18 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       const SizedBox(height: 40),
       FutureBuilder(
           future: _load(),
           builder: (context, AsyncSnapshot<bool> snapshot) {
             if (!snapshot.hasData) {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const StorybridgeDescriptor(name: "Profile Photo"),
+                const ScholarityDescriptor(name: "Profile Photo"),
                 widget.isOwner
                     ? ProfilePictureSelectorWidget(userId: widget.userId)
                     : ProfilePictureWidget(
@@ -286,7 +286,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                           isLocked: !widget.isOwner),
                     ]),
                 widget.isOwner
-                    ? StorybridgeButton(
+                    ? ScholarityButton(
                         text: "Save",
                         loading: _loadingSaveUser,
                         invertedColor: true,
@@ -296,7 +296,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                       )
                     : Container(),
                 _eudControllers.isNotEmpty
-                    ? const StorybridgeDivider(isLarge: true)
+                    ? const ScholarityDivider(isLarge: true)
                     : Container(),
                 _eudControllers.isNotEmpty
                     ? Wrap(
@@ -314,7 +314,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                     ? const SizedBox(height: 30)
                     : Container(),
                 widget.isOwner && _eudControllers.isNotEmpty
-                    ? StorybridgeButton(
+                    ? ScholarityButton(
                         text: "Save",
                         loading: _loadingSaveUser,
                         invertedColor: true,
@@ -323,8 +323,8 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                         },
                       )
                     : Container(),
-                const StorybridgeDivider(isLarge: true),
-                const StorybridgeDescriptor(name: "PDPA", description: ""),
+                const ScholarityDivider(isLarge: true),
+                const ScholarityDescriptor(name: "PDPA", description: ""),
                 _PDPAWidget(
                   isOwner: widget.isOwner,
                   data: _pdpaData,
@@ -333,31 +333,31 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                   },
                 ),
                 widget.isOwner
-                    ? const StorybridgeDivider(isLarge: true)
+                    ? const ScholarityDivider(isLarge: true)
                     : Container(),
                 widget.isOwner
-                    ? const StorybridgeDescriptor(
+                    ? const ScholarityDescriptor(
                         name: "Password", description: "")
                     : Container(),
                 widget.isOwner
                     ? _PasswordChanger(userId: widget.userId)
                     : Container(),
-                const StorybridgeDivider(isLarge: true),
+                const ScholarityDivider(isLarge: true),
                 Wrap(
                   crossAxisAlignment: WrapCrossAlignment.start,
                   alignment: WrapAlignment.start,
                   runAlignment: WrapAlignment.start,
                   children: [
-                    _StorybridgeSettingField(
+                    _ScholaritySettingField(
                       children: [
-                        const StorybridgeDescriptor(name: "User ID"),
-                        StorybridgeTextP(_userId)
+                        const ScholarityDescriptor(name: "User ID"),
+                        ScholarityTextP(_userId)
                       ],
                     ),
-                    _StorybridgeSettingField(
+                    _ScholaritySettingField(
                       children: [
-                        const StorybridgeDescriptor(name: "Organization ID"),
-                        StorybridgeTextP(_organizationId)
+                        const ScholarityDescriptor(name: "Organization ID"),
+                        ScholarityTextP(_organizationId)
                       ],
                     ),
                   ],
@@ -371,7 +371,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
 
 class _LockableSettingWidget extends StatelessWidget {
   // members of MyWidget
-  final StorybridgeTextFieldController controller;
+  final ScholarityTextFieldController controller;
   final String label;
   final bool isLocked;
 
@@ -387,12 +387,12 @@ class _LockableSettingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String lockedText = controller.text == "" ? "-" : controller.text;
-    return _StorybridgeSettingField(
+    return _ScholaritySettingField(
       children: [
-        StorybridgeDescriptor(name: label),
+        ScholarityDescriptor(name: label),
         isLocked
-            ? StorybridgeTextP(lockedText)
-            : StorybridgeTextField(
+            ? ScholarityTextP(lockedText)
+            : ScholarityTextField(
                 label: label,
                 controller: controller,
               )
@@ -401,12 +401,12 @@ class _LockableSettingWidget extends StatelessWidget {
   }
 }
 
-class _StorybridgeSettingField extends StatelessWidget {
+class _ScholaritySettingField extends StatelessWidget {
   // members of MyWidget
   final List<Widget> children;
 
   // constructor
-  const _StorybridgeSettingField({Key? key, required this.children})
+  const _ScholaritySettingField({Key? key, required this.children})
       : super(key: key);
 
   // main build function
@@ -434,12 +434,12 @@ class _PasswordChanger extends StatefulWidget {
 // myPage state
 class _PasswordChangerState extends State<_PasswordChanger> {
   bool _clickedChanged = false;
-  StorybridgeTextFieldController _oldPasswordController =
-      StorybridgeTextFieldController();
-  StorybridgeTextFieldController _newPasswordController =
-      StorybridgeTextFieldController();
-  StorybridgeTextFieldController _confirmNewPasswordController =
-      StorybridgeTextFieldController();
+  ScholarityTextFieldController _oldPasswordController =
+      ScholarityTextFieldController();
+  ScholarityTextFieldController _newPasswordController =
+      ScholarityTextFieldController();
+  ScholarityTextFieldController _confirmNewPasswordController =
+      ScholarityTextFieldController();
   bool _isLoadingPassword = false;
   bool _isPasswordSet = false;
 
@@ -462,7 +462,7 @@ class _PasswordChangerState extends State<_PasswordChanger> {
       setState(() {
         _isPasswordSet = true;
       });
-    } on error_service.StorybridgeException catch (err) {
+    } on error_service.ScholarityException catch (err) {
       switch (err.errorData?["authErrorType"]) {
         case "oldPassword":
         case "general":
@@ -494,7 +494,7 @@ class _PasswordChangerState extends State<_PasswordChanger> {
     if (!_clickedChanged) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
-        child: StorybridgeButton(
+        child: ScholarityButton(
           text: "Change Password",
           padding: false,
           onPressed: () {
@@ -506,30 +506,30 @@ class _PasswordChangerState extends State<_PasswordChanger> {
       );
     } else {
       if (_isPasswordSet) {
-        return const StorybridgeTextP("Password successfully changed.");
+        return const ScholarityTextP("Password successfully changed.");
       }
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 20),
-          StorybridgeTextField(
+          ScholarityTextField(
               label: "Old Password",
               isConstricted: true,
               isPasswordField: true,
               controller: _oldPasswordController),
-          StorybridgeTextField(
+          ScholarityTextField(
               label: "New Password",
               isConstricted: true,
               isPasswordField: true,
               controller: _newPasswordController),
-          StorybridgeTextField(
+          ScholarityTextField(
               label: "Retype New Password",
               isConstricted: true,
               isPasswordField: true,
               controller: _confirmNewPasswordController),
           Padding(
             padding: const EdgeInsets.only(bottom: 20),
-            child: StorybridgeButton(
+            child: ScholarityButton(
               text: "Set",
               loading: _isLoadingPassword,
               invertedColor: true,
@@ -544,26 +544,26 @@ class _PasswordChangerState extends State<_PasswordChanger> {
   }
 }
 
-class _StorybridgeFileUploadData {
+class _ScholarityFileUploadData {
   int? imageId;
 }
 
 // myPage class which creates a state on call
-class _StorybridgeFileUploadWidget extends StatefulWidget {
-  final _StorybridgeFileUploadData data;
+class _ScholarityFileUploadWidget extends StatefulWidget {
+  final _ScholarityFileUploadData data;
   final int userId;
-  const _StorybridgeFileUploadWidget(
+  const _ScholarityFileUploadWidget(
       {Key? key, required this.data, required this.userId})
       : super(key: key);
 
   @override
-  _StorybridgeFileUploadWidgetState createState() =>
-      _StorybridgeFileUploadWidgetState();
+  _ScholarityFileUploadWidgetState createState() =>
+      _ScholarityFileUploadWidgetState();
 }
 
 // myPage state
-class _StorybridgeFileUploadWidgetState
-    extends State<_StorybridgeFileUploadWidget> {
+class _ScholarityFileUploadWidgetState
+    extends State<_ScholarityFileUploadWidget> {
   bool _isUploading = false;
   String? _contentDataId;
   @override
@@ -642,7 +642,7 @@ class _StorybridgeFileUploadWidgetState
     // ignore: unused_local_variable
     print(widget.data);
     if (widget.data.imageId == null) {
-      return StorybridgeButton(
+      return ScholarityButton(
         invertedColor: true,
         text: "Upload File",
         loading: _isUploading,
@@ -654,7 +654,7 @@ class _StorybridgeFileUploadWidgetState
     } else {
       return Row(
         children: [
-          StorybridgeButton(
+          ScholarityButton(
               padding: false,
               text: "Download",
               onPressed: () {
@@ -662,7 +662,7 @@ class _StorybridgeFileUploadWidgetState
               },
               icon: Icons.download_rounded),
           const SizedBox(width: 10),
-          StorybridgeIconButton(
+          ScholarityIconButton(
             icon: Icons.close,
             onPressed: () {
               _delete();
@@ -731,7 +731,7 @@ class _PDPAWidgetState extends State<_PDPAWidget> {
         widget.isOwner
             ? Padding(
                 padding: const EdgeInsets.only(right: 10),
-                child: StorybridgeButton(
+                child: ScholarityButton(
                   text: "View PDPA",
                   onPressed: () {
                     _showPDPA();
@@ -744,15 +744,15 @@ class _PDPAWidgetState extends State<_PDPAWidget> {
                 children: [
                   Icon(Icons.check),
                   SizedBox(width: 5),
-                  StorybridgeTextP("PDPA accepted"),
+                  ScholarityTextP("PDPA accepted"),
                 ],
               )
             : Row(
                 children: [
                   Icon(Icons.close_rounded,
-                      color: Storybridge_color.StorybridgeAccent),
+                      color: scholarity_color.scholarityAccent),
                   const SizedBox(width: 5),
-                  const StorybridgeTextP("PDPA not accepted yet"),
+                  const ScholarityTextP("PDPA not accepted yet"),
                 ],
               ),
       ],
@@ -781,29 +781,29 @@ class _PDPAPopupState extends State<_PDPAPopup> {
 // Simple Pdf view with one render of page (loose quality on zoom)
   @override
   Widget build(BuildContext context) {
-    return StorybridgeScaffold(
+    return ScholarityScaffold(
       hasAppbar: false,
-      tabNames: [StorybridgeTabHeader(tabName: "a", tabIcon: Icons.close)],
+      tabNames: [ScholarityTabHeader(tabName: "a", tabIcon: Icons.close)],
       body: const [],
       tabs: [
         Container(
-          color: Storybridge_color.background,
+          color: scholarity_color.background,
           child: Align(
             alignment: Alignment.center,
-            child: StorybridgeHolder(
+            child: ScholarityHolder(
               child: SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StorybridgeIconButton(
+                    ScholarityIconButton(
                         icon: Icons.close,
                         onPressed: () {
                           Navigator.pop(context);
                         }),
                     const SizedBox(height: 10),
                     Expanded(
-                      child: StorybridgeTile(
+                      child: ScholarityTile(
                         useAltStyle: true,
                         child: Container(
                           constraints: const BoxConstraints(maxWidth: 800),
@@ -827,12 +827,12 @@ class _PDPAPopupState extends State<_PDPAPopup> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const StorybridgeTextP("Do you accept the PDPA?"),
+                    const ScholarityTextP("Do you accept the PDPA?"),
                     const SizedBox(height: 20),
                     _hasFullyRead
                         ? Row(
                             children: [
-                              StorybridgeButton(
+                              ScholarityButton(
                                 padding: false,
                                 invertedColor: true,
                                 text: "Accept",
@@ -842,7 +842,7 @@ class _PDPAPopupState extends State<_PDPAPopup> {
                                 },
                               ),
                               const SizedBox(width: 10),
-                              StorybridgeButton(
+                              ScholarityButton(
                                 padding: false,
                                 text: "Reject",
                                 onPressed: () {
@@ -855,7 +855,7 @@ class _PDPAPopupState extends State<_PDPAPopup> {
                         : Container(),
                     _hasFullyRead
                         ? Container()
-                        : const StorybridgeTextP(
+                        : const ScholarityTextP(
                             "Please scroll down to bottom page before accepting."),
                   ],
                 ),

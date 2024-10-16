@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 const widgetTypeHeader = "header";
 
@@ -16,8 +16,8 @@ class EditorWidgetHeader extends StatelessWidget implements EditorWidget {
   @override
   late final EditorWidgetMetadata metadata;
 
-  final StorybridgeTextFieldController _controller =
-      StorybridgeTextFieldController();
+  final ScholarityTextFieldController _controller =
+      ScholarityTextFieldController();
 
   // serialization
   @override
@@ -50,13 +50,13 @@ class EditorWidgetHeader extends StatelessWidget implements EditorWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeEditableText(
+    return ScholarityEditableText(
       enabled: editorWidgetData.isAdminMode,
       controller: _controller,
       onSubmit: () {
         editorWidgetData.onUpdate();
       },
-      style: StorybridgeTextH4Style,
+      style: scholarityTextH4Style,
     );
   }
 }

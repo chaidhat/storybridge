@@ -3,7 +3,7 @@ import 'package:image/image.dart' as img;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_service.dart' as networking_service;
 
@@ -74,7 +74,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       width: 500,
       height: 500,
       child: Scaffold(
-        appBar: AppBar(title: const StorybridgeTextBasic('Take a picture')),
+        appBar: AppBar(title: const ScholarityTextBasic('Take a picture')),
         // You must wait until the controller is initialized before displaying the
         // camera preview. Use a FutureBuilder to display a loading spinner until the
         // controller has finished initializing.

@@ -1,9 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 
 // myPage class which creates a state on call
 class EditorWidgetTailer extends StatefulWidget {
@@ -57,7 +57,7 @@ class EditorWidgetTailerState extends State<EditorWidgetTailer> {
       borderType: BorderType.RRect,
       color: _isBlank &&
               !widget.reduceSize /* reduce size also omits the dotted border */
-          ? Storybridge_color.borderColor
+          ? scholarity_color.borderColor
           : Colors.transparent,
       strokeWidth: 1,
       dashPattern: const [8, 4],
@@ -71,7 +71,7 @@ class EditorWidgetTailerState extends State<EditorWidgetTailer> {
           children: [
             (_isBlank || widget.reduceSize) && !widget.isHidden
                 ? const Center(
-                    child: StorybridgeTextH5(
+                    child: ScholarityTextH5(
                         "Drag & Drop widgets from the right side into here"))
                 : Container(),
             Stack(
@@ -130,7 +130,7 @@ class EditorWidgetDropIndicator extends StatelessWidget {
       child: Container(
         height: 5,
         decoration: BoxDecoration(
-            color: Storybridge_color.StorybridgeAccent,
+            color: scholarity_color.scholarityAccent,
             borderRadius: BorderRadius.circular(2.5)),
       ),
     );

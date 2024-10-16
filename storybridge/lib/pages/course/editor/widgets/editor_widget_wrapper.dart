@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/focus_service.dart';
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 import 'package:mooc/services/saving_telemetry_service.dart'
     as saving_telemetry_service;
 import 'package:mooc/services/showif_service.dart' as showif_service;
@@ -37,7 +37,7 @@ class _EditorWidgetWrapperState extends State<EditorWidgetWrapper> {
   bool _isEntryShowing = false;
   bool _isDragging = false;
   bool _isOverlayWanted = false;
-  final StorybridgeFocusNode _focusNode = StorybridgeFocusNode();
+  final ScholarityFocusNode _focusNode = ScholarityFocusNode();
   final LayerLink _layerLink = LayerLink();
   late final _EditorWidgetWrapperDropzonesController dropzoneController =
       _EditorWidgetWrapperDropzonesController(setVal: () {
@@ -102,11 +102,11 @@ class _EditorWidgetWrapperState extends State<EditorWidgetWrapper> {
                 _hideOverlay();
               },
               onShowAutomations: () {
-                StorybridgeShowDialog(
+                scholarityShowDialog(
                   context: context,
                   builder: (BuildContext context) =>
-                      StorybridgeAlertDialogWrapper(
-                    child: StorybridgeAlertDialog(
+                      ScholarityAlertDialogWrapper(
+                    child: ScholarityAlertDialog(
                       content: EditorWidgetMetadataPopup(
                         controller: EditorWidgetMetadataController(
                           editorWidgetData: widget.child.editorWidgetData,
@@ -167,8 +167,8 @@ class _EditorWidgetWrapperState extends State<EditorWidgetWrapper> {
                   /*
                   *
                   */
-                  StorybridgeFocus(
-                      StorybridgeFocusNode: _focusNode,
+                  ScholarityFocus(
+                      scholarityFocusNode: _focusNode,
                       z: widget.child.editorWidgetData.z,
                       onFocusChange: (bool hasFocus) {
                         if (hasFocus) {
@@ -179,7 +179,7 @@ class _EditorWidgetWrapperState extends State<EditorWidgetWrapper> {
                           _hideOverlay();
                         }
                       },
-                      builder: StorybridgeFocusBuilder(
+                      builder: ScholarityFocusBuilder(
                           builder: (BuildContext context, bool isFocused) {
                         return _EditorWidgetWrapperChild(
                           isAdminMode: widget.isAdminMode,
@@ -281,10 +281,10 @@ class _EditorWidgetWrapperOverlayState
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    boxShadow: const [Storybridge_color.shadow],
-                    color: Storybridge_color.background,
+                    boxShadow: const [scholarity_color.shadow],
+                    color: scholarity_color.background,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Storybridge_color.borderColor),
+                    border: Border.all(color: scholarity_color.borderColor),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(4),
@@ -309,7 +309,7 @@ class _EditorWidgetWrapperOverlayState
                               opacity: 0.8,
                               child: Container(
                                 decoration: const BoxDecoration(
-                                    boxShadow: [Storybridge_color.highShadow]),
+                                    boxShadow: [scholarity_color.highShadow]),
                                 child: Material(
                                   child: _EditorWidgetWrapperChild(
                                     isAdminMode: widget.isAdminMode,
@@ -320,7 +320,7 @@ class _EditorWidgetWrapperOverlayState
                               ),
                             ),
                             child: !_isDragging
-                                ? StorybridgeIconButton(
+                                ? ScholarityIconButton(
                                     icon: Icons.open_with_rounded,
                                     isGrabbable: true,
                                     onPressed: widget.onMove)
@@ -328,13 +328,13 @@ class _EditorWidgetWrapperOverlayState
                           ),
                           const SizedBox(width: 4),
                           !_isDragging
-                              ? StorybridgeIconButton(
+                              ? ScholarityIconButton(
                                   icon: Icons.delete_outline_rounded,
                                   onPressed: widget.onRemove)
                               : Container(),
                           const SizedBox(width: 4),
                           !_isDragging
-                              ? StorybridgeIconButton(
+                              ? ScholarityIconButton(
                                   icon: Icons.visibility_outlined,
                                   onPressed: widget.onShowAutomations)
                               : Container(),
@@ -477,14 +477,14 @@ class _EditorWidgetWrapperChild extends StatelessWidget {
       opacity: !isGreyedOut ? 1 : 0.3,
       child: AnimatedContainer(
         constraints: const BoxConstraints(
-            maxWidth: Storybridge_color.StorybridgeHolderMaxWidthNotPadded),
+            maxWidth: scholarity_color.scholarityHolderMaxWidthNotPadded),
         duration: const Duration(milliseconds: 200),
         curve: Curves.ease,
         decoration: BoxDecoration(
-            color: Storybridge_color.background,
+            color: scholarity_color.background,
             border: Border.all(
               color: hasFocus
-                  ? Storybridge_color.StorybridgeAccent
+                  ? scholarity_color.scholarityAccent
                   : Colors.transparent,
               width: 2,
             ),
@@ -492,7 +492,7 @@ class _EditorWidgetWrapperChild extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Material(
-              color: Storybridge_color.background,
+              color: scholarity_color.background,
               child: _ShowIfWrapper(isAdminMode: isAdminMode, child: child)),
         ),
       ),
@@ -523,7 +523,7 @@ void editorWidgetForceHideOverlay() {
 }
 
 // this is to make showing dialog safer (overlays are hidden)
-void StorybridgeShowDialog(
+void scholarityShowDialog(
     {required BuildContext context,
     required Widget Function(BuildContext) builder}) async {
   editorWidgetForceHideOverlay();

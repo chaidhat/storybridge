@@ -39,7 +39,7 @@ class _State extends State<Wrapper> {
       // try to log in based on token from localStorage
       try {
         await auth_service.globalUser.tryLogin();
-      } on error_service.StorybridgeException catch (error) {
+      } on error_service.ScholarityException catch (error) {
         SchedulerBinding.instance.addPostFrameCallback((_) {
           error_service.reportError(error, context);
         });

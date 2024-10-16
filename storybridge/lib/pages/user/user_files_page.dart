@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -44,7 +44,7 @@ class _UserFilesPageState extends State<UserFilesPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(hasVeryReducedPadding: true, body: [
+    return ScholarityTabPage(hasVeryReducedPadding: true, body: [
       const SizedBox(height: 50),
       FutureBuilder(
           future: _load(),
@@ -54,7 +54,7 @@ class _UserFilesPageState extends State<UserFilesPage> {
                 children: [
                   const SizedBox(height: 20),
                   Center(
-                    child: StorybridgeTable(
+                    child: ScholarityTable(
                       data: snapshot.data,
                       onDelete: (var pk, dynamic data, int i) {
                         _removeImage(pk, data);
@@ -64,7 +64,7 @@ class _UserFilesPageState extends State<UserFilesPage> {
                 ],
               );
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           })
     ]);

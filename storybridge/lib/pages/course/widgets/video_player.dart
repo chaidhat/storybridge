@@ -1,17 +1,17 @@
 import 'package:video_player/video_player.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/video_player_service.dart'
     as video_player_service;
 
 // myPage class which creates a state on call
-class StorybridgeVideoPlayer extends StatefulWidget {
+class ScholarityVideoPlayer extends StatefulWidget {
   final Uri videoUrl;
   final bool isSkippable;
   final Function()? onVideoEnd;
-  const StorybridgeVideoPlayer(
+  const ScholarityVideoPlayer(
       {Key? key,
       required this.videoUrl,
       this.isSkippable = true,
@@ -19,11 +19,11 @@ class StorybridgeVideoPlayer extends StatefulWidget {
       : super(key: key);
 
   @override
-  _StorybridgeVideoPlayerState createState() => _StorybridgeVideoPlayerState();
+  _ScholarityVideoPlayerState createState() => _ScholarityVideoPlayerState();
 }
 
 // myPage state
-class _StorybridgeVideoPlayerState extends State<StorybridgeVideoPlayer> {
+class _ScholarityVideoPlayerState extends State<ScholarityVideoPlayer> {
   late VideoPlayerController _controller;
 
   @override
@@ -82,7 +82,7 @@ class _StorybridgeVideoPlayerState extends State<StorybridgeVideoPlayer> {
           VideoPlayer(_controller),
           /*ClosedCaption(text: _controller.value.caption.text),*/
           _ControlsOverlay(controller: _controller),
-          StorybridgeVideoProgressIndicator(
+          ScholarityVideoProgressIndicator(
             controller: _controller,
             isSkippable: widget.isSkippable,
             onVideoEnd: widget.onVideoEnd,
@@ -149,7 +149,7 @@ class _ControlsOverlay extends StatelessWidget {
                 for (final double speed in _examplePlaybackRates)
                   PopupMenuItem<double>(
                     value: speed,
-                    child: StorybridgeTextBasic('${speed}x'),
+                    child: ScholarityTextBasic('${speed}x'),
                   )
               ];
             },
@@ -161,7 +161,7 @@ class _ControlsOverlay extends StatelessWidget {
                 vertical: 12,
                 horizontal: 16,
               ),
-              child: StorybridgeTextBasic('${controller.value.playbackSpeed}x',
+              child: ScholarityTextBasic('${controller.value.playbackSpeed}x',
                   style: const TextStyle(color: Colors.grey)),
             ),
           ),

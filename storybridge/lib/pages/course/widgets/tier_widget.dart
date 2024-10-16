@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/payment_service.dart' as payment_service;
 
@@ -15,10 +15,10 @@ class PaymentNoTierWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        StorybridgeTextH2B(payment_service.paymentTierName[paymentTier]!),
+        ScholarityTextH2B(payment_service.paymentTierName[paymentTier]!),
         const SizedBox(height: 10),
-        StorybridgeTextP(
-            "You have no tier at the moment. Please purchase a tier to begin using Storybridge.")
+        ScholarityTextP(
+            "You have no tier at the moment. Please purchase a tier to begin using Scholarity.")
       ],
     );
   }
@@ -36,9 +36,9 @@ class PaymentBasicTierWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        StorybridgeTextH2B(payment_service.paymentTierName[paymentTier]!),
+        ScholarityTextH2B(payment_service.paymentTierName[paymentTier]!),
         const SizedBox(height: 10),
-        StorybridgeTextP("Begin building your course online effortlessly.\n\n"
+        ScholarityTextP("Begin building your course online effortlessly.\n\n"
             "• Unlimited students\n"
             "• Create up to ${payment_service.paymentTierCourseMax[paymentTier]!.toString()} courses\n"
             "• ${payment_service.paymentTierDataMax[paymentTier]!.toString()}GB (~${payment_service.paymentTierDataMax[paymentTier]!.toString()} hours) of video data"),
@@ -59,9 +59,9 @@ class PaymentExpandTierWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        StorybridgeTextH2B(payment_service.paymentTierName[paymentTier]!),
+        ScholarityTextH2B(payment_service.paymentTierName[paymentTier]!),
         const SizedBox(height: 10),
-        StorybridgeTextP(
+        ScholarityTextP(
             "Expand your teaching brand and business using our best-in-class features.\n\n"
             "• Everything in Basic Tier\n"
             "• Have up to ${payment_service.paymentTierCourseMax[paymentTier]!.toString()} courses\n"
@@ -83,9 +83,9 @@ class PaymentBusinessTierWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        StorybridgeTextH2B(payment_service.paymentTierName[paymentTier]!),
+        ScholarityTextH2B(payment_service.paymentTierName[paymentTier]!),
         const SizedBox(height: 10),
-        StorybridgeTextP(
+        ScholarityTextP(
             "Designed for small/medium businesses, schools and SMEs.\n\n"
             "• Everything in Expand Tier\n"
             "• Have up to ${payment_service.paymentTierCourseMax[paymentTier]!.toString()} courses\n"
@@ -108,9 +108,9 @@ class PaymentEnterpriseTierWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        StorybridgeTextH2B(payment_service.paymentTierName[paymentTier]!),
+        ScholarityTextH2B(payment_service.paymentTierName[paymentTier]!),
         const SizedBox(height: 10),
-        StorybridgeTextP(
+        ScholarityTextP(
             "Designed for large corporations, schools and enterprises.\n\n"
             "• Everything in Business Tier\n"
             "• Have up to unlimited courses\n"

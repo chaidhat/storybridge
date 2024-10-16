@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -33,7 +33,7 @@ class _State extends State<CourseDesignPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       Padding(
         padding: const EdgeInsets.only(top: 80.0),
         child: Builder(builder: (context) {
@@ -98,12 +98,12 @@ class _CourseSettingsGeneralPageState extends State<CourseSettingsGeneralPage> {
   Widget build(BuildContext context) {
     error_service.checkAlerts(context);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const StorybridgeTextH2("General Settings"),
+      const ScholarityTextH2("General Settings"),
       const SizedBox(height: 60),
-      const StorybridgeDescriptor(
+      const ScholarityDescriptor(
         name: "Course Name",
       ),
-      StorybridgeSettingButton(
+      ScholaritySettingButton(
         name: "Course Name",
         loadValue: () async {
           Map<String, dynamic> course =
@@ -116,21 +116,21 @@ class _CourseSettingsGeneralPageState extends State<CourseSettingsGeneralPage> {
           course_service.sendToCoursePage(context, courseId: widget.courseId);
         },
       ),
-      const StorybridgeDescriptor(
+      const ScholarityDescriptor(
         name: "Certificate Design",
       ),
       const SizedBox(height: 15),
       _CertificateSettings(courseId: widget.courseId),
-      const StorybridgeDivider(),
-      const StorybridgeDescriptor(
+      const ScholarityDivider(),
+      const ScholarityDescriptor(
         name: "Course Files",
       ),
       _CourseFilesViewer(courseId: widget.courseId),
-      const StorybridgeDivider(),
-      const StorybridgeDescriptor(
+      const ScholarityDivider(),
+      const ScholarityDescriptor(
         name: "Course Control",
       ),
-      StorybridgeSettingCheckbox(
+      ScholaritySettingCheckbox(
         name: "Course Live",
         loadValue: () async {
           Map<String, dynamic> course =
@@ -144,7 +144,7 @@ class _CourseSettingsGeneralPageState extends State<CourseSettingsGeneralPage> {
         trueText: "Hide Course from Students",
         falseText: "Publish Course to Students",
       ),
-      StorybridgeButton(
+      ScholarityButton(
         text: "Delete Course",
         lightenBackground: true,
         onPressed: _deleteCourse,
@@ -177,12 +177,12 @@ class _CertificateSettingsState extends State<_CertificateSettings> {
     super.dispose();
   }
 
-  final StorybridgeTextFieldController _dateOfTrainingController =
-      StorybridgeTextFieldController();
-  final StorybridgeTextFieldController _signeeNameController =
-      StorybridgeTextFieldController();
-  final StorybridgeTextFieldController _signeePositionController =
-      StorybridgeTextFieldController();
+  final ScholarityTextFieldController _dateOfTrainingController =
+      ScholarityTextFieldController();
+  final ScholarityTextFieldController _signeeNameController =
+      ScholarityTextFieldController();
+  final ScholarityTextFieldController _signeePositionController =
+      ScholarityTextFieldController();
 
   Future<bool> _load() async {
     certificate_service.CertificateData certificateData =
@@ -269,38 +269,38 @@ class _CertificateSettingsState extends State<_CertificateSettings> {
                   flex: 1,
                   child: Column(
                     children: [
-                      StorybridgeTextField(
+                      ScholarityTextField(
                         label: "Training Date",
                         isConstricted: false,
                         isLarge: false,
                         controller: _dateOfTrainingController,
                       ),
-                      StorybridgeTextField(
+                      ScholarityTextField(
                         label: "Signed By",
                         isConstricted: false,
                         isLarge: false,
                         controller: _signeeNameController,
                       ),
-                      StorybridgeTextField(
+                      ScholarityTextField(
                         label: "Position of Signer",
                         isConstricted: false,
                         isLarge: false,
                         controller: _signeePositionController,
                       ),
-                      StorybridgeButton(
+                      ScholarityButton(
                         padding: false,
                         text: "Save",
                         onPressed: _save,
                       ),
                       const SizedBox(height: 20),
-                      StorybridgeButton(
+                      ScholarityButton(
                         padding: false,
                         text: "Preview Certificate",
                         onPressed: _previewCertificate,
                         loading: _isLoadingCert,
                       ),
                       const SizedBox(height: 20),
-                      StorybridgeButton(
+                      ScholarityButton(
                         padding: false,
                         text: "Preview Passport",
                         onPressed: _previewPassport,
@@ -320,9 +320,9 @@ class _CertificateSettingsState extends State<_CertificateSettings> {
                   flex: 1,
                   child: Column(
                     children: [
-                      StorybridgeBoxLoading(height: 60, width: 270),
-                      StorybridgeBoxLoading(height: 60, width: 270),
-                      StorybridgeBoxLoading(height: 60, width: 270),
+                      ScholarityBoxLoading(height: 60, width: 270),
+                      ScholarityBoxLoading(height: 60, width: 270),
+                      ScholarityBoxLoading(height: 60, width: 270),
                       SizedBox(height: 60),
                     ],
                   ),
@@ -383,14 +383,14 @@ class _CourseFilesViewerState extends State<_CourseFilesViewer> {
         future: _load(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData) {
-            return const StorybridgeBoxLoading(height: 200, width: 300);
+            return const ScholarityBoxLoading(height: 200, width: 300);
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              StorybridgeTextP(
+              ScholarityTextP(
                   "Total Size: ${_totalSize?.round() ?? "unknown"} MB"),
-              StorybridgeTable(
+              ScholarityTable(
                   maxItemsPerPage: 5,
                   pkName: "contentDataId",
                   onDelete: null,

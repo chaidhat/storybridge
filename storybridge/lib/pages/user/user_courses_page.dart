@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -44,7 +44,7 @@ class _UserCoursesPageState extends State<UserCoursesPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(hasVeryReducedPadding: true, body: [
+    return ScholarityTabPage(hasVeryReducedPadding: true, body: [
       const SizedBox(height: 50),
       FutureBuilder(
           future: _load(),
@@ -54,16 +54,16 @@ class _UserCoursesPageState extends State<UserCoursesPage> {
                 children: [
                   const SizedBox(height: 20),
                   Center(
-                    child: StorybridgeTable(
+                    child: ScholarityTable(
                       advancedHeaders: [
-                        StorybridgeTableHeader(
+                        ScholarityTableHeader(
                             key: "courseName",
                             label: "Course name",
                             width: 500),
-                        StorybridgeTableHeader(
+                        ScholarityTableHeader(
                             key: "dateSubscribed",
                             label: "Date subscribed",
-                            type: StorybridgeTableHeaderType.datetime,
+                            type: ScholarityTableHeaderType.datetime,
                             width: 200),
                       ],
                       onView: (_, dynamic data, _2) {
@@ -76,7 +76,7 @@ class _UserCoursesPageState extends State<UserCoursesPage> {
                 ],
               );
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           })
     ]);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:flutter/scheduler.dart';
 
@@ -7,22 +7,22 @@ import 'package:mooc/pages/auth_page.dart';
 import 'package:mooc/services/auth_service.dart' as auth_service;
 
 // myPage class which creates a state on call
-class StorybridgeAccountIndicator extends StatefulWidget {
+class ScholarityAccountIndicator extends StatefulWidget {
   final bool isAdminMode;
   final int?
-      organizationId; // if not provided, this means that Storybridge is the organization (used for appbar)
-  const StorybridgeAccountIndicator(
+      organizationId; // if not provided, this means that Scholarity is the organization (used for appbar)
+  const ScholarityAccountIndicator(
       {Key? key, this.isAdminMode = false, required this.organizationId})
       : super(key: key);
 
   @override
-  _StorybridgeAccountIndicatorState createState() =>
-      _StorybridgeAccountIndicatorState();
+  _ScholarityAccountIndicatorState createState() =>
+      _ScholarityAccountIndicatorState();
 }
 
 // myPage state
-class _StorybridgeAccountIndicatorState
-    extends State<StorybridgeAccountIndicator> {
+class _ScholarityAccountIndicatorState
+    extends State<ScholarityAccountIndicator> {
   bool _isLoggedIn = false;
   String _name = "";
   int _userId = 0;
@@ -82,7 +82,7 @@ class _AuthenticatedIndicator extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeButton(
+    return ScholarityButton(
       lightenBackground: true,
       onPressed: () {},
       padding: false,
@@ -98,7 +98,7 @@ class _AuthenticatedIndicator extends StatelessWidget {
               padding: const EdgeInsets.all(1.0),
               child: Row(
                 children: [
-                  StorybridgeTextH5(name),
+                  ScholarityTextH5(name),
                   const SizedBox(width: 10),
                   ProfilePictureWidget(
                     isSquare: true,
@@ -116,7 +116,7 @@ class _AuthenticatedIndicator extends StatelessWidget {
                           .pushNamed("/user/profile?id=${userId}");
                     });
                   },
-                  child: const StorybridgeTextBasic("Profile"),
+                  child: const ScholarityTextBasic("Profile"),
                 ),
                 PopupMenuItem(
                   onTap: () {
@@ -125,7 +125,7 @@ class _AuthenticatedIndicator extends StatelessWidget {
                           .pushNamed("/user/my-courses?id=${userId}");
                     });
                   },
-                  child: const StorybridgeTextBasic("My Courses"),
+                  child: const ScholarityTextBasic("My Courses"),
                 ),
                 PopupMenuItem(
                   onTap: () {
@@ -134,7 +134,7 @@ class _AuthenticatedIndicator extends StatelessWidget {
                           .pushNamed("/user/my-audits?id=${userId}");
                     });
                   },
-                  child: const StorybridgeTextBasic("My Audits"),
+                  child: const ScholarityTextBasic("My Audits"),
                 ),
                 PopupMenuItem(
                   onTap: () {
@@ -143,7 +143,7 @@ class _AuthenticatedIndicator extends StatelessWidget {
                       Navigator.of(context).pushNamed("/reload");
                     });
                   },
-                  child: const StorybridgeTextBasic("Logout"),
+                  child: const ScholarityTextBasic("Logout"),
                 ),
               ];
               return output;
@@ -155,7 +155,7 @@ class _AuthenticatedIndicator extends StatelessWidget {
 
 class _UnauthenticatedIndicator extends StatefulWidget {
   final int?
-      organizationId; // if not provided, this means that Storybridge is the organization (used for appbar)
+      organizationId; // if not provided, this means that Scholarity is the organization (used for appbar)
   // constructor
   const _UnauthenticatedIndicator({Key? key, required this.organizationId})
       : super(key: key);
@@ -171,14 +171,13 @@ class _UnauthenticatedIndicatorState extends State<_UnauthenticatedIndicator> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        StorybridgeButton(
+        ScholarityButton(
           onPressed: () {
             setState(() {
               showDialog<String>(
                 context: context,
-                builder: (BuildContext context) =>
-                    StorybridgeAlertDialogWrapper(
-                  child: StorybridgeAlertDialog(
+                builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+                  child: ScholarityAlertDialog(
                     content: AuthWidget(
                       startWithLoginMode: false,
                       organizationId: widget.organizationId,

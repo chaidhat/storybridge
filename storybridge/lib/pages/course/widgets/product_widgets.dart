@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 class ProductCoursesWidget extends StatelessWidget {
   // constructor
@@ -8,7 +8,7 @@ class ProductCoursesWidget extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTile(
+    return ScholarityTile(
       useAltStyle: true,
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -25,9 +25,9 @@ class ProductCoursesWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  StorybridgeTextH2B("E-Learning System"),
+                  ScholarityTextH2B("E-Learning System"),
                   SizedBox(height: 20),
-                  StorybridgeTextP(
+                  ScholarityTextP(
                       "Empower your team with our intuitive e-learning system, allowing teachers to effortlessly create engaging online training videos for employees. Enhance your workforce's skills and compliance with ease and efficiency."),
                 ],
               ),
@@ -46,7 +46,7 @@ class ProductAuditWidget extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTile(
+    return ScholarityTile(
       useAltStyle: true,
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -63,9 +63,9 @@ class ProductAuditWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  StorybridgeTextH2B("Auditing System"),
+                  ScholarityTextH2B("Auditing System"),
                   SizedBox(height: 20),
-                  StorybridgeTextP(
+                  ScholarityTextP(
                       "Simplify your inspection, auditing and reporting workflows with our advanced auditing system. Enhance accuracy and compliance in your organization with our user-friendly tools."),
                 ],
               ),
@@ -84,7 +84,7 @@ class ProductFleetWidget extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTile(
+    return ScholarityTile(
       useAltStyle: true,
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -101,9 +101,9 @@ class ProductFleetWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  StorybridgeTextH2B("Fleet System"),
+                  ScholarityTextH2B("Fleet System"),
                   SizedBox(height: 20),
-                  StorybridgeTextP(
+                  ScholarityTextP(
                       "Our fleet management system provides the tools you need to efficiently oversee your vehicle operations. From real-time tracking to maintenance scheduling, it ensures your fleet runs smoothly, safely, and in full compliance."),
                 ],
               ),

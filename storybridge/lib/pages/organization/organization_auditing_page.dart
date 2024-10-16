@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -19,8 +19,8 @@ class OrganizationAuditingPage extends StatefulWidget {
 
 // myPage state
 class _OrganizationAuditingPageState extends State<OrganizationAuditingPage> {
-  final StorybridgeTabPageController _tabPageController =
-      StorybridgeTabPageController();
+  final ScholarityTabPageController _tabPageController =
+      ScholarityTabPageController();
   int _selectedPage = 0;
 
   @override
@@ -36,12 +36,12 @@ class _OrganizationAuditingPageState extends State<OrganizationAuditingPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(
+    return ScholarityTabPage(
         hasVeryReducedPadding: true,
         tabPageController: _tabPageController,
         sideBar: [
           const SizedBox(height: 80),
-          StorybridgeSideBarButton(
+          ScholaritySideBarButton(
               label: "Dashboards",
               icon: Icons.analytics_outlined,
               onPressed: () {
@@ -54,8 +54,8 @@ class _OrganizationAuditingPageState extends State<OrganizationAuditingPage> {
                 });
               },
               selected: _selectedPage == 0),
-          const StorybridgeDivider(),
-          StorybridgeSideBarButton(
+          const ScholarityDivider(),
+          ScholaritySideBarButton(
               label: "Audit templates",
               icon: Icons.assignment_outlined,
               onPressed: () {
@@ -68,7 +68,7 @@ class _OrganizationAuditingPageState extends State<OrganizationAuditingPage> {
                 });
               },
               selected: _selectedPage == 1),
-          StorybridgeSideBarButton(
+          ScholaritySideBarButton(
               label: "Audits",
               icon: Icons.assignment_turned_in_outlined,
               onPressed: () {
@@ -81,8 +81,8 @@ class _OrganizationAuditingPageState extends State<OrganizationAuditingPage> {
                 });
               },
               selected: _selectedPage == 2),
-          const StorybridgeDivider(),
-          StorybridgeSideBarButton(
+          const ScholarityDivider(),
+          ScholaritySideBarButton(
               label: "Data types",
               icon: Icons.category_outlined,
               onPressed: () {
@@ -180,12 +180,12 @@ class _OrganizationAuditingTemplatesPageState
           future: _load(),
           builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
             if (snapshot.hasData) {
-              return StorybridgeHolder(
+              return ScholarityHolder(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     FittedBox(
-                      child: StorybridgeButton(
+                      child: ScholarityButton(
                           icon: Icons.add_rounded,
                           text: "New",
                           invertedColor: true,
@@ -210,7 +210,7 @@ class _OrganizationAuditingTemplatesPageState
                 ),
               );
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           }),
       Container(),
@@ -227,7 +227,7 @@ class _NewAuditPromptWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsets.only(bottom: 32),
-      child: StorybridgeTextH4("Click 'new' to create!"),
+      child: ScholarityTextH4("Click 'new' to create!"),
     );
   }
 }
@@ -249,19 +249,19 @@ class _OrganizationAuditWidget extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgePadding(
+    return ScholarityPadding(
         verticalOnly: true,
-        child: StorybridgeTile(
+        child: ScholarityTile(
           child: InkWell(
             onTap: () {
               // open the template editor
               Navigator.of(context)
                   .pushNamed("/auditing-template?id=$auditTemplateId");
             },
-            child: StorybridgePadding(
+            child: ScholarityPadding(
               child: SizedBox(
                 height: 70,
-                child: StorybridgeTextH2B(courseName),
+                child: ScholarityTextH2B(courseName),
               ),
             ),
           ),
@@ -330,7 +330,7 @@ class _OrganizationAuditingTasksPageState
                   Row(
                     children: [
                       Expanded(child: Container()),
-                      StorybridgeButton(
+                      ScholarityButton(
                           icon: Icons.add_rounded,
                           text: "New",
                           invertedColor: true,
@@ -344,27 +344,27 @@ class _OrganizationAuditingTasksPageState
                   snapshot.data!.isEmpty
                       ? const _NewAuditPromptWidget()
                       : Container(),
-                  StorybridgeTable(
+                  ScholarityTable(
                     data: snapshot.data!,
                     advancedHeaders: [
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                           key: "auditTaskId", label: "ID", width: 80),
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                           key: "auditTemplateName",
                           label: "Template type",
                           width: 200),
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                           key: "status",
                           label: "Status",
-                          type: StorybridgeTableHeaderType.label),
-                      StorybridgeTableHeader(
+                          type: ScholarityTableHeaderType.label),
+                      ScholarityTableHeader(
                           key: "dateCreated",
                           label: "Date created",
-                          type: StorybridgeTableHeaderType.datetime),
-                      StorybridgeTableHeader(
+                          type: ScholarityTableHeaderType.datetime),
+                      ScholarityTableHeader(
                           key: "dateModified",
                           label: "Date modified",
-                          type: StorybridgeTableHeaderType.datetime),
+                          type: ScholarityTableHeaderType.datetime),
                     ],
                     onDelete: (dynamic pk, dynamic data, int index) async {
                       await networking_api_service.removeAuditTask(
@@ -380,7 +380,7 @@ class _OrganizationAuditingTasksPageState
                 ],
               );
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           }),
       Container(),
@@ -404,8 +404,8 @@ class AuditTaskNewPopup extends StatefulWidget {
 class _AuditTaskNewPopupState extends State<AuditTaskNewPopup> {
   final List<String> _auditTemplates = [];
   final Map<String, int> _auditTemplateNameToId = {};
-  StorybridgeTextFieldController templateController =
-      StorybridgeTextFieldController();
+  ScholarityTextFieldController templateController =
+      ScholarityTextFieldController();
   int userId = 0;
 
   bool canEdit = false;
@@ -439,8 +439,8 @@ class _AuditTaskNewPopupState extends State<AuditTaskNewPopup> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    return StorybridgeAlertDialogWrapper(
-        child: StorybridgeAlertDialog(
+    return ScholarityAlertDialogWrapper(
+        child: ScholarityAlertDialog(
       content: SingleChildScrollView(
         child: SizedBox(
           width: 500,
@@ -448,16 +448,16 @@ class _AuditTaskNewPopupState extends State<AuditTaskNewPopup> {
               future: _load(),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (!snapshot.hasData) {
-                  return const StorybridgeBoxLoading(height: 100, width: 300);
+                  return const ScholarityBoxLoading(height: 100, width: 300);
                 }
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    const StorybridgeTextH2B("Create new audit"),
+                    const ScholarityTextH2B("Create new audit"),
                     const SizedBox(height: 20),
-                    StorybridgeDropdown(
+                    ScholarityDropdown(
                       label: "Template",
                       dropdownTypes: _auditTemplates,
                       controller: templateController,
@@ -465,7 +465,7 @@ class _AuditTaskNewPopupState extends State<AuditTaskNewPopup> {
                     const SizedBox(height: 20),
                     Row(
                       children: [
-                        StorybridgeButton(
+                        ScholarityButton(
                           padding: false,
                           text: "Create",
                           invertedColor: true,
@@ -485,7 +485,7 @@ class _AuditTaskNewPopupState extends State<AuditTaskNewPopup> {
                           },
                         ),
                         const SizedBox(width: 10),
-                        StorybridgeButton(
+                        ScholarityButton(
                             padding: false,
                             text: "Cancel",
                             onPressed: () {
@@ -618,14 +618,14 @@ class _OrganizationAuditingLabelGroupsPageState
           future: _load(),
           builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
             if (snapshot.hasData) {
-              return StorybridgeHolder(
+              return ScholarityHolder(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
                         Expanded(child: Container()),
-                        StorybridgeButton(
+                        ScholarityButton(
                             icon: Icons.add_rounded,
                             text: "New",
                             invertedColor: true,
@@ -636,15 +636,15 @@ class _OrganizationAuditingLabelGroupsPageState
                       ],
                     ),
                     const SizedBox(height: 8),
-                    StorybridgeTable(
+                    ScholarityTable(
                       data: snapshot.data!,
                       advancedHeaders: [
-                        StorybridgeTableHeader(
+                        ScholarityTableHeader(
                             key: "labelGroupName", label: "Data type group"),
-                        StorybridgeTableHeader(
+                        ScholarityTableHeader(
                           key: "isMultichoiceAllowed",
                           label: "Multiple choice?",
-                          type: StorybridgeTableHeaderType.boolean,
+                          type: ScholarityTableHeaderType.boolean,
                         ),
                       ],
                       onEdit: (dynamic pk, dynamic data, int index) async {
@@ -671,14 +671,14 @@ class _OrganizationAuditingLabelGroupsPageState
                     ),
                     const Padding(
                       padding: EdgeInsets.only(left: 20),
-                      child: StorybridgeTextP(
+                      child: ScholarityTextP(
                           "*Special custom list, owned by system."),
                     )
                   ],
                 ),
               );
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           }),
       Container(),
@@ -743,16 +743,16 @@ class _OrganizationAuditingLabelsPageState
           future: _load(),
           builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
             if (snapshot.hasData) {
-              return StorybridgeHolder(
+              return ScholarityHolder(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
                         const SizedBox(width: 20),
-                        StorybridgeTextH2(Uri.decodeComponent(_labelGroupName)),
+                        ScholarityTextH2(Uri.decodeComponent(_labelGroupName)),
                         Expanded(child: Container()),
-                        StorybridgeButton(
+                        ScholarityButton(
                             icon: Icons.add_rounded,
                             text: "New",
                             invertedColor: true,
@@ -763,25 +763,25 @@ class _OrganizationAuditingLabelsPageState
                       ],
                     ),
                     const SizedBox(height: 8),
-                    StorybridgeTable(
+                    ScholarityTable(
                       data: snapshot.data!,
                       advancedHeaders: [
-                        StorybridgeTableHeader(
+                        ScholarityTableHeader(
                             key: "preview",
                             label: "Data type",
-                            type: StorybridgeTableHeaderType.label),
-                        StorybridgeTableHeader(
+                            type: ScholarityTableHeaderType.label),
+                        ScholarityTableHeader(
                           key: "labelDescription",
                           label: "Description",
                           width: 300,
                         ),
                       ],
                       onView: (dynamic pk, dynamic data, int index) async {
-                        StorybridgeShowDialog(
+                        scholarityShowDialog(
                           context: context,
                           builder: (BuildContext context) =>
-                              StorybridgeAlertDialogWrapper(
-                            child: StorybridgeAlertDialog(
+                              ScholarityAlertDialogWrapper(
+                            child: ScholarityAlertDialog(
                               content: _LabelEditorPopup(
                                 data: data,
                                 onSaved: () {
@@ -803,7 +803,7 @@ class _OrganizationAuditingLabelsPageState
                 ),
               );
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           }),
       Container(),
@@ -827,10 +827,10 @@ class _LabelEditorPopup extends StatefulWidget {
 }
 
 class _LabelEditorPopupState extends State<_LabelEditorPopup> {
-  StorybridgeTextFieldController labelName = StorybridgeTextFieldController();
-  StorybridgeTextFieldController labelDescription =
-      StorybridgeTextFieldController();
-  StorybridgeTextFieldController labelColor = StorybridgeTextFieldController();
+  ScholarityTextFieldController labelName = ScholarityTextFieldController();
+  ScholarityTextFieldController labelDescription =
+      ScholarityTextFieldController();
+  ScholarityTextFieldController labelColor = ScholarityTextFieldController();
   @override
   void initState() {
     super.initState();
@@ -859,23 +859,23 @@ class _LabelEditorPopupState extends State<_LabelEditorPopup> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StorybridgeIconButton(
+          ScholarityIconButton(
               icon: Icons.close,
               onPressed: () {
                 Navigator.pop(context);
               }),
           const SizedBox(height: 10),
-          const StorybridgeTextH2B("Edit data type"),
+          const ScholarityTextH2B("Edit data type"),
           const SizedBox(height: 10),
-          StorybridgeTextField(
+          ScholarityTextField(
             label: "Data type name",
             controller: labelName,
           ),
-          StorybridgeColorPicker(controller: labelColor),
+          ScholarityColorPicker(controller: labelColor),
           const SizedBox(height: 20),
           SizedBox(
             height: 120,
-            child: StorybridgeTextField(
+            child: ScholarityTextField(
               isLarge: true,
               label: "Description",
               controller: labelDescription,
@@ -884,7 +884,7 @@ class _LabelEditorPopupState extends State<_LabelEditorPopup> {
           const SizedBox(height: 10),
           Row(
             children: [
-              StorybridgeButton(
+              ScholarityButton(
                 padding: false,
                 text: "Save",
                 invertedColor: true,
@@ -893,7 +893,7 @@ class _LabelEditorPopupState extends State<_LabelEditorPopup> {
                 },
               ),
               const SizedBox(width: 10),
-              StorybridgeButton(
+              ScholarityButton(
                 padding: false,
                 text: "Cancel",
                 onPressed: () {
@@ -923,8 +923,8 @@ class _OrganizationAuditingDashboardPage extends StatefulWidget {
 class _OrganizationAuditingDashboardPageState
     extends State<_OrganizationAuditingDashboardPage> {
   final Map<String, int> _auditTemplateNamesToAuditTemplateId = {};
-  final StorybridgeTextFieldController _auditTemplateController =
-      StorybridgeTextFieldController();
+  final ScholarityTextFieldController _auditTemplateController =
+      ScholarityTextFieldController();
   int? _auditTemplateId;
   @override
   void initState() {
@@ -969,7 +969,7 @@ class _OrganizationAuditingDashboardPageState
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -978,13 +978,13 @@ class _OrganizationAuditingDashboardPageState
               const ProductAuditWidget(),
               const SizedBox(height: 20),
               /*
-              StorybridgeDropdown(
+              ScholarityDropdown(
                 label: "Audit template",
                 controller: _auditTemplateController,
                 mappedDropdownTypes: _auditTemplateNamesToAuditTemplateId,
               ),
               */
-              StorybridgeButton(
+              ScholarityButton(
                 icon: Icons.add_rounded,
                 text: "New Graph",
                 onPressed: () {},
@@ -994,18 +994,18 @@ class _OrganizationAuditingDashboardPageState
                   future: _loadAuditTemplateData(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (!snapshot.hasData) {
-                      return const StorybridgePageLoading();
+                      return const ScholarityPageLoading();
                     }
                     return Wrap(
                       spacing: 10,
                       runSpacing: 10,
                       children: [
-                        const StorybridgeLineChart(x: 2),
-                        const StorybridgePieChart(x: 2),
-                        const StorybridgeNumberChart(x: 2),
-                        const StorybridgeNumberChart(x: 2),
-                        const StorybridgePieChart(x: 2),
-                        const StorybridgeNumberChart(x: 2),
+                        const ScholarityLineChart(x: 2),
+                        const ScholarityPieChart(x: 2),
+                        const ScholarityNumberChart(x: 2),
+                        const ScholarityNumberChart(x: 2),
+                        const ScholarityPieChart(x: 2),
+                        const ScholarityNumberChart(x: 2),
                       ],
                     );
                   }),

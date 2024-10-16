@@ -6,7 +6,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:html_parser_plus/html_parser_plus.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -42,7 +42,7 @@ class _State extends State<PtPage> {
     try {
       //Map<String, dynamic> response = await networking_api_service.adminPing();
       return true;
-    } on error_service.StorybridgeException catch (error) {
+    } on error_service.ScholarityException catch (error) {
       if (error.message == "Invalid admin token.") {
         Navigator.pushNamed(context, '/admin-auth');
         return true;
@@ -61,20 +61,19 @@ class _State extends State<PtPage> {
         future: _checkIsLoggedIn(),
         builder: (context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.hasData) {
-            return StorybridgeScaffold(
+            return ScholarityScaffold(
               hasAppbar: false,
               body: [],
-              tabPrefix: StorybridgeTextP("PT Fleet Tracker"),
+              tabPrefix: ScholarityTextP("PT Fleet Tracker"),
               tabNames: [
-                StorybridgeTabHeader(
+                ScholarityTabHeader(
                     tabName: "Driver - daily check in", tabIcon: Icons.search),
-                StorybridgeTabHeader(
+                ScholarityTabHeader(
                     tabName: "Car Status", tabIcon: Icons.search),
-                StorybridgeTabHeader(
-                    tabName: "Car List", tabIcon: Icons.search),
-                StorybridgeTabHeader(
+                ScholarityTabHeader(tabName: "Car List", tabIcon: Icons.search),
+                ScholarityTabHeader(
                     tabName: "Driver List", tabIcon: Icons.search),
-                StorybridgeTabHeader(
+                ScholarityTabHeader(
                     tabName: "Plan List", tabIcon: Icons.search),
               ],
               tabs: [
@@ -89,7 +88,7 @@ class _State extends State<PtPage> {
             return Container(
                 color: Colors.white,
                 child:
-                    const Center(child: StorybridgeTextP("Pinging server...")));
+                    const Center(child: ScholarityTextP("Pinging server...")));
           }
         });
   }
@@ -147,12 +146,12 @@ class _PtDriverCheckinPageState extends State<_PtDriverCheckinPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       FutureBuilder<bool>(
           future: _load(),
           builder: (context, AsyncSnapshot<bool> snapshot) {
             if (!snapshot.hasData) {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,7 +162,7 @@ class _PtDriverCheckinPageState extends State<_PtDriverCheckinPage> {
                       cars: _licensePlates,
                       data: [_PtDriverCheckinData("WFH", "")])
                 ]),
-                StorybridgeButton(
+                ScholarityButton(
                   text: "Submit",
                   onPressed: () {
                     _createFlightplan();
@@ -282,33 +281,33 @@ class _PtCarStatusPageState extends State<_PtCarStatusPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(hasVeryReducedPadding: true, body: [
+    return ScholarityTabPage(hasVeryReducedPadding: true, body: [
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            StorybridgeButton(
+            ScholarityButton(
               padding: false,
               text: "Upload GPS",
               onPressed: () {
                 uploadGPS();
               },
             ),
-            const StorybridgeTextH2("2ฒฬ-6128"),
+            const ScholarityTextH2("2ฒฬ-6128"),
             const SizedBox(height: 60),
             const Row(
               children: [
-                SizedBox(width: 150, child: StorybridgeTextH2B("Date")),
+                SizedBox(width: 150, child: ScholarityTextH2B("Date")),
                 SizedBox(width: 20),
-                SizedBox(width: 300, child: StorybridgeTextH2B("GPS")),
+                SizedBox(width: 300, child: ScholarityTextH2B("GPS")),
                 SizedBox(width: 20),
-                SizedBox(width: 150, child: StorybridgeTextH2B("GPS Distance")),
-                SizedBox(width: 150, child: StorybridgeTextH2B("Max Fleet")),
+                SizedBox(width: 150, child: ScholarityTextH2B("GPS Distance")),
+                SizedBox(width: 150, child: ScholarityTextH2B("Max Fleet")),
                 SizedBox(width: 20),
-                SizedBox(width: 150, child: StorybridgeTextH2B("Driver 1")),
-                SizedBox(width: 150, child: StorybridgeTextH2B("Driver 2")),
+                SizedBox(width: 150, child: ScholarityTextH2B("Driver 1")),
+                SizedBox(width: 150, child: ScholarityTextH2B("Driver 2")),
               ],
             ),
             const SizedBox(height: 30),
@@ -326,8 +325,8 @@ class _PtCarStatusPageState extends State<_PtCarStatusPage> {
 }
 
 class _PtDriverCheckinData {
-  StorybridgeTextFieldController location = StorybridgeTextFieldController();
-  StorybridgeTextFieldController remark = StorybridgeTextFieldController();
+  ScholarityTextFieldController location = ScholarityTextFieldController();
+  ScholarityTextFieldController remark = ScholarityTextFieldController();
   _PtDriverCheckinData(String location, String remark) {
     this.location.text = location;
     this.remark.text = remark;
@@ -347,7 +346,7 @@ class _PtDriverCheckinWidget extends StatefulWidget {
 }
 
 class _PtDriverCheckinWidgetState extends State<_PtDriverCheckinWidget> {
-  final StorybridgeTextFieldController _car = StorybridgeTextFieldController();
+  final ScholarityTextFieldController _car = ScholarityTextFieldController();
   Future<void> _addCheckinThing(int i) async {
     setState(() {
       widget.data.insert(i + 1, _PtDriverCheckinData("", ""));
@@ -370,21 +369,21 @@ class _PtDriverCheckinWidgetState extends State<_PtDriverCheckinWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const StorybridgeTextH2B("Check-in"),
+          const ScholarityTextH2B("Check-in"),
           const SizedBox(height: 20),
-          StorybridgeBox(
+          ScholarityBox(
             useAltStyle: true,
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  StorybridgeDatePicker(
+                  ScholarityDatePicker(
                     label: "Date Start",
                     date: DateTime.now(),
                   ),
                   const SizedBox(height: 28),
-                  StorybridgeDropdown(
+                  ScholarityDropdown(
                       label: "car",
                       controller: _car,
                       dropdownTypes: widget.cars),
@@ -395,7 +394,7 @@ class _PtDriverCheckinWidgetState extends State<_PtDriverCheckinWidget> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 28),
-                          child: StorybridgeDropdown(
+                          child: ScholarityDropdown(
                               label: "location",
                               controller: widget.data[i].location,
                               dropdownTypes: _PUMPS),
@@ -403,14 +402,14 @@ class _PtDriverCheckinWidgetState extends State<_PtDriverCheckinWidget> {
                         Container(
                           padding: const EdgeInsets.only(left: 10),
                           width: 250,
-                          child: StorybridgeTextField(
+                          child: ScholarityTextField(
                             label: "remark",
                             controller: widget.data[i].remark,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10, bottom: 28),
-                          child: StorybridgeIconButton(
+                          child: ScholarityIconButton(
                             icon: Icons.close,
                             onPressed: () {
                               _deleteCheckinThing(i);
@@ -419,7 +418,7 @@ class _PtDriverCheckinWidgetState extends State<_PtDriverCheckinWidget> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10, bottom: 28),
-                          child: StorybridgeIconButton(
+                          child: ScholarityIconButton(
                             icon: Icons.add,
                             onPressed: () {
                               _addCheckinThing(i);
@@ -474,33 +473,33 @@ class _PtDriverListWidget extends StatelessWidget {
         children: [
           SizedBox(
             width: 150,
-            child: StorybridgeTextH2B(data.date),
+            child: ScholarityTextH2B(data.date),
           ),
           const SizedBox(width: 20),
-          _StorybridgeCell(
-            child: StorybridgeTextP(data.gpsStart),
+          _ScholarityCell(
+            child: ScholarityTextP(data.gpsStart),
           ),
-          _StorybridgeCell(
-            child: StorybridgeTextP(data.gpsEnd),
-          ),
-          const SizedBox(width: 20),
-          _StorybridgeCell(
-            child: StorybridgeTextP(data.gpsDistance),
-          ),
-          _StorybridgeCell(
-            child: StorybridgeTextP(data.maxFleet),
+          _ScholarityCell(
+            child: ScholarityTextP(data.gpsEnd),
           ),
           const SizedBox(width: 20),
-          _StorybridgeCell(
-            child: StorybridgeTextP(data.driver1Loc),
+          _ScholarityCell(
+            child: ScholarityTextP(data.gpsDistance),
           ),
-          _StorybridgeCell(
-            child: StorybridgeTextP(data.driver2Loc),
+          _ScholarityCell(
+            child: ScholarityTextP(data.maxFleet),
           ),
           const SizedBox(width: 20),
-          _StorybridgeCell(
+          _ScholarityCell(
+            child: ScholarityTextP(data.driver1Loc),
+          ),
+          _ScholarityCell(
+            child: ScholarityTextP(data.driver2Loc),
+          ),
+          const SizedBox(width: 20),
+          _ScholarityCell(
             width: 300,
-            child: StorybridgeTextP(data.remarks),
+            child: ScholarityTextP(data.remarks),
           ),
         ],
       ),
@@ -508,13 +507,13 @@ class _PtDriverListWidget extends StatelessWidget {
   }
 }
 
-class _StorybridgeCell extends StatelessWidget {
+class _ScholarityCell extends StatelessWidget {
   // members of MyWidget
   final Widget child;
   final double width;
 
   // constructor
-  const _StorybridgeCell({Key? key, required this.child, this.width = 150})
+  const _ScholarityCell({Key? key, required this.child, this.width = 150})
       : super(key: key);
 
   // main build function
@@ -524,7 +523,7 @@ class _StorybridgeCell extends StatelessWidget {
       width: width,
       child: Padding(
         padding: const EdgeInsets.only(right: 8, top: 8),
-        child: StorybridgeTile(
+        child: ScholarityTile(
             child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Padding(
@@ -603,18 +602,18 @@ class _PtCarListPageState extends State<_PtCarListPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(hasVeryReducedPadding: true, body: [
+    return ScholarityTabPage(hasVeryReducedPadding: true, body: [
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 30),
           Row(
             children: [
-              const StorybridgeTextH2("Car List"),
+              const ScholarityTextH2("Car List"),
               Expanded(
                 child: Container(),
               ),
-              StorybridgeButton(
+              ScholarityButton(
                 text: "Add Car",
                 icon: Icons.directions_car_rounded,
                 loading: _isLoadingAddCar,
@@ -636,7 +635,7 @@ class _PtCarListPageState extends State<_PtCarListPage> {
               future: _load(),
               builder: (context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
-                  return StorybridgeTable(
+                  return ScholarityTable(
                     data: snapshot.data,
                     displayHeaders: ["licensePlate", "model"],
                     onEdit: (var pk, dynamic data, int i) {
@@ -647,7 +646,7 @@ class _PtCarListPageState extends State<_PtCarListPage> {
                     },
                   );
                 } else {
-                  return const StorybridgePageLoading();
+                  return const ScholarityPageLoading();
                 }
               }),
         ],
@@ -691,12 +690,12 @@ class _PtDriverListPageState extends State<_PtDriverListPage> {
   }
 
   Future<dynamic> _createDriver() async {
-    StorybridgeTextFieldController newDriverEmailController =
-        StorybridgeTextFieldController();
+    ScholarityTextFieldController newDriverEmailController =
+        ScholarityTextFieldController();
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-                child: StorybridgeAlertDialog(
+        builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+                child: ScholarityAlertDialog(
               content: SingleChildScrollView(
                 child: SizedBox(
                   width: 500,
@@ -705,16 +704,16 @@ class _PtDriverListPageState extends State<_PtDriverListPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 10),
-                      const StorybridgeTextH2B("Create Driver"),
+                      const ScholarityTextH2B("Create Driver"),
                       const SizedBox(height: 20),
-                      StorybridgeTextField(
+                      ScholarityTextField(
                         label: "Email",
                         controller: newDriverEmailController,
                       ),
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          StorybridgeButton(
+                          ScholarityButton(
                             padding: false,
                             text: "Save",
                             invertedColor: true,
@@ -734,7 +733,7 @@ class _PtDriverListPageState extends State<_PtDriverListPage> {
                             },
                           ),
                           const SizedBox(width: 10),
-                          StorybridgeButton(
+                          ScholarityButton(
                               padding: false,
                               text: "Cancel",
                               onPressed: () {
@@ -780,23 +779,23 @@ class _PtDriverListPageState extends State<_PtDriverListPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(hasVeryReducedPadding: true, body: [
+    return ScholarityTabPage(hasVeryReducedPadding: true, body: [
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 30),
           Row(
             children: [
-              const StorybridgeTextH2("Driver List"),
+              const ScholarityTextH2("Driver List"),
               Expanded(child: Container()),
-              StorybridgeButton(
+              ScholarityButton(
                 text: "Go to Login",
                 onPressed: () {
                   Navigator.pushNamed(
                       context, "/login?id=${organizationId.toString()}");
                 },
               ),
-              StorybridgeButton(
+              ScholarityButton(
                 text: "Add Driver",
                 loading: _isLoadingAddCar,
                 icon: Icons.person_rounded,
@@ -817,7 +816,7 @@ class _PtDriverListPageState extends State<_PtDriverListPage> {
               future: _load(),
               builder: (context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
-                  return StorybridgeTable(
+                  return ScholarityTable(
                     data: snapshot.data,
                     pkName: "fleetUserDataId",
                     displayHeaders: [
@@ -836,7 +835,7 @@ class _PtDriverListPageState extends State<_PtDriverListPage> {
                     },
                   );
                 } else {
-                  return const StorybridgePageLoading();
+                  return const ScholarityPageLoading();
                 }
               }),
         ],
@@ -900,16 +899,16 @@ class _PtFlightplanListPageState extends State<_PtFlightplanListPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(hasVeryReducedPadding: true, body: [
+    return ScholarityTabPage(hasVeryReducedPadding: true, body: [
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 30),
           Row(
             children: [
-              const StorybridgeTextH2("Plan List"),
+              const ScholarityTextH2("Plan List"),
               Expanded(child: Container()),
-              StorybridgeButton(
+              ScholarityButton(
                 text: "Add Plan",
                 loading: _isLoadingAddCar,
                 padding: false,
@@ -931,14 +930,14 @@ class _PtFlightplanListPageState extends State<_PtFlightplanListPage> {
               future: _load(),
               builder: (context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
-                  return StorybridgeTable(
+                  return ScholarityTable(
                     data: snapshot.data,
                     onDelete: (var pk, dynamic data, int i) {
                       _removeFlightplan(pk);
                     },
                   );
                 } else {
-                  return const StorybridgePageLoading();
+                  return const ScholarityPageLoading();
                 }
               }),
         ],

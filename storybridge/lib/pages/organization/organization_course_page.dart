@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -49,7 +49,7 @@ class _OrganizationCoursesStudentPageState
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       const SizedBox(height: 50),
       FutureBuilder(
           future: _loadCourses(),
@@ -72,7 +72,7 @@ class _OrganizationCoursesStudentPageState
                 ],
               );
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           }),
       Container(),
@@ -127,8 +127,9 @@ class _OrganizationCoursesAdminPageState
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       const SizedBox(height: 20),
+      const ProductCoursesWidget(),
       const SizedBox(height: 20),
       FutureBuilder(
           future: _loadCourses(),
@@ -138,7 +139,7 @@ class _OrganizationCoursesAdminPageState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   FittedBox(
-                    child: StorybridgeButton(
+                    child: ScholarityButton(
                         icon: Icons.add_rounded,
                         text: "New",
                         invertedColor: true,
@@ -174,7 +175,7 @@ class _OrganizationCoursesAdminPageState
                 ],
               );
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           }),
       Container(),
@@ -191,15 +192,15 @@ class _PaymentWallAlertDialog extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeAlertDialogWrapper(
-      child: StorybridgeAlertDialog(
-        title: const StorybridgeTextH2B("You've reached your tier limit"),
+    return ScholarityAlertDialogWrapper(
+      child: ScholarityAlertDialog(
+        title: const ScholarityTextH2B("You've reached your tier limit"),
         content: SizedBox(
           height: 200,
           width: 300,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            StorybridgeTextP(
+            ScholarityTextP(
                 "Your plan (${payment_service.paymentTierName[paymentTier]!}) only allows\n"
                 "for only ${payment_service.paymentTierCourseMax[paymentTier]!.toString()} "
                 "courses to be created.\n\n"
@@ -207,12 +208,12 @@ class _PaymentWallAlertDialog extends StatelessWidget {
             Expanded(child: Container()),
             Row(
               children: [
-                StorybridgeButton(
+                ScholarityButton(
                     text: "Dismiss",
                     onPressed: () {
                       Navigator.pop(context);
                     }),
-                StorybridgeButton(
+                ScholarityButton(
                     text: "Upgrade plan",
                     invertedColor: true,
                     onPressed: () {
@@ -245,18 +246,18 @@ class _OrganizationTileWidget extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgePadding(
+    return ScholarityPadding(
         verticalOnly: true,
-        child: StorybridgeTile(
+        child: ScholarityTile(
           child: InkWell(
             onTap: () {
               course_service.sendToCoursePage(context,
                   courseId: courseId, isAdminMode: isAdmin);
             },
-            child: StorybridgePadding(
+            child: ScholarityPadding(
               child: SizedBox(
                 height: 70,
-                child: StorybridgeTextH2B(courseName),
+                child: ScholarityTextH2B(courseName),
               ),
             ),
           ),
@@ -273,7 +274,7 @@ class _NewCoursePromptWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsets.only(bottom: 32),
-      child: StorybridgeTextH4("↑ Click this to create!"),
+      child: ScholarityTextH4("↑ Click this to create!"),
     );
   }
 }

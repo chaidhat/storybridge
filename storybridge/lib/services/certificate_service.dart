@@ -77,7 +77,7 @@ Future<void> updateCertificateData(
 Future<void> _generateCertificate(
     PdfPageFormat format, CertificateUserInput data, pw.Document doc) async {
   ByteData image = await rootBundle
-      .load('assets/certificate-backgrounds/Storybridge-certificate.jpg');
+      .load('assets/certificate-backgrounds/scholarity-certificate.jpg');
   Uint8List imageData = (image).buffer.asUint8List();
   pw.Font serifFont = await PdfGoogleFonts.sarabunMedium();
   pw.Font nameFont = await PdfGoogleFonts.sarabunMedium();
@@ -249,7 +249,7 @@ Future<Uint8List> _generatePassport(
                           color: PdfColor.fromHex("#000000"),
                           barcode: pw.Barcode.qrCode(),
                           data:
-                              "https://www.Storybridge.io/app/#/user?id=${data.userId}",
+                              "https://www.scholarity.io/app/#/user?id=${data.userId}",
                         ))),
                 _PdfPositionedWidget(
                   x: 6.8,

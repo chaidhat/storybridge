@@ -3,7 +3,7 @@ import 'package:excel/excel.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -21,8 +21,8 @@ class OrganizationFleetPage extends StatefulWidget {
 
 // myPage state
 class _OrganizationFleetPageState extends State<OrganizationFleetPage> {
-  final StorybridgeTabPageController _tabPageController =
-      StorybridgeTabPageController();
+  final ScholarityTabPageController _tabPageController =
+      ScholarityTabPageController();
   int _selectedPage = 0;
 
   @override
@@ -38,12 +38,12 @@ class _OrganizationFleetPageState extends State<OrganizationFleetPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(
+    return ScholarityTabPage(
         hasVeryReducedPadding: true,
         tabPageController: _tabPageController,
         sideBar: [
           const SizedBox(height: 80),
-          StorybridgeSideBarButton(
+          ScholaritySideBarButton(
               label: "Today's summary",
               icon: Icons.wb_sunny_outlined,
               onPressed: () {
@@ -58,7 +58,7 @@ class _OrganizationFleetPageState extends State<OrganizationFleetPage> {
                 });
               },
               selected: _selectedPage == 0),
-          StorybridgeSideBarButton(
+          ScholaritySideBarButton(
               label: "Multisearch",
               icon: Icons.analytics_outlined,
               onPressed: () {
@@ -73,8 +73,8 @@ class _OrganizationFleetPageState extends State<OrganizationFleetPage> {
                 });
               },
               selected: _selectedPage == 1),
-          const StorybridgeDivider(),
-          StorybridgeSideBarButton(
+          const ScholarityDivider(),
+          ScholaritySideBarButton(
               label: "Vehicles",
               icon: Icons.local_shipping_outlined,
               onPressed: () {
@@ -89,7 +89,7 @@ class _OrganizationFleetPageState extends State<OrganizationFleetPage> {
                 });
               },
               selected: _selectedPage == 2),
-          StorybridgeSideBarButton(
+          ScholaritySideBarButton(
               label: "Drivers",
               icon: Icons.face_rounded,
               onPressed: () {
@@ -104,7 +104,7 @@ class _OrganizationFleetPageState extends State<OrganizationFleetPage> {
                 });
               },
               selected: _selectedPage == 3),
-          StorybridgeSideBarButton(
+          ScholaritySideBarButton(
               label: "Locations",
               icon: Icons.location_on_outlined,
               onPressed: () {
@@ -119,8 +119,8 @@ class _OrganizationFleetPageState extends State<OrganizationFleetPage> {
                 });
               },
               selected: _selectedPage == 4),
-          const StorybridgeDivider(),
-          StorybridgeSideBarButton(
+          const ScholarityDivider(),
+          ScholaritySideBarButton(
               label: "GPS Integration",
               icon: Icons.track_changes_rounded,
               onPressed: () {
@@ -135,7 +135,7 @@ class _OrganizationFleetPageState extends State<OrganizationFleetPage> {
                 });
               },
               selected: _selectedPage == 5),
-          StorybridgeSideBarButton(
+          ScholaritySideBarButton(
               label: "Max Fleet Fuel",
               icon: Icons.local_gas_station_rounded,
               onPressed: () {
@@ -244,7 +244,7 @@ class _OrganizationFleetVehiclesPageState
         future: _load(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (!snapshot.hasData) {
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -252,7 +252,7 @@ class _OrganizationFleetVehiclesPageState
               Row(
                 children: [
                   Expanded(child: Container()),
-                  StorybridgeButton(
+                  ScholarityButton(
                       text: "New",
                       invertedColor: true,
                       verticalOnlyPadding: true,
@@ -262,11 +262,11 @@ class _OrganizationFleetVehiclesPageState
                 ],
               ),
               const SizedBox(height: 8),
-              StorybridgeTable(
+              ScholarityTable(
                   advancedHeaders: [
-                    StorybridgeTableHeader(
+                    ScholarityTableHeader(
                         key: "licensePlate", label: "License plate"),
-                    StorybridgeTableHeader(
+                    ScholarityTableHeader(
                         width: 300, key: "model", label: "Vehicle model"),
                   ],
                   onEdit: (var pk, dynamic data, int i) {
@@ -391,12 +391,12 @@ class _OrganizationFleetDriversAllPageState
   }
 
   Future<dynamic> _createDriver() async {
-    StorybridgeTextFieldController userController =
-        StorybridgeTextFieldController();
+    ScholarityTextFieldController userController =
+        ScholarityTextFieldController();
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-                child: StorybridgeAlertDialog(
+        builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+                child: ScholarityAlertDialog(
               content: SingleChildScrollView(
                 child: SizedBox(
                   width: 500,
@@ -405,11 +405,11 @@ class _OrganizationFleetDriversAllPageState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 10),
-                      const StorybridgeTextH2B("Assign user as driver"),
+                      const ScholarityTextH2B("Assign user as driver"),
                       const SizedBox(height: 20),
                       SizedBox(
                         width: 300,
-                        child: StorybridgeDropdown(
+                        child: ScholarityDropdown(
                             label: "User",
                             controller: userController,
                             dropdownTypes: _users),
@@ -417,7 +417,7 @@ class _OrganizationFleetDriversAllPageState
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          StorybridgeButton(
+                          ScholarityButton(
                             padding: false,
                             text: "Assign",
                             invertedColor: true,
@@ -436,7 +436,7 @@ class _OrganizationFleetDriversAllPageState
                             },
                           ),
                           const SizedBox(width: 10),
-                          StorybridgeButton(
+                          ScholarityButton(
                               padding: false,
                               text: "Cancel",
                               onPressed: () {
@@ -466,7 +466,7 @@ class _OrganizationFleetDriversAllPageState
         future: _load(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (!snapshot.hasData) {
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -474,7 +474,7 @@ class _OrganizationFleetDriversAllPageState
               Row(
                 children: [
                   Expanded(child: Container()),
-                  StorybridgeButton(
+                  ScholarityButton(
                       icon: Icons.sync_alt_rounded,
                       text: "Assign",
                       invertedColor: true,
@@ -487,18 +487,18 @@ class _OrganizationFleetDriversAllPageState
                 ],
               ),
               const SizedBox(height: 8),
-              StorybridgeTable(
+              ScholarityTable(
                   advancedHeaders: [
-                    StorybridgeTableHeader(key: "email", label: "Email"),
-                    StorybridgeTableHeader(
+                    ScholarityTableHeader(key: "email", label: "Email"),
+                    ScholarityTableHeader(
                         key: "firstName", label: "First name"),
-                    StorybridgeTableHeader(key: "lastName", label: "Last name"),
+                    ScholarityTableHeader(key: "lastName", label: "Last name"),
                   ],
                   onView: (dynamic pk, dynamic data, int index) {
                     Navigator.pushNamed(context, '/user?id=${data["userId"]}');
                   },
                   extraButtons: [
-                    StorybridgeTableButton(
+                    ScholarityTableButton(
                         buttonText: "History",
                         onPressed: (dynamic pk, dynamic data) {
                           widget.controller.driverUserId = data["userId"];
@@ -548,20 +548,20 @@ class _OrganizationFleetLocationsPageState
   }
 
   Future<dynamic> _createLocation() async {
-    StorybridgeTextFieldController locationNameController =
-        StorybridgeTextFieldController();
-    StorybridgeTextFieldController gpsController =
-        StorybridgeTextFieldController();
-    StorybridgeTextFieldController subdistrictController =
-        StorybridgeTextFieldController();
-    StorybridgeTextFieldController districtController =
-        StorybridgeTextFieldController();
-    StorybridgeTextFieldController provinceController =
-        StorybridgeTextFieldController();
+    ScholarityTextFieldController locationNameController =
+        ScholarityTextFieldController();
+    ScholarityTextFieldController gpsController =
+        ScholarityTextFieldController();
+    ScholarityTextFieldController subdistrictController =
+        ScholarityTextFieldController();
+    ScholarityTextFieldController districtController =
+        ScholarityTextFieldController();
+    ScholarityTextFieldController provinceController =
+        ScholarityTextFieldController();
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-                child: StorybridgeAlertDialog(
+        builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+                child: ScholarityAlertDialog(
               content: SingleChildScrollView(
                 child: SizedBox(
                   width: 500,
@@ -570,39 +570,39 @@ class _OrganizationFleetLocationsPageState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 10),
-                      const StorybridgeTextH2B("Add Location"),
+                      const ScholarityTextH2B("Add Location"),
                       const SizedBox(height: 20),
                       SizedBox(
                           width: 300,
-                          child: StorybridgeTextField(
+                          child: ScholarityTextField(
                             label: "Location Name",
                             controller: locationNameController,
                           )),
                       SizedBox(
                           width: 300,
-                          child: StorybridgeTextField(
+                          child: ScholarityTextField(
                               label: "GPS", controller: gpsController)),
                       SizedBox(
                           width: 300,
-                          child: StorybridgeTextField(
+                          child: ScholarityTextField(
                               label: "Subdistrict",
                               controller: subdistrictController)),
                       SizedBox(
                           width: 300,
-                          child: StorybridgeTextField(
+                          child: ScholarityTextField(
                               label: "District",
                               controller: districtController)),
                       SizedBox(
                           width: 300,
-                          child: StorybridgeTextField(
+                          child: ScholarityTextField(
                               label: "Province",
                               controller: provinceController)),
-                      const StorybridgeTextP(
+                      const ScholarityTextP(
                           "Note: Please enter GPS as decimals. (e.g. 20.250000,99.850000)"),
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          StorybridgeButton(
+                          ScholarityButton(
                             padding: false,
                             text: "Add",
                             invertedColor: true,
@@ -634,7 +634,7 @@ class _OrganizationFleetLocationsPageState
                             },
                           ),
                           const SizedBox(width: 10),
-                          StorybridgeButton(
+                          ScholarityButton(
                               padding: false,
                               text: "Cancel",
                               onPressed: () {
@@ -665,20 +665,20 @@ class _OrganizationFleetLocationsPageState
         future: _load(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (!snapshot.hasData) {
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(children: [
                 Expanded(child: Container()),
-                StorybridgeButton(
+                ScholarityButton(
                     text: "New",
                     invertedColor: true,
                     onPressed: () async {
                       await _createLocation();
                     }),
-                StorybridgeButton(
+                ScholarityButton(
                     text: "Upload Station View",
                     icon: Icons.upload_rounded,
                     onPressed: () async {
@@ -692,17 +692,16 @@ class _OrganizationFleetLocationsPageState
                     })
               ]),
               const SizedBox(height: 8),
-              StorybridgeTable(
+              ScholarityTable(
                   advancedHeaders: [
-                    StorybridgeTableHeader(
+                    ScholarityTableHeader(
                         key: "locationName", label: "Location name"),
-                    StorybridgeTableHeader(
+                    ScholarityTableHeader(
                         key: "subdistrict", label: "Subdistrict"),
-                    StorybridgeTableHeader(key: "district", label: "District"),
-                    StorybridgeTableHeader(key: "province", label: "Province"),
-                    StorybridgeTableHeader(
-                        key: "longitude", label: "Longitude"),
-                    StorybridgeTableHeader(key: "latitude", label: "Latitude"),
+                    ScholarityTableHeader(key: "district", label: "District"),
+                    ScholarityTableHeader(key: "province", label: "Province"),
+                    ScholarityTableHeader(key: "longitude", label: "Longitude"),
+                    ScholarityTableHeader(key: "latitude", label: "Latitude"),
                   ],
                   onDelete: (var pk, dynamic data, int i) {
                     _removeLocation(pk);
@@ -835,8 +834,8 @@ class _UploadStationViewPopupState extends State<_UploadStationViewPopup> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeAlertDialogWrapper(
-        child: StorybridgeAlertDialog(
+    return ScholarityAlertDialogWrapper(
+        child: ScholarityAlertDialog(
       content: SingleChildScrollView(
         child: SizedBox(
           width: 300,
@@ -847,14 +846,14 @@ class _UploadStationViewPopupState extends State<_UploadStationViewPopup> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  const StorybridgeTextH2B("Dangerous Operation"),
+                  const ScholarityTextH2B("Dangerous Operation"),
                   const SizedBox(height: 20),
-                  const StorybridgeTextP(
+                  const ScholarityTextP(
                       "This action will overwrite all existing pumps, are you sure you want to do this?"),
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      StorybridgeButton(
+                      ScholarityButton(
                         padding: false,
                         text: "Clear & upload new",
                         onPressed: () {
@@ -862,7 +861,7 @@ class _UploadStationViewPopupState extends State<_UploadStationViewPopup> {
                         },
                       ),
                       const SizedBox(width: 10),
-                      StorybridgeButton(
+                      ScholarityButton(
                           padding: false,
                           invertedColor: true,
                           text: "Cancel",
@@ -880,14 +879,14 @@ class _UploadStationViewPopupState extends State<_UploadStationViewPopup> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  const StorybridgeTextH2B("Operation Failed."),
+                  const ScholarityTextH2B("Operation Failed."),
                   const SizedBox(height: 20),
-                  const StorybridgeTextP(
+                  const ScholarityTextP(
                       "Invalid format, please contact support."),
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      StorybridgeButton(
+                      ScholarityButton(
                           padding: false,
                           invertedColor: true,
                           text: "Cancel",
@@ -905,13 +904,13 @@ class _UploadStationViewPopupState extends State<_UploadStationViewPopup> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  const StorybridgeTextH2B("Operation Succeeded."),
+                  const ScholarityTextH2B("Operation Succeeded."),
                   const SizedBox(height: 20),
-                  const StorybridgeTextP("Please reload the page."),
+                  const ScholarityTextP("Please reload the page."),
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      StorybridgeButton(
+                      ScholarityButton(
                           padding: false,
                           invertedColor: true,
                           text: "Dismiss",
@@ -927,14 +926,14 @@ class _UploadStationViewPopupState extends State<_UploadStationViewPopup> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const StorybridgeTextH2B(
+                const ScholarityTextH2B(
                     "Please wait, it could take a while..."),
                 const SizedBox(height: 20),
-                const StorybridgeTextP("DO NOT CLOSE THE PAGE."),
+                const ScholarityTextP("DO NOT CLOSE THE PAGE."),
                 const SizedBox(height: 20),
-                StorybridgeTextP(_progressString),
+                ScholarityTextP(_progressString),
                 const SizedBox(height: 10),
-                StorybridgeProgressIndicator(
+                ScholarityProgressIndicator(
                   progress: _progress,
                 ),
               ],
@@ -997,29 +996,29 @@ class _OrganizationFleetDriversHistoryPageState
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  StorybridgeTextH2(Uri.decodeComponent(_name)),
+                  ScholarityTextH2(Uri.decodeComponent(_name)),
                   const SizedBox(height: 25),
-                  StorybridgeTable(
+                  ScholarityTable(
                     useAltStyle: true,
                     advancedHeaders: [
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                         key: "date",
                         label: "Date filed",
-                        type: StorybridgeTableHeaderType.datetime,
+                        type: ScholarityTableHeaderType.datetime,
                       ),
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                         key: "dayMode",
                         label: "Activity",
                       ),
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                         key: "licensePlate",
                         label: "Vehicle",
                       ),
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                         key: "locationNames",
                         label: "Locations",
                       ),
-                      StorybridgeTableHeader(
+                      ScholarityTableHeader(
                         key: "remark",
                         label: "Remarks",
                       ),
@@ -1029,7 +1028,7 @@ class _OrganizationFleetDriversHistoryPageState
                 ],
               );
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           })
     ]);
@@ -1086,7 +1085,7 @@ class _OrganizationFleetDataPageState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(children: [
-          StorybridgeDatePicker(
+          ScholarityDatePicker(
               label: "Start date",
               date: _searchDateBegin,
               onChanged: (DateTime newDate) {
@@ -1095,7 +1094,7 @@ class _OrganizationFleetDataPageState
                 });
               }),
           const SizedBox(width: 10),
-          StorybridgeDatePicker(
+          ScholarityDatePicker(
               label: "End date",
               date: _searchDateEnd,
               onChanged: (DateTime newDate) {
@@ -1109,16 +1108,16 @@ class _OrganizationFleetDataPageState
             future: _load(),
             builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
               if (!snapshot.hasData) {
-                return const StorybridgePageLoading();
+                return const ScholarityPageLoading();
               }
-              return StorybridgeTable(advancedHeaders: [
-                StorybridgeTableHeader(
+              return ScholarityTable(advancedHeaders: [
+                ScholarityTableHeader(
                     key: "date",
                     label: "Date",
-                    type: StorybridgeTableHeaderType.datetime),
-                StorybridgeTableHeader(width: 300, key: "name", label: "Name"),
-                StorybridgeTableHeader(key: "licensePlate", label: "Vehicle"),
-                StorybridgeTableHeader(key: "locationName", label: "Location"),
+                    type: ScholarityTableHeaderType.datetime),
+                ScholarityTableHeader(width: 300, key: "name", label: "Name"),
+                ScholarityTableHeader(key: "licensePlate", label: "Vehicle"),
+                ScholarityTableHeader(key: "locationName", label: "Location"),
               ], data: snapshot.data!);
             }),
       ],
@@ -1166,7 +1165,7 @@ class _OrganizationFleetTodayPageState
         const SizedBox(height: 10),
         const ProductFleetWidget(),
         Row(children: [
-          StorybridgeButton(
+          ScholarityButton(
             invertedColor: controller.pageNumber == 0,
             text: "Drivers",
             onPressed: () {
@@ -1175,7 +1174,7 @@ class _OrganizationFleetTodayPageState
               });
             },
           ),
-          StorybridgeButton(
+          ScholarityButton(
             invertedColor: controller.pageNumber == 1,
             text: "Vehicles",
             onPressed: () {
@@ -1205,7 +1204,7 @@ class _OrganizationFleetTodayPageState
 class _OrganizationFleetTodayDriverWidget extends StatelessWidget {
   // members of MyWidget
   final int organizationId;
-  final List<StorybridgeTableHeader> _headers = [];
+  final List<ScholarityTableHeader> _headers = [];
 
   // constructor
   _OrganizationFleetTodayDriverWidget({Key? key, required this.organizationId})
@@ -1219,11 +1218,10 @@ class _OrganizationFleetTodayDriverWidget extends StatelessWidget {
     );
 
     _headers.clear();
-    _headers
-        .add(StorybridgeTableHeader(key: "name", label: "Name", width: 300));
+    _headers.add(ScholarityTableHeader(key: "name", label: "Name", width: 300));
     int maxItineraryLength = response["data"]["maxItineraryLength"];
     for (int i = 0; i < maxItineraryLength; i++) {
-      _headers.add(StorybridgeTableHeader(
+      _headers.add(ScholarityTableHeader(
           key: i.toString(), label: "location #$i", width: 200));
     }
     return response["data"]["data"];
@@ -1236,9 +1234,9 @@ class _OrganizationFleetTodayDriverWidget extends StatelessWidget {
         future: _load(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (!snapshot.hasData) {
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
-          return StorybridgeTable(
+          return ScholarityTable(
               useAltStyle: true,
               advancedHeaders: _headers,
               data: snapshot.data!);
@@ -1249,7 +1247,7 @@ class _OrganizationFleetTodayDriverWidget extends StatelessWidget {
 class _OrganizationFleetTodayVehicleWidget extends StatelessWidget {
   // members of MyWidget
   final int organizationId;
-  final List<StorybridgeTableHeader> _headers = [];
+  final List<ScholarityTableHeader> _headers = [];
 
   // constructor
   _OrganizationFleetTodayVehicleWidget({Key? key, required this.organizationId})
@@ -1262,11 +1260,11 @@ class _OrganizationFleetTodayVehicleWidget extends StatelessWidget {
     );
 
     _headers.clear();
-    _headers.add(StorybridgeTableHeader(
+    _headers.add(ScholarityTableHeader(
         key: "licensePlate", label: "Vehicle", width: 300));
     int maxItineraryLength = response["data"]["maxItineraryLength"];
     for (int i = 0; i < maxItineraryLength; i++) {
-      _headers.add(StorybridgeTableHeader(
+      _headers.add(ScholarityTableHeader(
           key: i.toString(), label: "location #$i", width: 200));
     }
     return response["data"]["data"];
@@ -1279,9 +1277,9 @@ class _OrganizationFleetTodayVehicleWidget extends StatelessWidget {
         future: _load(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (!snapshot.hasData) {
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
-          return StorybridgeTable(
+          return ScholarityTable(
               useAltStyle: true,
               advancedHeaders: _headers,
               data: snapshot.data!);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:flutter/scheduler.dart';
 import 'package:mooc/pages/admin_page.dart';
@@ -20,7 +20,7 @@ import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
 import 'package:mooc/services/video_player_service.dart'
     as video_player_service;
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 
 Uri? previousUri;
 
@@ -108,7 +108,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => ErrorPage(
-                error: error_service.StorybridgeException("invalid URL",
+                error: error_service.ScholarityException("invalid URL",
                     description: "a query was expected but not provided")));
       }
 
@@ -183,7 +183,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => ErrorPage(
-                error: error_service.StorybridgeException("invalid URL",
+                error: error_service.ScholarityException("invalid URL",
                     description: "a query was expected but not provided")));
       }
 
@@ -221,7 +221,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => ErrorPage(
-                error: error_service.StorybridgeException("invalid URL",
+                error: error_service.ScholarityException("invalid URL",
                     description: "a query was expected but not provided")));
       }
 
@@ -264,7 +264,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => ErrorPage(
-                error: error_service.StorybridgeException("invalid URL",
+                error: error_service.ScholarityException("invalid URL",
                     description: "a query was expected but not provided")));
       }
 
@@ -288,7 +288,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => ErrorPage(
-                error: error_service.StorybridgeException("invalid URL",
+                error: error_service.ScholarityException("invalid URL",
                     description: "a query was expected but not provided")));
       }
       return MaterialPageRoute(
@@ -305,7 +305,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => ErrorPage(
-                error: error_service.StorybridgeException("invalid URL",
+                error: error_service.ScholarityException("invalid URL",
                     description: "a query was expected but not provided")));
       } else {
         return MaterialPageRoute(
@@ -317,10 +317,10 @@ class RouteGenerator {
                     int? organizationId = snapshot.data;
                     if (organizationId == null) {
                       return ErrorPage(
-                          error: error_service.StorybridgeException(
+                          error: error_service.ScholarityException(
                               "User does not belong to any organization.",
                               description:
-                                  "Please contact support at https://Storybridge.io/contact"));
+                                  "Please contact support at https://scholarity.io/contact"));
                     }
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.of(context)
@@ -329,7 +329,7 @@ class RouteGenerator {
                   }
                   return const Align(
                       alignment: Alignment.topLeft,
-                      child: StorybridgeTextP("Logging you in"));
+                      child: ScholarityTextP("Logging you in"));
                 }));
       }
     }
@@ -356,7 +356,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => ErrorPage(
-                error: error_service.StorybridgeException("invalid URL",
+                error: error_service.ScholarityException("invalid URL",
                     description: "a query was expected but not provided")));
       }
 
@@ -393,7 +393,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => ErrorPage(
-                error: error_service.StorybridgeException("invalid URL",
+                error: error_service.ScholarityException("invalid URL",
                     description: "a query was expected but not provided")));
       }
 
@@ -409,7 +409,7 @@ class RouteGenerator {
     return MaterialPageRoute(
         settings: settings,
         builder: (context) => ErrorPage(
-            error: error_service.StorybridgeException("404",
+            error: error_service.ScholarityException("404",
                 description: "page not found.")));
   }
 }
@@ -443,7 +443,7 @@ Future<int?> _handlePortal(String token) async {
 
 class ErrorPage extends StatelessWidget {
   // members of MyWidget
-  final error_service.StorybridgeException error;
+  final error_service.ScholarityException error;
 
   // constructor
   const ErrorPage({Key? key, required this.error}) : super(key: key);
@@ -453,12 +453,12 @@ class ErrorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Storybridge_color.backgroundDim,
+        color: scholarity_color.backgroundDim,
         child: Center(
           child: SizedBox(
             width: 500,
-            child: StorybridgeTile(
-              child: StorybridgePadding(
+            child: ScholarityTile(
+              child: ScholarityPadding(
                 child: IntrinsicHeight(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -466,11 +466,11 @@ class ErrorPage extends StatelessWidget {
                       const Icon(Icons.sentiment_dissatisfied_rounded,
                           size: 50),
                       const SizedBox(height: 20),
-                      StorybridgeTextH2B("Error: ${error.message}"),
+                      ScholarityTextH2B("Error: ${error.message}"),
                       const SizedBox(height: 20),
-                      StorybridgeTextP(error.description ?? ""),
+                      ScholarityTextP(error.description ?? ""),
                       const SizedBox(height: 30),
-                      StorybridgeButton(
+                      ScholarityButton(
                         padding: false,
                         text: "go back to login",
                         onPressed: () {

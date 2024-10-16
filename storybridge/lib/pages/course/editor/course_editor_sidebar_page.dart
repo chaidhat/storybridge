@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/course_navigation_service.dart'
     as course_navigation_service;
 import 'package:mooc/services/error_service.dart' as error_service;
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 
 class EditorHierarchy extends StatefulWidget {
   final bool isAdminMode;
-  final StorybridgeTabPageController tabPageController;
+  final ScholarityTabPageController tabPageController;
   const EditorHierarchy({
     Key? key,
     required this.isAdminMode,
@@ -178,10 +178,10 @@ class _EditorHierarchyState extends State<EditorHierarchy>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 80),
-          StorybridgeBoxLoading(height: 40, width: 280),
-          StorybridgeBoxLoading(height: 40, width: 280),
-          StorybridgeBoxLoading(height: 40, width: 280),
-          StorybridgeBoxLoading(height: 40, width: 280),
+          ScholarityBoxLoading(height: 40, width: 280),
+          ScholarityBoxLoading(height: 40, width: 280),
+          ScholarityBoxLoading(height: 40, width: 280),
+          ScholarityBoxLoading(height: 40, width: 280),
         ],
       );
     }
@@ -200,7 +200,7 @@ class _EditorHierarchyState extends State<EditorHierarchy>
               return widget.isAdminMode
                   ? Padding(
                       padding: const EdgeInsets.only(bottom: 30),
-                      child: StorybridgeSideBarButton(
+                      child: ScholaritySideBarButton(
                           icon: Icons.home_rounded,
                           label: "Front Page",
                           isSpecial: true,
@@ -225,7 +225,7 @@ class _EditorHierarchyState extends State<EditorHierarchy>
                   */
             course_navigation_service.CourseSection courseSection =
                 _courseData!.courseHierarchy[i];
-            return StorybridgeHoverButton(
+            return ScholarityHoverButton(
               enabled: widget.isAdminMode,
               button: _PopupEditSectionButton(
                 onPressed: (_EditSectionTypes item) {
@@ -234,14 +234,14 @@ class _EditorHierarchyState extends State<EditorHierarchy>
               ),
               child: ExpansionTile(
                 tilePadding: const EdgeInsets.only(left: 10),
-                iconColor: Storybridge_color.grey,
+                iconColor: scholarity_color.grey,
                 initiallyExpanded: i == _courseData!.selectedCourseSectionNo ||
                     (i == 1 &&
                         _courseData!.selectedCourseSectionNo ==
                             0) /* if front page is selected, show first course */,
                 title: SizedBox(
                   width: 200,
-                  child: StorybridgeTextH5(
+                  child: ScholarityTextH5(
                       Uri.decodeComponent(courseSection.courseSectionName),
                       red: false),
                 ),
@@ -280,7 +280,7 @@ class _EditorHierarchyState extends State<EditorHierarchy>
                                   Uri.decodeComponent(courseElementName);
                             } catch (_) {}
 
-                            return StorybridgeHoverButton(
+                            return ScholarityHoverButton(
                               enabled: widget.isAdminMode,
                               button: PopupEditElementButton(
                                 onPressed: (EditElementTypes item) {
@@ -290,7 +290,7 @@ class _EditorHierarchyState extends State<EditorHierarchy>
                                       courseElement.courseElementId);
                                 },
                               ),
-                              child: StorybridgeSideBarButton(
+                              child: ScholaritySideBarButton(
                                   icon: courseElementIcon,
                                   isDisabled: courseElement.isLocked &&
                                       !widget.isAdminMode,
@@ -330,7 +330,7 @@ class _EditorHierarchyState extends State<EditorHierarchy>
           }),
         ),
         widget.isAdminMode
-            ? StorybridgeButton(
+            ? ScholarityButton(
                 text: "Add Section",
                 onPressed: () async {
                   await course_navigation_service.addCourseSection();
@@ -341,7 +341,7 @@ class _EditorHierarchyState extends State<EditorHierarchy>
       ],
     );
     //} else {
-    //return const StorybridgeLoading();
+    //return const ScholarityLoading();
     //}
   }
 }
@@ -357,7 +357,7 @@ class _PopupAddElementButton extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeButton(
+    return ScholarityButton(
       text: "Add Page",
       onPressed: () {
         onPressed();
@@ -393,7 +393,7 @@ class PopupEditElementButton extends StatelessWidget {
                   onTap: () {
                     onPressed(EditElementTypes.rename);
                   },
-                  child: const StorybridgeTextBasic('Rename'),
+                  child: const ScholarityTextBasic('Rename'),
                 ),
                 /*
                 const PopupMenuItem<_EditElementTypes>(
@@ -406,7 +406,7 @@ class PopupEditElementButton extends StatelessWidget {
                   onTap: () {
                     onPressed(EditElementTypes.delete);
                   },
-                  child: const StorybridgeTextBasic('Delete'),
+                  child: const ScholarityTextBasic('Delete'),
                 ),
               ]),
     );
@@ -437,7 +437,7 @@ class _PopupEditSectionButton extends StatelessWidget {
                 onTap: () {
                   onPressed(_EditSectionTypes.rename);
                 },
-                child: const StorybridgeTextBasic('Rename'),
+                child: const ScholarityTextBasic('Rename'),
               ),
               /*
               const PopupMenuItem<_EditSectionTypes>(
@@ -449,7 +449,7 @@ class _PopupEditSectionButton extends StatelessWidget {
                 onTap: () {
                   onPressed(_EditSectionTypes.delete);
                 },
-                child: const StorybridgeTextBasic('Delete'),
+                child: const ScholarityTextBasic('Delete'),
               ),
             ]);
   }

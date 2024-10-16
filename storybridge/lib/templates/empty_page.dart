@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 // myPage class which creates a state on call
 class MyPage extends StatefulWidget {
@@ -74,7 +74,7 @@ class MyPageWithFutureState extends State<MyPageWithFuture> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             // data has not loaded yet, show loading page
-            return const StorybridgePageLoading();
+            return const ScholarityPageLoading();
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,

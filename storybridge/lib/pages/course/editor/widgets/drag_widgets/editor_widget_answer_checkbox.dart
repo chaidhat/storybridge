@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/auditing_service.dart' as auditing_service;
 
@@ -71,8 +71,8 @@ class EditorWidgetAnswerCheckbox extends StatefulWidget
 class _EditorWidgetAnswerCheckboxState
     extends State<EditorWidgetAnswerCheckbox> {
   List<bool> _answers = [];
-  StorybridgeTextFieldController _otherFieldController =
-      StorybridgeTextFieldController();
+  ScholarityTextFieldController _otherFieldController =
+      ScholarityTextFieldController();
   bool _selectedOtherField = false;
   void updateQuestion() {
     widget.editorWidgetData.onUpdate();
@@ -120,7 +120,7 @@ class _EditorWidgetAnswerCheckboxState
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData) {
-            return StorybridgeBoxLoading(height: 60, width: 270);
+            return ScholarityBoxLoading(height: 60, width: 270);
           }
           var data = auditing_service
               .parseCommaData(widget._controller.checkboxesController.text);
@@ -128,7 +128,7 @@ class _EditorWidgetAnswerCheckboxState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               !widget._controller.questionController.text.isEmpty
-                  ? StorybridgeTextH2B(
+                  ? ScholarityTextH2B(
                       widget._controller.questionController.text)
                   : Container(),
               Column(
@@ -136,7 +136,7 @@ class _EditorWidgetAnswerCheckboxState
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: List.generate(data.length, (int i) {
-                        return StorybridgeCheckbox(
+                        return ScholarityCheckbox(
                             label: data[i],
                             value: i < _answers.length ? _answers[i] : false,
                             onChanged: (bool? value) {
@@ -154,7 +154,7 @@ class _EditorWidgetAnswerCheckboxState
                       })),
                   !widget._controller.hasOtherField
                       ? Container()
-                      : StorybridgeCheckbox(
+                      : ScholarityCheckbox(
                           label: "Other (please specify)",
                           value: _selectedOtherField,
                           onChanged: (bool val) {
@@ -164,7 +164,7 @@ class _EditorWidgetAnswerCheckboxState
                           }),
                   !_selectedOtherField
                       ? Container()
-                      : StorybridgeTextField(
+                      : ScholarityTextField(
                           label: "Please specify",
                           controller: _otherFieldController,
                           isEnabled: !widget.editorWidgetData.isAdminMode,
@@ -179,10 +179,10 @@ class _EditorWidgetAnswerCheckboxState
 
 class _AnswerCheckboxController {
   String quid = "";
-  StorybridgeTextFieldController questionController =
-      StorybridgeTextFieldController();
-  StorybridgeTextFieldController checkboxesController =
-      StorybridgeTextFieldController();
+  ScholarityTextFieldController questionController =
+      ScholarityTextFieldController();
+  ScholarityTextFieldController checkboxesController =
+      ScholarityTextFieldController();
   bool hasOtherField = false;
   Function onUpdate = () {};
 
@@ -220,33 +220,33 @@ class _AnswerCheckboxSettingsState extends State<_AnswerCheckboxSettings> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StorybridgeIconButton(
+          ScholarityIconButton(
               icon: Icons.close,
               onPressed: () {
                 Navigator.pop(context);
               }),
           const SizedBox(height: 10),
-          const StorybridgeTextH2B("Question Settings"),
+          const ScholarityTextH2B("Question Settings"),
           const SizedBox(height: 10),
           SizedBox(
             height: 110,
-            child: StorybridgeTextField(
+            child: ScholarityTextField(
               isLarge: true,
               label: "Question",
               controller: widget.controller.questionController,
             ),
           ),
-          const StorybridgeTextP("Please separate selections with a comma"),
+          const ScholarityTextP("Please separate selections with a comma"),
           SizedBox(
             height: 110,
-            child: StorybridgeTextField(
+            child: ScholarityTextField(
               isLarge: true,
               label: "Checkboxes, separated by commas",
               hintText: "alice, bob, charlie",
               controller: widget.controller.checkboxesController,
             ),
           ),
-          StorybridgeCheckbox(
+          ScholarityCheckbox(
               label: "Allow 'other' field",
               value: widget.controller.hasOtherField,
               onChanged: (bool val) {
@@ -256,7 +256,7 @@ class _AnswerCheckboxSettingsState extends State<_AnswerCheckboxSettings> {
                 });
               }),
           const SizedBox(height: 30),
-          StorybridgeTextP("quid: ${widget.controller.quid}"),
+          ScholarityTextP("quid: ${widget.controller.quid}"),
         ],
       ),
     );
@@ -273,15 +273,15 @@ class _Toolbar extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeButton(
+    return ScholarityButton(
       text: "Edit question",
       invertedColor: true,
       padding: false,
       onPressed: () {
-        StorybridgeShowDialog(
+        scholarityShowDialog(
           context: context,
-          builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-            child: StorybridgeAlertDialog(
+          builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+            child: ScholarityAlertDialog(
               content: _AnswerCheckboxSettings(
                 controller: controller,
               ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 import 'package:mooc/services/error_service.dart' as error_service;
 import 'package:mooc/services/translation_service.dart' as translation_service;
 
-class StorybridgeButton extends StatelessWidget {
+class ScholarityButton extends StatelessWidget {
   // members of MyWidget
   final String text;
   final Function()? onPressed;
@@ -17,7 +17,7 @@ class StorybridgeButton extends StatelessWidget {
   final Widget? child;
 
   // constructor
-  const StorybridgeButton({
+  const ScholarityButton({
     this.text = "",
     Key? key,
     this.onPressed,
@@ -46,18 +46,18 @@ class StorybridgeButton extends StatelessWidget {
               onPressed: onPressed,
               style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.all<Color>(
-                      Storybridge_color.background),
+                      scholarity_color.background),
                   backgroundColor: !invertedColor
                       ? (!darkenBackground
                           ? (!lightenBackground
                               ? MaterialStateProperty.all<Color>(
-                                  Storybridge_color.StorybridgeAccentBackground)
+                                  scholarity_color.scholarityAccentBackground)
                               : MaterialStateProperty.all<Color>(
-                                  Storybridge_color.background))
+                                  scholarity_color.background))
                           : MaterialStateProperty.all<Color>(
-                              Storybridge_color.StorybridgeAccentLight))
+                              scholarity_color.scholarityAccentLight))
                       : MaterialStateProperty.all<Color>(
-                          Storybridge_color.StorybridgeAccent),
+                          scholarity_color.scholarityAccent),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -74,8 +74,8 @@ class StorybridgeButton extends StatelessWidget {
                               child: Icon(
                                 icon,
                                 color: isTextRed
-                                    ? Storybridge_color.StorybridgeAccent
-                                    : Storybridge_color.background,
+                                    ? scholarity_color.scholarityAccent
+                                    : scholarity_color.background,
                                 size: 22,
                               ),
                             )
@@ -88,14 +88,14 @@ class StorybridgeButton extends StatelessWidget {
                             child: Text(
                               translation_service.translate(text),
                               style: isTextRed
-                                  ? StorybridgeTextH5RedStyle
-                                  : StorybridgeTextH5WhiteStyle,
+                                  ? scholarityTextH5RedStyle
+                                  : scholarityTextH5WhiteStyle,
                             ),
                           ),
                     ],
                   ),
                   loading
-                      ? StorybridgeLoading(white: invertedColor)
+                      ? ScholarityLoading(white: invertedColor)
                       : Container(),
                 ],
               )),
@@ -105,7 +105,7 @@ class StorybridgeButton extends StatelessWidget {
   }
 }
 
-class StorybridgeIconButton extends StatelessWidget {
+class ScholarityIconButton extends StatelessWidget {
   // members of MyWidget
   final IconData icon;
   final Function()? onPressed;
@@ -114,7 +114,7 @@ class StorybridgeIconButton extends StatelessWidget {
   final bool useAltStyle;
 
   // constructor
-  StorybridgeIconButton(
+  ScholarityIconButton(
       {Key? key,
       required this.icon,
       this.onPressed,
@@ -148,11 +148,11 @@ class StorybridgeIconButton extends StatelessWidget {
               backgroundColor: !useAltStyle
                   ? (isEnabled
                       ? MaterialStateProperty.all<Color>(
-                          Storybridge_color.StorybridgeAccentBackground)
+                          scholarity_color.scholarityAccentBackground)
                       : MaterialStateProperty.all<Color>(
-                          Storybridge_color.backgroundDim))
+                          scholarity_color.backgroundDim))
                   : MaterialStateProperty.all<Color>(
-                      Storybridge_color.StorybridgeAccent),
+                      scholarity_color.scholarityAccent),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -161,15 +161,15 @@ class StorybridgeIconButton extends StatelessWidget {
           child: Icon(icon,
               color: !useAltStyle
                   ? (isEnabled
-                      ? Storybridge_color.StorybridgeAccent
-                      : Storybridge_color.borderColor)
-                  : Storybridge_color.background,
+                      ? scholarity_color.scholarityAccent
+                      : scholarity_color.borderColor)
+                  : scholarity_color.background,
               size: 22)),
     );
   }
 }
 
-class StorybridgeSettingButton extends StatefulWidget {
+class ScholaritySettingButton extends StatefulWidget {
   // members of MyWidget
   final String name;
   final bool isSmall;
@@ -178,7 +178,7 @@ class StorybridgeSettingButton extends StatefulWidget {
   final bool isLarge;
 
   // constructor
-  StorybridgeSettingButton(
+  ScholaritySettingButton(
       {Key? key,
       required this.loadValue,
       required this.saveValue,
@@ -188,14 +188,14 @@ class StorybridgeSettingButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StorybridgeSettingButton> createState() =>
-      _StorybridgeSettingButtonState();
+  State<ScholaritySettingButton> createState() =>
+      _ScholaritySettingButtonState();
 }
 
-class _StorybridgeSettingButtonState extends State<StorybridgeSettingButton> {
+class _ScholaritySettingButtonState extends State<ScholaritySettingButton> {
   bool _loaded = false;
-  final StorybridgeTextFieldController _valueController =
-      StorybridgeTextFieldController();
+  final ScholarityTextFieldController _valueController =
+      ScholarityTextFieldController();
 
   Future<bool> _loadValue() async {
     if (_loaded) return true;
@@ -210,7 +210,7 @@ class _StorybridgeSettingButtonState extends State<StorybridgeSettingButton> {
     });
     try {
       await widget.saveValue(_valueController.text);
-    } on error_service.StorybridgeException catch (e) {
+    } on error_service.ScholarityException catch (e) {
       setState(() {
         _valueController.errorText = e.message;
       });
@@ -233,7 +233,7 @@ class _StorybridgeSettingButtonState extends State<StorybridgeSettingButton> {
                         constraints: !widget.isSmall
                             ? null
                             : const BoxConstraints(maxWidth: 200),
-                        child: StorybridgeTextField(
+                        child: ScholarityTextField(
                           label: widget.name,
                           isConstricted: !widget.isLarge,
                           isLarge: widget.isLarge,
@@ -241,8 +241,8 @@ class _StorybridgeSettingButtonState extends State<StorybridgeSettingButton> {
                         ),
                       ),
                     )
-                  : const StorybridgeBoxLoading(height: 60, width: 270),
-              StorybridgeButton(
+                  : const ScholarityBoxLoading(height: 60, width: 270),
+              ScholarityButton(
                 text: "Save",
                 onPressed: _saveValue,
               )
@@ -252,7 +252,7 @@ class _StorybridgeSettingButtonState extends State<StorybridgeSettingButton> {
   }
 }
 
-class StorybridgeSettingCheckbox extends StatefulWidget {
+class ScholaritySettingCheckbox extends StatefulWidget {
   // members of MyWidget
   final String name;
   final Future<bool> Function() loadValue;
@@ -261,7 +261,7 @@ class StorybridgeSettingCheckbox extends StatefulWidget {
   final String trueText;
 
   // constructor
-  StorybridgeSettingCheckbox({
+  ScholaritySettingCheckbox({
     Key? key,
     required this.loadValue,
     required this.saveValue,
@@ -271,12 +271,11 @@ class StorybridgeSettingCheckbox extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StorybridgeSettingCheckbox> createState() =>
-      _StorybridgeSettingCheckboxState();
+  State<ScholaritySettingCheckbox> createState() =>
+      _ScholaritySettingCheckboxState();
 }
 
-class _StorybridgeSettingCheckboxState
-    extends State<StorybridgeSettingCheckbox> {
+class _ScholaritySettingCheckboxState extends State<ScholaritySettingCheckbox> {
   bool _loaded = false;
   late bool _value;
 
@@ -304,11 +303,11 @@ class _StorybridgeSettingCheckboxState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               snapshot.hasData
-                  ? StorybridgeButton(
+                  ? ScholarityButton(
                       text: _value ? widget.trueText : widget.falseText,
                       onPressed: _toggleValue,
                     )
-                  : const StorybridgeBoxLoading(height: 60, width: 270),
+                  : const ScholarityBoxLoading(height: 60, width: 270),
             ],
           );
         });

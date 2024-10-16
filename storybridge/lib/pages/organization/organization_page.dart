@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/pages/organization/organization_people_page.dart';
 import 'package:mooc/pages/organization/organization_course_page.dart';
@@ -78,7 +78,7 @@ class _OrganizationStudentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    return StorybridgeScaffold(
+    return ScholarityScaffold(
       hasAppbar: false,
       body: [
         const SizedBox(height: 20),
@@ -90,17 +90,17 @@ class _OrganizationStudentPage extends StatelessWidget {
                   children: [
                     ProfilePictureWidget(organizationId: organizationId),
                     const SizedBox(width: 20),
-                    StorybridgeTextH2B(snapshot.data ?? ""),
+                    ScholarityTextH2B(snapshot.data ?? ""),
                   ],
                 );
               } else {
-                return const StorybridgeBoxLoading(height: 70, width: 300);
+                return const ScholarityBoxLoading(height: 70, width: 300);
               }
             }),
         const SizedBox(height: 10),
       ],
       tabNames: [
-        StorybridgeTabHeader(
+        ScholarityTabHeader(
             tabName: "Courses", tabIcon: Icons.collections_bookmark_rounded),
       ],
       tabs: [
@@ -132,7 +132,7 @@ class _OrganizationAdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    return StorybridgeScaffold(
+    return ScholarityScaffold(
       startingTab: startingTab,
       hasAppbar: false,
       tabSuffix: Row(
@@ -140,7 +140,7 @@ class _OrganizationAdminPage extends StatelessWidget {
           Expanded(child: Container()),
           const Padding(
             padding: EdgeInsets.only(right: 20),
-            child: StorybridgeAccountIndicator(organizationId: 0),
+            child: ScholarityAccountIndicator(organizationId: 0),
           ),
         ],
       ),
@@ -154,29 +154,33 @@ class _OrganizationAdminPage extends StatelessWidget {
                   children: [
                     ProfilePictureWidget(organizationId: organizationId),
                     const SizedBox(width: 20),
-                    StorybridgeTextH2B(snapshot.data ?? ""),
+                    ScholarityTextH2B(snapshot.data ?? ""),
                   ],
                 );
               } else {
-                return const StorybridgeBoxLoading(height: 70, width: 300);
+                return const ScholarityBoxLoading(height: 70, width: 300);
               }
             }),
         const SizedBox(height: 10),
       ],
       tabNames: [
-        StorybridgeTabHeader(
+        ScholarityTabHeader(
             tabName: "Courses", tabIcon: Icons.collections_bookmark_rounded),
-        StorybridgeTabHeader(
+        ScholarityTabHeader(
+            tabName: "Audits", tabIcon: Icons.collections_bookmark_rounded),
+        ScholarityTabHeader(
+            tabName: "Fleet", tabIcon: Icons.collections_bookmark_rounded),
+        ScholarityTabHeader(
             tabName: "People", tabIcon: Icons.stacked_line_chart_rounded),
-        StorybridgeTabHeader(
+        ScholarityTabHeader(
             tabName: "Sales", tabIcon: Icons.stacked_line_chart_rounded),
-        StorybridgeTabHeader(
+        ScholarityTabHeader(
             tabName: "Settings", tabIcon: Icons.stacked_line_chart_rounded),
         /*
-        StorybridgeTabHeaders(
+        ScholarityTabHeaders(
             tabName: "Design", tabIcon: Icons.stacked_line_chart_rounded),
-        StorybridgeTabHeaders(tabName: "Analytics", tabIcon: Icons.groups),
-        StorybridgeTabHeaders(
+        ScholarityTabHeaders(tabName: "Analytics", tabIcon: Icons.groups),
+        ScholarityTabHeaders(
             tabName: "Settings", tabIcon: Icons.stacked_line_chart_rounded),
             */
       ],
@@ -185,6 +189,8 @@ class _OrganizationAdminPage extends StatelessWidget {
           courses: _courses,
           organizationId: organizationId,
         ),
+        OrganizationAuditingPage(organizationId: organizationId),
+        OrganizationFleetPage(organizationId: organizationId),
         OrganizationPeoplePage(organizationId: organizationId),
         OrganizationSalesPage(organizationId: organizationId),
         OrganizationSettingsPage(organizationId: organizationId),

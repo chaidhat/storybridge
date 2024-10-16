@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class StorybridgeAlertDialogWrapper extends StatelessWidget {
+class ScholarityAlertDialogWrapper extends StatelessWidget {
   // members of MyWidget
   final Widget child;
 
   // constructor
-  const StorybridgeAlertDialogWrapper({Key? key, required this.child})
+  const ScholarityAlertDialogWrapper({Key? key, required this.child})
       : super(key: key);
 
   // main build function

@@ -1,9 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/auditing_service.dart' as auditing_service;
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
 import 'package:mooc/services/networking_service.dart' as networking_service;
@@ -109,14 +109,13 @@ class _EditorWidgetAnswerFileuploadState
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (!snapshot.hasData) {
-            return const StorybridgeBoxLoading(height: 60, width: 270);
+            return const ScholarityBoxLoading(height: 60, width: 270);
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               !widget.controller.questionController.text.isEmpty
-                  ? StorybridgeTextH2B(
-                      widget.controller.questionController.text)
+                  ? ScholarityTextH2B(widget.controller.questionController.text)
                   : Container(),
               FileUploadDisplayer(
                   fileExtensions: widget.controller.fileExtensions.text,
@@ -134,10 +133,10 @@ class _EditorWidgetAnswerFileuploadState
 
 class _AnswerFileuploadController {
   String quid = "";
-  StorybridgeTextFieldController questionController =
-      StorybridgeTextFieldController();
-  StorybridgeTextFieldController fileExtensions =
-      StorybridgeTextFieldController();
+  ScholarityTextFieldController questionController =
+      ScholarityTextFieldController();
+  ScholarityTextFieldController fileExtensions =
+      ScholarityTextFieldController();
   bool allowMultipleFiles = false;
   Function onUpdate = () {};
 
@@ -175,17 +174,17 @@ class _AnswerFileuploadSettingsState extends State<_AnswerFileuploadSettings> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StorybridgeIconButton(
+          ScholarityIconButton(
               icon: Icons.close,
               onPressed: () {
                 Navigator.pop(context);
               }),
           const SizedBox(height: 10),
-          const StorybridgeTextH2B("Question Settings"),
+          const ScholarityTextH2B("Question Settings"),
           const SizedBox(height: 10),
           SizedBox(
             height: 110,
-            child: StorybridgeTextField(
+            child: ScholarityTextField(
               isLarge: true,
               label: "Question",
               controller: widget.controller.questionController,
@@ -193,7 +192,7 @@ class _AnswerFileuploadSettingsState extends State<_AnswerFileuploadSettings> {
           ),
           SizedBox(
             height: 110,
-            child: StorybridgeTextField(
+            child: ScholarityTextField(
               isLarge: true,
               label: "Allow File Extensions",
               hintText:
@@ -201,7 +200,7 @@ class _AnswerFileuploadSettingsState extends State<_AnswerFileuploadSettings> {
               controller: widget.controller.fileExtensions,
             ),
           ),
-          StorybridgeCheckbox(
+          ScholarityCheckbox(
               label: "Allow multiple files",
               value: widget.controller.allowMultipleFiles,
               onChanged: (bool val) {
@@ -211,7 +210,7 @@ class _AnswerFileuploadSettingsState extends State<_AnswerFileuploadSettings> {
                 });
               }),
           const SizedBox(height: 30),
-          StorybridgeTextP("quid: ${widget.controller.quid}"),
+          ScholarityTextP("quid: ${widget.controller.quid}"),
         ],
       ),
     );
@@ -228,15 +227,15 @@ class _Toolbar extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeButton(
+    return ScholarityButton(
       text: "Edit question",
       invertedColor: true,
       padding: false,
       onPressed: () {
-        StorybridgeShowDialog(
+        scholarityShowDialog(
           context: context,
-          builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-            child: StorybridgeAlertDialog(
+          builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+            child: ScholarityAlertDialog(
               content: _AnswerFileuploadSettings(
                 controller: controller,
               ),
@@ -445,9 +444,9 @@ class _FileUploadDisplayerState extends State<FileUploadDisplayer> {
                   children:
                       List.generate(widget.controller.files.length, (int i) {
                     FileUploadDisplayerFile file = widget.controller.files[i];
-                    return StorybridgeHoverButton(
+                    return ScholarityHoverButton(
                       button: !file.isUploading
-                          ? StorybridgeIconButton(
+                          ? ScholarityIconButton(
                               icon: Icons.close,
                               onPressed: () async {
                                 // delete if not is uploading
@@ -477,12 +476,12 @@ class _FileUploadDisplayerState extends State<FileUploadDisplayer> {
                                     !file.isUploading
                                         ? Icons.description_rounded
                                         : Icons.sync_rounded,
-                                    color: Storybridge_color.StorybridgeAccent),
+                                    color: scholarity_color.scholarityAccent),
                                 const SizedBox(width: 10),
                                 Container(
                                     constraints:
                                         const BoxConstraints(maxWidth: 200),
-                                    child: StorybridgeTextP(
+                                    child: ScholarityTextP(
                                         Uri.decodeComponent(file.filename))),
                                 const SizedBox(width: 30),
                               ],
@@ -497,7 +496,7 @@ class _FileUploadDisplayerState extends State<FileUploadDisplayer> {
               const SizedBox(height: 10),
               !widget.allowMultipleFiles
                   ? Container()
-                  : StorybridgeIconButton(
+                  : ScholarityIconButton(
                       icon: Icons.add,
                       onPressed: () {
                         _uploadFiles();
@@ -508,7 +507,7 @@ class _FileUploadDisplayerState extends State<FileUploadDisplayer> {
         ],
       );
     } else {
-      return StorybridgeButton(
+      return ScholarityButton(
           icon: Icons.attach_file_rounded,
           invertedColor: true,
           text: "File Upload",
@@ -526,20 +525,20 @@ class _FileCannotBeDownloadedForAuditTemplates extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeAlertDialogWrapper(
-      child: StorybridgeAlertDialog(
-        title: const StorybridgeTextH2B("Cannot download file in test mode"),
+    return ScholarityAlertDialogWrapper(
+      child: ScholarityAlertDialog(
+        title: const ScholarityTextH2B("Cannot download file in test mode"),
         content: SizedBox(
           height: 150,
           width: 300,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const StorybridgeTextP(
+            const ScholarityTextP(
                 "Please create an audit report to actually download the file."),
             Expanded(child: Container()),
             Row(
               children: [
-                StorybridgeButton(
+                ScholarityButton(
                     text: "Dismiss",
                     onPressed: () {
                       Navigator.pop(context);

@@ -15,7 +15,7 @@ Future<Position> determinePosition() async {
     // Location services are not enabled don't continue
     // accessing the position and request users of the
     // App to enable the location services.
-    throw error_service.StorybridgeException(
+    throw error_service.ScholarityException(
         "Location services are disabled. Please give permission in settings.");
   }
 
@@ -28,14 +28,14 @@ Future<Position> determinePosition() async {
       // Android's shouldShowRequestPermissionRationale
       // returned true. According to Android guidelines
       // your App should show an explanatory UI now.
-      throw error_service.StorybridgeException(
+      throw error_service.ScholarityException(
           "Location permissions are denied. Please give permission in settings.");
     }
   }
 
   if (permission == LocationPermission.deniedForever) {
     // Permissions are denied forever, handle appropriately.
-    throw error_service.StorybridgeException(
+    throw error_service.ScholarityException(
         "Location permissions are permanently denied. Please give permission in settings.");
   }
 

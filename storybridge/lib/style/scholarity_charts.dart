@@ -2,22 +2,22 @@ import 'dart:math';
 
 import 'package:flutter/material.dart'; // Flutter
 import 'package:fl_chart/fl_chart.dart';
-import 'package:mooc/Storybridge.dart';
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/scholarity.dart';
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 
 // myPage class which creates a state on call
-class StorybridgeLineChart extends StatefulWidget {
+class ScholarityLineChart extends StatefulWidget {
   final int x;
-  const StorybridgeLineChart({Key? key, required this.x}) : super(key: key);
+  const ScholarityLineChart({Key? key, required this.x}) : super(key: key);
 
   @override
-  StorybridgeLineChartState createState() => StorybridgeLineChartState();
+  ScholarityLineChartState createState() => ScholarityLineChartState();
 }
 
 // myPage state
-class StorybridgeLineChartState extends State<StorybridgeLineChart> {
-  final StorybridgeTextFieldController _dateRangeSelector =
-      StorybridgeTextFieldController();
+class ScholarityLineChartState extends State<ScholarityLineChart> {
+  final ScholarityTextFieldController _dateRangeSelector =
+      ScholarityTextFieldController();
   @override
   void initState() {
     super.initState();
@@ -35,8 +35,8 @@ class StorybridgeLineChartState extends State<StorybridgeLineChart> {
     return SizedBox(
       width: 500,
       height: 400,
-      child: StorybridgeTile(
-        child: StorybridgePadding(
+      child: ScholarityTile(
+        child: ScholarityPadding(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,12 +45,12 @@ class StorybridgeLineChartState extends State<StorybridgeLineChart> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StorybridgeTextP("PT Work Flow"),
-                    StorybridgeTextH2B("New Users"),
+                    ScholarityTextP("PT Work Flow"),
+                    ScholarityTextH2B("New Users"),
                   ],
                 ),
                 Expanded(child: Container()),
-                StorybridgeDropdown(
+                ScholarityDropdown(
                   controller: _dateRangeSelector,
                   label: "Date range",
                   dropdownTypes: const [
@@ -71,7 +71,7 @@ class StorybridgeLineChartState extends State<StorybridgeLineChart> {
                   ],
                 ),
                 const SizedBox(width: 10),
-                StorybridgeIconButton(
+                ScholarityIconButton(
                   icon: Icons.settings_outlined,
                   onPressed: () {},
                 ),
@@ -86,16 +86,16 @@ class StorybridgeLineChartState extends State<StorybridgeLineChart> {
 }
 
 // myPage class which creates a state on call
-class StorybridgePieChart extends StatefulWidget {
+class ScholarityPieChart extends StatefulWidget {
   final int x;
-  const StorybridgePieChart({Key? key, required this.x}) : super(key: key);
+  const ScholarityPieChart({Key? key, required this.x}) : super(key: key);
 
   @override
-  StorybridgePieChartState createState() => StorybridgePieChartState();
+  ScholarityPieChartState createState() => ScholarityPieChartState();
 }
 
 // myPage state
-class StorybridgePieChartState extends State<StorybridgePieChart> {
+class ScholarityPieChartState extends State<ScholarityPieChart> {
   @override
   void initState() {
     super.initState();
@@ -113,8 +113,8 @@ class StorybridgePieChartState extends State<StorybridgePieChart> {
     return SizedBox(
       width: 500,
       height: 400,
-      child: StorybridgeTile(
-        child: StorybridgePadding(
+      child: ScholarityTile(
+        child: ScholarityPadding(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -123,12 +123,12 @@ class StorybridgePieChartState extends State<StorybridgePieChart> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StorybridgeTextP("PT Work Flow"),
-                    StorybridgeTextH2B("New Users"),
+                    ScholarityTextP("PT Work Flow"),
+                    ScholarityTextH2B("New Users"),
                   ],
                 ),
                 Expanded(child: Container()),
-                StorybridgeIconButton(
+                ScholarityIconButton(
                   icon: Icons.settings_outlined,
                   onPressed: () {},
                 ),
@@ -143,18 +143,18 @@ class StorybridgePieChartState extends State<StorybridgePieChart> {
 }
 
 // myPage class which creates a state on call
-class StorybridgeNumberChart extends StatefulWidget {
+class ScholarityNumberChart extends StatefulWidget {
   final int x;
-  const StorybridgeNumberChart({Key? key, required this.x}) : super(key: key);
+  const ScholarityNumberChart({Key? key, required this.x}) : super(key: key);
 
   @override
-  StorybridgeNumberChartState createState() => StorybridgeNumberChartState();
+  ScholarityNumberChartState createState() => ScholarityNumberChartState();
 }
 
 // myPage state
-class StorybridgeNumberChartState extends State<StorybridgeNumberChart> {
-  final StorybridgeTextFieldController _dateRangeSelector =
-      StorybridgeTextFieldController();
+class ScholarityNumberChartState extends State<ScholarityNumberChart> {
+  final ScholarityTextFieldController _dateRangeSelector =
+      ScholarityTextFieldController();
   @override
   void initState() {
     super.initState();
@@ -172,8 +172,8 @@ class StorybridgeNumberChartState extends State<StorybridgeNumberChart> {
     return SizedBox(
       width: 240,
       height: 200,
-      child: StorybridgeTile(
-        child: StorybridgePadding(
+      child: ScholarityTile(
+        child: ScholarityPadding(
             child: Stack(
           children: [
             Row(
@@ -182,18 +182,18 @@ class StorybridgeNumberChartState extends State<StorybridgeNumberChart> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StorybridgeTextP("PT Work Flow"),
-                    StorybridgeTextH2B("New Users"),
+                    ScholarityTextP("PT Work Flow"),
+                    ScholarityTextH2B("New Users"),
                   ],
                 ),
                 Expanded(child: Container()),
-                StorybridgeIconButton(
+                ScholarityIconButton(
                   icon: Icons.settings_outlined,
                   onPressed: () {
                     showDialog<String>(
                         context: context,
                         builder: (BuildContext context) =>
-                            StorybridgeNumberChartPopup(
+                            ScholarityNumberChartPopup(
                               onUpdate: () {
                                 setState(() {});
                               },
@@ -203,8 +203,7 @@ class StorybridgeNumberChartState extends State<StorybridgeNumberChart> {
               ],
             ),
             Align(
-                alignment: Alignment.bottomLeft,
-                child: StorybridgeTextH2("25")),
+                alignment: Alignment.bottomLeft, child: ScholarityTextH2("25")),
           ],
         )),
       ),
@@ -232,8 +231,8 @@ List<FlSpot> getData() {
 class _LineChartSample2State extends State<LineChartSample2> {
   bool showAvg = false;
   List<Color> gradientColors = [
-    Storybridge_color.auditBlue,
-    Storybridge_color.background,
+    scholarity_color.auditBlue,
+    scholarity_color.background,
   ];
 
   @override
@@ -256,13 +255,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
     Widget text;
     switch (value.toInt()) {
       case 2:
-        text = const StorybridgeTextP('MAR');
+        text = const ScholarityTextP('MAR');
         break;
       case 5:
-        text = const StorybridgeTextP('MAR');
+        text = const ScholarityTextP('MAR');
         break;
       case 8:
-        text = const StorybridgeTextP('MAR');
+        text = const ScholarityTextP('MAR');
         break;
       default:
         text = const Text('', style: style);
@@ -291,18 +290,18 @@ class _LineChartSample2State extends State<LineChartSample2> {
         return Container();
     }
 
-    return StorybridgeTextP(text, textAlign: TextAlign.left);
+    return ScholarityTextP(text, textAlign: TextAlign.left);
   }
 
   LineChartData mainData() {
     return LineChartData(
       lineTouchData: LineTouchData(
         touchTooltipData: LineTouchTooltipData(
-          tooltipBorder: BorderSide(color: Storybridge_color.borderColor),
-          tooltipBgColor: Storybridge_color.background,
+          tooltipBorder: BorderSide(color: scholarity_color.borderColor),
+          tooltipBgColor: scholarity_color.background,
           getTooltipItems: (touchedSpots) {
             return touchedSpots.map((LineBarSpot touchedSpot) {
-              final textStyle = StorybridgeTextPStyle;
+              final textStyle = scholarityTextPStyle;
               return LineTooltipItem(
                   "${touchedSpot.x}\n${touchedSpot.y}", textStyle);
             }).toList();
@@ -317,7 +316,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
             }
             return TouchedSpotIndicatorData(
               FlLine(
-                color: Storybridge_color.auditBlue,
+                color: scholarity_color.auditBlue,
                 strokeWidth: 2,
               ),
               FlDotData(
@@ -326,7 +325,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                     radius: 4,
                     color: Colors.white,
                     strokeWidth: 2,
-                    strokeColor: Storybridge_color.auditBlue,
+                    strokeColor: scholarity_color.auditBlue,
                   );
                 },
               ),
@@ -341,7 +340,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
         verticalInterval: 1,
         getDrawingHorizontalLine: (value) {
           return FlLine(
-            color: Storybridge_color.borderColor,
+            color: scholarity_color.borderColor,
             strokeWidth: 1,
           );
         },
@@ -386,7 +385,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
       lineBarsData: [
         LineChartBarData(
           spots: getData(),
-          color: Storybridge_color.auditBlue,
+          color: scholarity_color.auditBlue,
           barWidth: 2,
           isStrokeCapRound: true,
           dotData: FlDotData(
@@ -471,65 +470,65 @@ class PieChart2State extends State {
         case 0:
           return PieChartSectionData(
             borderSide: BorderSide(
-                color: Storybridge_color.background,
+                color: scholarity_color.background,
                 width: 2,
                 strokeAlign: BorderSide.strokeAlignOutside),
-            color: Storybridge_color.auditBlue,
+            color: scholarity_color.auditBlue,
             value: 40,
             title: '40%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: Storybridge_color.black,
+              color: scholarity_color.black,
             ),
           );
         case 1:
           return PieChartSectionData(
             borderSide: BorderSide(
-                color: Storybridge_color.background,
+                color: scholarity_color.background,
                 width: 2,
                 strokeAlign: BorderSide.strokeAlignOutside),
-            color: Storybridge_color.auditBlue.withAlpha(100),
+            color: scholarity_color.auditBlue.withAlpha(100),
             value: 30,
             title: '30%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: Storybridge_color.black,
+              color: scholarity_color.black,
             ),
           );
         case 2:
           return PieChartSectionData(
             borderSide: BorderSide(
-                color: Storybridge_color.background,
+                color: scholarity_color.background,
                 width: 2,
                 strokeAlign: BorderSide.strokeAlignOutside),
-            color: Storybridge_color.auditBlue.withAlpha(50),
+            color: scholarity_color.auditBlue.withAlpha(50),
             value: 15,
             title: '15%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: Storybridge_color.black,
+              color: scholarity_color.black,
             ),
           );
         case 3:
           return PieChartSectionData(
             borderSide: BorderSide(
-                color: Storybridge_color.background,
+                color: scholarity_color.background,
                 width: 2,
                 strokeAlign: BorderSide.strokeAlignOutside),
-            color: Storybridge_color.auditBlue.withAlpha(200),
+            color: scholarity_color.auditBlue.withAlpha(200),
             value: 15,
             title: '15%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: Storybridge_color.black,
+              color: scholarity_color.black,
             ),
           );
         default:
@@ -582,23 +581,23 @@ class Indicator extends StatelessWidget {
   }
 }
 
-class StorybridgeNumberChartPopup extends StatefulWidget {
+class ScholarityNumberChartPopup extends StatefulWidget {
   final Function onUpdate;
-  const StorybridgeNumberChartPopup({Key? key, required this.onUpdate})
+  const ScholarityNumberChartPopup({Key? key, required this.onUpdate})
       : super(key: key);
 
   @override
-  StorybridgeNumberChartPopupState createState() =>
-      StorybridgeNumberChartPopupState();
+  ScholarityNumberChartPopupState createState() =>
+      ScholarityNumberChartPopupState();
 }
 
 // myPage state
-class StorybridgeNumberChartPopupState
-    extends State<StorybridgeNumberChartPopup> {
+class ScholarityNumberChartPopupState
+    extends State<ScholarityNumberChartPopup> {
   final List<String> _auditTemplates = [];
   final Map<String, int> _auditTemplateNameToId = {};
-  StorybridgeTextFieldController templateController =
-      StorybridgeTextFieldController();
+  ScholarityTextFieldController templateController =
+      ScholarityTextFieldController();
   int userId = 0;
 
   bool canEdit = false;
@@ -635,8 +634,8 @@ class StorybridgeNumberChartPopupState
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    return StorybridgeAlertDialogWrapper(
-        child: StorybridgeAlertDialog(
+    return ScholarityAlertDialogWrapper(
+        child: ScholarityAlertDialog(
       content: SingleChildScrollView(
         child: SizedBox(
           width: 500,
@@ -644,16 +643,16 @@ class StorybridgeNumberChartPopupState
               future: _load(),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (!snapshot.hasData) {
-                  return const StorybridgeBoxLoading(height: 100, width: 300);
+                  return const ScholarityBoxLoading(height: 100, width: 300);
                 }
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    const StorybridgeTextH2B("Chart settings"),
+                    const ScholarityTextH2B("Chart settings"),
                     const SizedBox(height: 20),
-                    StorybridgeDropdown(
+                    ScholarityDropdown(
                       label: "Data Source",
                       dropdownTypes: [
                         "Number of logins",
@@ -666,7 +665,7 @@ class StorybridgeNumberChartPopupState
                     const SizedBox(height: 20),
                     Row(
                       children: [
-                        StorybridgeButton(
+                        ScholarityButton(
                           padding: false,
                           text: "Set",
                           invertedColor: true,
@@ -678,7 +677,7 @@ class StorybridgeNumberChartPopupState
                           },
                         ),
                         const SizedBox(width: 10),
-                        StorybridgeButton(
+                        ScholarityButton(
                             padding: false,
                             text: "Cancel",
                             onPressed: () {

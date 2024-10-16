@@ -4,12 +4,12 @@ import 'dart:math';
 import 'package:dotted_border/dotted_border.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/pages/course/editor/widgets/editor_widgets.dart';
 import 'package:mooc/pages/course/editor/widgets/drag_widgets/editor_widget_column.dart';
 
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
 import 'package:mooc/services/error_service.dart' as error_service;
@@ -160,12 +160,12 @@ class _EditorWidgetAssessmentState extends State<EditorWidgetAssessment> {
   bool _hasUserBegunTest = false;
   Map<String, dynamic>? _answerData;
 
-  StorybridgeTextFieldController weightingController =
-      StorybridgeTextFieldController();
-  StorybridgeTextFieldController minGradeController =
-      StorybridgeTextFieldController();
-  final _StorybridgeAssessmentWidgetController _assessmentWidgetController =
-      _StorybridgeAssessmentWidgetController();
+  ScholarityTextFieldController weightingController =
+      ScholarityTextFieldController();
+  ScholarityTextFieldController minGradeController =
+      ScholarityTextFieldController();
+  final _ScholarityAssessmentWidgetController _assessmentWidgetController =
+      _ScholarityAssessmentWidgetController();
 
   Future<bool> _loadAssessment() async {
     if (_isLoaded) return true;
@@ -257,7 +257,7 @@ class _EditorWidgetAssessmentState extends State<EditorWidgetAssessment> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Storybridge_color.borderColor),
+          border: Border.all(color: scholarity_color.borderColor),
           borderRadius: BorderRadius.circular(12)),
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -273,9 +273,9 @@ class _EditorWidgetAssessmentState extends State<EditorWidgetAssessment> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(Icons.quiz_outlined,
-                      size: 30, color: Storybridge_color.darkGrey),
+                      size: 30, color: scholarity_color.darkGrey),
                   const SizedBox(width: 10),
-                  const StorybridgeTextH2B("Assessment")
+                  const ScholarityTextH2B("Assessment")
                 ],
               ),
             ),
@@ -287,17 +287,17 @@ class _EditorWidgetAssessmentState extends State<EditorWidgetAssessment> {
                 if (!snapshot.hasData) {
                   return const Column(
                     children: [
-                      StorybridgeBoxLoading(height: 50, width: 500),
-                      StorybridgeBoxLoading(height: 50, width: 500),
-                      StorybridgeBoxLoading(height: 50, width: 500),
-                      StorybridgeBoxLoading(height: 50, width: 500),
+                      ScholarityBoxLoading(height: 50, width: 500),
+                      ScholarityBoxLoading(height: 50, width: 500),
+                      ScholarityBoxLoading(height: 50, width: 500),
+                      ScholarityBoxLoading(height: 50, width: 500),
                     ],
                   );
                 }
                 // if user has not begun test
                 if (!widget.editorWidgetData.isAdminMode &&
                     !_hasUserBegunTest) {
-                  return _StorybridgeAssessmentFront(
+                  return _ScholarityAssessmentFront(
                     auid: widget._auid,
                     onUpdate: () => setState(() {
                       _isLoaded = false;
@@ -307,7 +307,7 @@ class _EditorWidgetAssessmentState extends State<EditorWidgetAssessment> {
 
                 return Stack(
                   children: [
-                    _StorybridgeAssessment(
+                    _ScholarityAssessment(
                       isAdminMode: widget.editorWidgetData.isAdminMode,
                       auid: widget._auid,
                       columns: widget._columns,
@@ -321,7 +321,7 @@ class _EditorWidgetAssessmentState extends State<EditorWidgetAssessment> {
                         ? Container()
                         : Align(
                             alignment: Alignment.topRight,
-                            child: _StorybridgeAssessmentMore(
+                            child: _ScholarityAssessmentMore(
                               assessmentWidgetController:
                                   _assessmentWidgetController,
                               assessmentData: widget._assessmentData!,
@@ -341,10 +341,10 @@ class _EditorWidgetAssessmentState extends State<EditorWidgetAssessment> {
 
 class _AssessmentMoreSettings extends StatelessWidget {
   // members of MyWidget
-  final StorybridgeTextFieldController weightingController =
-      StorybridgeTextFieldController();
-  final StorybridgeTextFieldController minGradeController =
-      StorybridgeTextFieldController();
+  final ScholarityTextFieldController weightingController =
+      ScholarityTextFieldController();
+  final ScholarityTextFieldController minGradeController =
+      ScholarityTextFieldController();
   final String auid;
   final Map<String, dynamic> assessmentData;
   final _AssessmentMetaData assessmentMetaData;
@@ -386,17 +386,17 @@ class _AssessmentMoreSettings extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        StorybridgeIconButton(
+        ScholarityIconButton(
             icon: Icons.close,
             onPressed: () {
               Navigator.pop(context);
             }),
         const SizedBox(height: 30),
-        const StorybridgeTextH2B("Minimum Passing Percentage"),
-        const StorybridgeTextP(
+        const ScholarityTextH2B("Minimum Passing Percentage"),
+        const ScholarityTextP(
             "If a student scores above this percentage, they will be counted\nas passing the assessment. Otherwise, they will be counted as failing."),
         const SizedBox(height: 10),
-        StorybridgeSettingButton(
+        ScholaritySettingButton(
             isSmall: true,
             loadValue: () async {
               return minGradeController.text;
@@ -413,7 +413,7 @@ class _AssessmentMoreSettings extends StatelessWidget {
                   throw 0;
                 }
               } catch (_) {
-                throw error_service.StorybridgeException("0-100");
+                throw error_service.ScholarityException("0-100");
               }
 
               // set and save
@@ -421,11 +421,11 @@ class _AssessmentMoreSettings extends StatelessWidget {
               _saveMinGradeParam();
             },
             name: "min grade"),
-        const StorybridgeTextH2B("Relative Weighting of Assessment"),
-        const StorybridgeTextP(
+        const ScholarityTextH2B("Relative Weighting of Assessment"),
+        const ScholarityTextP(
             "The weighting of the assessment relative to other assessments'\nweightings."),
         const SizedBox(height: 10),
-        StorybridgeSettingButton(
+        ScholaritySettingButton(
             isSmall: true,
             loadValue: () async {
               return weightingController.text;
@@ -439,7 +439,7 @@ class _AssessmentMoreSettings extends StatelessWidget {
                   throw 0;
                 }
               } catch (_) {
-                throw error_service.StorybridgeException("number");
+                throw error_service.ScholarityException("number");
               }
 
               // set and save
@@ -447,15 +447,15 @@ class _AssessmentMoreSettings extends StatelessWidget {
               _saveWeightingParam();
             },
             name: "weighting"),
-        const StorybridgeTextH2B("Assessment Data"),
-        const StorybridgeTextP(
+        const ScholarityTextH2B("Assessment Data"),
+        const ScholarityTextP(
             "Copy and paste assessment questions to another page."),
         const SizedBox(height: 10),
         Row(
           children: [
             Tooltip(
               message: "copy",
-              child: StorybridgeIconButton(
+              child: ScholarityIconButton(
                 icon: Icons.copy_rounded,
                 onPressed: () {},
               ),
@@ -465,7 +465,7 @@ class _AssessmentMoreSettings extends StatelessWidget {
             ),
             Tooltip(
                 message: "paste",
-                child: StorybridgeIconButton(
+                child: ScholarityIconButton(
                   icon: Icons.paste_rounded,
                   onPressed: () async {
                     //final clipboardData =
@@ -479,11 +479,11 @@ class _AssessmentMoreSettings extends StatelessWidget {
   }
 }
 
-class _StorybridgeAssessmentWidgetController {
+class _ScholarityAssessmentWidgetController {
   int questionNumber = 0;
 }
 
-class _StorybridgeAssessment extends StatefulWidget {
+class _ScholarityAssessment extends StatefulWidget {
   // members of MyWidget
   final bool isAdminMode;
   final String auid;
@@ -492,10 +492,10 @@ class _StorybridgeAssessment extends StatefulWidget {
   final EditorWidgetData editorWidgetData;
   final Map<String, dynamic>? answerData;
   final void Function() onUpdate;
-  final _StorybridgeAssessmentWidgetController controller;
+  final _ScholarityAssessmentWidgetController controller;
 
   // constructor
-  const _StorybridgeAssessment({
+  const _ScholarityAssessment({
     Key? key,
     required this.isAdminMode,
     required this.auid,
@@ -508,10 +508,10 @@ class _StorybridgeAssessment extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<_StorybridgeAssessment> createState() => _StorybridgeAssessmentState();
+  State<_ScholarityAssessment> createState() => _ScholarityAssessmentState();
 }
 
-class _StorybridgeAssessmentState extends State<_StorybridgeAssessment> {
+class _ScholarityAssessmentState extends State<_ScholarityAssessment> {
   // main build function
   @override
   Widget build(BuildContext context) {
@@ -522,9 +522,9 @@ class _StorybridgeAssessmentState extends State<_StorybridgeAssessment> {
           padding: const EdgeInsets.only(left: 16, top: 16),
           child: Row(
             children: [
-              const StorybridgeTextH2B("Question"),
+              const ScholarityTextH2B("Question"),
               const SizedBox(width: 5),
-              StorybridgeTextH2B(
+              ScholarityTextH2B(
                   "${widget.controller.questionNumber + 1}/${widget.questionData.length}"),
             ],
           ),
@@ -534,7 +534,7 @@ class _StorybridgeAssessmentState extends State<_StorybridgeAssessment> {
           child: DottedBorder(
               borderType: BorderType.RRect,
               color: widget.isAdminMode
-                  ? Storybridge_color.borderColor
+                  ? scholarity_color.borderColor
                   : Colors.transparent,
               strokeWidth: 1,
               dashPattern: const [8, 4],
@@ -543,7 +543,7 @@ class _StorybridgeAssessmentState extends State<_StorybridgeAssessment> {
               strokeCap: StrokeCap.round,
               child: widget.columns[widget.controller.questionNumber]),
         ),
-        _StorybridgeAnswerMultipleChoice(
+        _ScholarityAnswerMultipleChoice(
           questionAnswerData:
               widget.questionData[widget.controller.questionNumber]
                   ["questionAnswerData"],
@@ -559,7 +559,7 @@ class _StorybridgeAssessmentState extends State<_StorybridgeAssessment> {
         Stack(
           children: [
             widget.controller.questionNumber != 0
-                ? StorybridgeButton(
+                ? ScholarityButton(
                     text: "Previous Question",
                     lightenBackground: true,
                     onPressed: () {
@@ -578,9 +578,9 @@ class _StorybridgeAssessmentState extends State<_StorybridgeAssessment> {
                     Expanded(
                       child: Container(),
                     ),
-                    const StorybridgeTextH5("Question"),
+                    const ScholarityTextH5("Question"),
                     const SizedBox(width: 3),
-                    StorybridgeTextH5(
+                    ScholarityTextH5(
                         "${widget.controller.questionNumber + 1}/${widget.questionData.length}"),
                     Expanded(
                       child: Container(),
@@ -594,7 +594,7 @@ class _StorybridgeAssessmentState extends State<_StorybridgeAssessment> {
               child: IntrinsicWidth(
                 child: widget.controller.questionNumber !=
                         widget.questionData.length - 1
-                    ? StorybridgeButton(
+                    ? ScholarityButton(
                         text: "Next Question",
                         onPressed: () {
                           setState(() {
@@ -604,7 +604,7 @@ class _StorybridgeAssessmentState extends State<_StorybridgeAssessment> {
                       )
                     : !widget.isAdminMode
                         ? Container()
-                        : StorybridgeButton(
+                        : ScholarityButton(
                             text: "Create New Question",
                             onPressed: () {
                               widget.questionData.add({
@@ -649,14 +649,14 @@ class _StorybridgeAssessmentState extends State<_StorybridgeAssessment> {
 }
 
 // myPage class which creates a state on call
-class _StorybridgeAnswerMultipleChoice extends StatefulWidget {
+class _ScholarityAnswerMultipleChoice extends StatefulWidget {
   final void Function() onAdminUpdate;
   final String auid;
   final String quid;
   final Map<String, dynamic> questionAnswerData;
   final Map<String, dynamic>? answerData;
   final bool isAdminMode;
-  const _StorybridgeAnswerMultipleChoice(
+  const _ScholarityAnswerMultipleChoice(
       {Key? key,
       required this.onAdminUpdate,
       required this.quid,
@@ -667,13 +667,13 @@ class _StorybridgeAnswerMultipleChoice extends StatefulWidget {
       : super(key: key);
 
   @override
-  _StorybridgeAnswerMultipleChoiceState createState() =>
-      _StorybridgeAnswerMultipleChoiceState();
+  _ScholarityAnswerMultipleChoiceState createState() =>
+      _ScholarityAnswerMultipleChoiceState();
 }
 
 // myPage state
-class _StorybridgeAnswerMultipleChoiceState
-    extends State<_StorybridgeAnswerMultipleChoice> {
+class _ScholarityAnswerMultipleChoiceState
+    extends State<_ScholarityAnswerMultipleChoice> {
   int? _selectedUserChoice;
 
   @override
@@ -748,7 +748,7 @@ class _StorybridgeAnswerMultipleChoiceState
     List<dynamic> correctAnswers = widget.questionAnswerData["correctAnswers"];
     return Column(
       children: List.generate(choices.length, (int i) {
-        return _StorybridgeRadio(
+        return _ScholarityRadio(
           label: choices[i],
           value: choices[i],
           isSelected: _selectedUserChoice == i,
@@ -780,7 +780,7 @@ class _StorybridgeAnswerMultipleChoiceState
   }
 }
 
-class _StorybridgeRadio extends StatelessWidget {
+class _ScholarityRadio extends StatelessWidget {
   // members of MyWidget
   final String label;
   final bool isSelected;
@@ -790,11 +790,11 @@ class _StorybridgeRadio extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final bool isAdminMode;
   final void Function(String newName) onNameChanged;
-  final StorybridgeTextFieldController textController =
-      StorybridgeTextFieldController();
+  final ScholarityTextFieldController textController =
+      ScholarityTextFieldController();
 
   // constructor
-  _StorybridgeRadio({
+  _ScholarityRadio({
     Key? key,
     required this.label,
     required this.isSelected,
@@ -824,8 +824,8 @@ class _StorybridgeRadio extends StatelessWidget {
               duration: const Duration(milliseconds: 200),
               decoration: BoxDecoration(
                   color: isSelected
-                      ? Storybridge_color.StorybridgeAccentBackground
-                      : Storybridge_color.background,
+                      ? scholarity_color.scholarityAccentBackground
+                      : scholarity_color.background,
                   borderRadius: BorderRadius.circular(12)),
               child: Padding(
                 padding: const EdgeInsets.all(8),
@@ -842,14 +842,14 @@ class _StorybridgeRadio extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     !isAdminMode
-                        ? Expanded(child: StorybridgeTextH5(label))
+                        ? Expanded(child: ScholarityTextH5(label))
                         : Expanded(
-                            child: StorybridgeEditableText(
+                            child: ScholarityEditableText(
                                 controller: textController,
                                 onSubmit: () {
                                   onNameChanged(textController.text);
                                 },
-                                style: StorybridgeTextH5Style),
+                                style: scholarityTextH5Style),
                           ),
                   ],
                 ),
@@ -868,7 +868,7 @@ class _StorybridgeRadio extends StatelessWidget {
                         onCorrectAnswerChanged(value!);
                       },
                     ),
-                    const StorybridgeTextH5("Is correct answer?"),
+                    const ScholarityTextH5("Is correct answer?"),
                   ],
                 ),
               ),
@@ -877,23 +877,23 @@ class _StorybridgeRadio extends StatelessWidget {
   }
 }
 
-class _StorybridgeAssessmentFront extends StatefulWidget {
+class _ScholarityAssessmentFront extends StatefulWidget {
   // members of MyWidget
   final String auid;
   final void Function() onUpdate;
 
   // constructor
-  const _StorybridgeAssessmentFront(
+  const _ScholarityAssessmentFront(
       {Key? key, required this.auid, required this.onUpdate})
       : super(key: key);
 
   @override
-  State<_StorybridgeAssessmentFront> createState() =>
-      _StorybridgeAssessmentFrontState();
+  State<_ScholarityAssessmentFront> createState() =>
+      _ScholarityAssessmentFrontState();
 }
 
-class _StorybridgeAssessmentFrontState
-    extends State<_StorybridgeAssessmentFront> {
+class _ScholarityAssessmentFrontState
+    extends State<_ScholarityAssessmentFront> {
   bool _isLoading = false;
   // main build function
   @override
@@ -908,11 +908,11 @@ class _StorybridgeAssessmentFrontState
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const StorybridgeTextH2B(
+              const ScholarityTextH2B(
                 "This is a graded assessment where you are given questions.\nPlease click button below to begin.",
               ),
               const SizedBox(height: 10),
-              StorybridgeButton(
+              ScholarityButton(
                 verticalOnlyPadding: true,
                 text: "Begin Assessment",
                 loading: _isLoading,
@@ -937,9 +937,9 @@ class _StorybridgeAssessmentFrontState
   }
 }
 
-class _StorybridgeAssessmentFinished extends StatelessWidget {
+class _ScholarityAssessmentFinished extends StatelessWidget {
   // constructor
-  const _StorybridgeAssessmentFinished({Key? key}) : super(key: key);
+  const _ScholarityAssessmentFinished({Key? key}) : super(key: key);
 
   // main build function
   @override
@@ -950,7 +950,7 @@ class _StorybridgeAssessmentFinished extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
-          child: StorybridgeTextH2B(
+          child: ScholarityTextH2B(
             "Your assessment has now been submitted.",
           ),
         ),
@@ -959,9 +959,9 @@ class _StorybridgeAssessmentFinished extends StatelessWidget {
   }
 }
 
-class _StorybridgeAssessmentMore extends StatefulWidget {
+class _ScholarityAssessmentMore extends StatefulWidget {
   // members of MyWidget
-  final _StorybridgeAssessmentWidgetController assessmentWidgetController;
+  final _ScholarityAssessmentWidgetController assessmentWidgetController;
 
   final _AssessmentMetaData assessmentMetaData;
   final String auid;
@@ -971,7 +971,7 @@ class _StorybridgeAssessmentMore extends StatefulWidget {
   final void Function(int questionNumber) onDeleteQuestion;
 
   // constructor
-  const _StorybridgeAssessmentMore(
+  const _ScholarityAssessmentMore(
       {Key? key,
       required this.assessmentWidgetController,
       required this.assessmentMetaData,
@@ -982,18 +982,17 @@ class _StorybridgeAssessmentMore extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<_StorybridgeAssessmentMore> createState() =>
-      _StorybridgeAssessmentMoreState();
+  State<_ScholarityAssessmentMore> createState() =>
+      _ScholarityAssessmentMoreState();
 }
 
-class _StorybridgeAssessmentMoreState
-    extends State<_StorybridgeAssessmentMore> {
+class _ScholarityAssessmentMoreState extends State<_ScholarityAssessmentMore> {
   // main build function
   @override
   Widget build(BuildContext context) {
     return IntrinsicWidth(
         child: PopupMenuButton<_AccountActions>(
-            child: StorybridgeIconButton(
+            child: ScholarityIconButton(
               icon: Icons.tune_rounded,
               isEnabled: true,
             ),
@@ -1005,8 +1004,8 @@ class _StorybridgeAssessmentMoreState
                       showDialog<String>(
                         context: context,
                         builder: (BuildContext context) =>
-                            StorybridgeAlertDialogWrapper(
-                          child: StorybridgeAlertDialog(
+                            ScholarityAlertDialogWrapper(
+                          child: ScholarityAlertDialog(
                             content: _AssessmentMoreReorderQuestion(
                               assessmentWidgetController:
                                   widget.assessmentWidgetController,
@@ -1019,7 +1018,7 @@ class _StorybridgeAssessmentMoreState
                       );
                     });
                   },
-                  child: const StorybridgeTextBasic('Reorder Question'),
+                  child: const ScholarityTextBasic('Reorder Question'),
                 ),
                 PopupMenuItem<_AccountActions>(
                   onTap: () {
@@ -1027,8 +1026,8 @@ class _StorybridgeAssessmentMoreState
                       showDialog<String>(
                         context: context,
                         builder: (BuildContext context) =>
-                            StorybridgeAlertDialogWrapper(
-                          child: StorybridgeAlertDialog(
+                            ScholarityAlertDialogWrapper(
+                          child: ScholarityAlertDialog(
                             content: _AssessmentMoreDeleteQuestion(
                               assessmentWidgetController:
                                   widget.assessmentWidgetController,
@@ -1039,7 +1038,7 @@ class _StorybridgeAssessmentMoreState
                       );
                     });
                   },
-                  child: const StorybridgeTextBasic('Delete Question'),
+                  child: const ScholarityTextBasic('Delete Question'),
                 ),
                 PopupMenuItem<_AccountActions>(
                   onTap: () {
@@ -1047,8 +1046,8 @@ class _StorybridgeAssessmentMoreState
                       showDialog<String>(
                         context: context,
                         builder: (BuildContext context) =>
-                            StorybridgeAlertDialogWrapper(
-                          child: StorybridgeAlertDialog(
+                            ScholarityAlertDialogWrapper(
+                          child: ScholarityAlertDialog(
                             content: _AssessmentMoreSettings(
                               assessmentMetaData: widget.assessmentMetaData,
                               auid: widget.auid,
@@ -1059,7 +1058,7 @@ class _StorybridgeAssessmentMoreState
                       );
                     });
                   },
-                  child: const StorybridgeTextBasic('Settings'),
+                  child: const ScholarityTextBasic('Settings'),
                 ),
               ];
             }));
@@ -1067,9 +1066,9 @@ class _StorybridgeAssessmentMoreState
 }
 
 class _AssessmentMoreReorderQuestion extends StatelessWidget {
-  final StorybridgeTextFieldController _controller =
-      StorybridgeTextFieldController();
-  final _StorybridgeAssessmentWidgetController assessmentWidgetController;
+  final ScholarityTextFieldController _controller =
+      ScholarityTextFieldController();
+  final _ScholarityAssessmentWidgetController assessmentWidgetController;
   final int numberOfQuestions;
   final void Function(int initialQuestionNum, int finalQuestionNum)
       onReorderQuestion;
@@ -1091,14 +1090,14 @@ class _AssessmentMoreReorderQuestion extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        StorybridgeIconButton(
+        ScholarityIconButton(
             icon: Icons.close,
             onPressed: () {
               Navigator.pop(context);
             }),
         const SizedBox(height: 10),
-        const StorybridgeTextH2B("Reorder Question"),
-        const StorybridgeTextP(
+        const ScholarityTextH2B("Reorder Question"),
+        const ScholarityTextP(
             "Move this question to a different place in this assessment."),
         const SizedBox(height: 20),
         Builder(builder: (context) {
@@ -1106,14 +1105,14 @@ class _AssessmentMoreReorderQuestion extends StatelessWidget {
           for (int i = 1; i <= numberOfQuestions; i++) {
             dropdowns.add(i.toString());
           }
-          return StorybridgeDropdown(
+          return ScholarityDropdown(
             label: "Move to",
             controller: _controller,
             dropdownTypes: dropdowns,
           );
         }),
         const SizedBox(height: 20),
-        StorybridgeButton(
+        ScholarityButton(
           padding: false,
           text: "Move",
           onPressed: () {
@@ -1128,9 +1127,9 @@ class _AssessmentMoreReorderQuestion extends StatelessWidget {
 }
 
 class _AssessmentMoreDeleteQuestion extends StatelessWidget {
-  final StorybridgeTextFieldController _controller =
-      StorybridgeTextFieldController();
-  final _StorybridgeAssessmentWidgetController assessmentWidgetController;
+  final ScholarityTextFieldController _controller =
+      ScholarityTextFieldController();
+  final _ScholarityAssessmentWidgetController assessmentWidgetController;
   final void Function(int questionNumber) onDeleteQuestion;
   // constructor
   _AssessmentMoreDeleteQuestion(
@@ -1149,18 +1148,18 @@ class _AssessmentMoreDeleteQuestion extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        StorybridgeIconButton(
+        ScholarityIconButton(
             icon: Icons.close,
             onPressed: () {
               Navigator.pop(context);
             }),
         const SizedBox(height: 10),
-        StorybridgeTextH2B(
+        ScholarityTextH2B(
             "Delete Question #${assessmentWidgetController.questionNumber + 1}"),
-        const StorybridgeTextP(
+        const ScholarityTextP(
             "Are you sure you want to permanently delete this question?"),
         const SizedBox(height: 20),
-        StorybridgeButton(
+        ScholarityButton(
           padding: false,
           text: "Delete",
           onPressed: () {

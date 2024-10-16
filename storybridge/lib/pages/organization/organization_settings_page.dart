@@ -1,7 +1,7 @@
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -45,16 +45,16 @@ class _OrganizationSettingsPageState extends State<OrganizationSettingsPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       const SizedBox(height: 40),
       OrganizationAuthShareWidget(
         organizationId: widget.organizationId,
       ),
       const SizedBox(height: 40),
-      const StorybridgeDescriptor(
+      const ScholarityDescriptor(
         name: "Organization Name",
       ),
-      StorybridgeSettingButton(
+      ScholaritySettingButton(
         name: "Organization Name",
         loadValue: () async {
           Map<String, dynamic> org = await networking_api_service
@@ -67,10 +67,10 @@ class _OrganizationSettingsPageState extends State<OrganizationSettingsPage> {
           Navigator.pushNamed(context, "/reload");
         },
       ),
-      const StorybridgeDescriptor(
+      const ScholarityDescriptor(
         name: "Organization Email",
       ),
-      StorybridgeSettingButton(
+      ScholaritySettingButton(
         name: "Organization Email",
         loadValue: () async {
           Map<String, dynamic> org = await networking_api_service
@@ -82,21 +82,21 @@ class _OrganizationSettingsPageState extends State<OrganizationSettingsPage> {
               organizationId: widget.organizationId, email: value);
         },
       ),
-      const StorybridgeDescriptor(
+      const ScholarityDescriptor(
         name: "Organization Logo",
       ),
       ProfilePictureSelectorWidget(
         organizationId: widget.organizationId,
       ),
       const SizedBox(height: 30),
-      const StorybridgeDivider(),
+      const ScholarityDivider(),
       const SizedBox(height: 30),
-      const StorybridgeTextH2B("Your plan:"),
+      const ScholarityTextH2B("Your plan:"),
       const SizedBox(height: 10),
       Container(
         constraints: const BoxConstraints(maxWidth: 500),
-        child: StorybridgeTile(
-          child: StorybridgePadding(
+        child: ScholarityTile(
+          child: ScholarityPadding(
             child: FutureBuilder(
                 future: _loadData(),
                 builder: (context, AsyncSnapshot<bool> snapshot) {
@@ -114,14 +114,14 @@ class _OrganizationSettingsPageState extends State<OrganizationSettingsPage> {
                         return const PaymentEnterpriseTierWidget();
                     }
                   } else {
-                    return const StorybridgeBoxLoading(height: 120, width: 300);
+                    return const ScholarityBoxLoading(height: 120, width: 300);
                   }
                 }),
           ),
         ),
       ),
       const SizedBox(height: 30),
-      StorybridgeButton(
+      ScholarityButton(
           text: "Manage Payment Info",
           onPressed: () {
             launchUrl(Uri.parse(_paymentPortalUrl));

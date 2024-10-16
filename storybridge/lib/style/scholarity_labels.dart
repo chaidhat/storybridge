@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart'; // Flutter
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
 
-class StorybridgeLabels extends StatelessWidget {
+class ScholarityLabels extends StatelessWidget {
   final int? labelGroupId;
   final List<dynamic> selectedLabels;
   final bool canEdit;
   final Function(List<int> labelId)? onUpdate;
 
   // constructor
-  const StorybridgeLabels({
+  const ScholarityLabels({
     Key? key,
     this.labelGroupId,
     required this.selectedLabels,
@@ -36,14 +36,14 @@ class StorybridgeLabels extends StatelessWidget {
         future: _load(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
-            return const StorybridgeBoxLoading(height: 40, width: 40);
+            return const ScholarityBoxLoading(height: 40, width: 40);
           }
           return Row(
             children: [
               Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: List.generate(selectedLabels.length, (int i) {
-                    return StorybridgeLabel(
+                    return ScholarityLabel(
                         label:
                             Uri.decodeComponent(selectedLabels[i]["labelName"]),
                         color: selectedLabels[i]["color"],
@@ -61,7 +61,7 @@ class StorybridgeLabels extends StatelessWidget {
                             onTap: () {
                               onUpdate!([snapshot.data[i]["labelId"]]);
                             },
-                            child: StorybridgeLabel(
+                            child: ScholarityLabel(
                                 label: Uri.decodeComponent(
                                     snapshot.data[i]["labelName"]),
                                 description: Uri.decodeComponent(
@@ -70,7 +70,7 @@ class StorybridgeLabels extends StatelessWidget {
                           );
                         });
                       },
-                      child: StorybridgeIconButton(
+                      child: ScholarityIconButton(
                         icon: Icons.sell_outlined,
                         isEnabled: true,
                       ),
@@ -82,13 +82,13 @@ class StorybridgeLabels extends StatelessWidget {
   }
 }
 
-class StorybridgeLabel extends StatelessWidget {
+class ScholarityLabel extends StatelessWidget {
   final String label;
   final String description;
   final String color;
   final double targetContrastRatio = .2;
   // constructor
-  const StorybridgeLabel(
+  const ScholarityLabel(
       {Key? key,
       required this.label,
       required this.description,
@@ -96,11 +96,11 @@ class StorybridgeLabel extends StatelessWidget {
       : super(key: key);
 
   Color _getTextColor(Color color) {
-    return Storybridge_color.getTextColor(color);
+    return scholarity_color.getTextColor(color);
   }
 
   Color _getBackgroundColor(Color color) {
-    return Storybridge_color.getBackgroundColor(color);
+    return scholarity_color.getBackgroundColor(color);
   }
 
   // main build function
@@ -116,7 +116,7 @@ class StorybridgeLabel extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: IntrinsicWidth(
-            child: StorybridgeTextBasic(label,
+            child: ScholarityTextBasic(label,
                 style: TextStyle(
                     color: _getTextColor(colorizedColor),
                     fontSize: 14,

@@ -1,12 +1,12 @@
 import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_service.dart' as networking_service;
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 import 'package:mooc/services/camera_service.dart' as camera_service;
 
 // myPage class which creates a state on call
@@ -104,8 +104,8 @@ class _ProfilePictureSelectorWidgetState
       // ignore: use_build_context_synchronously
       showDialog<String>(
           context: context,
-          builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-                  child: StorybridgeAlertDialog(
+          builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+                  child: ScholarityAlertDialog(
                       content: camera_service.TakePictureScreen(
                 onPictureTaken: () async {
                   _imageId = await networking_api_service.createImageForUser(
@@ -150,14 +150,14 @@ class _ProfilePictureSelectorWidgetState
                   ),
                 ),
               )
-            : const StorybridgeBoxLoading(height: 200, width: 200),
+            : const ScholarityBoxLoading(height: 200, width: 200),
         !_isLoading
             ? (widget.userId != null
                 ? Align(
                     alignment: Alignment.centerLeft,
                     child: IntrinsicWidth(
                       child: PopupMenuButton(
-                          child: const StorybridgeButton(
+                          child: const ScholarityButton(
                             text: "Change Profile Picture",
                             onPressed: null,
                           ),
@@ -167,26 +167,26 @@ class _ProfilePictureSelectorWidgetState
                                 onTap: () {
                                   _uploadProfilePicture();
                                 },
-                                child: const StorybridgeTextBasic(
-                                    'Upload Picture'),
+                                child:
+                                    const ScholarityTextBasic('Upload Picture'),
                               ),
                               PopupMenuItem(
                                 onTap: () {
                                   _takePhoto();
                                 },
-                                child: const StorybridgeTextBasic('Take photo'),
+                                child: const ScholarityTextBasic('Take photo'),
                               ),
                             ];
                           }),
                     ),
                   )
-                : StorybridgeButton(
+                : ScholarityButton(
                     text: "Upload Picture",
                     onPressed: () {
                       _uploadProfilePicture();
                     },
                   ))
-            : const StorybridgeBoxLoading(height: 70, width: 300),
+            : const ScholarityBoxLoading(height: 70, width: 300),
       ],
     );
   }
@@ -290,7 +290,7 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
                         ? BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: Storybridge_color.borderColor,
+                              color: scholarity_color.borderColor,
                             ))
                         : null,
                     child: Builder(builder: (context) {
@@ -321,7 +321,7 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
               ],
             );
           } else {
-            return const StorybridgeBoxLoading(height: 10, width: 10);
+            return const ScholarityBoxLoading(height: 10, width: 10);
           }
         });
   }

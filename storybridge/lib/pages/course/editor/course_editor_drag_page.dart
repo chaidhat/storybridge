@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/pages/course/editor/widgets/drag_widgets/editor_widget_answer_buttons.dart';
 import 'package:mooc/pages/course/editor/widgets/drag_widgets/editor_widget_answer_checkbox.dart';
@@ -68,7 +68,7 @@ class _GeneralWidgets extends StatelessWidget {
       children: [
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 14),
-          child: StorybridgeTextH2B("Drag & Drop Widgets"),
+          child: ScholarityTextH2B("Drag & Drop Widgets"),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -181,7 +181,7 @@ class _FrontPageWidgets extends StatelessWidget {
       children: [
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 14),
-          child: StorybridgeTextH2B("Front Page Widgets"),
+          child: ScholarityTextH2B("Front Page Widgets"),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -235,7 +235,7 @@ class _SuggestNewPageState extends State<_SuggestNewPage> {
           error_service.alert(error_service.Alert(
               title: "Suggest a New Widget",
               description:
-                  "Since Storybridge is very new, we are excited to hear what widget or feature you would like to see in the program!\n\nPlease describe your suggestion in two-three sentences.\nNote: submissions are anonymous.",
+                  "Since Scholarity is very new, we are excited to hear what widget or feature you would like to see in the program!\n\nPlease describe your suggestion in two-three sentences.\nNote: submissions are anonymous.",
               buttonName: "SUBMIT",
               isLarge: true,
               acceptInput: true,
@@ -243,7 +243,7 @@ class _SuggestNewPageState extends State<_SuggestNewPage> {
                 error_service.alert(error_service.Alert(
                     title: "Thank you!",
                     description:
-                        "Thank you very much for suggesting a feature! Every so often, we look at all the feature suggestions and, depending on its popularity and complexity, try to implement it into Storybridge.",
+                        "Thank you very much for suggesting a feature! Every so often, we look at all the feature suggestions and, depending on its popularity and complexity, try to implement it into Scholarity.",
                     buttonName: "Dismiss",
                     callback: (String input) async {
                       setState(() {});
@@ -290,7 +290,7 @@ class _AuditEditorDragSidebarState extends State<AuditEditorDragSidebar> {
         const SizedBox(height: 40),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 14),
-          child: StorybridgeTextH2B("Question Widgets"),
+          child: ScholarityTextH2B("Question Widgets"),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -334,7 +334,7 @@ class _AuditEditorDragSidebarState extends State<AuditEditorDragSidebar> {
         const SizedBox(height: 40),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 14),
-          child: StorybridgeTextH2B("Answer Widgets"),
+          child: ScholarityTextH2B("Answer Widgets"),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4),

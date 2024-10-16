@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-class StorybridgeException implements Exception {
+class ScholarityException implements Exception {
   String message;
   Map<String, dynamic>? errorData;
   String? description;
   bool expandError;
-  StorybridgeException(this.message,
+  ScholarityException(this.message,
       {this.description, this.expandError = true, this.errorData});
 }
 
-void reportError(StorybridgeException error, BuildContext context) {
+void reportError(ScholarityException error, BuildContext context) {
   if (!error.expandError) return;
   showDialog<String>(
     context: context,
-    builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-      child: StorybridgeAlertDialog(
-        title: StorybridgeTextBasic(error.message),
+    builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+      child: ScholarityAlertDialog(
+        title: ScholarityTextBasic(error.message),
         content: SizedBox(
             width: 250,
-            child: StorybridgeTextBasic(
+            child: ScholarityTextBasic(
                 error.description ?? "No description given.")),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const StorybridgeTextBasic('Dismiss'),
+            child: const ScholarityTextBasic('Dismiss'),
           ),
         ],
       ),
@@ -57,7 +57,7 @@ void alert(Alert alertMessage) {
   alertQueued = alertMessage;
 }
 
-final _alertInputController = StorybridgeTextFieldController();
+final _alertInputController = ScholarityTextFieldController();
 
 // stupid code
 // delete later maybe
@@ -68,21 +68,21 @@ void checkAlerts(BuildContext bc) async {
     await Future.delayed(const Duration(milliseconds: 100), () {});
     await showDialog<String>(
       context: bc,
-      builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-        child: StorybridgeAlertDialog(
-          title: StorybridgeTextH2B(alertQueued!.title),
+      builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+        child: ScholarityAlertDialog(
+          title: ScholarityTextH2B(alertQueued!.title),
           content: SizedBox(
               width: !alertQueued!.isLarge ? 250 : 500,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  StorybridgeTextP(alertQueued!.description),
+                  ScholarityTextP(alertQueued!.description),
                   const SizedBox(height: 20),
                   alertQueued!.acceptInput
                       ? SizedBox(
                           height: !alertQueued!.isLarge ? null : 120,
-                          child: StorybridgeTextField(
+                          child: ScholarityTextField(
                             label: "",
                             isLarge: alertQueued!.isLarge,
                             controller: _alertInputController,
@@ -97,14 +97,14 @@ void checkAlerts(BuildContext bc) async {
                 Navigator.pop(context);
                 isSubmit = true;
               },
-              child: StorybridgeTextBasic(alertQueued!.buttonName),
+              child: ScholarityTextBasic(alertQueued!.buttonName),
             ),
             alertQueued!.allowCancel
                 ? TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const StorybridgeTextBasic('Cancel'),
+                    child: const ScholarityTextBasic('Cancel'),
                   )
                 : Container(),
           ],

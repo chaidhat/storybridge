@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/pages/course/editor/widgets/drag_widgets/editor_widget_column.dart';
 
@@ -27,7 +27,7 @@ class CourseEditorViewerPage extends StatefulWidget {
 }
 
 class _CourseEditorVideoPageState extends State<CourseEditorViewerPage> {
-  final _courseElementNameController = StorybridgeTextFieldController();
+  final _courseElementNameController = ScholarityTextFieldController();
   Map<String, dynamic> _data = {};
   // fancy late keyword by https://stackoverflow.com/a/68273324
   late final EditorWidgetColumn _stemEditorWidget = EditorWidgetColumn(
@@ -66,7 +66,7 @@ class _CourseEditorVideoPageState extends State<CourseEditorViewerPage> {
             courseElementId:
                 widget.courseData.getSelectedCourseElement().courseElementId,
             data: jsonEncode(_data));
-      } on error_service.StorybridgeException catch (e) {
+      } on error_service.ScholarityException catch (e) {
         if (e.message == "assigner has insufficient permission") {
           setState(() {
             error_service.alert(error_service.Alert(
@@ -138,9 +138,9 @@ class _CourseEditorVideoPageState extends State<CourseEditorViewerPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(12),
-                            child: StorybridgeEditableText(
+                            child: ScholarityEditableText(
                               enabled: widget.isAdminMode,
-                              style: StorybridgeTextH2Style,
+                              style: scholarityTextH2Style,
                               controller: _courseElementNameController,
                               onSubmit: _changeCourseElementName,
                             ),
@@ -159,7 +159,7 @@ class _CourseEditorVideoPageState extends State<CourseEditorViewerPage> {
                           _stemEditorWidget,
                         ],
                       )
-                    : const StorybridgePageLoading(),
+                    : const ScholarityPageLoading(),
               ],
             ),
           );

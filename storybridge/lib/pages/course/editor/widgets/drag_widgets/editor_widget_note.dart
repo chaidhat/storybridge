@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:flutter_quill/flutter_quill.dart' as quill;
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 
 const widgetTypeNote = "note";
 
@@ -102,9 +102,9 @@ class _EditorWidgetNoteState extends State<EditorWidgetNote> {
   }
 
   void _formatDarkMode() {
-    if (Storybridge_color.isWhite(
+    if (scholarity_color.isWhite(
         widget.backgroundColorController.backgroundColor.text.toColor()!)) {
-      if (Storybridge_color.getIsDarkMode()) {
+      if (scholarity_color.getIsDarkMode()) {
         widget.controller.formatText(0, widget.controller.document.length,
             quill.Attribute.fromKeyValue('color', 'white'));
       } else {
@@ -116,7 +116,7 @@ class _EditorWidgetNoteState extends State<EditorWidgetNote> {
           0,
           widget.controller.document.length,
           quill.Attribute.fromKeyValue('color',
-              "#${Storybridge_color.getTextColor(widget.backgroundColorController.backgroundColor.text.toColor()!).toHexString()}"));
+              "#${scholarity_color.getTextColor(widget.backgroundColorController.backgroundColor.text.toColor()!).toHexString()}"));
     }
   }
 
@@ -124,26 +124,26 @@ class _EditorWidgetNoteState extends State<EditorWidgetNote> {
   @override
   Widget build(BuildContext context) {
     widget.backgroundColorController.onUpdate = _updateQuestion;
-    return StorybridgeTile(
+    return ScholarityTile(
         color: widget.backgroundColorController.backgroundColor.text.toColor()!,
-        child: StorybridgePadding(
+        child: ScholarityPadding(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Icon(Icons.tips_and_updates_outlined,
-                  color: Storybridge_color.getTextColor(widget
+                  color: scholarity_color.getTextColor(widget
                       .backgroundColorController.backgroundColor.text
                       .toColor()!)),
               const SizedBox(height: 10),
               Focus(
                 focusNode: widget.focusNode,
-                child: StorybridgeEditableText(
+                child: ScholarityEditableText(
                   enabled: widget.editorWidgetData.isAdminMode,
                   richController: widget.controller,
                   onSubmit: () {
                     widget.editorWidgetData.onUpdate();
                   },
-                  style: StorybridgeTextPRedStyle,
+                  style: scholarityTextPRedStyle,
                 ),
               ),
             ],
@@ -201,7 +201,7 @@ class _ToolbarState extends State<_Toolbar> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          StorybridgeIconButton(
+          ScholarityIconButton(
               icon: Icons.format_bold_rounded,
               useAltStyle: isBold,
               onPressed: () {
@@ -213,7 +213,7 @@ class _ToolbarState extends State<_Toolbar> {
                 });
               }),
           const SizedBox(width: 4),
-          StorybridgeIconButton(
+          ScholarityIconButton(
               icon: Icons.format_italic_rounded,
               useAltStyle: isItalic,
               onPressed: () {
@@ -225,7 +225,7 @@ class _ToolbarState extends State<_Toolbar> {
                 });
               }),
           const SizedBox(width: 4),
-          StorybridgeIconButton(
+          ScholarityIconButton(
               icon: Icons.format_underline_rounded,
               useAltStyle: isUnderline,
               onPressed: () {
@@ -237,13 +237,13 @@ class _ToolbarState extends State<_Toolbar> {
                 });
               }),
           const SizedBox(width: 20),
-          StorybridgeColorPickerIcon(
+          ScholarityColorPickerIcon(
             controller: widget.backgroundColorController.backgroundColor,
           ),
           /*
           const SizedBox(width: 4),
           !showMoreOptions
-              ? StorybridgeIconButton(
+              ? ScholarityIconButton(
                   icon: Icons.more_horiz,
                   onPressed: () {
                     setState(() {
@@ -253,7 +253,7 @@ class _ToolbarState extends State<_Toolbar> {
                   })
               : Row(children: [
                   const SizedBox(width: 26),
-                  StorybridgeIconButton(
+                  ScholarityIconButton(
                       icon: Icons.text_decrease_rounded,
                       onPressed: () {
                         widget.controller.formatSelection(isUnderline!
@@ -265,7 +265,7 @@ class _ToolbarState extends State<_Toolbar> {
                         });
                       }),
                   const SizedBox(width: 4),
-                  StorybridgeIconButton(
+                  ScholarityIconButton(
                       icon: Icons.text_increase_rounded,
                       onPressed: () {
                         widget.controller.formatSelection(isUnderline!
@@ -283,8 +283,8 @@ class _ToolbarState extends State<_Toolbar> {
 }
 
 class BackgroundColorController {
-  StorybridgeTextFieldController backgroundColor =
-      StorybridgeTextFieldController();
+  ScholarityTextFieldController backgroundColor =
+      ScholarityTextFieldController();
   Function onUpdate = () {};
   BackgroundColorController() {
     backgroundColor.text = "FFFFFF";

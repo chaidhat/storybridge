@@ -39,7 +39,7 @@ Future<Map<String, dynamic>> serverGet(
     print(err);
     saving_telemetry_service.indicateErrored();
     if (ignoreErrors) return {};
-    throw error_service.StorybridgeException("Something went wrong",
+    throw error_service.ScholarityException("Something went wrong",
         description: "Cannot connect to the server.");
   }
   saving_telemetry_service.indicateSaved();
@@ -57,7 +57,7 @@ Future<Map<String, dynamic>> serverGet(
       saving_telemetry_service.indicateErrored();
       print("Error message: ${resBodyJson["message"]}");
       if (ignoreErrors) return {};
-      throw error_service.StorybridgeException(
+      throw error_service.ScholarityException(
         resBodyJson["message"],
         description: "400: Bad request, client error",
       );
@@ -68,26 +68,26 @@ Future<Map<String, dynamic>> serverGet(
       saving_telemetry_service.indicateErrored();
       if (resBodyJson["policy"] != null) {
         resBodyJson["errorData"]["policy"] = resBodyJson["policy"];
-        throw error_service.StorybridgeException(
+        throw error_service.ScholarityException(
             resBodyJson["errorData"]["message"],
             errorData: resBodyJson["errorData"],
             expandError: false);
       } else if (resBodyJson["message"] != null) {
-        throw error_service.StorybridgeException(resBodyJson["message"],
+        throw error_service.ScholarityException(resBodyJson["message"],
             expandError: false);
       } else {
-        throw error_service.StorybridgeException("Malformed error.",
+        throw error_service.ScholarityException("Malformed error.",
             expandError: false);
       }
     case 500: // server error (server error)
       if (ignoreErrors) return {};
       saving_telemetry_service.indicateErrored();
-      throw error_service.StorybridgeException("Something went wrong",
+      throw error_service.ScholarityException("Something went wrong",
           description: "500: Bad request, server error");
     default: // anything could happen
       if (ignoreErrors) return {};
       saving_telemetry_service.indicateErrored();
-      throw error_service.StorybridgeException("Something went wrong",
+      throw error_service.ScholarityException("Something went wrong",
           description:
               "Can connect to server but received an unknown status code");
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
-import 'package:mooc/style/Storybridge_colors.dart' as Storybridge_color;
+import 'package:mooc/style/scholarity_colors.dart' as scholarity_color;
 import 'package:url_launcher/url_launcher.dart';
 
 const widgetTypeLinkButton = "link_button";
@@ -19,10 +19,10 @@ class EditorWidgetLinkButton extends StatelessWidget implements EditorWidget {
   @override
   late final EditorWidgetMetadata metadata;
 
-  final StorybridgeTextFieldController _controller =
-      StorybridgeTextFieldController();
-  final StorybridgeTextFieldController _linkController =
-      StorybridgeTextFieldController();
+  final ScholarityTextFieldController _controller =
+      ScholarityTextFieldController();
+  final ScholarityTextFieldController _linkController =
+      ScholarityTextFieldController();
 
   // serialization
   @override
@@ -57,7 +57,7 @@ class EditorWidgetLinkButton extends StatelessWidget implements EditorWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeButton(
+    return ScholarityButton(
         padding: false,
         child: Align(
             alignment: Alignment.center,
@@ -68,18 +68,18 @@ class EditorWidgetLinkButton extends StatelessWidget implements EditorWidget {
                             horizontal: 8, vertical: 12)
                         : const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 16),
-                    child: StorybridgeEditableText(
+                    child: ScholarityEditableText(
                         enabled: editorWidgetData.isAdminMode,
                         controller: _controller,
                         onSubmit: () {},
-                        style: StorybridgeTextH5RedStyle)))),
+                        style: scholarityTextH5RedStyle)))),
         onPressed: () {
           if (!editorWidgetData.isAdminMode) {
             showDialog<String>(
               context: context,
-              builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-                child: StorybridgeAlertDialog(
-                  content: _StorybridgeLinkPopup(
+              builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+                child: ScholarityAlertDialog(
+                  content: _ScholarityLinkPopup(
                     linkController: _linkController,
                   ),
                 ),
@@ -88,9 +88,9 @@ class EditorWidgetLinkButton extends StatelessWidget implements EditorWidget {
           } else {
             showDialog<String>(
               context: context,
-              builder: (BuildContext context) => StorybridgeAlertDialogWrapper(
-                child: StorybridgeAlertDialog(
-                  content: _StorybridgeLinkSetting(
+              builder: (BuildContext context) => ScholarityAlertDialogWrapper(
+                child: ScholarityAlertDialog(
+                  content: _ScholarityLinkSetting(
                     linkController: _linkController,
                     onSave: () {
                       editorWidgetData.onUpdate();
@@ -104,13 +104,13 @@ class EditorWidgetLinkButton extends StatelessWidget implements EditorWidget {
   }
 }
 
-class _StorybridgeLinkSetting extends StatelessWidget {
+class _ScholarityLinkSetting extends StatelessWidget {
   // members of MyWidget
-  final StorybridgeTextFieldController linkController;
+  final ScholarityTextFieldController linkController;
   final Function() onSave;
 
   // constructor
-  const _StorybridgeLinkSetting({
+  const _ScholarityLinkSetting({
     Key? key,
     required this.linkController,
     required this.onSave,
@@ -123,22 +123,22 @@ class _StorybridgeLinkSetting extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        StorybridgeIconButton(
+        ScholarityIconButton(
             icon: Icons.close,
             onPressed: () {
               Navigator.pop(context);
             }),
         const SizedBox(height: 30),
-        const StorybridgeTextH2B("Send to Link"),
-        const StorybridgeTextP(
+        const ScholarityTextH2B("Send to Link"),
+        const ScholarityTextP(
             "Please enter the url below of where you want to send the student to"),
         const SizedBox(height: 10),
         Column(
           children: [
             SizedBox(
-                child: StorybridgeTextField(
+                child: ScholarityTextField(
                     controller: linkController, label: "URL")),
-            StorybridgeButton(
+            ScholarityButton(
               padding: false,
               text: "save",
               onPressed: () {
@@ -153,12 +153,12 @@ class _StorybridgeLinkSetting extends StatelessWidget {
   }
 }
 
-class _StorybridgeLinkPopup extends StatelessWidget {
+class _ScholarityLinkPopup extends StatelessWidget {
   // members of MyWidget
-  final StorybridgeTextFieldController linkController;
+  final ScholarityTextFieldController linkController;
 
   // constructor
-  const _StorybridgeLinkPopup({
+  const _ScholarityLinkPopup({
     Key? key,
     required this.linkController,
   }) : super(key: key);
@@ -177,7 +177,7 @@ class _StorybridgeLinkPopup extends StatelessWidget {
       children: [
         Row(
           children: [
-            StorybridgeButton(
+            ScholarityButton(
                 padding: false,
                 onPressed: _goToLink,
                 child: Padding(
@@ -187,20 +187,20 @@ class _StorybridgeLinkPopup extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Storybridge_color.StorybridgeAccent)),
+                            color: scholarity_color.scholarityAccent)),
                     const SizedBox(width: 30),
                     Icon(Icons.arrow_forward_rounded,
-                        color: Storybridge_color.StorybridgeAccent)
+                        color: scholarity_color.scholarityAccent)
                   ]),
                 )),
             const SizedBox(width: 10),
           ],
         ),
         const SizedBox(height: 20),
-        const StorybridgeTextP(
+        const ScholarityTextP(
             "You will be sent to this link.\nMake sure you don't click on any suspicious links."),
         const SizedBox(height: 20),
-        StorybridgeButton(
+        ScholarityButton(
           padding: false,
           invertedColor: true,
           text: "Go to link",

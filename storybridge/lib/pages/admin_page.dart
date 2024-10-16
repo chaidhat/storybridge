@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart';
+import 'package:mooc/scholarity.dart';
 
 import 'package:mooc/pages/auth_page.dart';
 
@@ -33,7 +33,7 @@ class _State extends State<AdminPage> {
     try {
       await networking_api_service.adminPing();
       return true;
-    } on error_service.StorybridgeException catch (error) {
+    } on error_service.ScholarityException catch (error) {
       if (error.message == "Invalid admin token.") {
         Navigator.pushNamed(context, '/admin-auth');
         return true;
@@ -51,24 +51,22 @@ class _State extends State<AdminPage> {
         future: _checkIsLoggedIn(),
         builder: (context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.hasData) {
-            return StorybridgeScaffold(
+            return ScholarityScaffold(
               hasAppbar: false,
               body: [],
               tabNames: [
-                StorybridgeTabHeader(
+                ScholarityTabHeader(
                   tabName: "Server Status",
                   tabIcon: Icons.search,
                 ),
-                StorybridgeTabHeader(
+                ScholarityTabHeader(
                   tabName: "Server Post",
                   tabIcon: Icons.search,
                 ),
-                StorybridgeTabHeader(
-                    tabName: "Db Query", tabIcon: Icons.search),
-                StorybridgeTabHeader(tabName: "Db Get", tabIcon: Icons.search),
-                StorybridgeTabHeader(
-                    tabName: "Formulas", tabIcon: Icons.search),
-                StorybridgeTabHeader(tabName: "Design", tabIcon: Icons.search),
+                ScholarityTabHeader(tabName: "Db Query", tabIcon: Icons.search),
+                ScholarityTabHeader(tabName: "Db Get", tabIcon: Icons.search),
+                ScholarityTabHeader(tabName: "Formulas", tabIcon: Icons.search),
+                ScholarityTabHeader(tabName: "Design", tabIcon: Icons.search),
               ],
               tabs: [
                 _AdminStatusPage(),
@@ -83,7 +81,7 @@ class _State extends State<AdminPage> {
             return Container(
                 color: Colors.white,
                 child:
-                    const Center(child: StorybridgeTextP("Pinging server...")));
+                    const Center(child: ScholarityTextP("Pinging server...")));
           }
         });
   }
@@ -119,7 +117,7 @@ class _AdminStatusPageState extends State<_AdminStatusPage> {
       int end = DateTime.now().millisecondsSinceEpoch;
       _ping = end - start;
       return true;
-    } on error_service.StorybridgeException catch (error) {
+    } on error_service.ScholarityException catch (error) {
       if (error.message == "Invalid admin token.") {
         Navigator.pushNamed(context, '/admin-auth');
         return true;
@@ -132,7 +130,7 @@ class _AdminStatusPageState extends State<_AdminStatusPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       FutureBuilder(
           future: _pingServer(),
           builder: (context, AsyncSnapshot<bool> snapshot) {
@@ -147,14 +145,14 @@ class _AdminStatusPageState extends State<_AdminStatusPage> {
                         color: snapshot.data! ? Colors.green : Colors.red,
                         borderRadius: BorderRadius.circular(15)),
                   ),
-                  StorybridgeTextP(
+                  ScholarityTextP(
                       "Server status: ${snapshot.data! ? "OK" : "NO CONNECTION"}\n"
                       "Server ping: ${_ping ?? "N/A"} [ms]\n"
                       "Timestamp: ${DateTime.now()}\n"),
                 ],
               );
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           }),
     ]);
@@ -191,7 +189,7 @@ class _AdminLookupPageState extends State<_AdminLookupPage> {
       });
       return Column(
         children: [
-          const StorybridgeTextP(
+          const ScholarityTextP(
               "IMPORTANT: if a new backend table is created, please declare its id name in admin.js in TABLE_ID_MAP."),
           Column(children: outputWidgets),
         ],
@@ -204,14 +202,14 @@ class _AdminLookupPageState extends State<_AdminLookupPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       FutureBuilder(
           future: _getDb(),
           builder: (context, AsyncSnapshot<Widget> snapshot) {
             if (snapshot.hasData) {
               return snapshot.data!;
             } else {
-              return const StorybridgePageLoading();
+              return const ScholarityPageLoading();
             }
           }),
     ]);
@@ -246,8 +244,8 @@ class _JsonDropdownState extends State<_JsonDropdown> {
             });
           },
           child: widget.data.runtimeType == Map
-              ? StorybridgeTextP("${widget.keyName}: {...}")
-              : StorybridgeTextP("${widget.keyName}: [...]"));
+              ? ScholarityTextP("${widget.keyName}: {...}")
+              : ScholarityTextP("${widget.keyName}: [...]"));
     } else {
       List<Widget> outputWidgets = [];
       // if its a map
@@ -257,13 +255,13 @@ class _JsonDropdownState extends State<_JsonDropdown> {
         });
       } else {
         for (int i = 0; i < widget.data.length; i++) {
-          outputWidgets.add(StorybridgeTextP("{"));
+          outputWidgets.add(ScholarityTextP("{"));
           widget.data[i].forEach((key, value) {
             // it's a value
             if (value.runtimeType != Map && value.runtimeType != List) {
               outputWidgets.add(Padding(
                 padding: const EdgeInsets.only(left: 32),
-                child: StorybridgeTextP(
+                child: ScholarityTextP(
                     "${key}: ${Uri.decodeComponent(value.toString())}"),
               ));
             } else {
@@ -273,7 +271,7 @@ class _JsonDropdownState extends State<_JsonDropdown> {
               ));
             }
           });
-          outputWidgets.add(StorybridgeTextP("}"));
+          outputWidgets.add(ScholarityTextP("}"));
         }
         // it's a list
       }
@@ -289,7 +287,7 @@ class _JsonDropdownState extends State<_JsonDropdown> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              StorybridgeTextP("${widget.keyName}: ["),
+              ScholarityTextP("${widget.keyName}: ["),
               Padding(
                 padding: const EdgeInsets.only(left: 32),
                 child: Column(
@@ -297,7 +295,7 @@ class _JsonDropdownState extends State<_JsonDropdown> {
                   children: outputWidgets,
                 ),
               ),
-              const StorybridgeTextP("]"),
+              const ScholarityTextP("]"),
             ],
           ),
         ),
@@ -308,7 +306,7 @@ class _JsonDropdownState extends State<_JsonDropdown> {
 
 class AdminAuthPage extends StatelessWidget {
   final int?
-      organizationId; // if not provided, this means that Storybridge is the organization (used for appbar)
+      organizationId; // if not provided, this means that Scholarity is the organization (used for appbar)
   final String? redirectToUrl;
 
   const AdminAuthPage({Key? key, this.organizationId, this.redirectToUrl})
@@ -347,7 +345,7 @@ class _AuthWidgetState extends State<_AdminAuthWidget> {
   @override
   Widget build(BuildContext context) {
     return const IntrinsicHeight(
-      child: StorybridgePadding(
+      child: ScholarityPadding(
         thick: true,
         child: SizedBox(
           width: 370,
@@ -356,7 +354,7 @@ class _AuthWidgetState extends State<_AdminAuthWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 10),
-                StorybridgeLoginHeader(),
+                ScholarityLoginHeader(),
                 SizedBox(height: 50),
                 _AuthLoginWidget()
               ],
@@ -380,7 +378,7 @@ class _AuthLoginWidget extends StatefulWidget {
 
 // myPage state
 class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
-  final _tokenController = StorybridgeTextFieldController();
+  final _tokenController = ScholarityTextFieldController();
   bool _isLoggingIn = false;
 
   @override
@@ -400,7 +398,7 @@ class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
       auth_service.loginAdmin(auth_service.Token(adminToken));
       await networking_api_service.adminPing();
       Navigator.pushNamed(context, '/admin');
-    } on error_service.StorybridgeException catch (e) {
+    } on error_service.ScholarityException catch (e) {
       setState(() {
         _tokenController.errorText = e.message;
       });
@@ -415,11 +413,11 @@ class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
-        const StorybridgeTextH3("Admin Login"),
-        const StorybridgeTextP(
-            "This is for admin login only. Regular users please log in at https://Storybridge.io/#/login."),
+        const ScholarityTextH3("Admin Login"),
+        const ScholarityTextP(
+            "This is for admin login only. Regular users please log in at https://scholarity.io/#/login."),
         const SizedBox(height: 10),
-        StorybridgeTextField(
+        ScholarityTextField(
           label: "Token",
           controller: _tokenController,
           isPragmaticField: true,
@@ -432,7 +430,7 @@ class _AuthLoginWidgetState extends State<_AuthLoginWidget> {
             Padding(
               padding: const EdgeInsets.only(right: 20),
               child: IntrinsicWidth(
-                child: StorybridgeButton(
+                child: ScholarityButton(
                     text: "Login",
                     verticalOnlyPadding: true,
                     onPressed: () async {
@@ -468,8 +466,8 @@ class _AdminQueryPage extends StatefulWidget {
 class _AdminQueryPageState extends State<_AdminQueryPage> {
   String _responseText = "";
   List<dynamic> _responseData = [];
-  final _dbKeyController = StorybridgeTextFieldController();
-  final _dbQueryController = StorybridgeTextFieldController();
+  final _dbKeyController = ScholarityTextFieldController();
+  final _dbQueryController = ScholarityTextFieldController();
   bool _isCalling = false;
 
   @override
@@ -493,7 +491,7 @@ class _AdminQueryPageState extends State<_AdminQueryPage> {
       } catch (e) {
         print(e);
       }
-    } on error_service.StorybridgeException catch (e) {
+    } on error_service.ScholarityException catch (e) {
       setState(() {
         _responseText = e.message.toString();
       });
@@ -504,20 +502,20 @@ class _AdminQueryPageState extends State<_AdminQueryPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       const SizedBox(height: 30),
-      StorybridgeTextField(
+      ScholarityTextField(
         label: "ADMIN_DB_KEY",
         controller: _dbKeyController,
         isPasswordField: true,
         isPragmaticField: true,
       ),
-      StorybridgeTextField(
+      ScholarityTextField(
         label: "DB Query",
         controller: _dbQueryController,
         isPragmaticField: true,
       ),
-      StorybridgeButton(
+      ScholarityButton(
           text: "Call",
           verticalOnlyPadding: true,
           onPressed: () async {
@@ -531,7 +529,7 @@ class _AdminQueryPageState extends State<_AdminQueryPage> {
           },
           invertedColor: true,
           loading: _isCalling),
-      const StorybridgeBox(
+      const ScholarityBox(
         useAltStyle: true,
         child: SelectableText("Hints\n"
             "SELECT * FROM ___ LIMIT 3\n"
@@ -543,9 +541,9 @@ class _AdminQueryPageState extends State<_AdminQueryPage> {
             "ALTER TABLE ___ MODIFY column_name data_type\n"),
       ),
       const SizedBox(height: 20),
-      (_responseText != "") ? StorybridgeTextP(_responseText) : Container(),
+      (_responseText != "") ? ScholarityTextP(_responseText) : Container(),
       (_responseData.length != 0)
-          ? StorybridgeTable(data: _responseData)
+          ? ScholarityTable(data: _responseData)
           : Container(),
     ]);
   }
@@ -564,7 +562,7 @@ class _AdminPostPage extends StatefulWidget {
 class _AdminPostPageState extends State<_AdminPostPage> {
   String _responseText = "";
   List<dynamic> _responseData = [];
-  final _actionController = StorybridgeTextFieldController();
+  final _actionController = ScholarityTextFieldController();
   final List<_QueryData> _queryData = [_QueryData("", "")];
   bool _isCalling = false;
 
@@ -589,7 +587,7 @@ class _AdminPostPageState extends State<_AdminPostPage> {
       Map<String, dynamic> response =
           await networking_service.serverGet(_actionController.text, queries);
       _responseData = response["data"];
-    } on error_service.StorybridgeException catch (e) {
+    } on error_service.ScholarityException catch (e) {
       setState(() {
         _responseText = e.message.toString();
       });
@@ -600,19 +598,19 @@ class _AdminPostPageState extends State<_AdminPostPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       const SizedBox(height: 30),
-      StorybridgeTextField(
+      ScholarityTextField(
         label: "Action",
         controller: _actionController,
         isPragmaticField: true,
       ),
-      const StorybridgeTextH2B("Queries"),
+      const ScholarityTextH2B("Queries"),
       _QueryWidget(
         data: _queryData,
       ),
       const SizedBox(height: 30),
-      StorybridgeButton(
+      ScholarityButton(
           text: "Post",
           verticalOnlyPadding: true,
           onPressed: () async {
@@ -627,17 +625,17 @@ class _AdminPostPageState extends State<_AdminPostPage> {
           invertedColor: true,
           loading: _isCalling),
       const SizedBox(height: 20),
-      (_responseText != "") ? StorybridgeTextP(_responseText) : Container(),
+      (_responseText != "") ? ScholarityTextP(_responseText) : Container(),
       (_responseData.length != 0)
-          ? StorybridgeTable(data: _responseData)
+          ? ScholarityTable(data: _responseData)
           : Container(),
     ]);
   }
 }
 
 class _QueryData {
-  StorybridgeTextFieldController key = StorybridgeTextFieldController();
-  StorybridgeTextFieldController value = StorybridgeTextFieldController();
+  ScholarityTextFieldController key = ScholarityTextFieldController();
+  ScholarityTextFieldController value = ScholarityTextFieldController();
   _QueryData(String key, String value) {
     this.key.text = key;
     this.value.text = value;
@@ -645,7 +643,7 @@ class _QueryData {
 }
 
 class _QueryWidget extends StatefulWidget {
-  final StorybridgeTextFieldController date = StorybridgeTextFieldController();
+  final ScholarityTextFieldController date = ScholarityTextFieldController();
   final List<_QueryData> data;
 
   // constructor
@@ -682,7 +680,7 @@ class _QueryWidgetState extends State<_QueryWidget> {
             Container(
               padding: const EdgeInsets.only(left: 10),
               constraints: const BoxConstraints(maxWidth: 150),
-              child: StorybridgeTextField(
+              child: ScholarityTextField(
                 label: "key",
                 controller: widget.data[i].key,
               ),
@@ -690,14 +688,14 @@ class _QueryWidgetState extends State<_QueryWidget> {
             Container(
               padding: const EdgeInsets.only(left: 10),
               constraints: const BoxConstraints(maxWidth: 250),
-              child: StorybridgeTextField(
+              child: ScholarityTextField(
                 label: "value",
                 controller: widget.data[i].value,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 28),
-              child: StorybridgeIconButton(
+              child: ScholarityIconButton(
                 icon: Icons.close,
                 onPressed: () {
                   _deleteCheckinThing(i);
@@ -706,7 +704,7 @@ class _QueryWidgetState extends State<_QueryWidget> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 28),
-              child: StorybridgeIconButton(
+              child: ScholarityIconButton(
                 icon: Icons.add,
                 onPressed: () {
                   _addCheckinThing(i);
@@ -733,7 +731,7 @@ class _AdminFormulasPage extends StatefulWidget {
 class _AdminFormulasPageState extends State<_AdminFormulasPage> {
   String _responseText = "";
   List<dynamic> _responseData = [];
-  final _dbQueryController = StorybridgeTextFieldController();
+  final _dbQueryController = ScholarityTextFieldController();
   bool _isCalling = false;
 
   @override
@@ -757,7 +755,7 @@ class _AdminFormulasPageState extends State<_AdminFormulasPage> {
       } catch (e) {
         print(e);
       }
-    } on error_service.StorybridgeException catch (e) {
+    } on error_service.ScholarityException catch (e) {
       setState(() {
         _responseText = e.message.toString();
       });
@@ -768,14 +766,14 @@ class _AdminFormulasPageState extends State<_AdminFormulasPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       const SizedBox(height: 30),
-      StorybridgeTextField(
+      ScholarityTextField(
         label: "Formula",
         controller: _dbQueryController,
         isPragmaticField: true,
       ),
-      StorybridgeButton(
+      ScholarityButton(
           text: "Execute",
           verticalOnlyPadding: true,
           onPressed: () async {
@@ -790,9 +788,9 @@ class _AdminFormulasPageState extends State<_AdminFormulasPage> {
           invertedColor: true,
           loading: _isCalling),
       const SizedBox(height: 20),
-      (_responseText != "") ? StorybridgeTextP(_responseText) : Container(),
+      (_responseText != "") ? ScholarityTextP(_responseText) : Container(),
       (_responseData.length != 0)
-          ? StorybridgeTable(data: _responseData)
+          ? ScholarityTable(data: _responseData)
           : Container(),
     ]);
   }
@@ -822,103 +820,103 @@ class _AdminDesignPageState extends State<_AdminDesignPage> {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeTabPage(body: [
+    return ScholarityTabPage(body: [
       const SizedBox(height: 30),
-      const StorybridgeTextH2("StorybridgeTextH2 - Header 2"),
+      const ScholarityTextH2("ScholarityTextH2 - Header 2"),
       const SizedBox(height: 30),
-      const StorybridgeTextH2B("StorybridgeTextH2B - Header 2, small"),
+      const ScholarityTextH2B("ScholarityTextH2B - Header 2, small"),
       const SizedBox(height: 30),
-      const StorybridgeTextH3("StorybridgeTextH3 - Header 3"),
+      const ScholarityTextH3("ScholarityTextH3 - Header 3"),
       const SizedBox(height: 30),
-      const StorybridgeTextH3(
-        "StorybridgeTextH3 - Header 3",
+      const ScholarityTextH3(
+        "ScholarityTextH3 - Header 3",
         bracketText: "Bracket text",
       ),
       const SizedBox(height: 30),
-      const StorybridgeTextH4("StorybridgeTextH4 - Header 4"),
+      const ScholarityTextH4("ScholarityTextH4 - Header 4"),
       const SizedBox(height: 30),
-      const StorybridgeTextH5("StorybridgeTextH5 - Header 5"),
+      const ScholarityTextH5("ScholarityTextH5 - Header 5"),
       const SizedBox(height: 30),
-      const StorybridgeTextH5("StorybridgeTextH5 - Header 5 Red", red: true),
+      const ScholarityTextH5("ScholarityTextH5 - Header 5 Red", red: true),
       const SizedBox(height: 30),
-      const StorybridgeTextH5("StorybridgeTextH5 - Header 5 Bold", bold: true),
+      const ScholarityTextH5("ScholarityTextH5 - Header 5 Bold", bold: true),
       const SizedBox(height: 30),
-      const StorybridgeTextH5("StorybridgeTextH5 - Header 5 Dim", dim: true),
+      const ScholarityTextH5("ScholarityTextH5 - Header 5 Dim", dim: true),
       const SizedBox(height: 30),
-      const StorybridgeTextP("StorybridgeTextP - Paragraph"),
+      const ScholarityTextP("ScholarityTextP - Paragraph"),
       const SizedBox(height: 30),
-      const StorybridgeTextP(
-        "StorybridgeTextP - Paragraph dim",
+      const ScholarityTextP(
+        "ScholarityTextP - Paragraph dim",
         isDim: true,
       ),
       const SizedBox(height: 30),
-      const StorybridgeDivider(),
+      const ScholarityDivider(),
       const SizedBox(height: 30),
-      StorybridgeButton(
-        text: "StorybridgeButton",
+      ScholarityButton(
+        text: "ScholarityButton",
         onPressed: () {},
       ),
       const SizedBox(height: 30),
-      StorybridgeButton(
-        text: "StorybridgeButton, inverted color",
+      ScholarityButton(
+        text: "ScholarityButton, inverted color",
         invertedColor: true,
         onPressed: () {},
       ),
       const SizedBox(height: 30),
-      StorybridgeButton(
-        text: "StorybridgeButton, darkened background",
+      ScholarityButton(
+        text: "ScholarityButton, darkened background",
         darkenBackground: true,
         onPressed: () {},
       ),
       const SizedBox(height: 30),
-      StorybridgeButton(
-        text: "StorybridgeButton, lightened background",
+      ScholarityButton(
+        text: "ScholarityButton, lightened background",
         lightenBackground: true,
         onPressed: () {},
       ),
       const SizedBox(height: 30),
-      StorybridgeButton(
-        text: "StorybridgeButton, loading",
+      ScholarityButton(
+        text: "ScholarityButton, loading",
         loading: true,
         onPressed: () {},
       ),
       const SizedBox(height: 30),
-      StorybridgeIconButton(
+      ScholarityIconButton(
         icon: Icons.abc_rounded,
         onPressed: () {},
       ),
       const SizedBox(height: 30),
-      StorybridgeIconButton(
+      ScholarityIconButton(
         icon: Icons.abc_rounded,
         useAltStyle: true,
         onPressed: () {},
       ),
       const SizedBox(height: 30),
-      StorybridgeIconButton(
+      ScholarityIconButton(
         icon: Icons.abc_rounded,
       ),
       const SizedBox(height: 30),
-      const StorybridgeTile(
-        child: StorybridgeTextP("StorybridgeTile"),
+      const ScholarityTile(
+        child: ScholarityTextP("ScholarityTile"),
       ),
       const SizedBox(height: 30),
-      const StorybridgeTile(
+      const ScholarityTile(
         hasShadows: true,
-        child: StorybridgeTextP("StorybridgeTile, with shadows"),
+        child: ScholarityTextP("ScholarityTile, with shadows"),
       ),
       const SizedBox(height: 30),
-      const StorybridgeTile(
+      const ScholarityTile(
         useAltStyle: true,
-        child: StorybridgeTextP("StorybridgeTile, alternative style"),
+        child: ScholarityTextP("ScholarityTile, alternative style"),
       ),
       const SizedBox(height: 30),
-      const StorybridgeBox(
-        child: StorybridgeTextP("StorybridgeBox"),
+      const ScholarityBox(
+        child: ScholarityTextP("ScholarityBox"),
       ),
       const SizedBox(height: 30),
-      const StorybridgeBox(
+      const ScholarityBox(
         useAltStyle: true,
-        child: StorybridgeTextP("StorybridgeBox, alternative style"),
+        child: ScholarityTextP("ScholarityBox, alternative style"),
       ),
       const SizedBox(height: 30),
       Column(
@@ -927,13 +925,13 @@ class _AdminDesignPageState extends State<_AdminDesignPage> {
             color: Colors.red,
             width: 100,
             height: 50,
-            child: const StorybridgeTextP("Hello"),
+            child: const ScholarityTextP("Hello"),
           ),
           Container(
             color: Colors.red,
             width: 100,
             height: 50,
-            child: const StorybridgeTextP("Hello"),
+            child: const ScholarityTextP("Hello"),
           ),
         ],
       )

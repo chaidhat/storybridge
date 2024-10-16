@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mooc/Storybridge.dart'; // Storybridge
+import 'package:mooc/scholarity.dart'; // Scholarity
 
 import 'package:mooc/services/networking_api_service.dart'
     as networking_api_service;
@@ -91,12 +91,12 @@ class _PaymentCheckoutPageState extends State<PaymentCheckoutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child: StorybridgeTile(
+            child: ScholarityTile(
       width: 470,
       child: IntrinsicHeight(
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: StorybridgePadding(
+          child: ScholarityPadding(
             thick: true,
             child: FutureBuilder(
                 future: _loadData(),
@@ -105,7 +105,7 @@ class _PaymentCheckoutPageState extends State<PaymentCheckoutPage> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const StorybridgeTextH3(
+                        const ScholarityTextH3(
                             "Please choose an organization\nto purchase plan for:"),
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,9 +138,9 @@ class _PaymentCheckoutPageState extends State<PaymentCheckoutPage> {
                                       Navigator.of(context).pushNamed(
                                           "/organization?id=${_organizations[index].organizationId.toString()}");
                                     },
-                                    child: StorybridgeTile(
-                                        child: StorybridgePadding(
-                                            child: StorybridgeTextH2B(
+                                    child: ScholarityTile(
+                                        child: ScholarityPadding(
+                                            child: ScholarityTextH2B(
                                                 _organizations[index]
                                                     .organizationName)))),
                               );
@@ -148,7 +148,7 @@ class _PaymentCheckoutPageState extends State<PaymentCheckoutPage> {
                       ],
                     );
                   } else {
-                    return const StorybridgeBoxLoading(
+                    return const ScholarityBoxLoading(
                       height: 100,
                       width: 300,
                     );
@@ -184,26 +184,26 @@ class _PaymentAlertDialog extends StatelessWidget {
   // main build function
   @override
   Widget build(BuildContext context) {
-    return StorybridgeAlertDialogWrapper(
-      child: StorybridgeAlertDialog(
-        title: const StorybridgeTextH2B("Organization already has a plan!"),
+    return ScholarityAlertDialogWrapper(
+      child: ScholarityAlertDialog(
+        title: const ScholarityTextH2B("Organization already has a plan!"),
         content: SizedBox(
           height: 150,
           width: 300,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const StorybridgeTextP(
+            const ScholarityTextP(
                 "This organization appears to have an existing plan. "
                 "To upgrade it, please either cancel or upgrade it using our portal."),
             Expanded(child: Container()),
             Row(
               children: [
-                StorybridgeButton(
+                ScholarityButton(
                     text: "Dismiss",
                     onPressed: () {
                       Navigator.pop(context);
                     }),
-                StorybridgeButton(
+                ScholarityButton(
                     text: "Go to Portal",
                     invertedColor: true,
                     onPressed: () {
