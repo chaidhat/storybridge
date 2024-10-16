@@ -101,7 +101,7 @@ class _OrganizationStudentPage extends StatelessWidget {
       ],
       tabNames: [
         ScholarityTabHeader(
-            tabName: "Courses", tabIcon: Icons.collections_bookmark_rounded),
+            tabName: "Stories", tabIcon: Icons.collections_bookmark_rounded),
       ],
       tabs: [
         OrganizationCoursesStudentPage(
@@ -165,13 +165,7 @@ class _OrganizationAdminPage extends StatelessWidget {
       ],
       tabNames: [
         ScholarityTabHeader(
-            tabName: "Courses", tabIcon: Icons.collections_bookmark_rounded),
-        ScholarityTabHeader(
-            tabName: "Audits", tabIcon: Icons.collections_bookmark_rounded),
-        ScholarityTabHeader(
-            tabName: "Fleet", tabIcon: Icons.collections_bookmark_rounded),
-        ScholarityTabHeader(
-            tabName: "People", tabIcon: Icons.stacked_line_chart_rounded),
+            tabName: "Stories", tabIcon: Icons.collections_bookmark_rounded),
         ScholarityTabHeader(
             tabName: "Sales", tabIcon: Icons.stacked_line_chart_rounded),
         ScholarityTabHeader(
@@ -189,9 +183,6 @@ class _OrganizationAdminPage extends StatelessWidget {
           courses: _courses,
           organizationId: organizationId,
         ),
-        OrganizationAuditingPage(organizationId: organizationId),
-        OrganizationFleetPage(organizationId: organizationId),
-        OrganizationPeoplePage(organizationId: organizationId),
         OrganizationSalesPage(organizationId: organizationId),
         OrganizationSettingsPage(organizationId: organizationId),
       ],

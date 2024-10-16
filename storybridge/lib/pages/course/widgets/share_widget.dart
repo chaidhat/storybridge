@@ -62,7 +62,7 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                     Icon(Icons.rocket_launch_rounded,
                         color: scholarity_color.darkGrey, size: 40),
                     const SizedBox(height: 20),
-                    const ScholarityTextH2B("Link to your course page"),
+                    const ScholarityTextH2B("Link to your story page"),
                     const SizedBox(height: 10),
                     Row(
                       children: [
@@ -104,13 +104,13 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                     ),
                     const SizedBox(height: 20),
                     const ScholarityTextP(
-                        "Congratulations!\nPlease click the link above to go to your course.\n\nYou can share this link with your students for\nthem to view the course."),
+                        "Congratulations!\nPlease click the link above to go to your story.\n\nYou can share this link with your students for\nthem to view the course."),
                     const SizedBox(height: 50),
                     Row(
                       children: [
                         ScholarityButton(
                           padding: false,
-                          text: "Go to your course!",
+                          text: "Go to your story!",
                           invertedColor: true,
                           onPressed: () {
                             _goToCourse();

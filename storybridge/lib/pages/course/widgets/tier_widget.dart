@@ -38,7 +38,7 @@ class PaymentBasicTierWidget extends StatelessWidget {
       children: [
         ScholarityTextH2B(payment_service.paymentTierName[paymentTier]!),
         const SizedBox(height: 10),
-        ScholarityTextP("Begin building your course online effortlessly.\n\n"
+        ScholarityTextP("Begin building your story online effortlessly.\n\n"
             "• Unlimited students\n"
             "• Create up to ${payment_service.paymentTierCourseMax[paymentTier]!.toString()} courses\n"
             "• ${payment_service.paymentTierDataMax[paymentTier]!.toString()}GB (~${payment_service.paymentTierDataMax[paymentTier]!.toString()} hours) of video data"),

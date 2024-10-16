@@ -151,7 +151,7 @@ class _CourseSalesGeneralPageState extends State<CourseSalesGeneralPage> {
                       const ScholarityDescriptor(
                           name: "Course Price",
                           description:
-                              "The total price your students have to pay to access your course."),
+                              "The total price your students have to pay to access your story."),
                       PriceSelector(
                         controller: _priceSelectorController,
                         courseId: widget.courseId,

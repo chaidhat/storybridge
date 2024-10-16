@@ -269,7 +269,7 @@ class _NotEnrolledWidget extends StatelessWidget {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 64),
-                  child: ScholarityTextBasic("Enroll now",
+                  child: ScholarityTextBasic("Read now",
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: scholarityTextH2BStyle.fontFamily,
@@ -318,7 +318,7 @@ class _PaymentWelcomeWidget extends StatelessWidget {
               ScholarityTextH4(courseSalesData.productName),
               const SizedBox(height: 20),
               const ScholarityTextP(
-                  "Thank you for choosing to enroll in our course! We partner with Stripe to bring you effortless payment of your course."),
+                  "Thank you for choosing to enroll in our course! We partner with Stripe to bring you effortless payment of your story."),
               const SizedBox(height: 50),
               Row(
                 children: [

@@ -134,15 +134,6 @@ class _GeneralWidgets extends StatelessWidget {
                             "text": "Click to edit button",
                             "link": "https://",
                           })),
-              EditorDraggableWidgetIcon(
-                  icon: Icons.quiz_outlined,
-                  name: "Assessment",
-                  editorWidget: EditorWidgetTemplate(
-                      getWidgetJson: () => {
-                            "widgetType": widgetTypeAssessment,
-                            "auid": "0",
-                            "isInitialized": "false",
-                          })),
               /*
               EditorDraggableWidgetIcon(
                   icon: Icons.file_copy_outlined,
@@ -189,7 +180,7 @@ class _FrontPageWidgets extends StatelessWidget {
             children: [
               EditorDraggableWidgetIcon(
                   icon: Icons.exit_to_app_rounded,
-                  name: "Enroll Widget",
+                  name: "Read Widget",
                   editorWidget: EditorWidgetTemplate(
                       getWidgetJson: () => {
                             "widgetType": widgetTypeButton,

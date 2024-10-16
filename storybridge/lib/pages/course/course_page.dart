@@ -111,8 +111,6 @@ class _CoursePageAdminState extends State<_CoursePageAdmin> {
         ScholarityTabHeaders(
             tabName: "Analytics", tabIcon: Icons.school_rounded),
             */
-        ScholarityTabHeader(
-            tabName: "Analytics", tabIcon: Icons.show_chart_rounded),
         ScholarityTabHeader(tabName: "Sales", tabIcon: Icons.payment_rounded),
         ScholarityTabHeader(
             tabName: "Settings", tabIcon: Icons.settings_rounded),
@@ -126,9 +124,6 @@ class _CoursePageAdminState extends State<_CoursePageAdmin> {
           courseId: widget.courseId,
           organizationId: widget.organizationId,
           isAdminMode: true,
-        ),
-        CourseGradesForAdminsPage(
-          courseId: widget.courseId,
         ),
         CourseSalesPage(courseId: widget.courseId),
         CourseDesignPage(courseId: widget.courseId),
@@ -179,8 +174,7 @@ class _CoursePageStudent extends StatelessWidget {
       isTabRightAligned: true,
       tabNames: [
         ScholarityTabHeader(
-            tabName: "Course", tabIcon: Icons.collections_bookmark_rounded),
-        ScholarityTabHeader(tabName: "Grades", tabIcon: Icons.school_rounded),
+            tabName: "Story", tabIcon: Icons.collections_bookmark_rounded),
         /*
         ScholarityTabHeaders(
             tabName: "Discussion", tabIcon: Icons.school_rounded),
@@ -193,11 +187,6 @@ class _CoursePageStudent extends StatelessWidget {
           organizationId: organizationId,
           isAdminMode: false,
         ),
-        auth_service.globalUser.token == null
-            ? CourseGradesForFrontPage(courseId: courseId)
-            : CourseGradesForStudentsPage(
-                courseId: courseId,
-              ),
       ],
     );
   }
