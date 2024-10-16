@@ -149,9 +149,9 @@ class _CourseSalesGeneralPageState extends State<CourseSalesGeneralPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const StorybridgeDescriptor(
-                          name: "Course Price",
+                          name: "Story Price",
                           description:
-                              "The total price your students have to pay to access your story."),
+                              "The total price your readers have to pay to access your story."),
                       PriceSelector(
                         controller: _priceSelectorController,
                         courseId: widget.courseId,
@@ -174,7 +174,7 @@ class _CourseSalesGeneralPageState extends State<CourseSalesGeneralPage> {
                       const StorybridgeDescriptor(
                           name: "Payment Page - Product Name",
                           description:
-                              "This is the name of your course your students will see in the payment page."),
+                              "This is the name of your story your readers will see in the payment page."),
                       StorybridgeSettingButton(
                           loadValue: () async {
                             return _courseProductName;
@@ -190,7 +190,7 @@ class _CourseSalesGeneralPageState extends State<CourseSalesGeneralPage> {
                       const StorybridgeDescriptor(
                           name: "Payment Page - Product Description",
                           description:
-                              "This is the description your students will see in the payment page."),
+                              "This is the description your readers will see in the payment page."),
                       StorybridgeSettingButton(
                           isLarge: true,
                           loadValue: () async {

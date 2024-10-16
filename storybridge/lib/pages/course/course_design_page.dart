@@ -101,10 +101,10 @@ class _CourseSettingsGeneralPageState extends State<CourseSettingsGeneralPage> {
       const StorybridgeTextH2("General Settings"),
       const SizedBox(height: 60),
       const StorybridgeDescriptor(
-        name: "Course Name",
+        name: "Story Name",
       ),
       StorybridgeSettingButton(
-        name: "Course Name",
+        name: "Story Name",
         loadValue: () async {
           Map<String, dynamic> course =
               await networking_api_service.getCourse(courseId: widget.courseId);
@@ -117,21 +117,21 @@ class _CourseSettingsGeneralPageState extends State<CourseSettingsGeneralPage> {
         },
       ),
       const StorybridgeDescriptor(
-        name: "Certificate Design",
+        name: "Story Design",
       ),
       const SizedBox(height: 15),
       _CertificateSettings(courseId: widget.courseId),
       const StorybridgeDivider(),
       const StorybridgeDescriptor(
-        name: "Course Files",
+        name: "Story Files",
       ),
       _CourseFilesViewer(courseId: widget.courseId),
       const StorybridgeDivider(),
       const StorybridgeDescriptor(
-        name: "Course Control",
+        name: "Story Control",
       ),
       StorybridgeSettingCheckbox(
-        name: "Course Live",
+        name: "Story Live",
         loadValue: () async {
           Map<String, dynamic> course =
               await networking_api_service.getCourse(courseId: widget.courseId);
@@ -145,7 +145,7 @@ class _CourseSettingsGeneralPageState extends State<CourseSettingsGeneralPage> {
         falseText: "Publish Course to Students",
       ),
       StorybridgeButton(
-        text: "Delete Course",
+        text: "Delete Story",
         lightenBackground: true,
         onPressed: _deleteCourse,
       )
