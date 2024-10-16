@@ -563,14 +563,14 @@ class Router{
                 '{"widgetType":"column","children":[{"widgetType":"button","text":"button"},{"widgetType":"text","text":"Click the button above to enroll now!"},{"widgetType":"text","text":"Click this widget to edit this text. Introduce your course to your students and give a detailed description of your syllabus here. You can change the course name under the Settings tab. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum diam id nunc hendrerit, nec sollicitudin lacus tincidunt. Phasellus faucibus efficitur ornare. Nulla rhoncus magna ut arcu consectetur, at condimentum dolor rutrum. Sed id molestie enim, quis fermentum tellus. Donec dictum pellentesque metus vel pretium. Fusce nec lorem id turpis mattis accumsan eget sit amet lacus. Aenean egestas ligula vel lorem finibus elementum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. "}]}'
             );
             let courseSectionId2 = await CourseSections.addCourseSection(token, courseId, 
-                { courseSectionName: "Chapter 1"}
+                { courseSectionName: "Act 1"}
             );
             await CourseElements.createCourseElement(
                 token, 
                 courseSectionId2,
                 1, // reading page element
                 {
-                    courseElementName: "Lecture 1",
+                    courseElementName: "Scene 1",
                     courseElementDescription: "This is an automatically created front page",
                 },
                 // empty page data

@@ -125,16 +125,7 @@ class _AuthenticatedIndicator extends StatelessWidget {
                           .pushNamed("/user/my-courses?id=${userId}");
                     });
                   },
-                  child: const StorybridgeTextBasic("My Courses"),
-                ),
-                PopupMenuItem(
-                  onTap: () {
-                    SchedulerBinding.instance.addPostFrameCallback((_) {
-                      Navigator.of(context)
-                          .pushNamed("/user/my-audits?id=${userId}");
-                    });
-                  },
-                  child: const StorybridgeTextBasic("My Audits"),
+                  child: const StorybridgeTextBasic("My Stories"),
                 ),
                 PopupMenuItem(
                   onTap: () {

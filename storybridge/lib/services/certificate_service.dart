@@ -249,7 +249,7 @@ Future<Uint8List> _generatePassport(
                           color: PdfColor.fromHex("#000000"),
                           barcode: pw.Barcode.qrCode(),
                           data:
-                              "https://www.storybridge.io/app/#/user?id=${data.userId}",
+                              "https://www.storybridge.lat/app/#/user?id=${data.userId}",
                         ))),
                 _PdfPositionedWidget(
                   x: 6.8,

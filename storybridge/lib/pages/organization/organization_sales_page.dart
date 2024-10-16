@@ -85,7 +85,7 @@ class _OrganizationSalesPageState extends State<OrganizationSalesPage> {
                   children: [
                     const StorybridgeTextH2B("Balance"),
                     const StorybridgeTextP(
-                        "Start selling your courses by creating a course and going to the 'Sales' page. All net revenue from your students are aggregated here in your balance where you can withdraw the funds to your bank account whenever."),
+                        "Start selling your stories by creating a story and going to the 'Sales' page. All net revenue from your readers are aggregated here in your balance where you can withdraw the funds to your bank account whenever."),
                     const SizedBox(height: 20),
                     StorybridgeTile(
                         child: StorybridgePadding(
@@ -373,7 +373,7 @@ class _WithdrawalInsufficientFundsForm extends StatelessWidget {
             const SizedBox(height: 10),
             const StorybridgeTextH2B("No funds to be withdrawn."),
             const StorybridgeTextP(
-                "There are no funds which can be withdrawn to your bank account as your balance is \$0. Your net profit will start to show up here after students have bought your course. If you previously requested a withdrawal, this could mean it has been processed successfully and the funds have been sent to your bank account.\n\nIf you believe this is mistaken, please contact us immediately at contact@storybridge.io."),
+                "There are no funds which can be withdrawn to your bank account as your balance is \$0. Your net profit will start to show up here after readers have bought your story. If you previously requested a withdrawal, this could mean it has been processed successfully and the funds have been sent to your bank account.\n\nIf you believe this is mistaken, please contact us immediately at contact@storybridge.lat."),
           ],
         ),
       ),

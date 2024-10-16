@@ -73,7 +73,7 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                               padding: const EdgeInsets.all(12),
                               child: Row(children: [
                                 StorybridgeTextBasic(
-                                    "https://storybridge.io/app/#/course?id=${widget.courseId}",
+                                    "https://storybridge.lat/app/#/course?id=${widget.courseId}",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                             onPressed: () async {
                               await Clipboard.setData(ClipboardData(
                                   text:
-                                      "https://storybridge.io/app/#/course?id=${widget.courseId}"));
+                                      "https://storybridge.lat/app/#/course?id=${widget.courseId}"));
 
                               snackbar_service.showSnackbar(
                                   context, "Link copied to clipboard.");
@@ -104,7 +104,7 @@ class _CourseShareWidgetState extends State<CourseShareWidget> {
                     ),
                     const SizedBox(height: 20),
                     const StorybridgeTextP(
-                        "Congratulations!\nPlease click the link above to go to your story.\n\nYou can share this link with your students for\nthem to view the course."),
+                        "Congratulations!\nPlease click the link above to go to your story.\n\nYou can share this link with your reader for\nthem to view the reader."),
                     const SizedBox(height: 50),
                     Row(
                       children: [
@@ -240,7 +240,7 @@ class _OrganizationAuthShareWidgetState
                               padding: const EdgeInsets.all(12),
                               child: Row(children: [
                                 StorybridgeTextBasic(
-                                    "https://storybridge.io/app/#/login?id=${widget.organizationId}",
+                                    "https://storybridge.lat/app/#/login?id=${widget.organizationId}",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -257,7 +257,7 @@ class _OrganizationAuthShareWidgetState
                             onPressed: () async {
                               await Clipboard.setData(ClipboardData(
                                   text:
-                                      "https://storybridge.io/app/#/login?id=${widget.organizationId}"));
+                                      "https://storybridge.lat/app/#/login?id=${widget.organizationId}"));
 
                               snackbar_service.showSnackbar(
                                   context, "Link copied to clipboard.");

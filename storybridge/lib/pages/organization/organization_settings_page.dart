@@ -88,44 +88,6 @@ class _OrganizationSettingsPageState extends State<OrganizationSettingsPage> {
       ProfilePictureSelectorWidget(
         organizationId: widget.organizationId,
       ),
-      const SizedBox(height: 30),
-      const StorybridgeDivider(),
-      const SizedBox(height: 30),
-      const StorybridgeTextH2B("Your plan:"),
-      const SizedBox(height: 10),
-      Container(
-        constraints: const BoxConstraints(maxWidth: 500),
-        child: StorybridgeTile(
-          child: StorybridgePadding(
-            child: FutureBuilder(
-                future: _loadData(),
-                builder: (context, AsyncSnapshot<bool> snapshot) {
-                  if (snapshot.hasData) {
-                    switch (_paymentTier) {
-                      case payment_service.PaymentTier.basicTier:
-                        return const PaymentBasicTierWidget();
-                      case payment_service.PaymentTier.expandTier:
-                        return const PaymentExpandTierWidget();
-                      case payment_service.PaymentTier.businessTier:
-                        return const PaymentBusinessTierWidget();
-                      case payment_service.PaymentTier.enterpriseTier:
-                        return const PaymentEnterpriseTierWidget();
-                      case payment_service.PaymentTier.noTier:
-                        return const PaymentEnterpriseTierWidget();
-                    }
-                  } else {
-                    return const StorybridgeBoxLoading(height: 120, width: 300);
-                  }
-                }),
-          ),
-        ),
-      ),
-      const SizedBox(height: 30),
-      StorybridgeButton(
-          text: "Manage Payment Info",
-          onPressed: () {
-            launchUrl(Uri.parse(_paymentPortalUrl));
-          }),
     ]);
   }
 }

@@ -3,9 +3,10 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:mooc/storybridge.dart'; // Storybridge
 
 //const COLOR_MAIN = const Color(0xFF006EB4);
-const Color _lightmodeStorybridgeAccent = Color(0xFF000000);
-const Color _lightmodeStorybridgeAccentLight = Color(0x18000000);
-const Color _lightmodeStorybridgeAccentBackground = Color(0x10000000);
+const Color _lightmodeStorybridgeAccent = Color.fromARGB(255, 30, 92, 145);
+const Color _lightmodeStorybridgeAccentLight =
+    Color.fromARGB(255, 221, 245, 255);
+const Color _lightmodeStorybridgeAccentBackground = Color(0xFFE7FBFF);
 const Color _lightmodeBackground = Color(0xFFFFFFFF);
 const Color _lightmodeBackgroundTransparent = Color(0x00FFFFFF);
 const Color _lightmodeBackgroundDim = Color(0xFFF8F8F8);
@@ -16,7 +17,7 @@ const Color _lightmodeBorderColor = Color(0xFFD0D0D0);
 const Color _lightmodeBlack = Color(0xFF000000);
 const Color _lightmodeBackgroundLoading = Color(0xFFF0F0F0);
 
-const Color _darkmodeStorybridgeAccent = Color.fromARGB(255, 217, 217, 217);
+const Color _darkmodeStorybridgeAccent = Color.fromARGB(255, 98, 170, 233);
 const Color _darkmodeStorybridgeAccentLight = Color.fromARGB(255, 85, 85, 85);
 const Color _darkmodeStorybridgeAccentBackground =
     Color.fromARGB(255, 32, 32, 32);

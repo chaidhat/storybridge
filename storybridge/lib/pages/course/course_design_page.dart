@@ -119,8 +119,6 @@ class _CourseSettingsGeneralPageState extends State<CourseSettingsGeneralPage> {
       const StorybridgeDescriptor(
         name: "Story Design",
       ),
-      const SizedBox(height: 15),
-      _CertificateSettings(courseId: widget.courseId),
       const StorybridgeDivider(),
       const StorybridgeDescriptor(
         name: "Story Files",
@@ -141,8 +139,8 @@ class _CourseSettingsGeneralPageState extends State<CourseSettingsGeneralPage> {
           networking_api_service.setCourseLiveness(
               courseId: widget.courseId, isLive: value);
         },
-        trueText: "Hide Course from Students",
-        falseText: "Publish Course to Students",
+        trueText: "Hide Story from Readers",
+        falseText: "Publish Story to Readers",
       ),
       StorybridgeButton(
         text: "Delete Story",

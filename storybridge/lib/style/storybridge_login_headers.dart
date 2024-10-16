@@ -12,7 +12,6 @@ class StorybridgeLoginHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SizedBox(
-        height: 28,
         child: Image(fit: BoxFit.fill, image: AssetImage('assets/logo-1.png')));
   }
 }

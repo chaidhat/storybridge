@@ -241,7 +241,7 @@ class _FreeCourseWarning extends StatelessWidget {
         ),
         SizedBox(height: 5),
         StorybridgeTextP(
-            "Students can enroll and access the course without paying."),
+            "Readers can enroll and access the story without paying."),
       ],
     )));
   }

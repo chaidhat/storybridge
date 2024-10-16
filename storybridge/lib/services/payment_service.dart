@@ -37,7 +37,7 @@ const Map<PaymentTier, int> paymentTierDataMax = {
 };
 
 void launchPaymentPricingPage() {
-  launchUrl(Uri.parse("https://www.storybridge.io/pricing"));
+  launchUrl(Uri.parse("https://www.storybridge.lat/pricing"));
 }
 
 // returns null if the org already has a subscription (cannot check out more!)

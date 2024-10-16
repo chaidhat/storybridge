@@ -117,8 +117,8 @@ class _UserOwnerPage extends StatefulWidget {
 
 // myPage state
 class _UserOwnerPageState extends State<_UserOwnerPage> {
-  StorybridgeTabHeader myFleetTab = StorybridgeTabHeader(
-      tabIcon: Icons.abc, tabName: "Flight plan", isVisible: false);
+  StorybridgeTabHeader myFleetTab =
+      StorybridgeTabHeader(tabIcon: Icons.abc, tabName: "", isVisible: false);
   @override
   void initState() {
     super.initState();
@@ -175,10 +175,8 @@ class _UserOwnerPageState extends State<_UserOwnerPage> {
             userId: widget.userId,
             isOwner: true,
           ),
-          UserFleetPage(
-              userId: widget.userId, organizationId: getOrganizationId()),
           UserCoursesPage(userId: widget.userId),
-          UserAuditsPage(userId: widget.userId),
+          UserCoursesPage(userId: widget.userId),
           UserFilesPage(userId: widget.userId),
           UserSupportPage(userId: widget.userId),
         ],
@@ -187,9 +185,7 @@ class _UserOwnerPageState extends State<_UserOwnerPage> {
               tabName: "Profile", tabIcon: Icons.stacked_line_chart_rounded),
           myFleetTab,
           StorybridgeTabHeader(
-              tabName: "My courses", tabIcon: Icons.stacked_line_chart_rounded),
-          StorybridgeTabHeader(
-              tabName: "My audits", tabIcon: Icons.stacked_line_chart_rounded),
+              tabName: "My stories", tabIcon: Icons.stacked_line_chart_rounded),
           StorybridgeTabHeader(
               tabName: "My files", tabIcon: Icons.stacked_line_chart_rounded),
           StorybridgeTabHeader(

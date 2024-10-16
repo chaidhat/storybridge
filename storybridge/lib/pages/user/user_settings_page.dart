@@ -43,11 +43,24 @@ class _FieldTextWidget extends FieldWidget {
 
   @override
   Widget getEditableWidget() {
+    String labelOut = fieldName;
+    if (labelOut == "telephone") {
+      labelOut = "Reader Level";
+    }
+    if (labelOut == "jobTitle") {
+      labelOut = "Interests";
+    }
+    if (labelOut == "company") {
+      labelOut = "Gender";
+    }
+    if (labelOut == "employeeId") {
+      labelOut = "Age Group";
+    }
     return _StorybridgeSettingField(
       children: [
-        StorybridgeDescriptor(name: fieldName),
+        StorybridgeDescriptor(name: labelOut),
         StorybridgeTextField(
-          label: fieldName,
+          label: labelOut,
           controller: _controller,
         ),
       ],
@@ -323,15 +336,6 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                         },
                       )
                     : Container(),
-                const StorybridgeDivider(isLarge: true),
-                const StorybridgeDescriptor(name: "PDPA", description: ""),
-                _PDPAWidget(
-                  isOwner: widget.isOwner,
-                  data: _pdpaData,
-                  onChanged: () {
-                    _saveUser();
-                  },
-                ),
                 widget.isOwner
                     ? const StorybridgeDivider(isLarge: true)
                     : Container(),
